@@ -44,7 +44,7 @@
 
 /* 쪽지와 프로필 담는 박스 안의 프로필 담는 박스 */
 .profile_box{
-  border: 2px solid white;
+  border: 2px solid;
   border-radius: 50%;
   object-fit: fill;
   width:45px;
@@ -69,4 +69,30 @@
   border-radius: 100px;
   width: 26.34px;
   height: 15.81px;
+}
+
+.logo_bar{
+  width: 150px;
+  height:4px;
+  margin:0;
+  border:0;
+  background:#C9FD61;
+}
+.logo_text{
+  font-family: 'DungGeunMo';
+  font-weight: 400;
+  font-size: 76px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+.logo_box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* link 색깔 하얗게 */
+a{
+  color: #ececec;
 }
