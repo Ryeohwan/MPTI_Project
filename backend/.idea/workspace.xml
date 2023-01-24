@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7015f58c-3506-4c75-be6b-c754e4900ae8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/common/MakeBasicResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/common/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/common/response/BasicResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/api/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/api/request/UserRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/api/response/UserResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/application/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/config/MemberConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/dao/JpaUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/dao/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/dto/BasicResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/entity/Ptlog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/member/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/api/controller/TrainerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/api/request/TrainerRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/api/response/TrainerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/application/TrainerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/config/TrainerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/dao/JpaTrainerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/dao/TrainerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/dto/BasicResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/dto/TrainerDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mpti/backend/domain/trainer/entity/Trainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KiZOGvqJqIhYnQDK937fzEt6pA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/ryeoryeo/Documents/JPA_Study/backend/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/mpti/backend" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BackendApplication">
+    <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="backend.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="mpti.backend.BackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JibjoongApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="jibjoong.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="jibjoong.jibjoong.JibjoongApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7015f58c-3506-4c75-be6b-c754e4900ae8" name="Changes" comment="" />
+      <created>1674459329886</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674459329886</updated>
+      <workItem from="1674459331555" duration="2353000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
