@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 // ClientNAvbar css 모듈 가져오기
 import styles from './ClientNavBar.module.css'
+// 채팅 컴포넌트 가져오기
+import Chat from '../Chat/Chat';
 
 // 유저NavBar 리턴 함수
 export default function ClientNavuser(){
@@ -12,7 +14,7 @@ export default function ClientNavuser(){
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.nav_box}>
-
+			<Chat></Chat>
 			{/* 로고 클릭시 /home 으로 이동하는 라우팅 */}
 			<div className={styles.logo_box}>
 				<Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
@@ -44,7 +46,7 @@ export default function ClientNavuser(){
 					{/* 메일 모양 + 프로필 담는 박스 */}
 					<div className={styles.mail_profile_box}>
 						{/* 매일 담는 박스 */}
-						<div className={styles.mail_box}>
+						<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex'}}>
 							{/* 메시지 개수 출력 임시로 99+ 지정 */}
 							<div className={styles.mail_count_box}>
 										<span>99+</span>

@@ -53,6 +53,7 @@
 
 /* 쪽지(메일) 이미지 담는 박스 */
 .mail_box{
+  cursor: pointer;
   position: relative;
 }
 
