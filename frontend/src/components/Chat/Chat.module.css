@@ -96,3 +96,20 @@
 .chat_input {
     width: 100%;
 }
+
+#room_list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+}
+
+.room_box {
+    display: flex;
+    flex-flow: row;
+    color: #cecece;
+    border: 1pt solid #cecece;
+    margin-top: 10pt;
+    padding: 5pt 5pt;
+    border-radius: 5pt;
+}
