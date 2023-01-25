@@ -60,20 +60,34 @@ const onSubmitHandler = (e)=>{
 
 return (
     <div className={styles.Login}> 
+            <div className={styles.header_box}>
+                <span className={styles.header}>MPTI</span>
+            </div>
+            
         <form onSubmit={onSubmitHandler}>
-            <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" value={email} id="email" onChange={emailChangeHandler}/>
-            <p>{msgEmail}</p>
+            <div className={styles.form_box}>
+            <input className={styles.form_input} type="email" value={email} id="email" onChange={emailChangeHandler} placeholder="email"/>
+            <div className={styles.comment}><p>{msgEmail}</p></div>
             </div>
 
-            <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" value={password} id="password" onChange={passwordChangeHandler}/>
-            <p>{msgPassword}</p>
+            <div className={styles.form_box}>
+            <input  className={styles.form_input} type="password" value={password} id="password" onChange={passwordChangeHandler} placeholder="password"/>
+            <div className={styles.comment}><p>{msgPassword}</p></div>
             </div>
 
-            {(isEmail && isPassword)? <button>로그인</button>: <button disabled={true}>로그인</button> }
+            <div className={styles.form_sign_box}><div className={styles.form_sign}>회원가입</div></div>
+            {(isEmail && isPassword)?
+             <div className={styles.form_btn_box}><button >로그인</button></div>:
+              <div className={styles.form_btn_box}>< button  disabled={true}>로그인</button></div>  }
+           
+            <div className={styles.form_simple}>간편 회원가입</div>
+            
+            <div className={styles.simple_box}>
+                <div className={styles.simple_btn_kakao}>Kakao</div>
+                <div className={styles.simple_btn_google}>Google</div>
+                <div className={styles.simple_btn_naver}>Naver</div>
+            </div>
+
         </form>
     </div>
 );

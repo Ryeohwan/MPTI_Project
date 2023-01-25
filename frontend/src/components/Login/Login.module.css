@@ -3,6 +3,137 @@
     src: url('../../assets/fonts/DungGeunMo.ttf');
   }
 
-  .Login {
+
+    .Login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     font-family: 'DungGeunMo';
-  }
+    padding-top: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
+    }
+
+    .header {
+      font-size: 90px;
+      border-top: 4pt solid #c9fd61;
+      border-bottom: 4pt solid #c9fd61;
+      color: #ececec;
+    }
+
+    .header_box {
+      display: flex;
+    }
+
+
+    .form_box{
+      margin-top: 10px;
+    }
+
+    .form_input{
+      width: 530px;
+      height: 47px;
+      border-radius: 10px;
+      padding-left: 10px;
+      /* padding-left: 10px; */
+      font-family: 'DungGeunMo';
+      font-size: 20px;
+      color: #B4B4B4
+
+    }
+
+
+    .form_btn {
+      width: 530px;
+      height: 47px;
+      border-radius: 10px;
+      padding-top: 10px;
+      font-family: 'DungGeunMo';
+      font-size: 20px;
+      background-color: #c9fd61;
+    }
+
+    .form_btn_box button{
+      width: 530px;
+      height: 47px;
+      border-radius: 10px;
+      padding-top: 10px;
+      font-family: 'DungGeunMo';
+      font-size: 20px;
+      background-color: #c9fd61;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
+    button:disabled {
+      background: #dddddd;
+    }
+
+    
+
+
+    .form_sign_box{
+     color: #ececec;
+      width: 530px;
+      text-align: right;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .form_simple{
+      color: #ececec;
+      width: 530px;
+      font-size: 20px;
+      border-bottom: 1px solid #ececec;
+      padding-bottom: 10px;
+      text-align: left;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .simple_box{
+      display: flex;
+      width: 530px;
+      justify-content: space-between;
+      padding-top: 10px;
+      
+    }
+
+    .simple_btn_kakao{
+      display: flex;
+      width: 150px;
+      height: 48px;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      background-color: #FEE500;
+    }
+
+    .simple_btn_naver{
+      display: flex;
+      width: 150px;
+      height: 48px;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      background-color: #06BE34;
+    }
+
+    .simple_btn_google{
+      display: flex;
+      width: 150px;
+      height: 48px;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFFFFF;
+
+    }
+
+.comment{
+  width: 530px;
+  text-align: left;
+  color: red
+  
+}
