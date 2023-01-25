@@ -1,46 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Chat.module.css'
+import { Stomp } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 
-
-const serverurl = 'ws://localhost:5000/'
-const socket = new WebSocket(serverurl);
+const serverurl = 'http://i8a803.p.ssafy.io:8005'
+const socket = new SockJS(serverurl);
+let stompClient = Stomp.over(socket);
+let channelId= '12';
 
 export default function Chat(){
     const [chatlist, setchatlist] = useState([]);
-    socket.addEventListener("open", () => {
-        console.log("Conneted to Browser✅");
-        const hour = parseInt(new Date().getHours()/12)===0?'오전'+new Date().getHours():'오후'+(new Date().getHours()-12);
-        const minute = new Date().getMinutes()>9?new Date().getMinutes():'0'+new Date().getMinutes();
-        setchatlist([{id:1, content:'sever_connected', time:hour+':'+minute, user:serverurl}])
-    });
-    socket.addEventListener("message", (message) =>{
-        let reader = new FileReader();
-        const hour = parseInt(new Date().getHours()/12)===0?'오전'+new Date().getHours():'오후'+(new Date().getHours()-12);
-        const minute = new Date().getMinutes()>9?new Date().getMinutes():'0'+new Date().getMinutes();
-        reader.readAsText(message.data)
-        reader.onload=function() {
-            const result= JSON.parse(reader.result)
-            setchatlist([...chatlist, {id: chatlist.length+1 , content:result.content, time:hour+':'+minute, user:result.host}])
-        }
-        // console.log("Just got this: ",message.data, "from the server");
+    
+    useEffect( () => {
+        console.log(`연결 시도할 서버 : ${serverurl}`)
+        stompClient.connect(
+            {},
+            (frame) => {
+
+                console.log('연결했습니다', frame)
+                stompClient.subscribe("/send/12", (message) => {
+                    console.log("구독하고 받은 메시지",message)
+                    setchatlist([...chatlist,JSON.parse(message.body)])
+                })
+            },
+            (error) => {
+                console.log(error)
+                stompClient.connected = false
+            }
+)
         
-        // newMessage.setAttribute('style','color:white; list-style:none')
-        // newMessage.innerText = '글쓴이' + message.data;
-        // console.log(msgbox);
-        // msgbox.appendChild(newMessage);
-    });
-
-    socket.addEventListener("close", () =>{
-        console.log("Disconnected from the server❌")
-    })
-
+    }, [])
 
 function handleSubmit(event) {
     event.preventDefault();
-    const input = event.target['0'];
+    // const input = event.target['0'];
     // console.log(event.target['0'].value);
     // const input = document.getElementById('message_input');
-    socket.send(JSON.stringify({host: window.location.origin, content: input.value}));
+    console.log(event.target['0'].value)
+    if (stompClient && stompClient.connected){
+        const msg = {
+            'channelId': '12',
+            'userName': window.location.host,
+            'content': event.target['0'].value
+        }
+        stompClient.send("/chat/receive", JSON.stringify(msg),{})
+    }
     // console.log(input.value);
 }
 
@@ -58,24 +62,9 @@ function handleSubmit(event) {
                 <div className={styles.chat_temp}>
                     <div id='message_box'>
                         {chatlist.map((chat) => {
-                            if(chat.user === window.location.origin)
-                                return(
-                                    <li key={chat.id} className={styles.chat_talk_box}>
-                                        <div className={styles.chat_profile}>🧑본인 아이디</div>
-                                        <div className={styles.chat_talk_content}> {chat.content}</div>
-                                        <div className={styles.chat_time_box}><span className={styles.chat_time}>{chat.time}</span></div>
-                                    </li>
-                            )
-                            else
-                                return(
-                                    <li key={chat.id} className={styles.chat_talk_box}>
-                                        <div className={styles.chat_time_box}><span className={styles.chat_time}>{chat.time}</span></div>
-                                        <div className={styles.chat_talk_content}> {chat.content}</div>
-                                        <div className={styles.chat_profile}>🧑상대방</div>
-                                </li>
-                                )
+                            return <div>{chat.content}</div>
+                        })
                         }
-                        )}
                     </div>
                     <div>
                         <form id='message_form' method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
