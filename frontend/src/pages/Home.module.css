@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../assets/fonts/DungGeunMo.ttf');
+}
+
+.Home {
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    padding-top: 150px;
+    position: fixed;
+    width: 75%;
+}
+
+.home_header {
+    font-size: 32px;
+    padding-bottom: 20px;
+}
+
+.home_comment {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 15px;
+}
+
+.home_trainer {
+    position: fixed;
+    width: 75%;
+    height: 530px;
+    background-color: red;
+}
+
+.home_review {
+    font-size: 32px;
+    padding-bottom: 20px;
+    padding-top: 570px;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 15px;
+}
