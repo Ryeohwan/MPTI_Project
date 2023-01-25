@@ -19,9 +19,7 @@ export default function ClientNavuser(){
 			<div className={styles.logo_box}>
 				<Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
 					<div className={styles.logo_box}>
-						<div className={styles.logo_bar} style={menuselect === 'home'?{background:"#ececec"}:null}></div>
 						<span className={styles.logo_text} style={menuselect === 'home'?{color:"#C9FD61"}:null}>MPTI</span>
-						<div className={styles.logo_bar} style={menuselect === 'home'?{background:"#ececec"}:null}></div>
 					</div>
 					{/* <img alt='MPTIlogo' src='/MPTIlogo.png'></img> */}
 				</Link>
@@ -46,13 +44,13 @@ export default function ClientNavuser(){
 					{/* 메일 모양 + 프로필 담는 박스 */}
 					<div className={styles.mail_profile_box}>
 						{/* 매일 담는 박스 */}
-						<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex'}}>
+						<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex'; document.getElementById('mail').style.filter='invert(100%) sepia(32%) saturate(4032%) hue-rotate(32deg) brightness(125%) contrast(103%)';}}>
 							{/* 메시지 개수 출력 임시로 99+ 지정 */}
 							<div className={styles.mail_count_box}>
 										<span>99+</span>
 								</div>
 							{/* 메시지 이미지 */}
-							<img alt="chatmail" src='/chatmail.png'>
+							<img id='mail' className={styles.mail_img} alt="chatmail" src='/chatmail.png'>
 
 								</img>
 							</div>

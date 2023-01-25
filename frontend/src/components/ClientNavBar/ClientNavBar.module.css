@@ -30,6 +30,7 @@
   padding: 0px 10px;
   gap: 100px;
   font-size: 24px;
+  white-space: nowrap;
 }
 
 /* Navbar 오른쪽 박스에서 쪽지모양과 프로필 담는 박스 */
@@ -72,20 +73,18 @@
   height: 15.81px;
 }
 
-.logo_bar{
-  width: 150px;
-  height:4px;
-  margin:0;
-  border:0;
-  background:#C9FD61;
-}
+/* 로고 텍스트 */
 .logo_text{
   font-family: 'DungGeunMo';
   font-weight: 400;
   font-size: 76px;
   text-align: center;
+  border-bottom: 4pt solid #C9FD61;
+  border-top: 4pt solid #C9FD61;
   padding-bottom: 5px;
+  padding-left: 4pt;
 }
+/* 로고 담는 박스 */
 .logo_box{
   display: flex;
   flex-direction: column;
@@ -97,3 +96,6 @@
 a{
   color: #ececec;
 }
+
+.mail_img{
+  filter: none}

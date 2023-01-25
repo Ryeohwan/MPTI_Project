@@ -55,7 +55,8 @@ function handleSubmit(event) {
                     <div className={styles.chat_title_box}>
                         <div>&lt;</div>
                         <div>Chats</div>
-                        <div className={styles.chat_exit_btn} onClick={()=>{document.getElementById('chat').style.display='none'}}>❌</div>
+                        <div className={styles.chat_exit_btn} onClick={()=>{document.getElementById('mail').style.filter='none'; document.getElementById('chat').style.display='none';
+}}>❌</div>
                     </div>
                     <input className={styles.chat_search_bar} placeholder='사용자 검색'></input>
                 </div>
@@ -67,9 +68,9 @@ function handleSubmit(event) {
                         }
                     </div>
                     <div>
-                        <form id='message_form' method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
-                            <input id='message_input' className={styles.chat_input}></input>
-                            <button>Send</button>
+                        <form id={styles.message_form} method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
+                                <input id='message_input' className={styles.chat_input}></input>
+                                <button>Send</button>
                         </form>
                     </div>
                     </div>
