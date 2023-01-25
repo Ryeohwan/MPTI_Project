@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+  }
+
+  .Login {
+    font-family: 'DungGeunMo';
+  }
