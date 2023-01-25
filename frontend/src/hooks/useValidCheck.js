@@ -2,14 +2,16 @@ import { useReducer } from "react";
 
 export default function useValidCheck(initialInput) {
   let pattern_kor = /^[가-힣]{2,15}$/; // 한글
+
   const reducer = (state, action) => {
     const alertList = [];
-
+    alertList.push(action.value)
     switch (action.type) {
       case "NAME":
         if (action.value === "")
           return (
             <span>필수 입력 항목입니다.</span>
+            
           );
         if (action.value.length > 6)
           alertList.push(

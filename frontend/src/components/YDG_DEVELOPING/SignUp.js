@@ -1,4 +1,4 @@
-import useValidCheck from "./useValidCheck";
+import useValidCheck from '../../hooks/useValidCheck'
 
 export default function SignUP(){
   const [inputname, CheckNameValid] = useValidCheck(true);

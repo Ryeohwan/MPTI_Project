@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 //유저 네비게이션 바(컴포넌트)
 import ClientNavBar from './components/ClientNavBar/ClientNavBar'
+// import SignUP from './components/YDG_DEVELOPING/SignUp'
+// import NaverLogin from './components/YDG_DEVELOPING/test'
+
 
 // css module
 import styles from './App.module.css'
@@ -28,8 +31,8 @@ export default function App(){
         {/* ClientNavbar 는 client의 네비게이션 바/ TrainerNavBar는 Trainer의 네비게이션 바 */}
           <ClientNavBar></ClientNavBar>
         </header>
-
-
+        {/* <NaverLogin></NaverLogin>
+        <SignUP/> */}
 
 
         {/* 라우트 경로 목록들 */}
