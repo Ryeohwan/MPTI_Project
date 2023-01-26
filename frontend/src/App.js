@@ -22,10 +22,15 @@ export default function App(){
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
   const type = "client"
   // const type = "trainer"
-
+  localStorage.setItem('token','123')
 
   return (
       <div className="App">
+        {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>} */}
+        
+
+
+
         {type==="client"?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
         {/* <ClientHeader/> */}
@@ -33,6 +38,7 @@ export default function App(){
 
                 {/* 라우트 경로 목록들 */}
         <Routes>
+
           {/* 공통 */}
           <Route path="/home" element={<Home/>}/>
 
