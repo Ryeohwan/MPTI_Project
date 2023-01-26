@@ -3,16 +3,12 @@
     src: url('../../assets/fonts/DungGeunMo.ttf');
 }
 
-body {
-    padding-top: 80px;
-}
-
 .schedule {
     font-family: 'DungGeunMo';
     color: #ececec;
-    margin-top: 150px;
     width: 75%;
     position: fixed;
+    margin-top: 40px;
 }
 
 .schedule_header {
