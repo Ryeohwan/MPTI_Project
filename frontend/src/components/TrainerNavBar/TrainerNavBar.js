@@ -3,14 +3,13 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 // ClientNAvbar css 모듈 가져오기
-import styles from './ClientNavBar.module.css'
+import styles from './TrainerNavBar.module.css'
 // 채팅 컴포넌트 가져오기
 import Chat from '../Chat/Chat';
 
-// 유저NavBar 리턴 함수
-export default function ClientNavuser(){
+// 트레이너NavBar 리턴 함수
+export default function TrainerNavBar(){
 	const [menuselect, setMenuSelect] = useState(null);
-	console.log(menuselect)
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.nav_box}>
@@ -25,20 +24,16 @@ export default function ClientNavuser(){
 				</Link>
 				</div>
 			
-			{/* ClientNavbar 메뉴담는 오른쪽 박스. 폰트 지정 */}
+			{/* TrainerNavbar 메뉴담는 오른쪽 박스. 폰트 지정 */}
 			<div className = {`${styles.whitefont} ${styles.nav_menubox}`}>
 				<div>
 
-					{/* 내 스케줄 클릭시 /clientmyschedule로 라우팅 */}
-					<Link className={styles.nav_menu_text} to={'/clientmyschedule'} style={menuselect === 'clientmyschedule'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyschedule')}}>내 스케줄</Link>
+					{/* 예약현황 클릭시 /trainermyreservation로 라우팅 */}
+					<Link className={styles.nav_menu_text} to={'/trainermyreservation'} style={menuselect === 'trainermyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyreservation')}}>예약현황</Link>
 					</div>
 				<div>
-					{/* 내 운동기록 클릭시 /clientptlog 라우팅 */}
-					<Link className={styles.nav_menu_text} to={'/clientmylog'}  style={menuselect === 'clientmylog'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmylog')}}>운동기록</Link>
-					</div>
-				<div>
-					{/* 내 예약하기 클릭시 /clientreservation 라우팅 */}
-					<Link className={styles.nav_menu_text} to={'/clientmyreservation'} style={menuselect === 'clientmyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyreservation')}}>예약하기</Link>
+					{/* 고객관리 클릭시 /trainermyclient 라우팅 */}
+					<Link className={styles.nav_menu_text} to={'/trainermyclient'}  style={menuselect === 'trainermyclient'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyclient')}}>운동기록</Link>
 					</div>
 				<div>
 					{/* 메일 모양 + 프로필 담는 박스 */}
@@ -57,8 +52,8 @@ export default function ClientNavuser(){
 
 
 							{/* 가장 오른쪽 프로필 그림 클릭시 /clientmypage 라우팅 */}
-						<Link to={'/clientmypage'} onClick={()=>{setMenuSelect('clientmypage')}}>
-							<img className={styles.profile_box} style={menuselect === 'clientmypage'?{borderColor:"#C9FD61"}:{borderColor:"#ececec"}} alt="profilepic" src='/profilepic.png'></img>
+						<Link to={'/trainermypage'} onClick={()=>{setMenuSelect('trainermypage')}}>
+							<img className={styles.profile_box} style={menuselect === 'trainermypage'?{borderColor:"#C9FD61"}:{borderColor:"#ececec"}} alt="profilepic" src='/profilepic.png'></img>
 							</Link>
 						
 						</div>

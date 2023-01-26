@@ -1,11 +1,16 @@
 /* 바탕 그라데이션, 패딩 */
 .background {
-  padding: 0px 375px;
+  padding: 0px 10%;
   margin: 0;
   background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
-  height: 100%;
 }
-
+body {
+  height: 100%;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
 
 
 /* test용 */
