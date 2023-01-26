@@ -9,19 +9,20 @@ let stompClient = Stomp.over(socket);
 let channelId= '12';
 
 export default function Chat(){
+    const [channel, setchannel] = useState(null);
     const [roomlist, setroomlist] = useState([{channelId:1, userName:'Kim'}, {channelId:2, userName:'Jung'}])
     const [chatlist, setchatlist] = useState([]);
     console.log(chatlist)
     useEffect( () => {
-        console.log(`연결 시도할 서버 : ${serverurl}`)
         stompClient.connect(
             {},
             (frame) => {
 
                 console.log('연결했습니다', frame)
                 stompClient.subscribe("/send/1", (message) => {
-                    console.log("구독하고 받은 메시지",message)
-                    setchatlist([...chatlist, JSON.parse(message.body)])
+                    const a= JSON.parse(message.body)
+                    console.log("구독하고 받은 메시지",message.body)
+                    setchatlist((prev) =>([...prev, a]))
                 })
             },
             (error) => {
@@ -34,10 +35,6 @@ export default function Chat(){
 
 function handleSubmit(event) {
     event.preventDefault();
-    // const input = event.target['0'];
-    // console.log(event.target['0'].value);
-    // const input = document.getElementById('message_input');
-    console.log(event.target['0'].value)
     if (stompClient && stompClient.connected){
         const msg = {
             'channelId': '1',
@@ -52,7 +49,7 @@ function handleSubmit(event) {
     return(
         <div id='chat' className={styles.modal}>
             <div className={styles.modal_box}>
-                <div>  
+                <div className={styles.title_search}>  
                     <div className={styles.chat_title_box}>
                         <div>&lt;</div>
                         <div>Chats</div>
@@ -63,7 +60,7 @@ function handleSubmit(event) {
 
 
                 <div className={styles.chat_temp}>
-                    <div id='message_box'>
+                    <div id={styles.message_box}>
                         {chatlist.map((chat) => {
                             return <div>{chat.content}</div>
                         })
@@ -81,7 +78,7 @@ function handleSubmit(event) {
 
 
                     <div>
-                        <form id='message_form' method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
+                        <form className={styles.message_form} method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
                             <input id='message_input' className={styles.chat_input}></input>
                             <button>Send</button>
                         </form>
