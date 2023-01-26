@@ -1,8 +1,8 @@
 import React from 'react';
-
+import styles from './ClientMyPage.module.css'
 const ClientMyPage = () => {
     return (
-        <div>
+        <div className={styles.ClientMyPage}>
             ClientMyPage
         </div>
     );

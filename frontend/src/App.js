@@ -9,7 +9,7 @@ import TrainerMyReservation from './pages/Trainer/TrainerMyReservation';
 import ClientMyLog from './pages/Client/ClientMyLog';
 import ClientMyPage from './pages/Client/ClientMyPage';
 import ClientMyReservation from './pages/Client/ClientMyReservation';
-import ClientMySchdule from './pages/Client/ClientMySchdule';
+import ClientMySchedule from './pages/Client/ClientMySchedule';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path='/ClientMyLog' element={<ClientMyLog/>}/>
         <Route path='/ClientMyPage' element={<ClientMyPage/>}/>
         <Route path='/ClientMyReservation' element={<ClientMyReservation/>}/>
-        <Route path='/ClientMySchdule' element={<ClientMySchdule/>}/>
+        <Route path='/ClientMySchedule' element={<ClientMySchedule/>}/>
       </Routes>
 
      

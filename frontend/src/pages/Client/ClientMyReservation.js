@@ -1,8 +1,8 @@
 import React from 'react';
-
+import styles from './ClientMyReservation.module.css';
 const ClientMyReservation = () => {
     return (
-        <div>
+        <div className={styles.ClientMyReservation}>
             ClientMyReservation
         </div>
     );

@@ -6,13 +6,14 @@
 .Home {
     font-family: 'DungGeunMo';
     color: #ececec;
-    padding-top: 150px;
+    margin-top: 150px;
     position: fixed;
     width: 75%;
+    /* min-width: 1070px; */
 }
 
 .home_header {
-    font-size: 32px;
+    /* font-size: 32px; */
     padding-bottom: 20px;
 }
 
@@ -24,6 +25,7 @@
 .home_trainer {
     position: fixed;
     width: 75%;
+    /* min-width: 1070px; */
     height: 530px;
     background-color: red;
 }

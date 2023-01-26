@@ -1,8 +1,8 @@
 import React from 'react';
-
+import styles from './TrainerMyClient.module.css';
 const TrainerMyClient = () => {
     return (
-        <div>
+        <div className={styles.TrainerMyClient}>
             TrainerMyClient
         </div>
     );
