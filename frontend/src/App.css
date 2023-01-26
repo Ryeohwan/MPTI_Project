@@ -1,3 +1,17 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
+  padding: 0 13%;
+  margin-top: 100px;
+  
+}
+
+.App{
+min-width: 1070px;
 }

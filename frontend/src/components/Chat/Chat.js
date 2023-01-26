@@ -55,7 +55,7 @@ function handleSubmit(event) {
                     <div className={styles.chat_title_box}>
                         <div>&lt;</div>
                         <div>Chats</div>
-                        <div className={styles.chat_exit_btn} onClick={()=>{document.getElementById('mail').style.filter='none'; document.getElementById('chat').style.display='none';
+                        <div className={styles.chat_exit_btn} onClick={()=>{document.getElementById('chat').style.display='none';
 }}>❌</div>
                     </div>
                     <input className={styles.chat_search_bar} placeholder='사용자 검색'></input>
