@@ -34,7 +34,7 @@
 }
 
 .head_text {
-    white-space: nowra
+    white-space: nowrap;
 }
 
 .head_text:hover {

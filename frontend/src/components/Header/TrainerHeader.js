@@ -9,8 +9,8 @@ const TrainerHeader = () => {
         <div className={styles.head_menu}>
             <div className={styles.head_text}>예약현황</div>
             <div className={styles.head_text}>고객관리</div>
-            <div className={styles.head_message}>@</div>
-            <div className={styles.head_profile}>@</div>
+            {/* <div className={styles.head_message}>@</div>
+            <div className={styles.head_profile}>@</div> */}
         </div>
 
         </div>

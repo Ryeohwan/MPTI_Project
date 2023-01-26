@@ -1,17 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './CustomerHeader.module.css'
 const CustomerHeader = () => {
     return (
         <div className={styles.CustomerHeader}>
-
-        <div className={styles.head_logo}>MPTI</div>
+       <div className={styles.head_logo}> <Link to="/">MPTI</Link></div>
+       
 
         <div className={styles.head_menu}>
-            <div className={styles.head_text}>내 스케줄</div>
-            <div className={styles.head_text}>운동기록</div>
-            <div className={styles.head_text}>예약하기</div>
-            <div className={styles.head_message}>메시지</div>
-            <div className={styles.head_profile}>프로필</div>
+            <div><Link to="/">내 스케줄</Link></div>
+            <div><Link to="/">운동기록</Link></div>
+            <div><Link to="/ClientMyPage"> 예약하기</Link></div>
+            <div><Link to="/ClientMyPage">프로필</Link></div>
         </div>
 
         </div>

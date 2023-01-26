@@ -4,16 +4,9 @@
 
 body {
     display: flex;
-    /* 가로축 가운데 */
-    /* /justify-content: center; */
-    /* 세로축 가운데 */
-    /* align-items: center; */
     min-height: 100vh;
     margin: 0;
     background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
     padding: 0 13%;
 }
 
-.App {
-    /* display: flex; */
-}

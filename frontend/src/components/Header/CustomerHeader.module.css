@@ -29,6 +29,7 @@
     font-family: 'DungGeunMo';
     font-weight: 400;
     font-size: 76px;
+    color: #ececec;
     border-bottom: 4pt solid #C9FD61;
     border-top: 4pt solid #C9FD61
 }
@@ -39,5 +40,10 @@
 
 .head_text:hover {
     white-space: nowrap;
-    color: #C9FD61;
+    color: #C9FD61;}
+
+
+a {
+    text-decoration: none;
+    color: #ececec;
 }
