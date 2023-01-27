@@ -10,20 +10,23 @@ import ClientMyLog from './pages/Client/ClientMyLog';
 import ClientMyPage from './pages/Client/ClientMyPage';
 import ClientMyReservation from './pages/Client/ClientMyReservation';
 import ClientMySchedule from './pages/Client/ClientMySchedule';
+import Login from './components/Login/Login';
 
 
 function App() {
   return (
     <div className="App">
       {/* <TrainerHeader/> */}
-      <CustomerHeader/>
+      {/* <CustomerHeader/> */}
+
+
 
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/TrainerMyPage' element={<TrainerMyPage/>}/>
         <Route path='/TrainerMyClient' element={<TrainerMyClient/>}/>
         <Route path='/TrainerMyReservation' element={<TrainerMyReservation/>}/>
-
+        <Route path='/login' element={<Login/>}/>
         <Route path='/ClientMyLog' element={<ClientMyLog/>}/>
         <Route path='/ClientMyPage' element={<ClientMyPage/>}/>
         <Route path='/ClientMyReservation' element={<ClientMyReservation/>}/>

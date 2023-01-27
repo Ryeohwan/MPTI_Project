@@ -44,29 +44,16 @@ const passwordChangeHandler = (e) =>{
 
 const testLogin = (body)=>{
     console.log(body);
-
-    // axios({
-    //     method:"post",
-    //     data: {
-    //         email: email, name:password
-    //     },
-    //     url: "http://localhost:8080/user/check"
-    // }).then(res=>{
-    //     console.log(res);
-    // }).catch((error)=>{
-    //     console.log(error)
-    // })
-    axios.post("http://localhost:8080/user/check",  body).then(res=>{
+    axios.post("http://localhost:8080/user/check", body).then(res=>{
         console.log(res);
     }).catch((error)=>{
         console.log(error)
     })
 }
 
-const onSubmitHandler = (e)=>{
+const onSubmitHandler = async (e)=>{
     e.preventDefault();
-    const body ={email: email, name:password};
-    testLogin( {email: email, name:password});
+    const res = await axios.post("http://localhost:8080/user/check",{email: email, name:password});
 }
 
 
@@ -74,7 +61,7 @@ const onSubmitHandler = (e)=>{
 return (
     <div className={styles.Login}> 
             <div className={styles.header_box}>
-                <span className={styles.header}>MPTI</span>
+                <div className={styles.header}>MPTI</div>
             </div>
             
         <form onSubmit={onSubmitHandler}>
