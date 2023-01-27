@@ -1,7 +1,7 @@
 .TrainerMyReservation {
     font-family: 'DungGeunMo';
     color: #ececec;
-    margin-top: 150px;
-    position: fixed;
-    width: 75%;
+    background-color: red;
+    padding-left: 15px;
+    padding-right: 15px;
 }

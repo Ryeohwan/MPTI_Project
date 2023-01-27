@@ -11,3 +11,6 @@ body {
     background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
 }
 
+.App{
+    min-width: 970px;
+}

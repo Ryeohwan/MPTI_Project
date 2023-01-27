@@ -1,77 +1,40 @@
 import React from 'react';
 import styles from "./Home.module.css"
-import Card from './../../components/UI/Card/Card';
 import TrainerImg from "./../../assets/img/trainer.PNG"
 const Home = () => {
     
     return (
-    
         <div className={styles.Home}>
            <div className={styles.home_header}>이달의 트레이너</div>
            <div className={styles.home_comment}>MPTI를 빛낸 우수한 강사진을 확인하세요!</div>
             {/* 트레이너 리스트 부분 - 분리예정 */}
      
-            <div className={styles.home_trainer}>
+            <div className={styles.home_trainer_box}>
 
                 <ul className={styles.home_trainer_list}>
-                    <li>
-                        <div className={styles.home_trainer_item}>
+                  
+                
+
+                    <li className={styles.home_trainer_item}>
                             <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
                             <div className={styles.home_trainer_info}>
                                     <div>정원철 트레이너</div>
                                     <div>별점 5개 평점 4.86점</div>
                                     <div>이친구 정말 야무지게 가르쳐주네</div>
                             </div>
-
-                        </div>
                     </li>
 
-                    <li>
-                        <div className={styles.home_trainer_item}>
+                    <li className={styles.home_trainer_item}>
                             <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
                             <div className={styles.home_trainer_info}>
                                     <div>정원철 트레이너</div>
                                     <div>별점 5개 평점 4.86점</div>
                                     <div>이친구 정말 야무지게 가르쳐주네</div>
                             </div>
-
-                        </div>
                     </li>
 
-                    <li>
-                        <div className={styles.home_trainer_item}>
-                            <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
-                            <div className={styles.home_trainer_info}>
-                                    <div>정원철 트레이너</div>
-                                    <div>별점 5개 평점 4.86점</div>
-                                    <div>이친구 정말 야무지게 가르쳐주네</div>
-                            </div>
 
-                        </div>
-                    </li>
-
-                    <li>
-                        <div className={styles.home_trainer_item}>
-                            <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
-                            <div className={styles.home_trainer_info}>
-                                    <div>정원철 트레이너</div>
-                                    <div>별점 5개 평점 4.86점</div>
-                                    <div>이친구 정말 야무지게 가르쳐주네</div>
-                            </div>
-
-                        </div>
-                    </li>
-                    <li>
-                        <div className={styles.home_trainer_item}>
-                            <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
-                            <div className={styles.home_trainer_info}>
-                                    <div>정원철 트레이너</div>
-                                    <div>별점 5개 평점 4.86점</div>
-                                    <div>이친구 정말 야무지게 가르쳐주네</div>
-                            </div>
-
-                        </div>
-                    </li>
+                 
                     
                 </ul>
                 
@@ -81,72 +44,6 @@ const Home = () => {
             <div className={styles.home_comment}>MPTI 고객님들의 생생한 후기를 확인해보세요!</div>
  
  
- {/*리뷰 리스트  */}
-<div className={styles.home_review}>
-
-<ul className={styles.home_trainer_list}>
-    <li>
-        <div className={styles.home_review_item}>
-           
-            <div className={styles.home_trainer_info}>
-                    <div>정원철 트레이너</div>
-                    <div>별점 5개 평점 4.86점</div>
-                    <div>이친구 정말 야무지게 가르쳐주네</div>
-            </div>
-
-        </div>
-    </li>
-
-    <li>
-        <div className={styles.home_review_item}>
-          
-            <div className={styles.home_trainer_info}>
-                    <div>정원철 트레이너</div>
-                    <div>별점 5개 평점 4.86점</div>
-                    <div>이친구 정말 야무지게 가르쳐주네</div>
-            </div>
-
-        </div>
-    </li>
-
-    <li>
-        <div className={styles.home_review_item}>
-           
-            <div className={styles.home_trainer_info}>
-                    <div>정원철 트레이너</div>
-                    <div>별점 5개 평점 4.86점</div>
-                    <div>이친구 정말 야무지게 가르쳐주네</div>
-            </div>
-
-        </div>
-    </li>
-
-    <li>
-        <div className={styles.home_review_item}>
-           
-            <div className={styles.home_trainer_info}>
-                    <div>정원철 트레이너</div>
-                    <div>별점 5개 평점 4.86점</div>
-                    <div>이친구 정말 야무지게 가르쳐주네</div>
-            </div>
-
-        </div>
-    </li>
-    <li>
-        <div className={styles.home_review_item}>
-            
-            <div className={styles.home_trainer_info}>
-                    <div>정원철 트레이너</div>
-                    <div>별점 5개 평점 4.86점</div>
-                    <div>이친구 정말 야무지게 가르쳐주네</div>
-            </div>
-
-        </div>
-    </li>
-    
-</ul>
-
-</div>
         </div>
     );
 };
