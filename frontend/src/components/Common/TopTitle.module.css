@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+.body_title_box {
+    width: 100%;
+    border-bottom: 1px #ececec solid;
+    margin-bottom: 20px;
+    
+}
+
+.body_title_bigtxt {
+    font-family: 'DungGeunMo';
+    font-size: 32px;
+    color: #ececec;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.body_title_smtxt{
+    font-family: 'DungGeunMo';
+    font-size: 15px;
+    color: #ececec;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from "./Home.module.css"
 import TrainerImg from "./../../assets/img/trainer.PNG"
+import TopTitle from '../../components/Common/TopTitle'
+
 const Home = () => {
     
     return (
         <div className={styles.Home}>
+            <TopTitle title='이달의 트레이너' content='MPTI를 빛낸 우수한 강사진을 확인하세요!'/>
            <div className={styles.home_header}>이달의 트레이너</div>
            <div className={styles.home_comment}>MPTI를 빛낸 우수한 강사진을 확인하세요!</div>
             {/* 트레이너 리스트 부분 - 분리예정 */}
