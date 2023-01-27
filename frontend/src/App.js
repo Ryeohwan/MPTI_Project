@@ -20,8 +20,8 @@ import TrainerMyPage from './pages/Trainer/TrainerMyPage';
 
 export default function App(){
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
-  // const type = "client"
-  const type = "trainer"
+  const type = "client"
+  //const type = "trainer"
   localStorage.setItem('token','123')
 
   return (

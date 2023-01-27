@@ -11,7 +11,7 @@ export default function TrainerHeader(){
 	// 메시지 개수
 	const [messagecount, setMessageCount] = useState(99);
 	useEffect(() =>{
-		const LINK_LIST=['/home','/clientmyschedule','/clientmylog', '/clientmyreservation','/clientmypage']
+		const LINK_LIST=['/home', '/trainermyreservation','/trainermyclient', '/trainermypage']
 		LINK_LIST.forEach((link) => {
 			if(window.location.pathname.startsWith(link)){
 				setMenuSelect(link.slice(1));
@@ -26,7 +26,7 @@ export default function TrainerHeader(){
 		<div className={styles.Header}>
 
 			{/* home 이동버튼 */}
-			<div className={styles.head_logo}>
+			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'/home'} >
 						MPTI</Link>	
 			</div>

@@ -31,7 +31,7 @@ export default function ClientHeader(){
 		<div className={styles.Header}>
 
 			{/* home 이동버튼 */}
-			<div className={styles.head_logo}> <Link to={'/home'} style={menuselect === 'home'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('home')}}>
+			<div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
 			MPTI</Link>	</div>
 			
 

@@ -6,7 +6,6 @@
 .body_title_box {
     width: 100%;
     border-bottom: 1px #ececec solid;
-    margin-bottom: 20px;
     
 }
 
@@ -14,14 +13,12 @@
     font-family: 'DungGeunMo';
     font-size: 32px;
     color: #ececec;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .body_title_smtxt{
     font-family: 'DungGeunMo';
-    font-size: 15px;
+    font-size: 16px;
     color: #ececec;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
