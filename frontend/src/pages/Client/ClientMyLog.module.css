@@ -1,7 +1,8 @@
 .ClientMyLog {
     font-family: 'DungGeunMo';
     color: #ececec;
-    margin-top: 150px;
-    position: fixed;
-    width: 75%;
+    background-color: red;
+    padding-left: 10px;
+    padding-right: 10px;
+    
 }

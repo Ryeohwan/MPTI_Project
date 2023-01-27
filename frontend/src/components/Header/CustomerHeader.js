@@ -5,7 +5,6 @@ const CustomerHeader = () => {
     return (
         <div className={styles.CustomerHeader}>
        <div className={styles.head_logo}> <Link to="/">MPTI</Link></div>
-       
         <div className={styles.head_menu}>
             <div className={styles.head_text}><Link to="/ClientMySchedule">내 스케줄</Link></div>
             <div className={styles.head_text}><Link to="/ClientMyLog">운동기록</Link></div>

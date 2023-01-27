@@ -4,34 +4,27 @@
 }
 
 .CustomerHeader {
-    position: fixed;
-    font-family: 'DungGeunMo';
-    color: #ececec;
-    /* width: 1920px; */
-    width: 100% ;
-    height: 100px;
-    margin: 0;
-    top: 0;
-    left: 0;
-    padding: 0 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 0px;
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    width: 970px ;
+    height: 70px;
+    margin: 0;
 }
 
 .head_menu {
     display: flex;
     justify-content: space-between;
     width: 40%;
-    /* width: 960px; */
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .head_logo {
     font-family: 'DungGeunMo';
     font-weight: 400;
-    font-size: 76px;
+    font-size: 56px;
     color: #ececec;
     border-bottom: 4pt solid #C9FD61;
     border-top: 4pt solid #C9FD61
@@ -39,13 +32,11 @@
 
 .head_text {
     white-space: nowrap;
-    padding-right:30px;
 }
 
 .head_text:hover {
     white-space: nowrap;
     color: #C9FD61;}
-
 
 a {
     text-decoration: none;
