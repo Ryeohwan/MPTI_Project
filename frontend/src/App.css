@@ -4,14 +4,13 @@
 
 body {
   display: flex;
-  min-height: 100vh;
+  justify-content: center;
   margin: 0;
+  width: 100%;
+  min-height: 100vh;
   background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
-  padding: 0 13%;
-  margin-top: 100px;
-  
 }
 
 .App{
-min-width: 1070px;
+  min-width: 970px;
 }

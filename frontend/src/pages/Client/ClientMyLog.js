@@ -1,7 +1,11 @@
-export default function ClientMyLog(){
-    return(
-        <div>
-            <span style={{color:"green", fontSize:"30px"}}>운동기록 도착 했습니다.</span>
+import React from 'react';
+import styles from './ClientMyLog.module.css'
+const ClientMyLog = () => {
+    return (
+        <div className={styles.ClientMyLog}>
+         ClientMyLog
         </div>
-    )
-}
+    );
+};
+
+export default ClientMyLog;

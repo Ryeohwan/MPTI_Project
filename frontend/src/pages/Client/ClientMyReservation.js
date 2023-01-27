@@ -1,7 +1,11 @@
-export default function ClientMyReservation(){
-    return(
-        <div>
-            <span style={{color:"purple", fontSize:"30px"}}>예약하기 도착했습니다.</span>
+import React from 'react';
+import styles from './ClientMyReservation.module.css';
+const ClientMyReservation = () => {
+    return (
+        <div className={styles.ClientMyReservation}>
+            ClientMyReservation
         </div>
-    )
-}
+    );
+};
+
+export default ClientMyReservation;

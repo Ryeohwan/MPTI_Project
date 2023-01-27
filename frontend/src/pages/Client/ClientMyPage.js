@@ -1,7 +1,11 @@
-export default function ClientMyPage(){
-    return(
-        <div>
-            <span style={{color:"red", fontSize:"30px"}}>마이페이지에 도착 했습니다.</span>
+import React from 'react';
+import styles from './ClientMyPage.module.css'
+const ClientMyPage = () => {
+    return (
+        <div className={styles.ClientMyPage}>
+            ClientMyPage
         </div>
-    )
-}
+    );
+};
+
+export default ClientMyPage;

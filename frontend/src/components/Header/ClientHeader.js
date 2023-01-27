@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
-// 컴포넌트
-import Chat from '../Chat/Chat';
 
 //ClientHeader
 export default function ClientHeader(){
@@ -31,25 +29,22 @@ export default function ClientHeader(){
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-			<Chat></Chat>
 
 			{/* home 이동버튼 */}
-			<div className={styles.head_logo}>
-				<Link to={'/home'} style={menuselect === 'home'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('home')}}>
-					MPTI</Link>	
-			</div>
+			<div className={styles.head_logo}> <Link to={'/home'} style={menuselect === 'home'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('home')}}>
+			MPTI</Link>	</div>
 			
 
 			{/* head menu담는 박스 */}
 			<div className = {styles.head_menu}>
 				{/* 내 스케줄 클릭시 /clientmyschedule로 라우팅 */}
-				<div><Link id='clientmyschedule' className={styles.head_text} to={'/clientmyschedule'} style={menuselect === 'clientmyschedule'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyschedule')}}>
+				<div className={styles.head_text}><Link id='clientmyschedule' to={'/clientmyschedule'} style={menuselect === 'clientmyschedule'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyschedule')}}>
 					내 스케줄</Link></div>
 				{/* 내 운동기록 클릭시 /clientptlog 라우팅 */}
-				<div><Link id='clientmylog'className={styles.head_text} to={'/clientmylog'}  style={menuselect === 'clientmylog'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmylog')}}>
+				<div className={styles.head_text}><Link id='clientmylog' to={'/clientmylog'}  style={menuselect === 'clientmylog'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmylog')}}>
 					운동기록</Link></div>
 				{/* 내 예약하기 클릭시 /clientreservation 라우팅 */}
-				<div><Link id='clientmyreservation' className={styles.head_text} to={'/clientmyreservation'} style={menuselect === 'clientmyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyreservation')}}>
+				<div className={styles.head_text}><Link id='clientmyreservation' to={'/clientmyreservation'} style={menuselect === 'clientmyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyreservation')}}>
 					예약하기</Link></div>
 
 				{/* 메일 + 프로필 담는 박스 */}

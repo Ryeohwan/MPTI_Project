@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
-// 컴포넌트
-import Chat from '../Chat/Chat';
 
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
@@ -26,7 +24,6 @@ export default function TrainerHeader(){
 	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-			<Chat></Chat>
 
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo}>
@@ -38,7 +35,7 @@ export default function TrainerHeader(){
 			<div className = {styles.head_menu}>
 					{/* 예약현황 클릭시 /trainermyreservation로 라우팅 */}
 					<div><Link id='trainermyreservation' className={styles.head_text} to={'/trainermyreservation'} style={menuselect === 'trainermyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyreservation')}}>
-						내 스케줄</Link></div>
+						예약현황</Link></div>
 					{/* 고객관리 클릭시 /trainermyclient 라우팅 */}
 					<div><Link id='trainermyclient'className={styles.head_text} to={'/trainermyclient'}  style={menuselect === 'trainermyclient'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyclient')}}>
 						고객관리</Link></div>
