@@ -50,11 +50,6 @@
     color: #ececec;    
 }
 
-.select_list{
-    display: flex;
-    width: 370px;
-    justify-content: space-between;
-}
 
 .select_btn_box{
     display: flex;
@@ -76,7 +71,35 @@
     cursor: pointer;
 }
 
-.select_item :hov{
 
+.select_list{
+    display: flex;
+    width: 370px;
+    justify-content: space-between;
+}
+
+.select_square1{
+    visibility: hidden;
+}
+
+.select_square2{
+    visibility: hidden;
+}
+.select_list>.select_item1:hover .select_square1 {
+    visibility: visible;
+    color: red;
+}
+
+.select_list>.select_item2:hover .select_square2 {
+    visibility: visible;
+    color: red;
+}
+
+.select_item1{
+    cursor: pointer;
+}
+
+.select_item2{
+    cursor: pointer;
 }
 
