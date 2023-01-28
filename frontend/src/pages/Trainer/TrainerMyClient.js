@@ -1,7 +1,11 @@
-export default function TrainerMyClient(){
-    return(
-        <div>
-            <span style={{color:"green", fontSize:"30px"}}>트레이너 고객관리 페이지.</span>
+import React from 'react';
+import styles from './TrainerMyClient.module.css';
+const TrainerMyClient = () => {
+    return (
+        <div className={styles.TrainerMyClient}>
+            TrainerMyClient
         </div>
-    )
-}
+    );
+};
+
+export default TrainerMyClient;

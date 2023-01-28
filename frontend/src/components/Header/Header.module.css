@@ -6,26 +6,20 @@
 
 /* 헤더 전체 박스*/
 .Header {
-  position: fixed;
-  font-family: 'DungGeunMo';
-  color: #ececec;
-  /* width: 1920px; */
-  width: 100% ;
-  height: 100px;
-  margin: 0;
-  top: 0;
-  left: 0;
-  padding: 0 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 0px;
+  font-family: 'DungGeunMo';
+  color: #ececec;
+  width: 970px ;
+  height: 70px;
+  margin-bottom: 45px;
 }
 
 .head_logo {
   font-family: 'DungGeunMo';
   font-weight: 400;
-  font-size: 76px;
+  font-size: 56px;
   color: #ececec;
   border-bottom: 4pt solid #C9FD61;
   border-top: 4pt solid #C9FD61
@@ -37,8 +31,7 @@
   justify-content: space-between;
   align-items: center;
   width: 40%;
-  /* width: 960px; */
-  font-size: 24px;
+  font-size: 18px;
 }
 
 /* 메일과 프로필 담는 박스 */
@@ -46,8 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  gap: 30px;
+  gap: 20px;
   height: 100%;
 }
 
@@ -66,11 +58,11 @@
   align-items: center;
   top:0;
   right: 0;
-  font-size:9pt;
+  font-size:9px;
   background-color: red;
   border-radius: 100px;
-  width: 26.34px;
-  height: 15.81px;
+  width: 20px;
+  height: 10px;
 }
 
 /* 프로필 사진 동그라미 안에 넣기 */
@@ -78,20 +70,25 @@
   border: 2px solid;
   border-radius: 50%;
   object-fit: fill;
-  width:45px;
-  height: 45px;
+  width:px;
+  height: 35px;
 }
 
 .head_text{
   white-space: nowrap;
-  transition: 0.5s; 
 }
 
 .head_text:hover{
   white-space: nowrap;
+  color: #C9FD61;
 }
 
 a {
   text-decoration: none;
   color: #ececec;
+}
+
+.mail_img{
+  width: 30px;
+  height: 30px;
 }
