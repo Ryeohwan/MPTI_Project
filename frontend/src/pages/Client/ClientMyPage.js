@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ClientMyPage.module.css'
 import TopTitle from '../../components/Common/TopTitle'
 import ClientMyPageProfile from '../../components/MyPage/ClientMyPageProfile';
-
+import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
 const ClientMyPage = () => {
     return (
         <div className={styles.ClientMyPage}>
@@ -10,7 +10,7 @@ const ClientMyPage = () => {
             <div className={styles.ClientMyPage_body}>
                 <ClientMyPageProfile/>
                 <div className={styles.ClientMyPage_body_content}>
-                    개인정보
+                    <ClientMyPageMyInfo/>
                 </div>
             </div>
         
