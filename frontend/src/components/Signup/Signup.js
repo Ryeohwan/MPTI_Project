@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
-
+import styles from "./Signup.module.css"
 const Signup = () => {
   const [name,setName] = useState({name:"", nameMsg:"", isName: false});
   const [gender, setGender] = useState({gender:"", isGender: false});
@@ -137,8 +137,11 @@ const onSubmitHandler= (e)=>{
 
 
 return (
-    <div className='Signup'>
-              
+    <div className={styles.Signup}>
+            <div className={styles.header_box}>
+                <div className={styles.header}>MPTI</div>
+            </div>
+
         <form onSubmit={onSubmitHandler}>
         <div>
             <label htmlFor='name'>성명</label>
