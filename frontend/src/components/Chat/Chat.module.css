@@ -21,15 +21,17 @@
     flex-flow: row;
     justify-content: space-between;
     font-family: 'DungGeunMo';
-    font-size: 35pt;
+    font-size: 25px;
+    padding-bottom: 1px;
     color: #cecece;
 }
 
 .chat_exit_btn {
-    font-size: 15pt;
-    height: fit-content;
+    display: flex;
+    font-size: 25px;
     cursor: pointer;
     justify-content: center;
+    align-items: center;
 }
 
 .chat_search_bar{

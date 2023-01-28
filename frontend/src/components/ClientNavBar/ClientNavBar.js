@@ -10,11 +10,15 @@ import Chat from '../Chat/Chat';
 // 유저NavBar 리턴 함수
 export default function ClientNavuser(){
 	const [menuselect, setMenuSelect] = useState(null);
-	console.log(menuselect)
+	const [chaton, setChatOn] = useState(false);
+	function turnoffchat() {
+		setChatOn(false)
+	}
+
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.nav_box}>
-			<Chat></Chat>
+			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* 로고 클릭시 /home 으로 이동하는 라우팅 */}
 			<div className={styles.logo_box}>
 				<Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
@@ -46,7 +50,7 @@ export default function ClientNavuser(){
 					{/* 메일 모양 + 프로필 담는 박스 */}
 					<div className={styles.mail_profile_box}>
 						{/* 매일 담는 박스 */}
-						<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex'}}>
+						<div className={styles.mail_box} onClick={()=>{setChatOn(true)}}>
 							{/* 메시지 개수 출력 임시로 99+ 지정 */}
 							<div className={styles.mail_count_box}>
 										<span>99+</span>

@@ -1,82 +1,121 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './Chat.module.css'
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-const serverurl = 'http://i8a803.p.ssafy.io:8005'
-const socket = new SockJS(serverurl);
-let stompClient = Stomp.over(socket);
-let channelId= '12';
 
-export default function Chat(){
-    const [channel, setchannel] = useState(null);
+
+// let channelId= '12';
+
+export default function Chat({chaton, turnoffchat}){
+    const [roomnum, setRoomNum] = useState(undefined);
     const [roomlist, setroomlist] = useState([{channelId:1, userName:'Kim'}, {channelId:2, userName:'Jung'}])
     const [chatlist, setchatlist] = useState([]);
-    console.log(chatlist)
-    useEffect( () => {
-        stompClient.connect(
-            {},
-            (frame) => {
+    const serverurl = 'http://i8a803.p.ssafy.io:8005'
+    const socket = useRef(); // 소켓 서버
+    const stompClient = useRef(); // stompe 서버
+    useEffect(() => {
+        
+        if(chaton === false){
+            document.getElementById('chat').style.display='none'
+            if(stompClient.current){
+                disconnect_socket_server();
+            }
+        }
+        else{
+            socket.current = new SockJS(serverurl)
+            stompClient.current= Stomp.over(socket.current)
+            document.getElementById('chat').style.display='flex'
+            connect_socket_server();
+        }
+    },[chaton])
 
-                console.log('연결했습니다', frame)
-                stompClient.subscribe("/send/1", (message) => {
-                    const a= JSON.parse(message.body)
-                    console.log("구독하고 받은 메시지",message.body)
-                    setchatlist((prev) =>([...prev, a]))
-                })
+
+
+    // 소켓 서버 연결
+    function connect_socket_server() {
+        stompClient.current.connect({}, (frame) => {
+                console.log('소켓 서버에 연결했습니다', frame)
             },
             (error) => {
                 console.log(error)
-                stompClient.connected = false
             }
-    )
-        
-    }, [])
-
-function handleSubmit(event) {
-    event.preventDefault();
-    if (stompClient && stompClient.connected){
-        const msg = {
-            'channelId': '1',
-            'userName': window.location.host,
-            'content': event.target['0'].value
-        }
-        stompClient.send("/chat/receive", {}, JSON.stringify(msg))
+        )
     }
-    // console.log(input.value);
-}
+    // 소켓 서버 해체
+    function disconnect_socket_server() {
+        stompClient.current.disconnect(() => {console.log("소켓 서버와 연결을 끊었습니다.")})
+    }
+
+    // 채팅 룸 접속
+    async function enter_chat_room(room_info) {
+        leave_chat_room()
+        
+        const room_id =  room_info.channelId
+        setRoomNum(room_id)
+        stompClient.current.subscribe(`/send/${room_id}`, (message) => {
+            // 소켓에 send했을때, 구독한 이곳에서 응답받고 이 함수를 실행. message는 응답 받은 메시지
+            const msg= JSON.parse(message.body)
+            console.log('받은 메시지 :',msg)
+            setchatlist((prev) =>([...prev, msg]))
+        },{id : room_id})
+    }
+
+    // 채팅 룸 떠나기
+    function leave_chat_room() {
+        stompClient.current.unsubscribe(roomnum)
+        setRoomNum(undefined)
+    }
+
+    // 메시지 보내기
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (stompClient.current && stompClient.current.connected){
+            const msg = {
+                'channelId': roomnum,
+                'userName': window.location.host,
+                'content': event.target['0'].value
+            }
+            stompClient.current.send("/chat/receive", {}, JSON.stringify(msg))
+        }
+    }
+
+    // 채팅 목록 가져오기
+    function getChatList() {
+        console.log(roomnum)
+        return(
+            chatlist.map((chat, index) => {
+                return <div key={index}>{chat.content}</div>
+            })
+        )
+    }
+
+    // 채팅방 목록 가져오기
+    function getRoomList() {
+        console.log(roomnum)
+        return(
+            roomlist.map((room, index) => {
+                return <div className={styles.room_box} key={index} onClick={(event) => {enter_chat_room(room); console.log(`${room.channelId}방 이동`)}}>{room.channelId}번 방, {room.userName}님</div>
+            })
+        )
+    }
+
+
 
     return(
         <div id='chat' className={styles.modal}>
             <div className={styles.modal_box}>
                 <div className={styles.title_search}>  
                     <div className={styles.chat_title_box}>
-                        <div>&lt;</div>
-                        <div>Chats</div>
-                        <div className={styles.chat_exit_btn} onClick={()=>{document.getElementById('chat').style.display='none'}}>❌</div>
+                        {roomnum? [<div className={styles.chat_exit_btn} onClick={() => {leave_chat_room()}}>&lt;&nbsp;</div>,<div>{roomnum}번 방</div>]:[<div>&nbsp;&nbsp;</div>,<div>채팅방</div>]}
+                        <div className={styles.chat_exit_btn} onClick={()=>{turnoffchat()}}>❌</div>
                     </div>
                     <input className={styles.chat_search_bar} placeholder='사용자 검색'></input>
                 </div>
 
 
                 <div className={styles.chat_temp}>
-                    <div id={styles.message_box}>
-                        {chatlist.map((chat) => {
-                            return <div>{chat.content}</div>
-                        })
-                        }
-                    </div>
-
-                    <div id={styles.room_list}>
-                        {roomlist.map((room) => {
-                            return (<div className={styles.room_box} onClick={() => {console.log('방 이동')}}>{room.channelId}번 방, {room.userName}님</div>)
-                        })}
-
-                    </div>
-
-
-
-
+                    {roomnum?<div id={styles.message_box}>{getChatList()}</div>:<div id={styles.room_list}>{getRoomList()}</div>}
                     <div>
                         <form className={styles.message_form} method='submit' onSubmit={(event)=>{handleSubmit(event)}}>
                             <input id='message_input' className={styles.chat_input}></input>
@@ -84,10 +123,6 @@ function handleSubmit(event) {
                         </form>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     )
