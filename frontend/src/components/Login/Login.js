@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styles from "./Login.module.css"
-
+import kakao from "../../assets/img/login_kakao.png";
+import naver from "../../assets/img/login_naver.png";
+import google from "../../assets/img/login_google.png";
 const Login = () => {
 
     
@@ -20,7 +22,6 @@ const emailChangeHandler = (e) =>{
     const emailValidCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
     setEmail(curEmail);
     if(!emailValidCheck.test(curEmail)){
-        //console.log(email);
         setIsEmail(false);
         setMsgEmail("이메일 형식이 알맞지 않습니다.");
     }else{
@@ -42,18 +43,16 @@ const passwordChangeHandler = (e) =>{
     } 
 }
 
-const testLogin = (body)=>{
-    console.log(body);
-    axios.post("http://localhost:8080/user/check", body).then(res=>{
-        console.log(res);
-    }).catch((error)=>{
-        console.log(error)
-    })
-}
 
 const onSubmitHandler = async (e)=>{
     e.preventDefault();
-    const res = await axios.post("http://localhost:8080/user/check",{email: email, name:password});
+    axios.post("http://localhost:8080/user/check", {email: email, password:password}).then(res=>{
+        console.log(res);
+        localStorage.setItem('access_token', res.data.access_token);
+        localStorage.setItem('refresh_token', res.data.refresh_token);
+    }).catch((error)=>{
+        console.log(error);
+    })
 }
 
 
@@ -83,9 +82,9 @@ return (
             <div className={styles.form_simple}>간편 회원가입</div>
             
             <div className={styles.simple_box}>
-                <div className={styles.simple_btn_kakao}>Kakao</div>
-                <div className={styles.simple_btn_google}>Google</div>
-                <div className={styles.simple_btn_naver}>Naver</div>
+                <div className={styles.simple_btn_kakao}><img src={kakao}></img>Kakao</div>
+                <div className={styles.simple_btn_google}> <img src={google}></img>Google</div>
+                <div className={styles.simple_btn_naver}> <img src={naver}></img>Naver</div>
             </div>
 
         </form>

@@ -99,7 +99,7 @@
       width: 530px;
       justify-content: space-between;
       padding-top: 10px;
-      
+      font-size: 20px;
       
     }
 
@@ -111,7 +111,7 @@
       border-radius: 10px;
       justify-content: center;
       align-items: center;
-      background-color: #FEE500;
+      background-color: #FDDC3F;
     }
 
     .simple_btn_naver{
@@ -122,7 +122,8 @@
       border-radius: 10px;
       justify-content: center;
       align-items: center;
-      background-color: #06BE34;
+      color: #ececec;
+      background-color: #5FC33A;
     }
 
     .simple_btn_google{
@@ -134,7 +135,11 @@
       justify-content: center;
       align-items: center;
       background-color: #FFFFFF;
+    }
 
+    img{
+      width: 40px;
+      height: 40px;
     }
 
 .comment{
