@@ -142,6 +142,9 @@ return (
                 <div className={styles.header}>MPTI</div>
             </div>
 
+
+        <div className={styles.form_box}>
+        <div className={styles.form_title}>회원가입</div>
         <form onSubmit={onSubmitHandler}>
         <div>
             <label htmlFor='name'>성명</label>
@@ -207,7 +210,7 @@ return (
 
             
         </form>
-
+        </div>
     </div>
 );
 };
