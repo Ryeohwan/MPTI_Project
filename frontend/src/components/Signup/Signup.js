@@ -9,12 +9,14 @@ const Signup = () => {
   const [passwordConfirm, setPasswordConfirm]= useState({passwordConfirm: "",passwordConfirmMsg:"", isPasswordConfirm: true});
   const [birth, setBirth] = useState({birth: "", birthMsg:"",isBirth: false});
   const [award, setAward] = useState({name: "", company:"", date:""});
+  const [certificate,setCertificate] = useState({name: "", company:"", date:""});
+  const [career, setCareer] = useState({name: "", company:"", date:""});
   const nameInputRef= useRef();
   const emailInputRef= useRef();
   const passwordInputRef= useRef();
   const genderInputRef = useRef();
   const birthInputRef = useRef();
-  
+  const phoneInputRef = useRef();
 
  const nameChangeHandler = (e)=>{
         const curName= e.target.value;
@@ -56,7 +58,7 @@ const passwordChangeHandler = (e) =>{
 const passwordConfirmChangeHandler = (e) =>{
     const curPassword = e.target.value;
     console.log(curPassword, password.password);
-    if (curPassword==password.password){
+    if (curPassword===password.password){
         setPasswordConfirm({passwordConfirm: curPassword, passwordConfirmMsg: "두 비밀번호가 일치합니다.", isPasswordConfirm: true});
     }else if(curPassword!==password.password){
         setPasswordConfirm({passwordConfirm: curPassword, passwordConfirmMsg: "두 비밀번호가 일치하지 않습니다", isPasswordConfirm: true});
@@ -74,18 +76,19 @@ const birthChangeHandler = (e)=>{
     }
 }
 
-const awardNameChangeHandler= (e=>{
-    setAward({...award, name:e.target.value})
-})
+const awardNameChangeHandler= (e=>{setAward({...award, name:e.target.value})})
+const awardCompanyChangeHandler= (e=>{setAward({...award, company:e.target.value})})
+const awardDateChangeHandler= (e=>{setAward({...award, date:e.target.value})})
 
-const awardCompanyChangeHandler= (e=>{
-    setAward({...award, company:e.target.value})
-})
+const certificateNameChangeHandler= (e=>{setCertificate({...certificate, name:e.target.value})})
+const certificateCompanyChangeHandler= (e=>{setCertificate({...certificate, company:e.target.value})})
+const certificateDateChangeHandler= (e=>{setCertificate({...certificate, date:e.target.value})})
 
-const awardDateChangeHandler= (e=>{
-    setAward({...award, date:e.target.value})
-})
-console.log(award);
+const careerNameChangeHandler= (e=>{setCareer({...career, name:e.target.value})})
+const careerCompanyChangeHandler= (e=>{setCareer({...career, company:e.target.value})})
+const careerDateChangeHandler= (e=>{setCareer({...career, date:e.target.value})})
+
+
 
 const testDuplicateChk = (body)=>{
     console.log(body);
@@ -105,9 +108,8 @@ const duplicateHandler=()=>{
 }
 
 const onSubmitHandler= (e)=>{
-
-    e.preventDefault();
-    if(!name.isName){
+e.preventDefault();
+if(!name.isName){
         nameInputRef.current.focus();
         return
     }else if(!email.isEmail){
@@ -119,6 +121,9 @@ const onSubmitHandler= (e)=>{
     }else if(!birth.isBirth){
         birthInputRef.current.focus();
         return
+    }else if(!phoneInputRef.current.value){
+        phoneInputRef.current.focus();
+        return
     }
 
     const newObj ={
@@ -126,10 +131,21 @@ const onSubmitHandler= (e)=>{
         email: email.email,
         password : password.password,
         birth: birth.birth,
+        phone: phoneInputRef.current.value,
         award: {
             name: award.name,
             company: award.company,
             date: award.date
+        },
+        certificate: {
+            name: certificate.name,
+            company: certificate.company,
+            date: certificate.date
+        },
+        career: {
+            name: career.name,
+            company: career.company,
+            date: career.date
         }
     }
     console.log(newObj);
@@ -138,78 +154,98 @@ const onSubmitHandler= (e)=>{
 
 return (
     <div className={styles.Signup}>
+
             <div className={styles.header_box}>
                 <div className={styles.header}>MPTI</div>
             </div>
 
-
-        <div className={styles.form_box}>
         <div className={styles.form_title}>회원가입</div>
-        <form onSubmit={onSubmitHandler}>
-        <div>
-            <label htmlFor='name'>성명</label>
-            <input ref={nameInputRef} type="text" id="name" onChange={nameChangeHandler}/>
-            <p>{name.nameMsg}</p>
 
+        <form onSubmit={onSubmitHandler} className={styles.form_box}>
 
+   
+            
+  
+            <div className={styles.form_name} >
+                    <label htmlFor='name'>성명</label>
+                    <input ref={nameInputRef} type="text" id="name" onChange={nameChangeHandler}/>
+                    <p>{name.nameMsg}</p>
+            </div>
+         
+
+            <div className={styles.form_gender} >
             <label htmlFor='gender'>성별</label>
-            <select ref={genderInputRef}id="gender" onChange={genderChangeHandler}>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
-            </select>
-        </div>
-
-
-        <div>
+                <select ref={genderInputRef}id="gender" onChange={genderChangeHandler}>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                </select>
+                <p></p>
+            </div>
+          
+     
+        <div className={styles.form_email}> 
             <label htmlFor='email'>이메일</label>
             <input ref={emailInputRef} type="email" id='email' onChange={emailChangeHandler} />
-            <p>{email.emailMsg}</p>
             <button onClick={duplicateHandler}>중복확인</button>
+            <p>{email.emailMsg}</p>
         </div>
-
-        <div>
+           
+        <div className={styles.form_password}>
             <label htmlFor='password' >비밀번호</label>
             <input ref={passwordInputRef} type="password" name='password' onChange={passwordChangeHandler}/>
             <p>{password.passwordMsg}</p>
         </div>
 
-        <div>
+        <div className={styles.form_passwordConfirm}> 
             <label htmlFor='password'>비밀번호 확인</label>
             <input type="password"  onChange={passwordConfirmChangeHandler} />
             <p>{passwordConfirm.passwordConfirmMsg}</p>
         </div>
 
-        <div>
+        <div className={styles.form_birth}>
             <label htmlFor='birth'>생년월일</label>
             <input ref={birthInputRef} type='date' onChange={birthChangeHandler}/>
+            <p>{birth.birthMsg}</p>
+        </div>
+
+        <div className={styles.form_phone}>
+            <label htmlFor='phone'>핸드폰 번호</label>
+            <input ref={phoneInputRef} type='phone'/>
             <p>{birth.birthMsg}</p>
         </div>
 
         
 
         
-        <div>
-            <label htmlFor='prize'>수상이력</label>
-            <input type="text" onChange={awardNameChangeHandler}/> <input type="text" onChange={awardCompanyChangeHandler} /> <input type="text" onChange={awardDateChangeHandler} />
-        </div>
-{/* 
-        <div>
-            <label htmlFor=''>관련 자격증</label>
-            <input type="text" value={certificate.name} /> <input type="text" value={certificate.company}/> <input type="text" value={certificate.date}/>
+        <div className={styles.form_prize}>
+            <label htmlFor='prize'>수상(선택)</label>
+            <input type="text" onChange={awardNameChangeHandler}/> 
+            <input type="text" onChange={awardCompanyChangeHandler} />
+            <input type="text" onChange={awardDateChangeHandler} />
+            <p></p>
         </div>
 
-        <div>
-            <label htmlFor='phone'>경력</label>
-            <input type="text" value={career.name} /> <input type="text" value={career.company}/> <input type="text" value={career.date}/>
-        </div> */}
-        
-        <button>회원가입</button>
-        
+        <div className={styles.form_certificate}>
+            <label htmlFor='certificate'>자격증(선택)</label>
+            <input type="text" onChange={certificateNameChangeHandler}/> 
+            <input type="text" onChange={certificateCompanyChangeHandler} />
+            <input type="text" onChange={certificateDateChangeHandler} />
+            <p></p>
+        </div>
+     
+  
+        <div className={styles.form_career}>
+            <label htmlFor='career'>경력(선택)</label>
+            <input type="text" onChange={careerNameChangeHandler}/> 
+            <input type="text" onChange={careerCompanyChangeHandler} />
+            <input type="text" onChange={careerDateChangeHandler} />
+            <p></p>
+        </div>
+        <button className={styles.form_sub_btn}>회원가입</button>
+    </form>
 
-    
-
-            
-        </form>
+    <div className={styles.form_btn_box}>
+           <button className={styles.form_sub_btn} >뒤로가기</button>
         </div>
     </div>
 );
