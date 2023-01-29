@@ -4,10 +4,9 @@ const ClientMyPageMyInfo = () => {
     const info_list=['이름', '성별', '생년월일', '이메일', '핸드폰']
     const get_info = {name:'정원철', gender:'남', birth: '1997.01.01', email:'dnjscjf@naver.com', phone:'010-1234-5678'}
     const [edit,setEdit] = useState(false);
-    console.log(get_info[Object.keys(get_info)[0]])
+    // console.log(get_info[Object.keys(get_info)[0]])
     return(
         <div className={styles.container}> 
-            <div className={styles.title}>내 개인정보</div>
             {edit?
             <form className={styles.out_box} method='PUT' onSubmit={(e) => {e.preventDefault(); console.log('a'); setEdit(false);}}>
                 <div className={styles.in_box}>

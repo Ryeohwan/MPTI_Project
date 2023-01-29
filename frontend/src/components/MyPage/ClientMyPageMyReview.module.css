@@ -1,0 +1,71 @@
+.container{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+    height: 520px;
+}
+
+
+.out_box{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 30px 10px 30px;
+    background-color: #D0E2A6;
+    border-radius: 7px;
+    align-items:center;
+    gap:20px;   
+    justify-content: space-between;
+}
+.in_box {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #DDE2E2;
+    padding: 20px;
+}
+
+.content_box{
+    display: flex;
+    flex-flow: column;
+    min-height: 385px;
+    gap: 20px;
+}
+
+.review_top{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.review_top_left{
+    display: flex;
+    flex-flow: row;
+    align-items:center;
+    line-height: 0;
+
+}
+
+.review_top_right{
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+    font-size: 25px;
+}
+
+.review_email{
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.review_content{
+    max-width: 580px;
+    margin-top: 10px;
+    font-size: 15px;
+    overflow-wrap: break-word;
+}
