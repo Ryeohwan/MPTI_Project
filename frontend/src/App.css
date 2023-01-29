@@ -1,16 +1,16 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(257.74deg, #101112 0.04%, #4E4E4E 101.31%);
 }
 
-.App{
-  min-width: 970px;
+.App {
+    min-width: 970px;
 }
