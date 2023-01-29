@@ -7,8 +7,6 @@ function MySchedule() {
     return (
         <div className={styles.schedule}>
             <TopTitle title='내 스케줄▼' content='고객님의 오늘 수업에 입장하고 예약 스케줄을 관리해보세요!'/>
-            <div className={styles.schedule_header}>내 스케줄</div>
-            <div className={styles.schedule_comment}>고객님의 오늘 수업에 입장하고 예약 스케줄을 관리해보세요!</div>
 
             <div className={styles.schedule_menu}>오늘 수업</div>
 
