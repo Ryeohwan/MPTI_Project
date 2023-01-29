@@ -14,7 +14,7 @@ export default function Pagination(props) {
             {showpage.map((page) => (page<=props.pages)?
             (page===props.select)?<div className={`${styles.btn} ${styles.btn_select}`} onClick={()=>props.setReviewPage(page)}>{page}</div>:<div className={`${styles.btn} ${styles.btn_num}`} onClick={()=>props.setReviewPage(page)}>{page}</div>
              : 
-             <div/>)}
+             null)}
             {(props.select<props.pages)?<div className={`${styles.btn} ${styles.btn_step}`} onClick={(e)=>props.setReviewPage(props.select+1)}>&gt;</div >:<div className={styles.btn}></div>}
             {(props.select<props.pages)?<div className={`${styles.btn} ${styles.btn_step}`} onClick={(e)=>props.setReviewPage(props.pages)}>&gt;&gt;</div >:<div className={styles.btn}></div>}
         </div>

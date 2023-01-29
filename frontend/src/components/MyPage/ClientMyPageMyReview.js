@@ -7,7 +7,10 @@ const ClientMyPageMyReview = () => {
     {id:2, name:'정원철', email:'wonchool@naver.com', score:5, content: ' linebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktest 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
     {id:3, name:'정원철', email:'wonchool@naver.com', score:4, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
     {id:4, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
-    {id:5, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'}]);
+    {id:5, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
+    {id:6, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
+    {id:7, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
+    {id:8, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'}]);
     const [reviewpage, setReviewPage] = useState(1);
     const [showreview, setShowReview] = useState(myreview.slice((reviewpage-1)*3,(reviewpage-1)*3+3));
     useEffect(()=>setShowReview(myreview.slice((reviewpage-1)*3, (reviewpage-1)*3+3)),
