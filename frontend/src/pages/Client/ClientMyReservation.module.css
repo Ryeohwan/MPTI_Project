@@ -5,12 +5,38 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-
-.SearchDate {
+.SearchItem {
+    font-family: 'DungGeunMo';
+    font-size: 20px;
+    color: white;
+    margin-top: 1.5rem;
+}
+.SearchName:hover {
+    color: #C9FD61;
+}
+.SearchNameInput {
     font-family: 'DungGeunMo';
     font-size: 15px !important;
-    margin-top: 1.5rem;
-    width: 18%;
+    margin-top: 1rem;
+    width: 20%;
+    height: 45px;
+    padding-left: 1%;
+    padding-right: 1%;
+    border-radius: 5px;
+    border: 3px solid grey;
+    font-size: 12px;
+}
+.SearchDateTime {
+    margin-left: 4%;
+}
+.SearchDateTime:hover {
+    color: #C9FD61;
+}
+.SearchDateTimePicker {
+    font-family: 'DungGeunMo';
+    font-size: 15px !important;
+    margin-top: 1rem;
+    width: 20%;
     height: 45px;
     padding-left: 1%;
     padding-right: 1%;
@@ -18,4 +44,11 @@
     border: 3px solid grey;
     font-size: 12px;
     background-color: white;
+}
+
+.SearchInfo {
+    font-family: 'DungGeunMo';
+    font-size: 13px;
+    margin-top: 10px;
+    color: white;
 }
