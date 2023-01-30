@@ -1,4 +1,4 @@
-package mpti.domain.business.entity;
+package mpti.domain.opinion.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +14,8 @@ public class Report extends Opinion{
 
     private LocalDateTime stopUntil;
 
-    public LocalDateTime setStopUntil(int blockPeriod){
-        return this.stopUntil = this.getCreatedAt().plusDays(blockPeriod);
+    public void setStopUntil(int blockPeriod){
+        this.stopUntil = this.getCreatedAt().plusDays(blockPeriod);
     }
 
 

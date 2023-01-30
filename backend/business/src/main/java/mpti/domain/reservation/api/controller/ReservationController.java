@@ -1,10 +1,10 @@
-package mpti.domain.business.api.controller;
+package mpti.domain.reservation.api.controller;
 
 import lombok.RequiredArgsConstructor;
 
 
-import mpti.domain.business.application.ReservationService;
-import mpti.domain.business.entity.Reservation;
+import mpti.domain.reservation.application.ReservationService;
+import mpti.domain.reservation.entity.Reservation;
 //import mpti.domain.business.mapper.ReservationDtoMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,7 @@ public class ReservationController {
 
 
     // [GET] 현재 모든 예약(예약가능 + 예약 완료) 리스트 반환
+    // Pageable
 
     @GetMapping ("/list")
     public ResponseEntity<List<Reservation>> getReservations() {
@@ -34,6 +35,8 @@ public class ReservationController {
     }
 
     // [GET] 특정 트레이너의 특정 날짜의 예약 리스트를 반환
+    // Pageable
+
     @GetMapping ("/list/{id}/{year}/{month}/{day}")
     public ResponseEntity<List<Reservation>> getReservationsByTrainerAndDate(
             @PathVariable("id") Long trainerId,

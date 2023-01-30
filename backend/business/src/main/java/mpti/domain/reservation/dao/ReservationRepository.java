@@ -1,7 +1,7 @@
-package mpti.domain.business.dao;
+package mpti.domain.reservation.dao;
 
 import lombok.RequiredArgsConstructor;
-import mpti.domain.business.entity.Reservation;
+import mpti.domain.reservation.entity.Reservation;
 //import mpti.domain.business.entity.User;
 import org.springframework.stereotype.Repository;
 

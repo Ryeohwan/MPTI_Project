@@ -1,9 +1,8 @@
-package mpti.domain.business.entity;
+package mpti.domain.opinion.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -22,15 +21,8 @@ public abstract class Opinion {
     @Column(name ="opinion_id")
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "trainer_id")
-//    private Trainer trainer;
-    private Long trainerId;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-    private Long userId;
+    private Long writerId;
+    private Long targetId;
 
     @CreatedDate
     @Column(name = "created_at")

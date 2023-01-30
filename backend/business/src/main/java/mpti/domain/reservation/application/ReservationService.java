@@ -1,13 +1,12 @@
-package mpti.domain.business.application;
+package mpti.domain.reservation.application;
 
 import lombok.RequiredArgsConstructor;
 //import mpti.domain.business.api.response.ReservationDto;
-import mpti.domain.business.dao.ReservationRepository;
-import mpti.domain.business.entity.Reservation;
+import mpti.domain.reservation.dao.ReservationRepository;
+import mpti.domain.reservation.entity.Reservation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
-
 
     public List<Reservation> loadReservations() {
         List<Reservation> reservation = reservationRepository.findAll();

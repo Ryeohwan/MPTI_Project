@@ -1,9 +1,8 @@
-package mpti.domain.business.entity;
+package mpti.domain.opinion.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("review")
