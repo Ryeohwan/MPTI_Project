@@ -1,43 +1,43 @@
-.ClientMyPage {
+.MyPage {
     font-family: 'DungGeunMo';
     color: #ececec;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.ClientMyPage_body {
+.MyPage_body {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.ClientMyPage_body_profile {
+.MyPage_body_profile {
     display: flex;
     flex-flow: column;
     gap: 10px;
 }
 
 
-.ClientMyPage_body_profile_box{
+.MyPage_body_profile_box{
     position: relative;
 }
 
-.ClientMyPage_body_profile_box > .picture {
+.MyPage_body_profile_box > .picture {
     width: 180px;
     height: 180px;
     border: solid 1px white;
     border-radius: 50%;
     overflow: hidden;
 }
-.ClientMyPage_body_profile_box > .camera {
+.MyPage_body_profile_box > .camera {
     position: absolute;
     width: 40px;
     height: 35px;
     left: 130px;
     bottom: 10px;
 }
-.ClientMyPage_body_profile > .name {
+.MyPage_body_profile > .name {
     font-size: 20px;
     text-align: center;
 }
@@ -45,9 +45,4 @@
 .name > .name2 {
     font-size: 16px;
     text-align: center;
-}
-
-
-.ClientMyPage_body_content {
-    
 }
