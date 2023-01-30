@@ -5,8 +5,8 @@ const MyPageProfile = (props) => {
     return(
         <div className={styles.MyPage_body_profile}>
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src='/profilepic.png'></img>
-                <img className={styles.camera} src='/camera.png'></img>
+                <img className={styles.picture} alt='프로필사진' src='/profilepic.png'></img>
+                <img className={styles.camera} alt='프로필카메라' src='/camera.png'></img>
             </div>
             <div className={styles.name}>{props.name} <span className={styles.name2}>{props.role}</span></div>
         </div>

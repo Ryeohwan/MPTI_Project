@@ -1,5 +1,5 @@
 // 라이브러리
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 //CSS
 import './App.css';
 // 컴포넌트
@@ -20,8 +20,8 @@ import TrainerMyPage from './pages/Trainer/TrainerMyPage';
 
 export default function App(){
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
-  const type = "client"
-  // const type = "trainer"
+  // const type = "client"
+  const type = "trainer"
   localStorage.setItem('token','123')
 
   return (
@@ -49,8 +49,7 @@ export default function App(){
           {/* 트레이너 */}
           <Route path="/trainermyclient" element={<TrainerMyClient/>}/>
           <Route path="/trainermyreservation" element={<TrainerMyReservation/>}/>
-          <Route path="/trainermypage" element={<TrainerMyPage/>}/>
-
+          <Route path="/trainermypage/*" element={<TrainerMyPage/>}/>  
         </Routes>
       </div>
   )

@@ -38,6 +38,7 @@
     bottom: 10px;
 }
 .MyPage_body_profile > .name {
+    width: 180px;
     font-size: 20px;
     text-align: center;
 }
