@@ -1,6 +1,37 @@
 import React from 'react';
 import styles from './ManagerSignupApproval.module.css';
 import trainerImg from '../../assets/img/trainer.PNG';
+
+const dummydata=[
+    {
+        id:1,
+        name: "정원철",
+        birth: "1997.03.16",
+        email: "GOOGLE@GMAIL.COM",
+        award: "NABBA KOREA -78KG 체급 1위",
+        cirt: "생활체육지도사 자격증 2급",
+        career: "마이짐 휘트니스 2001.03 - 2002.02",
+    },
+    {
+        id:2,
+        name: "정원철",
+        email: "GOOGLE@GMAIL.COM",
+        birth: "1997.03.16",
+        award: "NABBA KOREA -78KG 체급 1위",
+        cirt: "생활체육지도사 자격증 2급",
+        career: "마이짐 휘트니스 2001.03 - 2002.02",
+    },
+    {
+        id:3,
+        name: "정원철",
+        email: "GOOGLE@GMAIL.COM",
+        birth: "1997.03.16",
+        award: "NABBA KOREA -78KG 체급 1위",
+        cirt: "생활체육지도사 자격증 2급",
+        career: "마이짐 휘트니스 2001.03 - 2002.02",
+    },
+]
+
 const ManagerSignupApproval = () => {
     return (
         <>
@@ -10,29 +41,33 @@ const ManagerSignupApproval = () => {
                     <div className={styles.content_content}>
               
                         <ul className={styles.content_list}>
-
-                            <li className={styles.content_item}>
-                                <div className={styles.item_img}>
-                                    <img src={trainerImg}></img>
-                                </div>
-
-                                <div className={styles.item_info_box}>
-                                    <div className={styles.item_info} > 
-                                        <div>신청자 성명: 정원철 (남)</div>
-                                        <div>E-MAIL: GOOGLE@GMAIL.COM </div>
-                                        <div>생년월일 : 1997.03.16</div>
-                                        <div>수상내역 : NABBA KOREA -78KG 체급 1위</div>
-                                        <div>자격증 : 생활체육지도사 자격증 2급</div>
-                                        <div>근무이력 : 마이짐 휘트니스 2001.03 - 2002.02</div>
-                                    </div>
-
-                                    <div className={styles.item_btn}>
-                                        <button className={styles.btn_positive}>승인</button>
-                                        <button className={styles.btn_negative}>거절</button>
-                                    </div>
-                                </div>
-
-                            </li>
+                            {dummydata.map(it=>{
+                                    return(
+                                        <li  key={it.id} className={styles.content_item}>
+                                        <div className={styles.item_img}>
+                                        <img src={trainerImg}></img>
+                                        </div>
+        
+                                        <div className={styles.item_info_box}>
+                                            <div className={styles.item_info} > 
+                                                <div>신청자 성명: {it.name}</div>
+                                                <div>E-MAIL: {it.email} </div>
+                                                <div>생년월일 : {it.birth}</div>
+                                                <div>수상내역 : {it.award}</div>
+                                                <div>자격증 : {it.cirt}</div>
+                                                <div>근무이력 : {it.career}</div>
+                                            </div>
+        
+                                            <div className={styles.item_btn}>
+                                                <button className={styles.btn_positive}>승인</button>
+                                                <button className={styles.btn_negative}>거절</button>
+                                            </div>
+                                        </div>
+      
+                                    </li>
+                                    )
+                                     
+                            })}
                         </ul>
                         
                     </div>
