@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styles from "./ClientMyReservation.module.css";
 import TopTitle from "../../components/Common/TopTitle";
 import DateTimePicker from "react-datetime-picker";
-// import "react-datetime-picker/dist/react-datetime-picker.css/"
+import "react-datetime-picker/dist/DateTimePicker.css"
 import { ko } from "date-fns/esm/locale";
-import moment from "moment"
+import moment from "moment";
 
 const ClientMyReservation = () => {
   // const [startDate, setStartDate] = useState(new Date());
@@ -41,7 +41,7 @@ const ClientMyReservation = () => {
         /> */}
         <DateTimePicker
           className={styles.SearchDate}
-          format="y-MM-dd HH:mm"
+          format="y-MM-dd HH시"
           onChange={setValue}
           value={value}
           autoFocus={true}
@@ -49,11 +49,17 @@ const ClientMyReservation = () => {
           locale={ko}
           minDate={new Date()}
           maxDetail="hour"
-          // disableClock={true}
+          disableClock={true}
           minDetail="year"
           formatDay={(locale, date) => moment(date).format("DD")}
+          // step={60}
+          // beginLimit="6:00AM"
+          // endLimit="23:00PM"
+          // name="default"
         />
+        <span></span>
       </div>
+   
     </>
   );
 };
