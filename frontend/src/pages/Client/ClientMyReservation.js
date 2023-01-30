@@ -5,11 +5,13 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import { ko } from "date-fns/esm/locale";
 import moment from "moment";
+import Calendar from "../../components/Calendar/Calendar";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());
   const [text, setText] = useState("");
   const inputRef = useRef(null);
+
   const [item, setItem] = useState("");
 
   const onChange = (e) => {
@@ -26,7 +28,7 @@ const ClientMyReservation = () => {
       return inputRef?.current?.focus();
     }
     setText(""); // 엔터 후 input 빈값으로 수정
-    inputRef?.current?.focus(); // 메시지 전송 후 input 포커스
+    inputRef?.current?.focus(); // 전송 후 input 포커스
   };
 
   const handleKeyUp = (e) => {
@@ -93,6 +95,11 @@ const ClientMyReservation = () => {
           </div>
         </div>
       )}
+
+      <br></br>
+
+      {/* calendar CSS 화면 테스트 용 */}
+      <Calendar/>
     </>
   );
 };

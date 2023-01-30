@@ -1,20 +1,125 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import styles from "./Calendar.module.css"
+import { Icon } from "@iconify/react";
+import { format, addMonths, subMonths } from "date-fns";
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
+import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
+import styles from "./Calendar.module.css";
 
-function ReservationCalendar() {
-  const [value, onChange] = useState(new Date());
+const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
-    <Calendar 
-        onChange={onChange}
-        value={value} 
-        className={styles.custom_calendar }
-        formatDay={(locale, date) =>
-            date.toLocaleString('en', { day: 'numeric'})
-        }
-    />
+    <div className="header row">
+      <div className="col col-start">
+        <span className="text">
+            <span className="text month">
+                {format(currentMonth, 'M')}월
+            </span>
+            {format(currentMonth, 'yyyy')}  
+        </span>
+      </div>
+      <div className="col col-end">
+        <Icon icon="bi:arrow-left-circle-fill" onClick={prevMonth}/>
+        <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/>
+      </div>
+    </div>
+  );
+};
+
+const RenderDays = () => {
+  const days = [];
+  const date = ['일', '월', '화', '수', '목', '금', '토'];
+
+  for (let i = 0; i < 7; i++) {
+    days.push(
+      <div className="col" key={i}>
+        {date[i]}
+      </div>,
+    );
+  }
+
+  return <div className="days row">{days}</div>;
+};
+
+const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(monthStart);
+  const startDate = startOfWeek(monthStart);
+  const endDate = endOfWeek(monthEnd);
+
+  const rows = [];
+  let days = [];
+  let day = startDate;
+  let formattedDate = '';
+
+  while (day <= endDate) {
+    for (let i = 0; i < 7; i++) {
+      formattedDate = format(day, 'd');
+      const cloneDay = day;
+      days.push(
+        <div
+          className={`col cell ${
+            !isSameMonth(day, monthStart)
+              ? 'disabled'
+              : isSameDay(day, selectedDate)
+              ? 'selected'
+              : format(currentMonth, 'M') !== format(day, 'M')
+              ? 'not-valid'
+              : 'valid'
+          }`}
+          key={day}
+          onClick={() => onDateClick(parse(cloneDay))}  
+        >
+          <span
+            className={
+              format(currentMonth, 'M') !== format(day, 'M')
+                ? 'text not-valid'
+                : ''
+            }
+          >
+            {formattedDate}
+          </span>
+        </div>,
+      );
+      day = addDays(day, 1);
+    }
+    rows.push(
+      <div className="row" key={day}>
+        {days}
+      </div>
+    );
+    days = [];
+  }
+  return <div className="body">{rows}</div>
+} 
+
+const Calendar = () => {
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const prevMonth = () => {
+    setCurrentMonth(subMonths(currentMonth, 1));
+  }
+  const nextMonth = () => {
+    setCurrentMonth(addMonths(currentMonth, 1));
+  }
+  const onDateClick = (day) => {
+    setSelectedDate(day);
+  }
+  return (
+    <div className={styles.calendar}>
+      <RenderHeader
+        currentMonth={currentMonth}
+        prevMonth={prevMonth}
+        nextMonth={nextMonth}
+        className={styles.calendar.header}
+      />
+      <RenderDays/>
+      <RenderCells
+        currentMonth={currentMonth}
+        selectedDate={selectedDate}
+        onDateClick={onDateClick}
+      />
+    </div>
   )
 }
 
-export default ReservationCalendar;
+export default Calendar;

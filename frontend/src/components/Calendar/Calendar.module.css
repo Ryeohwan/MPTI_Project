@@ -1,6 +1,131 @@
-.custom_calendar {
-    font-family: "DungGeunMo";
-    src: url("../../assets/fonts/DungGeunMo.ttf");
-    font-size: 20px;
-    color: black;
+.calendar {
+  width: 60%;
+  height: 90%;
+}
+
+.calendar .header {
+  width: 100%;
+  height: 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.calendar .header .col.col-first {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 1%;
+}
+
+.calendar .header .col.col-first .text {
+  font-size: 0.8em;
+}
+
+.calendar .header .col.col-first .text.month {
+  margin-right: 5px;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.calendar .header .col.col-end {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.calendar .header .col.col-end svg {
+  width: 11%;
+  margin-left: 5%;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.calendar .header .col.col-end svg:hover {
+  transform: scale(1.15);
+  color: #333;
+}
+
+.calendar .days {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.65em;
+  padding: 2px;
+  color: #333;
+}
+
+.calendar .days .col {
+  width: 12.9%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-left: 1%;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.calendar .body {
+  width: 100%;
+  height: 89%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar .body .row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar .body .row .col {
+  width: 13.5%;
+  height: 93%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 0.4px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.calendar .body .row .col span {
+  margin: 4px 0 0 4px;
+}
+
+.calendar .body .row .col .not-valid {
+    color: #808080;
+}
+
+.calendar .body .row .col img {
+  opacity: 0.1;
+}
+
+.calendar .body .row .col.cell.valid:hover {
+  cursor: pointer;
+  box-shadow: 1.5px 1.5px #404040, -1.5px 1.5px #404040, 1.5px -1.5px #404040, -1.5px -1.5px #404040;
+  transform: scale(1.01);
+  border: none;
+  background: rgba(128, 128, 128, 0.5);
+}
+
+.calendar .body .row .col.cell.selected {
+  box-shadow: 1.5px 1.5px #0077c9, -1.5px 1.5px #0077c9, 1.5px -1.5px #0077c9, -1.5px -1.5px #0077c9;
+  transform: scale(1.02);
+  border: none;
+  background: #0077c9;
+  color: #0077c9;
+  font-weight: 600;
 }
