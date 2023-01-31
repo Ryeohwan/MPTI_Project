@@ -1,8 +1,9 @@
-package mpti.backend.domain.member.dto;
+package mpti.domain.member.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import mpti.domain.member.entity.Role;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package mpti.backend.domain.member.entity;
+package mpti.domain.member.entity;
 
 import javax.persistence.*;
 
@@ -10,10 +10,11 @@ public class Ptlog {
     @Column(name ="ptlog_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private String memo;
+    private String memo; // 일단 날짜랑 트레이너
 
+    @Column(columnDefinition = "integer default 0")
     private int core,chest, shoulder, biceps, triceps,back,legs,aerobic;
 }

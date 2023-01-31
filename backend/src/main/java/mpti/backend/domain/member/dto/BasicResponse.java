@@ -1,4 +1,4 @@
-package mpti.backend.domain.member.dto;
+package mpti.domain.member.dto;
 
 import lombok.Builder;
 import lombok.Getter;

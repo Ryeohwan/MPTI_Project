@@ -1,18 +1,18 @@
-package mpti.backend.domain.member.api.controller;
+package mpti.domain.member.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mpti.backend.common.MakeBasicResponse;
-import mpti.backend.common.response.BasicResponse;
-import mpti.backend.domain.member.dto.UserDto;
-import mpti.backend.domain.member.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import mpti.common.MakeBasicResponse;
+import mpti.common.response.BasicResponse;
+import mpti.domain.member.dto.UserDto;
+import mpti.domain.member.entity.Ptlog;
+import mpti.domain.member.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
-import mpti.backend.domain.member.application.UserService;
+import mpti.domain.member.application.UserService;
 import java.time.LocalDateTime;
 
 
@@ -27,20 +27,20 @@ public class UserController {
     final MakeBasicResponse makeBasicResponse;
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
-    public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 
 
     // email 중복체크
     @GetMapping("/duplicate/{email}")
     public ResponseEntity<BasicResponse<String>> CheckEmailDuplicated(@PathVariable String email) {
         boolean result = userService.isEmailDuplicate(email);
-        String responseMessage = result ? "DUPLICATE" : "NON-DUPLICATE";
+        String responseMessage = result ? "DUPLICATED" : "NON-DUPLICATE";
         if(result){
-            logger.debug("이메일 중복을 넣었네");
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(FAIL, responseMessage), HttpStatus.NOT_ACCEPTABLE);
         }else{
-            logger.debug("이메일 사용가능");
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, responseMessage), HttpStatus.OK);
         }
-        return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(FAIL, responseMessage), HttpStatus.OK);
+
     }
 
     @GetMapping ("/test")
@@ -51,15 +51,13 @@ public class UserController {
         }else{
             System.out.println("here is it");
         }
-
-
         return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, userDto), HttpStatus.OK);
     }
 
 
     @PostMapping(value = "/join")
     @ResponseBody
-    public User create(User form){
+    public String create(User form){
         User user1 = new User();
         user1.setEmail(form.getEmail());
         user1.setName(form.getName());
@@ -70,10 +68,48 @@ public class UserController {
         user1.setAddress(form.getAddress());
         user1.setCreateAt(LocalDateTime.now());
         user1.setUpdateAt(LocalDateTime.now());
+        Ptlog ptlog1 = new Ptlog();
 
-        userService.join(user1);
-        return user1;
+        return userService.join(user1);
     }
 
+    @PostMapping("info") // 개인정보 조회
+    @ResponseBody
+    public ResponseEntity<BasicResponse<User>> find(String email) {
+        User result = userService.findByEmail(email);
+        return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, result), HttpStatus.OK);
+    }
+
+    // are you there?
+    @PostMapping("check")
+    @ResponseBody
+    public ResponseEntity<BasicResponse<Boolean>> check(User form) {
+        String email = form.getEmail();
+        String name = form.getName();
+        if (userService.relog(email, name)) {
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, userService.relog(email, name)), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(FAIL, userService.relog(email, name)), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @PostMapping("delete")
+    @ResponseBody
+    public ResponseEntity<BasicResponse<String>> delete(User form) {
+        String email = form.getEmail();
+        String name = form.getName();
+        if(userService.delete(email,name) == 1){
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, name), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(FAIL, name), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @PutMapping("update")
+    @ResponseBody
+    public ResponseEntity<BasicResponse<User>> update(User form){
+        User result = userService.update(form);
+        return new ResponseEntity(makeBasicResponse.makeBasicResponse(SUCCESS, result), HttpStatus.OK);
+    }
 
 }
