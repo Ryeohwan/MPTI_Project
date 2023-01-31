@@ -7,6 +7,7 @@ import mpti.domain.member.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Service
 @Transactional
 public class UserService {
-
+    EntityManager em;
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
@@ -52,13 +53,15 @@ public class UserService {
 
     public User update(User user){
         String email = user.getEmail();
-        User check = userRepository.findUserByEmail(email);
+        String password = user.getPassword();
+        User check = userRepository.findUserByEmailAndPassword(email,password);
         check.setPhone(user.getPhone());
         check.setAddress(user.getAddress());
         check.setAge(user.getAge());
         check.setUpdateAt(LocalDateTime.now());
         check.setPassword(user.getPassword());
         check.setGender(user.getGender());
+        check.setName(user.getName());
         return check;
     }
 

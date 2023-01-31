@@ -105,7 +105,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("update")
+    @PostMapping ("update")
     @ResponseBody
     public ResponseEntity<BasicResponse<User>> update(User form){
         User result = userService.update(form);
