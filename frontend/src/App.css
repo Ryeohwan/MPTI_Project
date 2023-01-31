@@ -14,3 +14,29 @@ body {
 .App{
   min-width: 970px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: lightgray;
+}
+
+.pagination .active {
+  background-color: lightblue;
+  color: white;
+}
