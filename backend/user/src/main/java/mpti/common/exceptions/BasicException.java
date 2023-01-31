@@ -1,4 +1,4 @@
-package mpti.domain.member.exceptions;
+package mpti.common.exceptions;
 
 public class BasicException extends RuntimeException{
     public BasicException(){
