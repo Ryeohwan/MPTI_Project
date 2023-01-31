@@ -5,15 +5,16 @@ import SockJS from 'sockjs-client';
 import axios from 'axios';
 
 
-
-// let channelId= '12';
-
 export default function Chat({chaton, turnoffchat}){
     const [roomnum, setRoomNum] = useState(undefined);
+    // 채팅방 목록
     const [roomlist, setRoomList] = useState([]);
+    // 채팅 내역
     const [chatlist, setchatlist] = useState([]);
     const [userid, setUserId] = useState(1);
-    const [role, setRole] = useState('USER')
+    // const [target,setTarget] = useState(1);
+    const [role, setRole] = useState('USER');
+    const [name, setName] = useState('내이름');
     const serverurl = 'http://i8a803.p.ssafy.io:8005'
     const socket = useRef(); // 소켓 서버
     const stompClient = useRef(); // stompe 서버
@@ -22,14 +23,14 @@ export default function Chat({chaton, turnoffchat}){
         if(chaton === false){
             document.getElementById('chat').style.display='none'
             if(stompClient.current){
-                console.log('채팅앱 종료')
                 disconnect_socket_server();
             }
         }
         else{
-            console.log('채팅앱 시작')
+
             socket.current = new SockJS(serverurl)
             stompClient.current= Stomp.over(socket.current)
+            // 채팅창 오픈
             document.getElementById('chat').style.display='flex'
             // 소켓 서버 연결
             connect_socket_server();
@@ -39,11 +40,13 @@ export default function Chat({chaton, turnoffchat}){
     
     // 소켓 서버 연결
     function connect_socket_server() {
-        stompClient.current.connect({id:1, jwt:'123'}, (frame) => {
+        stompClient.current.connect({}, (frame) => {
                 console.log('소켓 서버에 연결했습니다', frame)
+                if(roomnum !== undefined){
+                    enter_chat_room(roomnum)
+                }
                 // 채팅방 목록 가져오기
                 getRoomList()
-               
             },
             (error) => {
                 console.log(error)
@@ -56,79 +59,81 @@ export default function Chat({chaton, turnoffchat}){
     }
 
     // 채팅 룸 접속
-    async function enter_chat_room(room_info) {
-        leave_chat_room()
-        const room_id =  room_info.channelId
+    async function enter_chat_room(room_id) {
+        await leave_chat_room(room_id)
         setRoomNum(room_id)
+
+        getChatList(room_id)
+        // 소켓에 send했을때, 구독한 이곳에서 응답받고 이 함수를 실행. message는 응답 받은 메시지
         stompClient.current.subscribe(`/send/${room_id}`, (message) => {
-            // 소켓에 send했을때, 구독한 이곳에서 응답받고 이 함수를 실행. message는 응답 받은 메시지
             const msg= JSON.parse(message.body)
             console.log('받은 메시지 :',msg)
             setchatlist((prev) =>([...prev, msg]))
-        },{id : room_id})
+        }, {id : room_id})
     }
     // 채팅 룸 떠나기
-    function leave_chat_room() {
-        stompClient.current.unsubscribe(roomnum)
+
+    async function leave_chat_room(room_id) {
+        setchatlist([])
+        await stompClient.current.unsubscribe(room_id)
         setRoomNum(undefined)
     }
+
     // 메시지 보내기
     function handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault(); 
         if (stompClient.current && stompClient.current.connected){
             const msg = {
-                'channelId': 1,
-                'userName': '내이름',
+                'channelId': roomnum,
+                'userName': name,
                 'content': event.target['0'].value
             }
             stompClient.current.send("/chat/receive", {}, JSON.stringify(msg))
         }
     }
 
-    // 상대방과 채팅 채널 있는지 조회
+    // 상대방과 채팅 채널 만들기.
     function searchChannel(target) {
         if(role==='USER'){
-            axios.get(serverurl+`/chat/channel/${target}/${userid}`).then((res) => {
-                console.log(res)
+            return axios.get(serverurl+`/chat/channel/${target}/${userid}`).then((res) => {
+                return res.data
             })
         }
         if(role==='TRAINER'){
-            axios.get(serverurl+`/chat/channel/${userid}/${target}`).then((res) => {
-                console.log(res)
+            return axios.get(serverurl+`/chat/channel/${userid}/${target}`).then((res) => {
+                return res.data
             })
         }
-    }
-
-    // 채팅 내역 가져오기
-    function getChatList() {
-        console.log(roomnum)
-        axios.get(serverurl+``).then((res) => {
-            console.log(res.data)
-        })
     }
 
     // 채팅방 목록 가져오기 (채팅 룸 id필요)
     function getRoomList() {
-        console.log(1, role, userid)
-        // role(trainer or user)의 데이터에서 id= useid인 채팅방 id 다 가져오기.
-        axios.get(serverurl+'/chat/load/list/1/USER').then((res) => console.log(res))
-        // axios.get(serverurl+`/chat/load/list/${userid}/${role}`).then((res) => {
-        //     // res.data 콘솔찍기
-        //     console.log(res)
-        //     setRoomList(res.data)
-        // })
+        axios.get(serverurl+`/chat/load/list/${userid}/${role}`).then((res) => {
+            setRoomList(res.data)
+        })
     }
 
     // 채팅방 목록 보여주기
     function showRoomList() {
         return(
             roomlist.map((room, index) => {
-                // console.log(room)
-                return <div className={styles.room_box} key={index} onClick={(event) => {enter_chat_room(room.writer); console.log(`${room.writer}방 이동`)}}>{room.writer}번 방, {room.content}님</div>
+                return <div className={styles.room_box} key={index} onClick={(event) => {enter_chat_room(room.channelId); console.log(`${room.channelId}방 이동`)}}>{room.yourId}님 과의 대화, 내용:{room.content}</div>
             })
         )
     }
-
+    // 채팅 내역 가져오기
+    async function getChatList(room_id) {
+        axios.get(serverurl+'/chat/load/'+ room_id).then((res) => {
+            setchatlist(res.data)
+        })
+    }
+    // async function getChatList(target) {
+    //     const room_id = await searchChannel(target)
+    //     axios.get(serverurl+'/chat/load/'+ room_id).then((res) => {
+    //         enter_chat_room(room_id)
+    //         setchatlist(res.data)
+    //     })
+    // }
     // 상대방과 채팅 내역 보여주기
     function showChatList() {
         return(
@@ -137,7 +142,6 @@ export default function Chat({chaton, turnoffchat}){
             })
         )
     }
-
 
 
     return(
@@ -164,6 +168,15 @@ export default function Chat({chaton, turnoffchat}){
                             <input id='message_input' className={styles.chat_input}></input>
                             <button>Send</button>
                         </form>
+                        {/* <div>사용자 번호</div>
+                        <input onChange={(e)=>setUserId(e.target.value)} defaultValue={userid}></input>
+                        <div> 상대방 번호</div>
+                        <input onChange={(e)=>setTarget(e.target.value)} defaultValue={target}></input>
+                        <div>Role</div>
+                        <input onChange={(e)=>setRole(e.target.value)} defaultValue={role}></input>
+                        <div>이름</div>
+                        <input onChange={(e)=>setName(e.target.value)} defaultValue={name}></input>
+                        <button onClick={() => getChatList(target)} >채팅방 접속</button> */}
                     </div>
                 </div>
             </div>
