@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainerController {
 
     @GetMapping("/test")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_TRAINER')")
     public ResponseEntity<?> test(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         System.out.println(userPrincipal.getEmail());
         return ResponseEntity.ok("토큰 테스트 완료");

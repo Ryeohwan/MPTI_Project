@@ -1,6 +1,6 @@
 package mpti.common.security;
 
-
+import lombok.Getter;
 import mpti.domain.trainer.entity.Trainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;
     private String email;
@@ -28,29 +29,11 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     public static UserPrincipal create(Trainer user) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                singletonList(new SimpleGrantedAuthority("ROLE_TRAINER"));
 
-        return new UserPrincipal(
-                user.getId(),
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
+        return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
     }
 
-    public static UserPrincipal create(Trainer user, Map<String, Object> attributes) {
-        UserPrincipal userPrincipal = UserPrincipal.create(user);
-        userPrincipal.setAttributes(attributes);
-        return userPrincipal;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String getPassword() {
@@ -93,7 +76,9 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
+        if(attributes != null) {
+            this.attributes = attributes;
+        }
     }
 
     @Override

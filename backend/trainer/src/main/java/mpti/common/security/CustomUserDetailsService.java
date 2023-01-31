@@ -1,9 +1,8 @@
 package mpti.common.security;
 
-import mpti.common.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import mpti.domain.trainer.dao.TrainerRepository;
 import mpti.domain.trainer.entity.Trainer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,29 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    TrainerRepository trainerRepository;
+    private final TrainerRepository trainerRepository;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Trainer user = trainerRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with email : " + email)
-        );
-
+                        new UsernameNotFoundException("이 이메일을 사용하는 회원이 없습니다 : " + email)
+                );
         return UserPrincipal.create(user);
     }
 
-    @Transactional
-    public UserDetails loadUserById(Long id) {
-        Trainer user = trainerRepository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("User", "id", id)
-        );
-
-        return UserPrincipal.create(user);
-    }
 }

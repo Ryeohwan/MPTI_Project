@@ -1,9 +1,9 @@
 package mpti.common.security;
 
 import io.jsonwebtoken.*;
-import mpti.domain.trainer.config.AppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,16 +11,13 @@ public class TokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-    private AppProperties appProperties;
-
-    public TokenProvider(AppProperties appProperties) {
-        this.appProperties = appProperties;
-    }
+    @Value("${app.auth.tokenSecret:}")
+    private String SECRET_KEY;
 
 
     public String getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(appProperties.getAuth().getTokenSecret())
+                .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -30,7 +27,7 @@ public class TokenProvider {
     public boolean validateToken(String authToken) {
         logger.info("토큰 겁사필터 시작");
         try {
-            Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             logger.info("유효한 jwt access tocken 입니다");
             return true;
         } catch (SignatureException ex) {

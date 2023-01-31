@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.common.exception.BadRequestException;
 import mpti.domain.trainer.api.request.LoginRequest;
-import mpti.domain.trainer.api.request.SignUpRequest;
+import mpti.domain.trainer.api.request.SocialSignUpRequest;
 import mpti.domain.trainer.dao.TrainerRepository;
 import mpti.domain.trainer.entity.Trainer;
 import org.slf4j.Logger;
@@ -18,6 +18,10 @@ import javax.validation.Valid;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * 인증서버와 통신을 위한  Controller
+ */
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
@@ -28,9 +32,7 @@ public class AuthToTrainerController {
     private final Gson gson;
 
     /**
-     * 일반 로그인 시
-     * 서버와 서버간 통신
-     * Auth - Trainer
+     * 일반 로그인 + 소셜 로그인
      * @param requestBody
      * @return
      */
@@ -39,73 +41,49 @@ public class AuthToTrainerController {
     public Optional<Trainer> login(@RequestBody String requestBody) {
 
         LoginRequest loginRequest = gson.fromJson(requestBody, LoginRequest.class);
-        System.out.println(requestBody);
-        System.out.println(loginRequest);
-
-        Optional<Trainer> trainer = trainerRepository.findByEmail(loginRequest.getEmail());
-        logger.info(loginRequest.getEmail());
-        logger.info(trainer.toString());
-
-        if(trainer.isEmpty()){
+        if(!trainerRepository.existsByEmail(loginRequest.getEmail())){
             logger.error("이 아이디에 해당하는 트레이너를 찾을 수 없습니다");
-        } else {
-            logger.info(trainer.get().getPassword());
         }
         return trainerRepository.findByEmail(loginRequest.getEmail());
     }
 
     /**
-     * 일반 회원가입 ( 폼 )
-     * @param signUpRequest
+     * 소셜로그인을 통해 회원가입 할때
+     * @param socialSignUpRequest
      * @return
      */
 
     @PostMapping("/signup")
-    public ResponseEntity<Trainer> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(trainerRepository.existsByEmail(signUpRequest.getEmail())) {
+    public ResponseEntity<Trainer> registerUser(@Valid @RequestBody SocialSignUpRequest socialSignUpRequest) {
+        if(trainerRepository.existsByEmail(socialSignUpRequest.getEmail())) {
             throw new BadRequestException("이미 사용하고 있는 아이디 이메일입니다");
         }
 
-        // Creating user's account
         Trainer user = new Trainer();
-        user.setName(signUpRequest.getName());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(signUpRequest.getPassword());
-        user.setProvider(signUpRequest.getProvider());
+        user.setName(socialSignUpRequest.getName());
+        user.setEmail(socialSignUpRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(socialSignUpRequest.getPassword()));
+        user.setProvider(socialSignUpRequest.getProvider());
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Trainer result = trainerRepository.saveAndFlush(user);
-
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<Trainer> updateUser(@Valid @RequestBody Map<String , Object> body) {
-        String email = (String) body.get("email");
-        logger.info("update controller");
-        logger.info(email);
+    /**
+     * 이전에 소셜로그인으로 회원가입이 된 사용자 일때
+     * 해당 유저의 정보를 가져온다
+     * @param body - email
+     * @return
+     */
 
-        // Creating user's account
-//        Trainer user = new Trainer();
-//        user.setName(signUpRequest.getName());
-//        user.setEmail(signUpRequest.getEmail());
-//        user.setPassword(signUpRequest.getPassword());
-//        user.setProvider(AuthProvider.local);
-//
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    @PostMapping("/update")
+    public Optional<Trainer> updateUser(@Valid @RequestBody Map<String , Object> body) {
+        String email = (String) body.get("email");
 
         Optional<Trainer> result = trainerRepository.findByEmail(email);
         if(result.isEmpty()){
             logger.error("이 아이디에 해당하는 트레이너를 찾을 수 없습니다");
-            return ResponseEntity.ok(null);
         }
-
-        logger.info(result.get().getEmail());
-        return ResponseEntity.ok(result.get());
+        return result;
     }
-
-
-
-
-
 }
