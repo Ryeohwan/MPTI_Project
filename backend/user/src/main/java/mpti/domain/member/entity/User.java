@@ -1,29 +1,31 @@
 package mpti.domain.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.lang.Nullable;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
 
 @Entity
 @Table
 @Getter
 public class User {
+
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "user_id", columnDefinition = "BINARY(16)")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long id;
+
+//    @Id
+//    @GeneratedValue(generator = "uuid2")
+//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+//    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+//    private UUID id;
 
     private String name;
 
@@ -49,6 +51,8 @@ public class User {
     @LastModifiedDate
     @Column(name = "update_at")
     private LocalDateTime updateAt;
+
+    private String provider;
 
     public User() {
     }
@@ -90,6 +94,8 @@ public class User {
         if(updateAt != null) this.updateAt = updateAt;
     }
 
+    public void setProvider(String provider) {if(provider != null)this.provider = provider;}
+
     public void setPtlog(Ptlog ptlog) {
         if(ptlog != null){
             this.ptlog = ptlog;
@@ -100,9 +106,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", ptlog=" + ptlog +
                 ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
+                ", role=" + role +
                 ", password='" + password + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
@@ -110,11 +117,45 @@ public class User {
                 ", address='" + address + '\'' +
                 ", createAt=" + createAt +
                 ", updateAt=" + updateAt +
+                ", provider='" + provider + '\'' +
                 '}';
     }
 
+    //    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", ptlog=" + ptlog +
+//                ", email='" + email + '\'' +
+//                ", name='" + name + '\'' +
+//                ", password='" + password + '\'' +
+//                ", age=" + age +
+//                ", gender='" + gender + '\'' +
+//                ", phone='" + phone + '\'' +
+//                ", address='" + address + '\'' +
+//                ", createAt=" + createAt +
+//                ", updateAt=" + updateAt +
+//                '}';
+//    }
+
+//    @Builder
+//    public User(UUID id, String name, Ptlog ptlog, String email, Role role, String password, int age, String gender, String phone, String address, LocalDateTime createAt, LocalDateTime updateAt) {
+//        this.id = id;
+//        this.name = name;
+//        this.ptlog = ptlog;
+//        this.email = email;
+//        this.role = role;
+//        this.password = password;
+//        this.age = age;
+//        this.gender = gender;
+//        this.phone = phone;
+//        this.address = address;
+//        this.createAt = createAt;
+//        this.updateAt = updateAt;
+//    }
+
     @Builder
-    public User(UUID id, String name, Ptlog ptlog, String email, Role role, String password, int age, String gender, String phone, String address, LocalDateTime createAt, LocalDateTime updateAt) {
+    public User(long id, String name, Ptlog ptlog, String email, Role role, String password, int age, String gender, String phone, String address, LocalDateTime createAt, LocalDateTime updateAt) {
         this.id = id;
         this.name = name;
         this.ptlog = ptlog;
