@@ -12,12 +12,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
     "react": "^18.2.0",
-<<<<<<< HEAD
-    "react-datepicker": "^4.8.0",
     "react-datetime-picker": "^4.2.0",
-=======
-    "react-calendar": "^4.0.0",
->>>>>>> 54e8ac5957aa7936c5025ecfa9e9dab8cc76082c
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
