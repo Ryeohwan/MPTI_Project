@@ -1,0 +1,94 @@
+/* 둥근모체 (디지털체) 불러오기 */
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+/* 헤더 전체 박스*/
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'DungGeunMo';
+  color: #ececec;
+  width: 970px ;
+  height: 70px;
+  margin-bottom: 45px;
+}
+
+.head_logo {
+  font-family: 'DungGeunMo';
+  font-weight: 400;
+  font-size: 56px;
+  color: #ececec;
+  border-bottom: 4pt solid #C9FD61;
+  border-top: 4pt solid #C9FD61
+}
+
+/* 헤더 메뉴 담는 박스 */
+.head_menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  font-size: 18px;
+}
+
+/* 메일과 프로필 담는 박스 */
+.mail_profile_box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+
+
+/* 쪽지(메일) 이미지 담는 박스 */
+.mail_box{
+  cursor: pointer;
+  position: relative;
+}
+
+/* 메일에서 숫자 담는 박스 */
+.mail_count_box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top:0;
+  right: 0;
+  font-size:9px;
+  background-color: red;
+  border-radius: 100px;
+  width: 20px;
+  height: 10px;
+}
+
+/* 프로필 사진 동그라미 안에 넣기 */
+.profile_img{
+  border: 2px solid;
+  border-radius: 50%;
+  object-fit: fill;
+  width:px;
+  height: 35px;
+}
+
+.head_text{
+  white-space: nowrap;
+}
+
+.head_text:hover{
+  white-space: nowrap;
+  color: #C9FD61;
+}
+
+a {
+  text-decoration: none;
+  color: #ececec;
+}
+
+.mail_img{
+  width: 30px;
+  height: 30px;
+}
