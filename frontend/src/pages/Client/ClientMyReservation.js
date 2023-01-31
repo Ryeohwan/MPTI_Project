@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useRef, useState } from "react";
 import styles from "./ClientMyReservation.module.css";
 import TopTitle from "../../components/Common/TopTitle";
@@ -37,6 +38,16 @@ const ClientMyReservation = () => {
     }
   };
 
+=======
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import styles from "./ClientMyReservation.module.css";
+import TopTitle from "../../components/Common/TopTitle";
+
+const ClientMyReservation = () => {
+  const [value, onChange] = useState(new Date());
+>>>>>>> 54e8ac5957aa7936c5025ecfa9e9dab8cc76082c
   return (
     <>
       <div className={styles.ClientMyReservation}>
@@ -45,6 +56,7 @@ const ClientMyReservation = () => {
           content="여러분과 딱 맞는 트레이너를 찾아보세요!"
         />
       </div>
+<<<<<<< HEAD
 
       <div className={styles.SearchItem}>
         <span
@@ -99,6 +111,16 @@ const ClientMyReservation = () => {
 
       <br></br>
       
+=======
+      <Calendar
+        onChange={onChange}
+        value={value}
+        className={styles.custom_calendar}
+        formatDay={(locale, date) =>
+          date.toLocaleString("en", { day: "numeric" })
+        }
+      />
+>>>>>>> 54e8ac5957aa7936c5025ecfa9e9dab8cc76082c
     </>
   );
 };
