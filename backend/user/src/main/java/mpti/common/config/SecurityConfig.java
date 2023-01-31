@@ -1,4 +1,4 @@
-package mpti.backend.common.config;
+package mpti.common.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

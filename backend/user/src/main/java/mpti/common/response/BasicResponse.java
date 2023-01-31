@@ -1,4 +1,4 @@
-package mpti.backend.common.response;
+package mpti.common.response;
 
 import lombok.Builder;
 import lombok.Getter;

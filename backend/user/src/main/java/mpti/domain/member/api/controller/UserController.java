@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mpti.common.MakeBasicResponse;
 import mpti.common.response.BasicResponse;
+import mpti.domain.member.api.request.UserRequest;
+import mpti.domain.member.api.response.UserResponse;
 import mpti.domain.member.dto.UserDto;
 import mpti.domain.member.entity.Ptlog;
 import mpti.domain.member.entity.User;
@@ -57,26 +59,14 @@ public class UserController {
 
     @PostMapping(value = "/join")
     @ResponseBody
-    public String create(User form){
-        User user1 = new User();
-        user1.setEmail(form.getEmail());
-        user1.setName(form.getName());
-        user1.setPassword(form.getPassword());
-        user1.setAge(form.getAge());
-        user1.setGender(form.getGender());
-        user1.setPhone(form.getPhone());
-        user1.setAddress(form.getAddress());
-        user1.setCreateAt(LocalDateTime.now());
-        user1.setUpdateAt(LocalDateTime.now());
-        Ptlog ptlog1 = new Ptlog();
-
-        return userService.join(user1);
+    public String create(UserRequest form){
+        return userService.join(form);
     }
 
     @PostMapping("info") // 개인정보 조회
     @ResponseBody
-    public ResponseEntity<BasicResponse<User>> find(String email) {
-        User result = userService.findByEmail(email);
+    public ResponseEntity<BasicResponse<UserResponse>> find(String email) {
+        UserResponse result = userService.findByEmail(email);
         return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, result), HttpStatus.OK);
     }
 
@@ -98,7 +88,7 @@ public class UserController {
     public ResponseEntity<BasicResponse<String>> delete(User form) {
         String email = form.getEmail();
         String name = form.getName();
-        if(userService.delete(email,name) == 1){
+        if(userService.delete(email,name) == "SUCCESS"){
             return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(SUCCESS, name), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(makeBasicResponse.makeBasicResponse(FAIL, name), HttpStatus.NOT_ACCEPTABLE);
@@ -107,8 +97,8 @@ public class UserController {
 
     @PostMapping ("update")
     @ResponseBody
-    public ResponseEntity<BasicResponse<User>> update(User form){
-        User result = userService.update(form);
+    public ResponseEntity<BasicResponse<String>> update(UserRequest form){
+        String result = userService.update(form);
         return new ResponseEntity(makeBasicResponse.makeBasicResponse(SUCCESS, result), HttpStatus.OK);
     }
 

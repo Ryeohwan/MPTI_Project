@@ -1,6 +1,6 @@
-package mpti.backend.common;
+package mpti.common;
 
-import mpti.backend.common.response.BasicResponse;
+import mpti.common.response.BasicResponse;
 import org.springframework.stereotype.Component;
 
 @Component
