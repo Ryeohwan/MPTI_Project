@@ -1,0 +1,52 @@
+.chat_box{
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    color: #cecece;
+    padding: 5px 5px;
+    width: 100%;
+    align-items:flex-start;
+}
+
+.chat_box2{
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: end;
+    color: #cecece;
+    padding: 5px 10px 5px 0;
+    border-radius: 5pt;
+    width: 100%;
+}
+
+.name{
+    font-size: 16px;
+}
+
+.content_box{
+    display: flex;
+    flex-direction: row;
+}
+
+.talk_content{
+    font-size: 15px;
+    max-width: 300px;
+    border: 1pt solid #cecece;
+    margin-top: 10pt;
+    padding: 5px 10px;
+    border-radius: 5pt;
+    word-break: break-all;
+    text-align: left;
+}
+
+
+.time_box{
+    font-size: 10pt;
+    margin-top: auto;
+}
+
+.time {
+    padding: 0 5px 0 5px;
+    white-space: nowrap;
+    display: inline-block;
+}
