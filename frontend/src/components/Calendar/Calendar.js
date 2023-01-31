@@ -1,42 +1,46 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { format, addMonths, subMonths } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
-import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
+import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
-    <div className="header row">
-      <div className="col col-start">
-        <span className="text">
-            <span className="text month">
-                {format(currentMonth, 'M')}월
-            </span>
-            {format(currentMonth, 'yyyy')}  
+    <div className={`${styles.header} ${styles.headerRow}`}>
+      <Icon
+        icon="material-symbols:arrow-back-ios-new-rounded"
+        onClick={prevMonth}
+      />
+      <div className={styles.headerColStart}>
+        <span className={styles.headerColText}>
+          <span className={styles.headerColTextMonth}>
+            {format(currentMonth, "M")}월
+          </span>
+          {format(currentMonth, "yyyy")}
         </span>
       </div>
-      <div className="col col-end">
-        <Icon icon="bi:arrow-left-circle-fill" onClick={prevMonth}/>
-        <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/>
-      </div>
+      <Icon
+        icon="material-symbols:arrow-forward-ios-rounded"
+        onClick={nextMonth}
+      />
     </div>
   );
 };
 
 const RenderDays = () => {
   const days = [];
-  const date = ['일', '월', '화', '수', '목', '금', '토'];
+  const date = ["일", "월", "화", "수", "목", "금", "토"];
 
   for (let i = 0; i < 7; i++) {
     days.push(
-      <div className="col" key={i}>
+      <div className={styles.calendarDaysCol} key={i}>
         {date[i]}
-      </div>,
+      </div>
     );
   }
 
-  return <div className="days row">{days}</div>;
+  return <div className={styles.calendarDays}>{days}</div>;
 };
 
 const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
@@ -48,48 +52,46 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   const rows = [];
   let days = [];
   let day = startDate;
-  let formattedDate = '';
+  let formattedDate = "";
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, 'd');
-      const cloneDay = day;
+      formattedDate = format(day, "d");
       days.push(
         <div
-          className={`col cell ${
+          className={`${styles.bodyRowCol} ${
             !isSameMonth(day, monthStart)
-              ? 'disabled'
+              ? `${styles.bodyRowColNotValid}`
               : isSameDay(day, selectedDate)
-              ? 'selected'
-              : format(currentMonth, 'M') !== format(day, 'M')
-              ? 'not-valid'
-              : 'valid'
+              ? `${styles.bodyRowColSellect}`
+              : format(currentMonth, "M") !== format(day, "M")
+              ? `${styles.bodyRowColNotValid}`
+              : `${styles.bodyRowColValid}`
           }`}
           key={day}
-          onClick={() => onDateClick(parse(cloneDay))}  
         >
           <span
             className={
-              format(currentMonth, 'M') !== format(day, 'M')
-                ? 'text not-valid'
-                : ''
+              format(currentMonth, "M") !== format(day, "M")
+                ? `${styles.bodyRowColNotValid}`
+                : ""
             }
           >
             {formattedDate}
           </span>
-        </div>,
+        </div>
       );
       day = addDays(day, 1);
     }
     rows.push(
-      <div className="row" key={day}>
+      <div className={styles.bodyRow} key={day}>
         {days}
       </div>
     );
     days = [];
   }
-  return <div className="body">{rows}</div>
-} 
+  return <div className={styles.body}>{rows}</div>;
+};
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -97,29 +99,30 @@ const Calendar = () => {
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
-  }
+  };
   const nextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
-  }
+  };
   const onDateClick = (day) => {
     setSelectedDate(day);
-  }
+  };
   return (
     <div className={styles.calendar}>
       <RenderHeader
         currentMonth={currentMonth}
         prevMonth={prevMonth}
         nextMonth={nextMonth}
-        className={styles.calendar.header}
       />
-      <RenderDays/>
-      <RenderCells
-        currentMonth={currentMonth}
-        selectedDate={selectedDate}
-        onDateClick={onDateClick}
-      />
+      <div className={styles.calendarBody}>
+        <RenderDays />
+        <RenderCells
+          currentMonth={currentMonth}
+          selectedDate={selectedDate}
+          onDateClick={onDateClick}
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Calendar;
