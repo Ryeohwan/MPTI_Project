@@ -25,10 +25,10 @@ const ClientMyReservation = () => {
   };
   const handleMessage = () => {
     if (text === "") {
-      return inputRef?.current?.focus();
+      return inputRef.current.focus();
     }
     setText(""); // 엔터 후 input 빈값으로 수정
-    inputRef?.current?.focus(); // 전송 후 input 포커스
+    inputRef.current.focus(); // 전송 후 input 포커스
   };
 
   const handleKeyUp = (e) => {
@@ -62,19 +62,11 @@ const ClientMyReservation = () => {
           날짜로 찾기
         </span>
       </div>
-      {item === "name" ? (
-        <input
-          className={styles.SearchNameInput}
-          placeholder="이름을 입력하세요"
-          value={text}
-          onChange={onChange}
-          ref={inputRef}
-          onKeyUp={handleKeyUp}
-        />
-      ) : (
+      {item === "date" ?  (
         <div>
           <DateTimePicker
             className={styles.SearchDateTimePicker}
+            // wrapperClassName="customDateTime"
             yearPlaceholder="연도"
             monthPlaceholder="월"
             dayPlaceholder="일"
@@ -94,12 +86,19 @@ const ClientMyReservation = () => {
             ※ 원하는 PT 시작 시간을 입력하세요
           </div>
         </div>
+      ) : (
+        <input
+          className={styles.SearchNameInput}
+          placeholder="이름을 입력하세요"
+          value={text}
+          onChange={onChange}
+          ref={inputRef}
+          onKeyUp={handleKeyUp}
+        />
       )}
 
       <br></br>
-
-      {/* calendar CSS 화면 테스트 용 */}
-      <Calendar/>
+      
     </>
   );
 };
