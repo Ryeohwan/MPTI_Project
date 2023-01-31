@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @Getter
 @Setter
-public class SignUpRequest {
+public class SocialSignUpRequest {
     @NotBlank
     private String name;
 

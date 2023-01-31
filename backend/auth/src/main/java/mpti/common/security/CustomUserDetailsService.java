@@ -1,20 +1,14 @@
-package mpti.authserver.security;
+package mpti.common.security;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.authserver.api.request.LoginRequest;
-import mpti.authserver.config.AppProperties;
-import mpti.authserver.dao.UserRefreshTokenRepository;
-import mpti.authserver.entity.UserRefreshToken;
 import okhttp3.*;
 
 import mpti.authserver.dto.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,19 +25,21 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    final private AppProperties appProperties;
-
-    OkHttpClient client = new OkHttpClient();
+    private OkHttpClient client = new OkHttpClient();
 
     private final Gson gson;
 
     private final String USER = "ROLE_USER";
     private final String TRAINER = "ROLE_TRAINER";
 
+    @Value("${app.auth.trainerServerUrl}")
+    private String TRAINER_SERVER_URL;
+    @Value("${app.auth.userServerUrl}")
+    private String USER_SERVER_URL;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        // LoginRequest Dto 객체 생성
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(email);
         String json = gson.toJson(loginRequest);
@@ -52,7 +48,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         logger.info("트레이너 DB 조회");
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
-                .url(appProperties.getAuth().getTrainerServerUrl() + "/login")
+                .url(TRAINER_SERVER_URL + "/login")
                 .post(requestBody)
                 .build();
         User responseUser = null;
@@ -75,11 +71,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         ///////////////////////////////// 유저 DB 조회
         logger.info("유저 DB 조회");
-
-        logger.info("트레이너 DB 조회");
         requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         request = new Request.Builder()
-                .url(appProperties.getAuth().getUserServerUrl() + "/login")
+                .url(USER_SERVER_URL + "/login")
                 .post(requestBody)
                 .build();
         responseUser = null;

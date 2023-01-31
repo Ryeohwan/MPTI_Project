@@ -1,4 +1,4 @@
-package mpti.authserver.security;
+package mpti.common.security;
 
 import mpti.authserver.dto.User;
 import org.slf4j.Logger;

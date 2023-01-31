@@ -1,4 +1,4 @@
-package mpti.authserver.security.oauth.provider;
+package mpti.common.security.oauth.provider;
 
 import java.util.Map;
 

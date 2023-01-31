@@ -1,10 +1,10 @@
-package mpti.authserver.security.oauth.provider;
+package mpti.common.security.oauth.provider;
 
 
 
 
 import mpti.authserver.dto.AuthProvider;
-import mpti.authserver.exception.OAuth2AuthenticationProcessingException;
+import mpti.common.exception.OAuth2AuthenticationProcessingException;
 
 import java.util.Map;
 

@@ -1,23 +1,21 @@
-package mpti.authserver.security.oauth;
+package mpti.common.security.oauth;
 
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.authserver.config.AppProperties;
 import mpti.authserver.dao.UserRefreshTokenRepository;
 import mpti.authserver.entity.UserRefreshToken;
-import mpti.authserver.exception.BadRequestException;
-import mpti.authserver.security.TokenProvider;
-import mpti.authserver.security.UserPrincipal;
-import mpti.authserver.security.oauth.provider.OAuth2UserInfo;
-import mpti.authserver.security.oauth.provider.OAuth2UserInfoFactory;
+import mpti.common.exception.BadRequestException;
+import mpti.common.security.TokenProvider;
+import mpti.common.security.UserPrincipal;
+import mpti.common.security.oauth.provider.OAuth2UserInfo;
+import mpti.common.security.oauth.provider.OAuth2UserInfoFactory;
 import mpti.authserver.utils.CookieUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -29,13 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-import static mpti.authserver.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames.*;
 
 
@@ -45,8 +41,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     final private TokenProvider tokenProvider;
 
-    final private AppProperties appProperties;
-
     final private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     private final UserRefreshTokenRepository userRefreshTokenRepository;
@@ -55,21 +49,16 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     private final Gson gson;
 
+    @Value("${app.oauth2.authorizedRedirectUris}")
+    private List<String> REDIRECT_URL;
 
-//    @Autowired
-//    OAuth2AuthenticationSuccessHandler(TokenProvider tokenProvider, AppProperties appProperties,
-//                                       HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
-//        this.tokenProvider = tokenProvider;
-//        this.appProperties = appProperties;
-//        this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
-//    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(request, response, authentication);
 
         if (response.isCommitted()) {
-            logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
+            logger.debug("이미 commit되어서 리다리렉트를 실행 할 수 없습니다 " + targetUrl);
             return;
         }
 
@@ -80,7 +69,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     @Transactional
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
+        Optional<String> redirectUri = CookieUtils.getCookie(request, HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
         if(redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
@@ -100,20 +89,22 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String refreshToken = tokenProvider.createRefreshToken(authentication);
 
         // DB에 저장
-        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserEmail(userInfo.getEmail());
-        if (userRefreshToken != null) {
-            userRefreshToken.setRefreshToken(refreshToken);
-            userRefreshTokenRepository.flush();
-            logger.info("[OAuth 로그인] 기존의 값 update");
-        } else {
+        // UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserEmail(userInfo.getEmail());
+//        UserRefreshToken userRefreshToken = userRefreshTokenRepository.findById();
+//        if (userRefreshToken != null) {
+//            userRefreshToken.setRefreshToken(refreshToken);
+////            userRefreshTokenRepository.flush();
+//            logger.info("[OAuth 로그인] 기존의 값 update");
+//        } else {
 
-            List<GrantedAuthority> authorities = Collections.
-                    singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+//            List<GrantedAuthority> authorities = Collections.
+//                    singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
-            userRefreshToken = new UserRefreshToken(userInfo.getId(), refreshToken, authorities);
-            userRefreshTokenRepository.saveAndFlush(userRefreshToken);
+            UserRefreshToken userRefreshToken = new UserRefreshToken(userInfo.getId(), refreshToken, authentication.getAuthorities());
+//            userRefreshTokenRepository.saveAndFlush(userRefreshToken);
+            userRefreshTokenRepository.save(userRefreshToken);
             logger.info("[OAuth 로그인] 새로 생성");
-        }
+//        }
 
         //쿼리로 토큰을 보낸다
 //        String json = gson.toJson(userInfo);
@@ -143,8 +134,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private boolean isAuthorizedRedirectUri(String uri) {
         URI clientRedirectUri = URI.create(uri);
 
-        return appProperties.getOauth2().getAuthorizedRedirectUris()
-                .stream()
+        return REDIRECT_URL.stream()
                 .anyMatch(authorizedRedirectUri -> {
                     // Only validate host and port. Let the clients use different paths if they want to
                     URI authorizedURI = URI.create(authorizedRedirectUri);

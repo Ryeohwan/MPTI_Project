@@ -1,21 +1,21 @@
-package mpti.authserver.security.oauth;
+package mpti.common.security.oauth;
 
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.authserver.api.request.LoginRequest;
-import mpti.authserver.api.request.SignUpRequest;
-import mpti.authserver.config.AppProperties;
+import mpti.authserver.api.request.SocialSignUpRequest;
 import mpti.authserver.dto.AuthProvider;
 import mpti.authserver.dto.User;
-import mpti.authserver.exception.OAuth2AuthenticationProcessingException;
-import mpti.authserver.exception.ResourceNotFoundException;
-import mpti.authserver.security.UserPrincipal;
-import mpti.authserver.security.oauth.provider.OAuth2UserInfo;
-import mpti.authserver.security.oauth.provider.OAuth2UserInfoFactory;
+import mpti.common.exception.OAuth2AuthenticationProcessingException;
+import mpti.common.exception.ResourceNotFoundException;
+import mpti.common.security.UserPrincipal;
+import mpti.common.security.oauth.provider.OAuth2UserInfo;
+import mpti.common.security.oauth.provider.OAuth2UserInfoFactory;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -37,11 +37,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    OkHttpClient client = new OkHttpClient();
+    private OkHttpClient client = new OkHttpClient();
 
     private final Gson gson;
 
-    private final AppProperties appProperties;
+    @Value("${app.auth.tokenSecret:}")
+    private String SECRET_KEY;
+    @Value("${app.auth.accessTokenExpirationMsec}")
+    private long ACCESS_TOKEN_EXPIRATION;
+    @Value("${app.auth.refreshTokenExpirationMsec}")
+    private long REFRESH_TOKEN_EXPIRATION;
+    @Value("${app.auth.userServerUrl}")
+    private String USER_SERVER_URL;
+    @Value("${app.auth.trainerServerUrl}")
+    private String TRAINER_SERVER_URL;
 
 
     @Override
@@ -94,7 +103,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
 //                .url("http://localhost:8002/api/auth/login")
-                .url(appProperties.getAuth().getTrainerServerUrl() + "/login")
+                .url(TRAINER_SERVER_URL + "/login")
                 .post(requestBody)
                 .build();
 
@@ -132,7 +141,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
 //                .url("http://localhost:8002/api/auth/login")
-                .url(appProperties.getAuth().getUserServerUrl() + "/login")
+                .url(USER_SERVER_URL + "/login")
                 .post(requestBody)
                 .build();
 
@@ -168,7 +177,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         logger.info(json);
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
-                .url(appProperties.getAuth().getTrainerServerUrl()+"/update")
+                .url(USER_SERVER_URL +"/update")
                 .post(requestBody)
                 .build();
 
@@ -207,18 +216,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 //        logger.info("[OAuth 로그인]임시 트레이너 회원가입");
         logger.info("[OAuth 로그인] 회원 회원가입");
 
-        SignUpRequest signUpRequest = SignUpRequest.builder()
+        SocialSignUpRequest socialSignUpRequest = SocialSignUpRequest.builder()
                 .name(oAuth2UserInfo.getName())
                 .password(oAuth2UserInfo.getId())
                 .email(oAuth2UserInfo.getEmail())
                 .provider(oAuth2UserInfo.getProvider())
                 .build();
 
-        String json = gson.toJson(signUpRequest);
+        String json = gson.toJson(socialSignUpRequest);
         logger.info(json);
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
-                .url(appProperties.getAuth().getUserServerUrl()+"/signup")
+                .url(USER_SERVER_URL+"/signup")
                 .post(requestBody)
                 .build();
 

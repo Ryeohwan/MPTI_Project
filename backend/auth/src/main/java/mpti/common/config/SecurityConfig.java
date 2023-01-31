@@ -1,26 +1,22 @@
-package mpti.authserver.config;
+package mpti.common.config;
 
-import mpti.authserver.security.CustomUserDetailsService;
-import mpti.authserver.security.oauth.CustomOAuth2UserService;
-import mpti.authserver.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
-import mpti.authserver.security.oauth.OAuth2AuthenticationFailureHandler;
-import mpti.authserver.security.oauth.OAuth2AuthenticationSuccessHandler;
+import mpti.common.security.CustomUserDetailsService;
+import mpti.common.security.oauth.CustomOAuth2UserService;
+import mpti.common.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
+import mpti.common.security.oauth.OAuth2AuthenticationFailureHandler;
+import mpti.common.security.oauth.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -30,8 +26,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class SecurityConfig {
-
-    private AppProperties appProperties;
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -52,12 +46,6 @@ public class SecurityConfig {
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
-
-    public SecurityConfig(AppProperties appProperties) {
-        this.appProperties = appProperties;
-    };
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -68,7 +56,6 @@ public class SecurityConfig {
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -118,7 +105,6 @@ public class SecurityConfig {
                         .and()
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
-
 
         return httpSecurity.build();
     }

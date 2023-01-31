@@ -1,4 +1,4 @@
-package mpti.authserver.security.oauth;
+package mpti.common.security.oauth;
 
 
 import com.nimbusds.oauth2.sdk.util.StringUtils;

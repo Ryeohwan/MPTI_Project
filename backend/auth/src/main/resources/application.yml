@@ -1,6 +1,12 @@
 ###########테스트를 위해 설정 port : 8081 #############
 server:
   port: 8000
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
 
 spring:
   datasource:
@@ -17,6 +23,10 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+  redis:
+    host: localhost
+    port: 6379
 
   security:
     oauth2.client:
@@ -73,8 +83,8 @@ spring:
 app:
   auth:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
-    tokenExpirationMsec: 300000 # 5분
-    tokenRefreshExpirationMsec: 1800000 # 30분
+    accessTokenExpirationMsec: 300000 # 5분
+    refreshTokenExpirationMsec: 1800000 # 30분
     trainerServerUrl : http://localhost:8002/api/auth
     userServerUrl : http://localhost:8001/api/auth
 
@@ -86,8 +96,7 @@ app:
     allowedOrigins: http://localhost:3000,http://localhost:8080
 
   oauth2:
-    authorizedRedirectUris:
-      - http://localhost:3000/oauth2/redirect
+    authorizedRedirectUris: http://localhost:3000/oauth2/redirect
 #      - myandroidapp://oauth2/redirect
 #      - myiosapp://oauth2/redirect
 

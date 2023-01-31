@@ -1,14 +1,12 @@
-package mpti.authserver.security;
+package mpti.common.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
-import mpti.authserver.config.AppProperties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,32 +26,20 @@ public class TokenProvider implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
     private static final String AUTHORITIES_KEY = "auth";
-
-    private final String SECRET;
-    private final long ACCESS_EXPIRATION_MSEC;
-    private final long REFRESH_EXPIRATION_MSEC;
-
-    @Autowired
-    private AppProperties appProperties;
-
+    @Value("${app.auth.tokenSecret:}")
+    private String SECRET_KEY;
+    @Value("${app.auth.accessTokenExpirationMsec}")
+    private long ACCESS_TOKEN_EXPIRATION;
+    @Value("${app.auth.refreshTokenExpirationMsec}")
+    private long REFRESH_TOKEN_EXPIRATION;
 
     private Key key;
-
-    public TokenProvider(
-            @Value("${spring.security.jwt.secret}") String secret,
-            @Value("${spring.security.jwt.accessExpiration}") long access,
-            @Value("${spring.security.jwt.refreshExpiration}") long refresh
-    ) {
-        this.SECRET = secret;
-        this.ACCESS_EXPIRATION_MSEC = access;
-        this.REFRESH_EXPIRATION_MSEC = refresh;
-    }
 
 
     @Override
     public void afterPropertiesSet() throws Exception {
         // 주입받은 secret 값을 key로 할당 받기 위해서
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -64,7 +50,7 @@ public class TokenProvider implements InitializingBean {
                 .collect(Collectors.joining(","));
 
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + ACCESS_EXPIRATION_MSEC);
+        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION);
 
 
         return Jwts.builder()
@@ -72,7 +58,7 @@ public class TokenProvider implements InitializingBean {
                 .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
 
@@ -82,14 +68,14 @@ public class TokenProvider implements InitializingBean {
                 singletonList(new SimpleGrantedAuthority(role));
 
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + ACCESS_EXPIRATION_MSEC);
+        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION);
 
         return Jwts.builder()
                 .setSubject(name)
                 .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
 
@@ -102,7 +88,7 @@ public class TokenProvider implements InitializingBean {
         logger.info("authorities :: " + authorities);
 
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + REFRESH_EXPIRATION_MSEC);
+        Date expiryDate = new Date(now.getTime() + REFRESH_TOKEN_EXPIRATION);
 
 
         return Jwts.builder()
@@ -110,7 +96,7 @@ public class TokenProvider implements InitializingBean {
                 .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
 
@@ -125,7 +111,7 @@ public class TokenProvider implements InitializingBean {
     public boolean validateToken(String authToken) {
         logger.info("토큰 겁사필터 시작");
         try {
-            Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             logger.info("유효한 jwt access tocken 입니다");
             return true;
         } catch (SignatureException ex) {
@@ -144,7 +130,7 @@ public class TokenProvider implements InitializingBean {
 
     public Claims getExpiredTokenClaims(String authToken) {
         try {
-            Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
         } catch (ExpiredJwtException e) {
             logger.info("만료된 jwt access tocken 입니다[1]"); // "Expired JWT token."
             return e.getClaims();
@@ -154,7 +140,7 @@ public class TokenProvider implements InitializingBean {
 
     public String getUserEmailFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(appProperties.getAuth().getTokenSecret())
+                .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
 
