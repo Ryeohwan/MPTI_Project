@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
@@ -43,6 +43,24 @@ const dummydata = [
 ];
 
 const ManagerReportApproval = () => {
+
+
+  const [reportList, setReportList] = useState([]);
+
+  useEffect(()=>{
+      const onReportListCreate=() =>{
+          axios.get("/opinion/report/list")
+          .then((res)=>{
+              console.log(res);
+              setReportList(res);
+          })
+          .catch((err)=>{
+              console.log(err);
+          })
+      }
+  }, [reportList])
+
+
   const [modal, setModal] = useState({
     show: false,
     name: "",

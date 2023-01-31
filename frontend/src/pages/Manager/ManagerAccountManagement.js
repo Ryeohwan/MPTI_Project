@@ -1,8 +1,29 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ManagerAccountManagement.module.css";
 
 const ManagerAccountManagement = () => {
+
+
+  const [accountList, setAccountList] = useState([]);
+
+  useEffect(()=>{
+      const onAccountListCreate=() =>{
+          axios.get("/user/list")
+          .then((res)=>{
+              console.log(res);
+              setAccountList(res);
+          })
+          .catch((err)=>{
+              console.log(err);
+          })
+      }
+  }, [accountList])
+
+
+
+
+
     const deleteAccountHandler = () =>{
         axios.post("/user/info/delete",{id: 1})
         .then((res) => {

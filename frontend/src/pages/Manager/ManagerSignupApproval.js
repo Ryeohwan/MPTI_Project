@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ManagerSignupApproval.module.css';
 import trainerImg from '../../assets/img/trainer.PNG';
+import axios from 'axios';
 
 const dummydata=[
     {
@@ -33,6 +34,35 @@ const dummydata=[
 ]
 
 const ManagerSignupApproval = () => {
+    
+
+    const [signupList, setSignupList] = useState([]);
+
+    useEffect(()=>{
+        const onSignUpListCreate=() =>{
+            axios.get("/trainer/application/list")
+            .then((res)=>{
+                console.log(res);
+                setSignupList(res);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+    }, [signupList])
+   
+
+
+
+
+    const approveHandler = ()=>{
+        axios.post("/trainer/application/process")
+    }
+
+    const negativeHandler = ()=>{
+        axios.post("/trainer/application/process")
+    }
+
     return (
         <>
                 <div className={styles.info_content_box}>
@@ -59,8 +89,8 @@ const ManagerSignupApproval = () => {
                                             </div>
         
                                             <div className={styles.item_btn}>
-                                                <button className={styles.btn_positive}>승인</button>
-                                                <button className={styles.btn_negative}>거절</button>
+                                                <button className={styles.btn_positive} onClick={approveHandler}>승인</button>
+                                                <button className={styles.btn_negative} onClick={negativeHandler}>거절</button>
                                             </div>
                                         </div>
       
