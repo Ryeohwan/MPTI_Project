@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import BasicLoadingSpinner from "../../components/Loading/BasicLoadingSpinner";
 import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
@@ -44,24 +45,30 @@ const dummydata = [
 
 const ManagerReportApproval = () => {
 
-
+  const [loading, setLoading] = useState(true);
   const [reportList, setReportList] = useState([]);
   const onReportListCreate=() =>{
-    axios.get("/opinion/report/list")
-    .then((res)=>{
-        console.log(res.data);
-        const data= res.data;
-        const reportlist= data.map(it=>{
-          //  형식 정해지면 넣을거임
-          return{
+    setLoading(true);
 
-          }
-        })
-        setReportList(reportlist);
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
+    setTimeout(()=>{
+      axios.get("/opinion/report/list")
+      .then((res)=>{
+          console.log(res.data);
+          const data= res.data;
+          const reportlist= data.map(it=>{
+            //  형식 정해지면 넣을거임
+            return{
+  
+            }
+          })
+          setReportList(reportlist);
+          setLoading(false);
+      })
+      .catch((err)=>{
+          console.log(err);
+      })
+    },500)
+   
 }
   useEffect(()=>{
     onReportListCreate();
@@ -134,6 +141,7 @@ const ManagerReportApproval = () => {
                       </button>
                     </div>
                   </div>
+                  {loading ? <BasicLoadingSpinner /> : null}
                   {modal.show && (
                     <ReportModalContainer onClose={handleCloseModal}>
                       <ReportModal
