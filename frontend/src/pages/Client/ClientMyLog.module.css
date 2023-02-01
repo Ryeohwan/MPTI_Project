@@ -4,14 +4,15 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-.log_box{
+
+.log_box {
     display: flex;
     height: 200px;
     justify-content: space-between;
     margin-top: 10px;
-    
 }
-.log_graph{
+
+.log_graph {
     padding: 15px;
     display: flex;
     width: 58%;
@@ -19,7 +20,8 @@
     border-radius: 5px;
     border: 1px solid white;
 }
-.log_recommend{
+
+.log_recommend {
     padding: 15px;
     width: 40%;
     border-radius: 5px;
@@ -28,13 +30,13 @@
     border: 1px solid white;
 }
 
-.sub_content{
+.sub_content {
     margin-top: 10px;
-    height: 200px;
+    height: 56px;
 }
 
-.sub_info{
-    height: 200px;
+.sub_info {
+    height: 250px;
     margin-top: 10px;
     border-radius: 5px;
     border: 1px solid white;
@@ -42,4 +44,33 @@
     padding: 15px;
     display: flex;
     justify-content: space-between;
+}
+
+.info_question {
+    width: 50%;
+    /* background-color: blue; */
+}
+
+.info_question input[type='number'] {
+    /* background-color: red; */
+    width: 40px;
+    border-style: none;
+    border-radius: 3px;
+}
+
+.info_question input[type='range'] {
+    width: 200px;
+}
+
+.info_title {
+    margin-bottom: 15px;
+}
+
+.title {
+    margin-top: 15px;
+}
+
+.bmi {
+    width: 500px;
+    word-wrap: break-word;
 }
