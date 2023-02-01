@@ -8,7 +8,7 @@ const ClientMyPageMyInfo = () => {
     return(
         <div className={styles.container}> 
             {edit?
-            <form className={styles.out_box} method='PUT' onSubmit={(e) => {e.preventDefault(); console.log('a'); setEdit(false);}}>
+            <form className={styles.out_box} method='PUT' onSubmit={(e) => {e.preventDefault(); setEdit(false);}}>
                 <div className={styles.in_box}>
                     <div className={styles.in_box_title}>✔ 인적사항</div>
                     {Object.values(get_info).map((value, index)=>

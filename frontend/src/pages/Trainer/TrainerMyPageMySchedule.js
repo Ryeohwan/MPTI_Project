@@ -1,7 +1,7 @@
 import styles from './TrainerMyPageMySchedule.module.css'
 
 
-export default function TrainerMyPageMySchedule(){
+const TrainerMyPageMySchedule = ()=>{
 
     return(
         <div>
@@ -9,3 +9,9 @@ export default function TrainerMyPageMySchedule(){
         </div>
     )
 }
+
+
+
+
+
+export default TrainerMyPageMySchedule

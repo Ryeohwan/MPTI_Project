@@ -7,20 +7,16 @@ import TrainerMyPageMyReview from './TrainerMyPageMyReview';
 import TrainerMyPageMyInfo from './TrainerMyPageMyInfo'
 import TrainerMyPageMySchedule from './TrainerMyPageMySchedule'
 import {Routes, Route} from 'react-router-dom';
+
 const TrainerMyPage = (props) => {
     const paths = ['myschedule', 'myreview', 'myinfo']
-    const [url, setUrl] = useState(window.location.pathname)
-    useEffect(()=>{
-        paths.some((path) => 
-        {
-            if(url.endsWith(path)){
-                setUrl(path)
-                return true;
+    const [url, setUrl] = useState(()=> {
+        for(let i=0; i<paths.length; i++){
+            if(window.location.pathname.endsWith(paths[i])){
+                return paths[i]
             }
-            return false;
-        })
-    }
-    ,[])
+        }
+})
 
     return (
         <div className={styles.TrainerMyPage}>
@@ -30,7 +26,6 @@ const TrainerMyPage = (props) => {
                     <MyPageProfile name='정원철' role='트레이너'/>
                     <TrainerMyPageMenu id='my_page_menu' url={url} setUrl={setUrl}/>
                 </div>
-
                 <Routes>
                     <Route path='/myinfo' element={<TrainerMyPageMyInfo/>}/>
                     <Route path='/myreview' element={<TrainerMyPageMyReview/>}/>
