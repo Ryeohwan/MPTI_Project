@@ -3,6 +3,7 @@ package mpti.domain.member.api.controller;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
+import mpti.common.security.UserPrincipal;
 import mpti.domain.member.api.request.LoginRequest;
 import mpti.domain.member.api.request.SocialSignUpRequest;
 import mpti.domain.member.dao.UserRepository;
@@ -10,11 +11,11 @@ import mpti.domain.member.entity.User;
 import mpti.common.exceptions.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class AuthToUserController {
 
     @PostMapping("/signup")
     public User registerUser(@Valid @RequestBody SocialSignUpRequest socialSignUpRequest) {
-        if(userRepository.existsByEmail(socialSignUpRequest.getEmail())) {
+        if(userRepository.e`xistsByEmail(socialSignUpRequest.getEmail())) {
             throw new BadRequestException("이미 사용하고 있는 아이디 이메일입니다");
         }
 
@@ -89,8 +90,16 @@ public class AuthToUserController {
         return Optional.of(result);
     }
 
+    /**
+     * 권한 테스트
+     * @param userPrincipal
+     * @return
+     */
 
-
-
-
+    @GetMapping("/test")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<?> test(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        System.out.println(userPrincipal.getEmail());
+        return ResponseEntity.ok("토큰 테스트 완료");
+    }
 }
