@@ -7,6 +7,7 @@ import mpti.domain.trainer.dao.TrainerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.UnknownHostException;
 
 @RestController
@@ -21,6 +22,46 @@ public class TrainerController {
         trainerService.checkDuplicateEmail(email);
         return ResponseEntity.ok(email);
     }
+
+    @PostMapping("/join")
+    public ResponseEntity join(@Valid @RequestBody SignupRequest signupRequest) {
+
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity getTrainerInfo(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+    @PostMapping("/info/update")
+    public ResponseEntity updateTrainerInfo(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/info/delete")
+    public ResponseEntity deleteTrainer(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity getTrainerList(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/application/list")
+    public ResponseEntity getTrainerApplicationList(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+    @PostMapping("/application/process")
+    public ResponseEntity processTrainerApplicationList(@Valid @RequestBody SignupRequest signupRequest) {
+        return ResponseEntity.ok("");
+    }
+
+
+
+
 
 
 }

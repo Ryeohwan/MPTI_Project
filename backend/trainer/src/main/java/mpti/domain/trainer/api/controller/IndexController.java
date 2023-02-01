@@ -11,16 +11,9 @@ import java.net.UnknownHostException;
 
 @RestController
 @RequestMapping("/")
-@RequiredArgsConstructor
 public class IndexController {
-
-    private final TrainerService trainerService;
-
     @GetMapping("")
-    public ResponseEntity checkDuplicateId(@RequestBody(required = true) String email) {
-
-        return ResponseEntity.ok(email);
+    public String checkDuplicateId() {
+        return "<h1>Hello Trainer Server Main Page</h1>";
     }
-
-
 }

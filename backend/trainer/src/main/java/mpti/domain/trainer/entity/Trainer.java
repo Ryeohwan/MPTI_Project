@@ -24,6 +24,11 @@ public class Trainer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trainer_id")
     private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     @Column(nullable = false)
     private String name;
     @Email
@@ -37,7 +42,7 @@ public class Trainer {
     private String providerId;
     private String gender;
     private String phone;
-    private String address;
+    private String address2;
     private String license;
     private boolean approved;
     @CreatedDate
