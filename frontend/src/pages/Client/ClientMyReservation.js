@@ -2,10 +2,10 @@ import React, { useRef, useState } from "react";
 import styles from "./ClientMyReservation.module.css";
 import TopTitle from "../../components/Common/TopTitle";
 import DateTimePicker from "react-datetime-picker";
-import "react-datetime-picker/dist/DateTimePicker.css";
 import { ko } from "date-fns/esm/locale";
 import moment from "moment";
-import Calendar from "../../components/Calendar/Calendar";
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "./DateTimePickerCustom.css";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());
@@ -66,7 +66,6 @@ const ClientMyReservation = () => {
         <div>
           <DateTimePicker
             className={styles.SearchDateTimePicker}
-            // wrapperClassName="customDateTime"
             yearPlaceholder="연도"
             monthPlaceholder="월"
             dayPlaceholder="일"
