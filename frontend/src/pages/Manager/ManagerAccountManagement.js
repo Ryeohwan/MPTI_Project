@@ -9,7 +9,7 @@ const ManagerAccountManagement = () => {
 
   useEffect(()=>{
       const onAccountListCreate=() =>{
-          axios.get("/user/list")
+          axios.get("i8a803.p.ssafy.io:3003")
           .then((res)=>{
               console.log(res);
               setAccountList(res);

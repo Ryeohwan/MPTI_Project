@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+.Landing{
+    font-family: 'DungGeunMo';
+    
+    width: 100%;
+  
+}
+
+.logo{
+    font-size: 98px;
+    color: #ececec;
+}
+

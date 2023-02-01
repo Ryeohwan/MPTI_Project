@@ -46,19 +46,30 @@ const ManagerReportApproval = () => {
 
 
   const [reportList, setReportList] = useState([]);
+  const onReportListCreate=() =>{
+    axios.get("/opinion/report/list")
+    .then((res)=>{
+        console.log(res.data);
+        const data= res.data;
+        const reportlist= data.map(it=>{
+          //  형식 정해지면 넣을거임
+          return{
 
+          }
+        })
+        setReportList(reportlist);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
   useEffect(()=>{
-      const onReportListCreate=() =>{
-          axios.get("/opinion/report/list")
-          .then((res)=>{
-              console.log(res);
-              setReportList(res);
-          })
-          .catch((err)=>{
-              console.log(err);
-          })
-      }
-  }, [reportList])
+    onReportListCreate();
+  }, [])
+
+
+
+
 
 
   const [modal, setModal] = useState({

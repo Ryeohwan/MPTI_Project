@@ -1,5 +1,6 @@
 import styles from "./ReportModal.module.css";
 import { useState } from 'react';
+import axios from "axios";
 const ReportModal = ({ name, report, reportman, onClose }) => {
     const [days, setDays]= useState("");
     
@@ -11,11 +12,18 @@ const ReportModal = ({ name, report, reportman, onClose }) => {
             alert("제재 기간을 입력해주세요!")
             return;
         }
-        
+
         const crimimnal = {
-            name: reportman,
-            days: days
+          id: 1,
+          days: 2
         }
+        axios.post("/opinion/report/process", crimimnal).then((res)=>{
+          console.log(res);
+        }).catch((err)=>{
+          console.log(err)
+        })
+        
+       
         console.log(crimimnal);
         
     }
@@ -42,6 +50,7 @@ const ReportModal = ({ name, report, reportman, onClose }) => {
 
           <div className={styles.process_select}>
             <select onChange={selectHandler} defaultValue={""}>
+              <option value={0}>무죄</option>
               <option value={1}>1일</option>
               <option value={3}>3일</option>
               <option value={7}>7일</option>
