@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 
 @RestController
-@RequestMapping("/api/trainer")
+@RequestMapping("/")
 @RequiredArgsConstructor
-public class TrainerController {
+public class IndexController {
 
     private final TrainerService trainerService;
 
-    @GetMapping("/duplication-check")
+    @GetMapping("")
     public ResponseEntity checkDuplicateId(@RequestBody(required = true) String email) {
-        trainerService.checkDuplicateEmail(email);
+
         return ResponseEntity.ok(email);
     }
 

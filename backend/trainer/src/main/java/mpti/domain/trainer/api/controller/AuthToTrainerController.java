@@ -4,6 +4,7 @@ package mpti.domain.trainer.api.controller;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.common.exception.BadRequestException;
+import mpti.common.security.UserPrincipal;
 import mpti.domain.trainer.api.request.LoginRequest;
 import mpti.domain.trainer.api.request.SocialSignUpRequest;
 import mpti.domain.trainer.dao.TrainerRepository;
@@ -11,6 +12,8 @@ import mpti.domain.trainer.entity.Trainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,5 +88,17 @@ public class AuthToTrainerController {
             logger.error("이 아이디에 해당하는 트레이너를 찾을 수 없습니다");
         }
         return result;
+    }
+
+    /**
+     * 권한 테스트
+     * @param userPrincipal
+     * @return
+     */
+    @GetMapping("/test")
+    @PreAuthorize("hasAuthority('ROLE_TRAINER')")
+    public ResponseEntity<?> test(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        System.out.println(userPrincipal.getEmail());
+        return ResponseEntity.ok("토큰 테스트 완료");
     }
 }
