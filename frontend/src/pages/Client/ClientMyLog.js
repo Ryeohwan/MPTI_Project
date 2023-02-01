@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import styles from './ClientMyLog.module.css'
 import TopTitle from '../../components/Common/TopTitle'
 import { Doughnut } from "react-chartjs-2";
@@ -16,6 +16,14 @@ const data = {
   };
 
 const ClientMyLog = () => {
+
+    const ageInputRef= useRef();
+    const genderInputRef= useRef();
+    const heightInputRef= useRef();
+    const weightInputRef= useRef();
+
+
+
     return (
         <div className={styles.ClientMyLog}>
             <TopTitle title='운동기록▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 !'/>
@@ -35,8 +43,39 @@ const ClientMyLog = () => {
 
             <div className={styles.sub_content}>
 
-                <h3>BMI지수를 확인하세요!</h3>
+                <div className={styles.sub_title}>BMI지수를 확인하세요!</div>
+                <div className={styles.sub_info}>
 
+                    <div className={styles.info_question}>
+                        <div>고객님의 나이를 입력하세요 ! </div>
+                        <input></input>
+
+                        <div>고객님의 나이를 입력하세요 ! </div>
+                        <select>
+                            <option>남</option>
+                            <option>여</option>
+                        </select>
+
+                        <div>고객님의 신장을 입력하세요 ! </div>
+                        <input></input>
+
+                        <div>고객님의 체중을 입력하세요 !</div>
+                        <input></input>
+
+                       
+
+
+                    </div>
+                    <div className={styles.info_result}>
+
+                        결과 부분
+                    </div>
+
+
+
+
+
+                </div>
 
             </div>
 

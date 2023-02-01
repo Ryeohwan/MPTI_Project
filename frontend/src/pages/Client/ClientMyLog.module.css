@@ -18,9 +18,6 @@
     background-color: black;
     border-radius: 5px;
     border: 1px solid white;
-
-    
-    
 }
 .log_recommend{
     padding: 15px;
@@ -31,11 +28,18 @@
     border: 1px solid white;
 }
 
-.graph_chart{
-    /* background-color: red; */
-
-}
-canvas{
-    
+.sub_content{
+    margin-top: 10px;
+    height: 200px;
 }
 
+.sub_info{
+    height: 200px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: black;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
