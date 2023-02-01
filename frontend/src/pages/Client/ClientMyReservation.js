@@ -5,7 +5,6 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import { ko } from "date-fns/esm/locale";
 import moment from "moment";
-import Calendar from "../../components/Calendar/Calendar";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());

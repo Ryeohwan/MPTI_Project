@@ -14,7 +14,7 @@ import ClientMyPage from './pages/Client/ClientMyPage';
 import TrainerMyClient from './pages/Trainer/TrainerMyClient';
 import TrainerMyReservation from './pages/Trainer/TrainerMyReservation';
 import TrainerMyPage from './pages/Trainer/TrainerMyPage';
-
+import ClientTrainerDetail from './pages/Client/ClientTrainerDetail';
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -44,7 +44,7 @@ export default function App(){
           <Route path="/clientmylog" element={<ClientMyLog/>}/>
           <Route path="/clientmyreservation" element={<ClientMyReservation/>}/>
           <Route path="/clientmypage" element={<ClientMyPage/>}/>
-
+          <Route path="/clienttrainerdetail" element={<ClientTrainerDetail/>}/>
 
           {/* 트레이너 */}
           <Route path="/trainermyclient" element={<TrainerMyClient/>}/>
