@@ -1,4 +1,4 @@
-package mpti.authserver.api.response;
+package mpti.auth.api.response;
 
 import lombok.Builder;
 import lombok.Getter;

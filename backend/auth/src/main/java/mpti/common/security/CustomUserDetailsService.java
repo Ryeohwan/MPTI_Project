@@ -2,10 +2,10 @@ package mpti.common.security;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.authserver.api.request.LoginRequest;
+import mpti.auth.api.request.LoginRequest;
 import okhttp3.*;
 
-import mpti.authserver.dto.User;
+import mpti.auth.dto.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

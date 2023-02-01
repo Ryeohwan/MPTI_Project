@@ -3,10 +3,10 @@ package mpti.common.security.oauth;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.authserver.api.request.LoginRequest;
-import mpti.authserver.api.request.SocialSignUpRequest;
-import mpti.authserver.dto.AuthProvider;
-import mpti.authserver.dto.User;
+import mpti.auth.api.request.LoginRequest;
+import mpti.auth.api.request.SocialSignUpRequest;
+import mpti.auth.dto.AuthProvider;
+import mpti.auth.dto.User;
 import mpti.common.exception.OAuth2AuthenticationProcessingException;
 import mpti.common.exception.ResourceNotFoundException;
 import mpti.common.security.UserPrincipal;
@@ -74,7 +74,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
         if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
-            throw new OAuth2AuthenticationProcessingException("서비스를 제공하는 이메일이 아닙니다");
+            throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
         User user = processTrainerOAuth2User(oAuth2UserRequest,oAuth2UserInfo);
@@ -82,7 +82,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         user = processMemberOAuth2User(oAuth2UserRequest, oAuth2UserInfo);
         if(user != null) return UserPrincipal.create(user, oAuth2User.getAttributes());
-
 
         user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
         logger.info(user.getProvider() + "[OAuth 로그인] 소셜 로그인을 처음 시도해서 데이터 DB에 저장성공");
@@ -133,7 +132,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private User processMemberOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
 
-        logger.info("[OAuth 로그인] 멤버 DB 조회");
+        logger.info("[OAuth 로그인] 유저 DB 조회");
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(oAuth2UserInfo.getEmail());
         String json = gson.toJson(loginRequest);
@@ -210,11 +209,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 //        user.setEmail(oAuth2UserInfo.getEmail());
 //        user.setImageUrl(oAuth2UserInfo.getImageUrl());
 
-        // 회원만 소셜로그인이 가능하다
-        // 트레이너 로그인을 회원 로그인으로 수정
-//        logger.info("[OAuth 로그인]임시 트레이너 회원가입");
-//        logger.info("[OAuth 로그인]임시 트레이너 회원가입");
+        // 회원만 소셜로그인으로 회원가입이 가능하다
         logger.info("[OAuth 로그인] 회원 회원가입");
+        logger.info(oAuth2UserInfo.toString());
+
 
         SocialSignUpRequest socialSignUpRequest = SocialSignUpRequest.builder()
                 .name(oAuth2UserInfo.getName())
@@ -242,6 +240,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         if(user == null) {
             throw new ResourceNotFoundException("[OAuth] 회원가입 실패", "", "");
         }

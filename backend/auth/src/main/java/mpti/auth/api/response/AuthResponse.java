@@ -1,9 +1,7 @@
-package mpti.authserver.api.response;
+package mpti.auth.api.response;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

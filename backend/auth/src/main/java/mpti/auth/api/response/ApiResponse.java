@@ -1,4 +1,4 @@
-package mpti.authserver.api.response;
+package mpti.auth.api.response;
 
 public class ApiResponse {
     private boolean success;

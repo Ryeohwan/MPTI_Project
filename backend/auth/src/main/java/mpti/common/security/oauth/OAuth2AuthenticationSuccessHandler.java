@@ -3,14 +3,14 @@ package mpti.common.security.oauth;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.authserver.dao.UserRefreshTokenRepository;
-import mpti.authserver.entity.UserRefreshToken;
+import mpti.auth.dao.UserRefreshTokenRepository;
+import mpti.auth.entity.UserRefreshToken;
 import mpti.common.exception.BadRequestException;
 import mpti.common.security.TokenProvider;
 import mpti.common.security.UserPrincipal;
 import mpti.common.security.oauth.provider.OAuth2UserInfo;
 import mpti.common.security.oauth.provider.OAuth2UserInfoFactory;
-import mpti.authserver.utils.CookieUtils;
+import mpti.auth.utils.CookieUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames.*;
 

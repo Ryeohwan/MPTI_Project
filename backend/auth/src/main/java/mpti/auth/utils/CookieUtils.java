@@ -1,4 +1,4 @@
-package mpti.authserver.utils;
+package mpti.auth.utils;
 
 import org.springframework.util.SerializationUtils;
 

@@ -1,7 +1,7 @@
-package mpti.authserver.entity;
+package mpti.auth.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.*;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +15,7 @@ import java.util.Collection;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RedisHash(timeToLive = 30) //Sec
+@RedisHash(timeToLive = 1800 ) //Sec
 public class UserRefreshToken {
     @NotNull
     @Size(max = 256)

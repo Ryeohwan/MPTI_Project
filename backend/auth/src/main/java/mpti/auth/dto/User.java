@@ -1,6 +1,4 @@
-package mpti.authserver.dto;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package mpti.auth.dto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

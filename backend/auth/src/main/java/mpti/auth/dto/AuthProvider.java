@@ -1,4 +1,4 @@
-package mpti.authserver.dto;
+package mpti.auth.dto;
 
 public enum  AuthProvider {
     local,

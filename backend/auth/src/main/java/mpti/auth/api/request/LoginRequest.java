@@ -1,4 +1,4 @@
-package mpti.authserver.api.request;
+package mpti.auth.api.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

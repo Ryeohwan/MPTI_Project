@@ -1,6 +1,6 @@
 package mpti.common.security;
 
-import mpti.authserver.dto.User;
+import mpti.auth.dto.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

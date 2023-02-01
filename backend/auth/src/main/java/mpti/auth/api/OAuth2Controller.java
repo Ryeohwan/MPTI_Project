@@ -1,4 +1,4 @@
-package mpti.authserver.api;
+package mpti.auth.api;
 
 public class OAuth2Controller {
 }

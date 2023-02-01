@@ -1,7 +1,7 @@
 package mpti.common.security.oauth;
 
 
-import mpti.authserver.utils.CookieUtils;
+import mpti.auth.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;

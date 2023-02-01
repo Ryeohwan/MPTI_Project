@@ -1,17 +1,16 @@
-package mpti.authserver.api;
+package mpti.auth.api;
 
 import lombok.RequiredArgsConstructor;
-import mpti.authserver.api.request.LoginRequest;
-import mpti.authserver.api.response.ApiResponse;
-import mpti.authserver.api.response.AuthResponse;
-import mpti.authserver.dao.UserRefreshTokenRepository;
-import mpti.authserver.entity.UserRefreshToken;
+import mpti.auth.api.request.LoginRequest;
+import mpti.auth.api.response.ApiResponse;
+import mpti.auth.api.response.AuthResponse;
+import mpti.auth.dao.UserRefreshTokenRepository;
+import mpti.auth.entity.UserRefreshToken;
 import mpti.common.security.TokenProvider;
 import okhttp3.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

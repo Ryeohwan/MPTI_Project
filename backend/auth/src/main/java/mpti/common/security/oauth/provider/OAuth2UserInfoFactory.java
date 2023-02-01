@@ -3,7 +3,7 @@ package mpti.common.security.oauth.provider;
 
 
 
-import mpti.authserver.dto.AuthProvider;
+import mpti.auth.dto.AuthProvider;
 import mpti.common.exception.OAuth2AuthenticationProcessingException;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public class OAuth2UserInfoFactory {
         } else if (registrationId.equalsIgnoreCase(AuthProvider.naver.toString())) {
             return new NaverOAuth2UserInfo(attributes);
         } else {
-            throw new OAuth2AuthenticationProcessingException( registrationId + " 로그인은 아직 지원하지 않습니다.");
+            throw new OAuth2AuthenticationProcessingException( registrationId + "login is not supported");
         }
     }
 }

@@ -1,4 +1,4 @@
-package mpti.authserver.entity;
+package mpti.auth.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 
