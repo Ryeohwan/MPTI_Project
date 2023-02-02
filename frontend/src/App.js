@@ -28,9 +28,9 @@ import { Link } from 'react-router-dom';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
-  const [type, setType] = useState('')
+  // const [type, setType] = useState('')
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
-  // const type = "client"
+  const type = "client"
   // const type = "trainer"
   // const type=''
   localStorage.setItem('token','123')
@@ -38,6 +38,7 @@ export default function App(){
   return (
       <div className="App">
         {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>} */}
+<<<<<<< HEAD
 
         {/* 테스트용 이동 버튼 삭제시 import link도 삭제 */}
         <div style={{display:'flex', flexDirection:'column', position:'absolute', zIndex:100, top:0, left:0 }}>
@@ -47,6 +48,11 @@ export default function App(){
           <Link to='/manager'><button onClick={()=>setType('manager')}>관리자</button></Link>
           <span style={{color:'white'}}>상태:{type?type:'not user'}</span>
         </div>
+=======
+        {/* <div onClick={()=>setType('trainer')}>트레이너</div>
+        <div onClick={()=>setType('client')}>고객</div>
+        <div onClick={()=>setType('')}>관리자</div> */}
+>>>>>>> df70ff908a37f10b9c58705bdd1d9d52fa293ccb
         {type==="client"?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
 
