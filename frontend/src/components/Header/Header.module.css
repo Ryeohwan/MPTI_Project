@@ -21,8 +21,8 @@
   font-weight: 400;
   font-size: 56px;
   color: #ececec;
-  border-bottom: 4pt solid #C9FD61;
-  border-top: 4pt solid #C9FD61
+  /* border-bottom: 4pt solid #C9FD61;
+  border-top: 4pt solid #C9FD61 */
 }
 
 /* 헤더 메뉴 담는 박스 */

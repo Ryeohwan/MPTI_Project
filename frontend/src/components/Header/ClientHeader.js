@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
+import logo from '../../assets/img/pxArt.png'
 //ClientHeader
 export default function ClientHeader(){
 
@@ -39,7 +40,7 @@ export default function ClientHeader(){
 			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
-			MPTI</Link>	</div>
+			<img style={{width: "200px", height: "100px"}} src={logo}></img></Link>	</div>
 			
 
 			{/* head menu담는 박스 */}
