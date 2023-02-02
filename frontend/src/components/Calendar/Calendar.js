@@ -59,6 +59,9 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
       const copyday = day;
+      const parsedDay = new Date(copyday);
+      const formatDay = format(parsedDay, 'yyyy-MM-dd')
+
       days.push(
         <div
           className={`${styles.bodyRowCol} ${
@@ -70,7 +73,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
               ? `${styles.bodyRowColNotValid}`
               : `${styles.bodyRowColValid}`
           }`}
-          key={day}
+          key={formatDay}
           
           onClick={() => {
             const parsedDay = new Date(copyday);
@@ -104,11 +107,12 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   while (rows.length < 6) {
     for (let i=0; i<7; i++) {
       days.push(
-        <div className={styles.bodyRowColNotValid}>-</div>
+        <div className={styles.bodyRowColNotValid} key={i}>-</div>
       );
     }
-    rows.push(<div className={styles.bodyRow}>{days}</div>)
+    rows.push(<div className={styles.bodyRow} key={rows.length}>{days}</div>)
   }
+
   return <div className={styles.body}>{rows}</div>;
 };
 

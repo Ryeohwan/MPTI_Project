@@ -17,7 +17,7 @@ const Home = () => {
                 
 
                     <li className={styles.home_trainer_item}>
-                            <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
+                            <div className={styles.home_trainer_img}><img src={TrainerImg} alt=""/></div>
                             <div className={styles.home_trainer_info}>
                                     <div>정원철 트레이너</div>
                                     <div>별점 5개 평점 4.86점</div>
@@ -26,7 +26,7 @@ const Home = () => {
                     </li>
 
                     <li className={styles.home_trainer_item}>
-                            <div className={styles.home_trainer_img}><img src={TrainerImg}/></div>
+                            <div className={styles.home_trainer_img}><img src={TrainerImg} alt=""/></div>
                             <div className={styles.home_trainer_info}>
                                     <div>정원철 트레이너</div>
                                     <div>별점 5개 평점 4.86점</div>
