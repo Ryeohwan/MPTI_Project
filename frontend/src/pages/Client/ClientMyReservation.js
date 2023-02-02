@@ -40,14 +40,11 @@ const ClientMyReservation = () => {
   };
 
   return (
-    <>
-      <div className={styles.ClientMyReservation}>
-        <TopTitle
-          title="예약하기▼"
-          content="여러분과 딱 맞는 트레이너를 찾아보세요!"
-        />
-      </div>
-
+    <div className={styles.my_reservation}>
+      <TopTitle
+        title="예약하기▼"
+        content="여러분과 딱 맞는 트레이너를 찾아보세요!"
+      />
       <div className={styles.SearchItem}>
         <span
           className={styles.SearchName}
@@ -103,7 +100,7 @@ const ClientMyReservation = () => {
           <TrainerCard />
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
