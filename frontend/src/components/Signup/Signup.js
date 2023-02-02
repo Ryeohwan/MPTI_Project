@@ -11,6 +11,9 @@ const Signup = () => {
   const [award, setAward] = useState({name: "", company:"", date:""});
   const [certificate,setCertificate] = useState({name: "", company:"", date:""});
   const [career, setCareer] = useState({name: "", company:"", date:""});
+  const [file, setFile]= useState();
+
+
   const nameInputRef= useRef();
   const emailInputRef= useRef();
   const passwordInputRef= useRef();
@@ -88,7 +91,10 @@ const careerNameChangeHandler= (e=>{setCareer({...career, name:e.target.value})}
 const careerCompanyChangeHandler= (e=>{setCareer({...career, company:e.target.value})})
 const careerDateChangeHandler= (e=>{setCareer({...career, date:e.target.value})})
 
-
+const fileChangedHandler= (e)=>{
+    const files= e.target.files[0];
+    setFile({selectedFiles: files});
+}
 
 const testDuplicateChk = (body)=>{
     console.log(body);
@@ -125,13 +131,19 @@ if(!name.isName){
         phoneInputRef.current.focus();
         return
     }
+    const formData = new FormData();
+    formData.append('profileImage', file);
 
+    axios.post('/server/register',newObj).then(res=>{
+        console.log(res);
+    })
     const newObj ={
         name: name.name,
         email: email.email,
         password : password.password,
         birth: birth.birth,
         phone: phoneInputRef.current.value,
+        iprofileImage: file,
         award: {
             name: award.name,
             company: award.company,
@@ -181,8 +193,15 @@ return (
                 </select>
                 <p></p>
             </div>
+
+            <div className={styles.form_gender} >
+            <label htmlFor='image'>이미지 첨부</label>
+            <input type="file"  onChange={fileChangedHandler}/>
+                <p></p>
+            </div>
           
-     
+          
+ 
         <div className={styles.form_email}> 
             <label htmlFor='email'>이메일</label>
             <input ref={emailInputRef} type="email" id='email' onChange={emailChangeHandler} />

@@ -26,9 +26,9 @@ import { useState } from 'react';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
-  const [type, setType] = useState('')
+  // const [type, setType] = useState('')
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
-  // const type = "client"
+  const type = "client"
   // const type = "trainer"
   // const type=''
   localStorage.setItem('token','123')
@@ -36,9 +36,9 @@ export default function App(){
   return (
       <div className="App">
         {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>} */}
-        <div onClick={()=>setType('trainer')}>트레이너</div>
+        {/* <div onClick={()=>setType('trainer')}>트레이너</div>
         <div onClick={()=>setType('client')}>고객</div>
-        <div onClick={()=>setType('')}>관리자</div>
+        <div onClick={()=>setType('')}>관리자</div> */}
         {type==="client"?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
         {/* <ClientHeader/> */}
