@@ -38,9 +38,10 @@ export default function ClientHeader(){
 		<div className={styles.Header}>
 			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
-			<div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
-			MPTI</Link>	</div>
-			
+			{/* <div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
+			MPTI</Link>	</div> */}
+			<Link  to={'/home'} onClick={()=>{setMenuSelect('home')}}><img  src='/logo5.png' className={styles.logo_img} alt='a'> 
+			</img></Link>
 
 			{/* head menu담는 박스 */}
 			<div className = {styles.head_menu}>

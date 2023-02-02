@@ -23,6 +23,7 @@ import ManagerReportApproval from './pages/Manager/ManagerReportApproval'
 import ManagerSignupApproval from './pages/Manager/ManagerSignupApproval'
 import SignupSelect from './components/Signup/SignupSelect'
 import { useState } from 'react';
+import Landing from './pages/Common/Landing';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
@@ -52,6 +53,7 @@ export default function App(){
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/select" element={<SignupSelect/>}/>
+          <Route path="/" element={<Landing/>}/>
 
           {/* 회원 */}
           <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>

@@ -25,6 +25,10 @@
   border-top: 4pt solid #C9FD61
 }
 
+.logo_img{
+  scale: 0.3;
+}
+
 /* 헤더 메뉴 담는 박스 */
 .head_menu {
   display: flex;
