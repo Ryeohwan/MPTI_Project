@@ -23,6 +23,8 @@ import ManagerReportApproval from './pages/Manager/ManagerReportApproval'
 import ManagerSignupApproval from './pages/Manager/ManagerSignupApproval'
 import SignupSelect from './components/Signup/SignupSelect'
 import { useState } from 'react';
+import Landing from './pages/Landing/Landing';
+import { Link } from 'react-router-dom';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
@@ -36,18 +38,24 @@ export default function App(){
   return (
       <div className="App">
         {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>} */}
-        <div onClick={()=>setType('trainer')}>트레이너</div>
-        <div onClick={()=>setType('client')}>고객</div>
-        <div onClick={()=>setType('')}>관리자</div>
+
+        {/* 테스트용 이동 버튼 삭제시 import link도 삭제 */}
+        <div style={{display:'flex', flexDirection:'column', position:'absolute', zIndex:100, top:0, left:0 }}>
+          <Link to='/'><button onClick={()=>setType('')}>비회원</button></Link>
+          <Link to='/home'><button onClick={()=>setType('trainer')}>트레이너</button></Link>
+          <Link to='/home'><button onClick={()=>setType('client')}>고객</button></Link>
+          <Link to='/manager'><button onClick={()=>setType('manager')}>관리자</button></Link>
+          <span style={{color:'white'}}>상태:{type?type:'not user'}</span>
+        </div>
         {type==="client"?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
-        {/* <ClientHeader/> */}
-        {/* <TrainerHeader/> */}
+
         
-                {/* 라우트 경로 목록들 */}
+        {/* 라우트 경로 목록들 */}
         <Routes>
 
           {/* 공통 */}
+          <Route path="/" element={<Landing/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>

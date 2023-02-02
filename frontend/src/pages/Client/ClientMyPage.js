@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ClientMyPage.module.css'
 import TopTitle from '../../components/Common/TopTitle'
-import MyPageProfile from '../../components/Common/MyPageProfile';
+import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
 import ClientMyPageMyReview from '../../components/MyPage/ClientMyPageMyReview';
 

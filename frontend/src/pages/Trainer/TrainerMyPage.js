@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styles from './TrainerMyPage.module.css';
 import TopTitle from '../../components/Common/TopTitle'
-import MyPageProfile from '../../components/Common/MyPageProfile';
+import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import TrainerMyPageMenu from '../../components/MyPage/TrainerMyPageMenu';
 import TrainerMyPageMyReview from './TrainerMyPageMyReview';
 import TrainerMyPageMyInfo from './TrainerMyPageMyInfo'

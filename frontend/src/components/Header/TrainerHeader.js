@@ -57,7 +57,7 @@ export default function TrainerHeader(){
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /trainermypage 라우팅 */}
-					<Link to={'/trainermypage'} onClick={()=>{setMenuSelect('trainermypage')}}>
+					<Link to={'/trainermypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>
 						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
 					</Link>
 				</div>

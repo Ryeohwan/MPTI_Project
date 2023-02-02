@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TrainerMyReservation.module.css';
 import TopTitle from '../../components/Common/TopTitle'
-import MyPageProfile from '../../components/Common/MyPageProfile';
+import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import axios from 'axios';
 const TrainerMyReservation = () => {
 

@@ -1,6 +1,5 @@
 import styles from './TrainerMyPageMenu.module.css'
 import {Link} from 'react-router-dom';
-import { Children } from 'react';
 export default function TrainerMyPageMenu(props) {
     return(
         <div className={styles.menu_box}>
