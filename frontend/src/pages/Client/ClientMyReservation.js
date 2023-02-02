@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./ClientMyReservation.module.css";
 import TopTitle from "../../components/Common/TopTitle";
 import DateTimePicker from "react-datetime-picker";
@@ -6,6 +7,7 @@ import { ko } from "date-fns/esm/locale";
 import moment from "moment";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "./DateTimePickerCustom.css";
+import TrainerCard from "../../components/Card/TrainerCard";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());
@@ -62,7 +64,7 @@ const ClientMyReservation = () => {
           날짜로 찾기
         </span>
       </div>
-      {item === "date" ?  (
+      {item === "date" ? (
         <div>
           <DateTimePicker
             className={styles.SearchDateTimePicker}
@@ -96,8 +98,11 @@ const ClientMyReservation = () => {
         />
       )}
 
-      <br></br>
-
+      <div className={styles.home_trainer_box}>
+        <Link to={"/clienttrainerdetail"}>
+          <TrainerCard />
+        </Link>
+      </div>
     </>
   );
 };
