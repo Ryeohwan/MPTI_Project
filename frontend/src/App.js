@@ -15,29 +15,43 @@ import TrainerMyClient from './pages/Trainer/TrainerMyClient';
 import TrainerMyReservation from './pages/Trainer/TrainerMyReservation';
 import TrainerMyPage from './pages/Trainer/TrainerMyPage';
 import ClientTrainerDetail from './pages/Client/ClientTrainerDetail';
-
+import Login from './components/Login/Login'
+import Signup from './components/Signup/Signup'
+import ManagerAccountManagement from './pages/Manager/ManagerAccountManagement'
+import ManagerHome from './pages/Manager/ManagerHome'
+import ManagerReportApproval from './pages/Manager/ManagerReportApproval'
+import ManagerSignupApproval from './pages/Manager/ManagerSignupApproval'
+import SignupSelect from './components/Signup/SignupSelect'
+import { useState } from 'react';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
+  const [type, setType] = useState('')
   // type 고객 => <ClientHeader>출력,  type 트레이너 => <TrainerHeader>출력
-  const type = "client"
-  //const type = "trainer"
+  // const type = "client"
+  // const type = "trainer"
+  // const type=''
   localStorage.setItem('token','123')
 
   return (
       <div className="App">
         {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>} */}
-        
+        <div onClick={()=>setType('trainer')}>트레이너</div>
+        <div onClick={()=>setType('client')}>고객</div>
+        <div onClick={()=>setType('')}>관리자</div>
         {type==="client"?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
         {/* <ClientHeader/> */}
         {/* <TrainerHeader/> */}
-
+        
                 {/* 라우트 경로 목록들 */}
         <Routes>
 
           {/* 공통 */}
           <Route path="/home" element={<Home/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/select" element={<SignupSelect/>}/>
 
           {/* 회원 */}
           <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>
@@ -49,9 +63,12 @@ export default function App(){
           {/* 트레이너 */}
           <Route path="/trainermyclient" element={<TrainerMyClient/>}/>
           <Route path="/trainermyreservation" element={<TrainerMyReservation/>}/>
-          <Route path="/trainermypage" element={<TrainerMyPage/>}/>
+          <Route path="/trainermypage/*" element={<TrainerMyPage/>}/>
 
+          {/* 관리자 */}
+          <Route path="/manager/*" element={<ManagerHome/>}/>
         </Routes>
+
       </div>
   )
 }
