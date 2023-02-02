@@ -48,15 +48,17 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
-
+  
   const rows = [];
   let days = [];
   let day = startDate;
   let formattedDate = "";
-
+  
+  
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
+      const copyday = day;
       days.push(
         <div
           className={`${styles.bodyRowCol} ${
@@ -69,6 +71,13 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
               : `${styles.bodyRowColValid}`
           }`}
           key={day}
+          
+          onClick={() => {
+            const parsedDay = new Date(copyday);
+            const formatDay = format(parsedDay, 'yyyy-MM-dd')
+            console.log(formatDay)
+            onDateClick(copyday)
+          }}
         >
           <span
             className={
@@ -90,6 +99,16 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     );
     days = [];
   }
+
+  console.log(rows.length);
+  while (rows.length < 6) {
+    for (let i=0; i<7; i++) {
+      days.push(
+        <div className={styles.bodyRowColNotValid}>-</div>
+      );
+    }
+    rows.push(<div className={styles.bodyRow}>{days}</div>)
+  }
   return <div className={styles.body}>{rows}</div>;
 };
 
@@ -105,6 +124,7 @@ const Calendar = () => {
   };
   const onDateClick = (day) => {
     setSelectedDate(day);
+    console.log(day)
   };
   return (
     <div className={styles.calendar}>
