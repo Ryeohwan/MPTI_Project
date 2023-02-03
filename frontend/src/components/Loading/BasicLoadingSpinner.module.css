@@ -1,0 +1,24 @@
+.LoadingBackground{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #2e2c2c26;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoadingText{
+    font-family: 'DungGeunMo';
+    text-align: center;
+    color: #ffffff;
+    font-size: 50px;
+    text-shadow:2px 2px 2px #000;
+}
+.LoadingImg{
+    width: 20%;
+}

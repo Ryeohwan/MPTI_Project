@@ -1,0 +1,78 @@
+.container{
+    font-family: 'DungGeunMo';
+    display: flex;
+    flex-flow: column;
+    gap:10px;
+    width: 680px;
+}
+
+.bigtxt {
+    font-size: 32px;
+    color: #ececec;
+    padding-bottom: 15px;
+}
+
+.smtxt{
+    font-size: 16px;
+    color: #ececec;
+    margin-bottom: 15px;
+}
+
+.out_box{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 20px 10px 20px;
+    background-color: #D0E2A6;
+    border-radius: 7px;
+    align-items:center;
+    gap:20px;   
+    justify-content: space-between;
+}
+
+.in_box {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #D0E2A6;
+    padding: 20px;
+}
+
+.time_table {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #DDE2E2;
+    padding: 15px;
+}
+
+.table_text{
+    width: 10%;
+    height: 100%;
+}
+
+.times_box{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 10px;
+    justify-items: center;
+}
+
+.time{
+    width: 90%;
+    font-size: 16px;
+    color: #ececec;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.53);
+    padding:3px 10px;
+    text-align: center;
+}

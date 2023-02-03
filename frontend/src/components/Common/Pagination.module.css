@@ -1,0 +1,35 @@
+.box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 34px;
+    padding: 4px 10px;
+    gap:10px;
+}
+
+.btn{
+    cursor: pointer;
+    height:26px;
+    width: 58px;
+    line-height: 26px;
+    text-align: center;
+    font-size: 15px;
+    color: #222222;
+}
+
+.btn_step {
+    border-radius: 3px;
+    background-color: #C9FD61;
+}
+
+.btn_num {
+    border-radius: 3px;
+    background-color: #90E8A3;
+}
+
+.btn_select {
+    border-radius: 3px;
+    background-color: #00FF37;
+}

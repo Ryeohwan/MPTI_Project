@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+  }
+
+
+.SignupSelect {
+    font-family: 'DungGeunMo';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    
+}
+
+.header {
+    font-size: 90px;
+    border-top: 4pt solid #c9fd61;
+    border-bottom: 4pt solid #c9fd61;
+    color: #ececec;
+  }
+
+  .header_box {
+    display: flex;
+    justify-content: left;
+    width: 530px;
+  }
+.select_form{
+    display: flex;
+    flex-direction: column;
+    width: 530px;
+    margin-top: 10px;
+   
+}
+
+.select_title{
+    color: #ececec;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.select_box{
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    font-size: 32px;
+    color: #ececec;    
+}
+
+
+.select_btn_box{
+    display: flex;
+    justify-content: right;
+    padding-right: 5px;
+    padding-top: 10px;
+    width: 530px;
+}
+
+.select_btn{
+    width: 138px;
+    height: 48px;
+    font-family: 'DungGeunMo';
+    background-color: #B1DE59;
+    color: #ececec;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.select_list{
+    display: flex;
+    width: 370px;
+    justify-content: space-between;
+}
+
+.select_square1{
+    visibility: hidden;
+}
+
+.select_square2{
+    visibility: hidden;
+}
+.select_list>.select_item1:hover .select_square1 {
+    visibility: visible;
+    color: red;
+}
+
+.select_list>.select_item2:hover .select_square2 {
+    visibility: visible;
+    color: red;
+}
+
+.select_item1{
+    cursor: pointer;
+}
+
+.select_item2{
+    cursor: pointer;
+}
+

@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+
+  .Login {
+      font-family: 'DungGeunMo';
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10%;
+  }
+
+  .header {
+    font-size: 90px;
+    border-top: 4pt solid #c9fd61;
+    border-bottom: 4pt solid #c9fd61;
+    color: #ececec;
+  }
+
+  .header_box {
+    display: flex;
+    justify-content: left;
+    width: 530px;
+  }
+
+
+  .form_box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .form_input{
+    width: 530px;
+    height: 47px;
+    border-radius: 10px;
+    padding-left: 10px;
+    /* padding-left: 10px; */
+    font-family: 'DungGeunMo';
+    font-size: 20px;
+    color: #B4B4B4
+
+  }
+
+
+  .form_btn {
+    width: 530px;
+    height: 47px;
+    border-radius: 10px;
+
+    font-family: 'DungGeunMo';
+    font-size: 20px;
+    background-color: #c9fd61;
+  }
+  .form_btn_box_none button{
+    cursor: pointer;
+    width: 530px;
+    height: 47px;
+    border-radius: 10px;
+    padding-top: 10px;
+    font-family: 'DungGeunMo';
+    font-size: 20px;
+    background-color: #c9fd61;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .form_btn_box button:hover{
+    color: #ececec;
+    background-color: green;
+  }
+
+  .form_btn_box button{
+    cursor: pointer;
+    width: 530px;
+    height: 47px;
+    border-radius: 10px;
+    padding-top: 10px;
+    font-family: 'DungGeunMo';
+    font-size: 20px;
+    background-color: #c9fd61;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  button:disabled {
+    background: #dddddd;
+  }
+
+  
+
+
+  .form_sign_box{
+   color: #ececec;
+    width: 530px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .form_simple{
+    color: #ececec;
+    width: 530px;
+    font-size: 20px;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .simple_box{
+    display: flex;
+    width: 530px;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: 20px;
+    
+  }
+
+  .simple_btn_kakao{
+    cursor: pointer;
+    display: flex;
+    width: 150px;
+    height: 48px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDDC3F;
+  }
+
+  .simple_btn_naver{
+    cursor: pointer;
+    display: flex;
+    width: 150px;
+    height: 48px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    color: #ececec;
+    background-color: #5FC33A;
+  }
+
+  .simple_btn_google{
+    cursor: pointer;
+    display: flex;
+    width: 150px;
+    height: 48px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+  }
+
+  .simple_box  img{
+    width: 40px;
+    height: 40px;
+  }
+
+.comment{
+width: 530px;
+text-align: left;
+color: red
+
+}

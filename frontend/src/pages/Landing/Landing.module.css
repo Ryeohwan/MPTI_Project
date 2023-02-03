@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Slab:wght@900&display=swap");
+
+.container{
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+}
+/* DungGeunMo 안어울림 */
+h1 {
+  font-family:'Roboto';
+  padding: 0;
+  color: #C9FD61;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+
+.section {
+  position: absolute;
+  margin-top: 200px;
+  padding-left: 40px;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  z-index: 0;
+  opacity: 1;
+}
+
+.section::before{
+  position: absolute;
+  background: url(../../../public/exercise1.jpg) no-repeat;
+  content: "";
+  background-size: contain;
+  width: inherit;
+  left: auto;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  opacity: 0.5;
+}
+.section_content{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+}
+
+.section_content > h1, .section_content > p, .section_content > a >  button {
+  opacity: 0;
+  animation: fadeUp 1s ease-out forwards;
+}
+.section_content h1 {
+  font-size: 4rem;
+}
+
+
+.section_content  > a > button {
+  border: 2px solid #C9FD61;
+  color: #C9FD61;
+  background-color: #ececec;
+  width: 50%;
+  padding: 1em 1.2em;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 100;
+}
+.section_content > a > button:hover {
+  background-color: #C9FD61;
+  color: black;
+  border: 2px solid #ffffff;
+}
+
+.section_content h1:nth-child(1){
+  padding-left: 0px;
+}
+.section_content h1:nth-child(2) {
+  animation-delay: 0.2s;
+  padding-left: 38px;
+}
+.section_content h1:nth-child(3) {
+  animation-delay: 0.5s;
+  padding-left: 62px;
+}
+.section_content h1:nth-child(4) {
+  animation-delay: 0.8s;
+  letter-spacing: 6px;
+  padding-left: 10px;
+}
+.section_content p {
+  animation-delay: 1s;
+}
+.section_content > a > button{
+  animation-delay: 1.2s;
+}
+
+.menu_section {
+  margin-left: auto;
+  width: fit-content;
+  top: 2%;
+  z-index: 20;
+  padding: 1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color:#ececec;
+}
+.menu_section a {
+  float: left;
+  margin-left: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.menu_section a:hover {
+  color: #C9FD61;
+  border: #C9FD61;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.circle{
+  position: absolute;
+  left: 115px;
+  border-radius: 50px;
+  border: #C9FD61 solid 1px;
+  transform: rotate(-13.6deg);
+  height: 400px;
+  width: 70px;
+}
