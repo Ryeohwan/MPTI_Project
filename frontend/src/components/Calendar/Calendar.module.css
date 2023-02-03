@@ -101,7 +101,7 @@
   margin-bottom: 1px;
   height: 78px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   /* border: 0.4px solid rgba(0, 0, 0, 0.4); */

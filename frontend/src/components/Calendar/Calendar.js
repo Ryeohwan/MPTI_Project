@@ -4,6 +4,7 @@ import { format, addMonths, subMonths } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
+import CalendarSchedule from "./Schedule.js";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   return (
@@ -48,7 +49,6 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
-  
   const rows = [];
   let days = [];
   let day = startDate;
@@ -59,8 +59,6 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
       const copyday = day;
-      const parsedDay = new Date(copyday);
-      const formatDay = format(parsedDay, 'yyyy-MM-dd')
 
       days.push(
         <div
@@ -73,8 +71,8 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
               ? `${styles.bodyRowColNotValid}`
               : `${styles.bodyRowColValid}`
           }`}
-          key={formatDay}
-          
+          key={copyday}
+          id={copyday}
           onClick={() => {
             const parsedDay = new Date(copyday);
             const formatDay = format(parsedDay, 'yyyy-MM-dd')
@@ -82,7 +80,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
             onDateClick(copyday)
           }}
         >
-          <span
+          <div
             className={
               format(currentMonth, "M") !== format(day, "M")
                 ? `${styles.bodyRowColNotValid}`
@@ -90,7 +88,11 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
             }
           >
             {formattedDate}
-          </span>
+          </div>
+          {/* schedule 박스 넣을 곳 */}
+          <div>
+            <CalendarSchedule/>
+          </div>
         </div>
       );
       day = addDays(day, 1);
@@ -103,7 +105,6 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     days = [];
   }
 
-  console.log(rows.length);
   while (rows.length < 6) {
     for (let i=0; i<7; i++) {
       days.push(
@@ -116,10 +117,10 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   return <div className={styles.body}>{rows}</div>;
 };
 
+
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
   };
@@ -128,7 +129,8 @@ const Calendar = () => {
   };
   const onDateClick = (day) => {
     setSelectedDate(day);
-    console.log(day)
+    console.log(day);
+    console.log(document.getElementById(day) )
   };
   return (
     <div className={styles.calendar}>
