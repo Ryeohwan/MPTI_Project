@@ -53,12 +53,13 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   let days = [];
   let day = startDate;
   let formattedDate = "";
-  
-  
+
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
       const copyday = day;
+      const parsedDay = new Date(copyday);
+      const formatDay = format(parsedDay, "yyyy-MM-dd");
 
       days.push(
         <div
@@ -71,13 +72,10 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
               ? `${styles.bodyRowColNotValid}`
               : `${styles.bodyRowColValid}`
           }`}
-          key={copyday}
-          id={copyday}
+          key={formatDay}
+          id={formatDay}
           onClick={() => {
-            const parsedDay = new Date(copyday);
-            const formatDay = format(parsedDay, 'yyyy-MM-dd')
-            console.log(formatDay)
-            onDateClick(copyday)
+            onDateClick(copyday);
           }}
         >
           <div
@@ -91,11 +89,12 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
           </div>
           {/* schedule 박스 넣을 곳 */}
           <div>
-            <CalendarSchedule/>
+            <CalendarSchedule times={['서유진 7시']} date={formatDay}/>
           </div>
         </div>
       );
       day = addDays(day, 1);
+
     }
     rows.push(
       <div className={styles.bodyRow} key={day}>
@@ -106,17 +105,22 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   }
 
   while (rows.length < 6) {
-    for (let i=0; i<7; i++) {
+    for (let i = 0; i < 7; i++) {
       days.push(
-        <div className={styles.bodyRowColNotValid} key={i}>-</div>
+        <div className={styles.bodyRowColNotValid} key={i}>
+          -
+        </div>
       );
     }
-    rows.push(<div className={styles.bodyRow} key={rows.length}>{days}</div>)
+    rows.push(
+      <div className={styles.bodyRow} key={rows.length}>
+        {days}
+      </div>
+    );
   }
 
   return <div className={styles.body}>{rows}</div>;
 };
-
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -128,9 +132,14 @@ const Calendar = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
   const onDateClick = (day) => {
+    console.log(day)
+    const formatDay = format(day, "yyyy-MM-dd");
+    const A = formatDay.split('-').map((item) => parseInt(item));
+    console.log(A)
+    console.log(formatDay)
     setSelectedDate(day);
-    console.log(day);
-    console.log(document.getElementById(day) )
+    // console.log(day);
+    console.log(document.getElementById(formatDay));
   };
   return (
     <div className={styles.calendar}>
