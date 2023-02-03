@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import {useDispatch} from "react-redux"
 import styles from "./Login.module.css"
 import kakao from "../../assets/img/login_kakao.png";
 import naver from "../../assets/img/login_naver.png";
 import google from "../../assets/img/login_google.png";
+import { authActions } from '../../store/auth';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
-
-    
+const dispatch = useDispatch();
+const navigate=useNavigate();
 const [email,setEmail] = useState("");
 const [password,setPassword] = useState("");
 
@@ -44,15 +47,10 @@ const passwordChangeHandler = (e) =>{
 }
 
 
-const onSubmitHandler = async (e)=>{
+const onSubmitHandler = (e)=>{
     e.preventDefault();
-    axios.post("http://localhost:8080/user/check", {email: email, password:password}).then(res=>{
-        console.log(res);
-        localStorage.setItem('access_token', res.data.access_token);
-        localStorage.setItem('refresh_token', res.data.refresh_token);
-    }).catch((error)=>{
-        console.log(error);
-    })
+    dispatch(authActions.login({email, password}));
+    navigate("/")
 }
 
 
@@ -82,7 +80,7 @@ return (
             <div className={styles.form_simple}>간편 회원가입</div>
             
             <div className={styles.simple_box}>
-                <div className={styles.simple_btn_kakao}><img src={kakao}></img>Kakao</div>
+            <a href="http://i8a803.p.ssafy.io/api/auth/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect">구글로그인</a>      <div className={styles.simple_btn_kakao}><img src={kakao}></img>Kakao</div>
                 <div className={styles.simple_btn_google}> <img src={google}></img>Google</div>
                 <div className={styles.simple_btn_naver}> <img src={naver}></img>Naver</div>
             </div>

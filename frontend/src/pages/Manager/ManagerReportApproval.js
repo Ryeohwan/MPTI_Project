@@ -51,7 +51,7 @@ const ManagerReportApproval = () => {
     setLoading(true);
 
     setTimeout(()=>{
-      axios.get("/opinion/report/list")
+      axios.get("/api/business/opinion/report/list")
       .then((res)=>{
           console.log(res.data);
           const data= res.data;
