@@ -95,17 +95,21 @@ const Signup = () => {
     const careerCompanyChangeHandler = (e => { setCareer({ ...career, company: e.target.value }) })
     const careerDateChangeHandler = (e => { setCareer({ ...career, date: e.target.value }) })
 
-    const fileChangedHandler = (e) => {
-        const files = e.target.files[0];
-        setFile({ selectedFiles: files });
-    }
+ 
 
     const duplicateHandler = () => {
         if (email.isEmail) {
-            dispatch(duplicateCheck("trainer",email.email))
-        } 
+            dispatch(duplicateCheck("trainer",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
+        }else{
+            emailInputRef.current.focus();
+            return;
+        }
     }
-
+    const fileChangedHandler = (e) => {
+        const file = e.target.files;
+        //console.log(file);
+        setFile(file[0]);
+    }
     const onSubmitHandler = (e) => {
         e.preventDefault();
         if (!name.isName) {
@@ -125,11 +129,17 @@ const Signup = () => {
             return
         }
         const formData = new FormData();
-        formData.append('profileImage', file);
-
-        axios.post('/server/register', newObj).then(res => {
+        formData.append('email', "vksek222@gmail.com");
+        formData.append('file', file);
+        console.log(file)
+     
+        axios.post('/api/user/upload', formData).then(res => {
             console.log(res);
         })
+    
+        
+   
+
         const newObj = {
             name: name.name,
             email: email.email,
@@ -194,7 +204,7 @@ const Signup = () => {
                     <label htmlFor='email'>이메일</label>
                     <input ref={emailInputRef} type="email" id='email' onChange={emailChangeHandler} />
                     <button onClick={duplicateHandler}>중복확인</button>
-                    <p>{isCheckMsg}</p>
+                    <p>{email.emailMsg}</p>
                 </div>
 
                 <div className={styles.form_password}>

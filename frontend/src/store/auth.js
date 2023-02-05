@@ -2,6 +2,10 @@ import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    name: "",
+    email: "",
+    phone: "",
+    image: "",
     isLoading: false,
     isLoggedIn: false,
     error: null,
@@ -80,15 +84,28 @@ export const logout = () => async(dispatch)=>{
     }
 }
 
+
+export const signup = (type, userInfo)=> async(dispatch) =>{
+    try {
+        const response = await axios.post(`/api/${type}/join`, userInfo);
+        console.log(response);
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const duplicateCheck = (type,email) => async(dispatch)=>{
     try {
         const response= await axios.get(`/api/${type}/duplicate/${email}`);
         console.log(response);
         console.log("중복확인 성공");
-        dispatch(authActions.duplicateMsg("중복된 아이디가 없습니다."));
+        return "중복된 아이디가 없습니다";
+        // dispatch(authActions.duplicateMsg("중복된 아이디가 없습니다."));
     } catch (error) {
-        console.log(error.response)
-        dispatch(authActions.duplicateMsg("중복된 아이디가 있습니다."));
+        // console.log(error.response);
+        return "중복된 아이디가 있습니다";
+        // dispatch(authActions.duplicateMsg("중복된 아이디가 있습니다."));
     }
 }
 
