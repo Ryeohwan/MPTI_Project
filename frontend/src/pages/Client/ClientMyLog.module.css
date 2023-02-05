@@ -3,21 +3,26 @@
     color: #ececec;
     padding-left: 15px;
     padding-right: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .log_box {
     display: flex;
     height: 200px;
     justify-content: space-between;
+    width: 100%;
     margin-top: 10px;
 }
 
 .log_graph {
     padding: 15px;
     display: flex;
-    width: 58%;
+    justify-content: left;
+    /* background-color: pink; */
     background-color: black;
     border-radius: 5px;
+    width: 100%;
     border: 1px solid white;
 }
 
@@ -117,4 +122,14 @@
 
 .result span {
     font-size: 26px;
+}
+
+.graph_chart {
+    display: flex;
+    background-color: red;
+}
+
+.graph_part {
+    background-color: blue;
+    display: flex;
 }
