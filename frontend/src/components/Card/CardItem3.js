@@ -6,7 +6,7 @@ function CardItem3(props) {
   const age = props.age;
   const time = props.time;
   const picture = props.picture;
-
+  const setTargetClient = props.setTargetClient;
     return (
       <div className={styles.card_item}>
         <img className={styles.card_item_img} src="/profilepic.png" alt="profile"></img>
@@ -20,7 +20,7 @@ function CardItem3(props) {
           <div className={styles.card_item_info_txt}>({gender}), {age}세</div>
           <div>{time}</div>
         </div>
-        <button className={styles.button}>관리</button>
+        <button className={styles.button} onClick={()=>{setTargetClient(props.id)}}>관리</button>
       </div>
     );
   }
