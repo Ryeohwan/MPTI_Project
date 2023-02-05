@@ -2,14 +2,7 @@ import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    name: "",
-    email: "",
-    phone: "",
-    image: "",
     isLoading: false,
-    isLoggedIn: false,
-    error: null,
-    isCheckMsg: ""
 };
 
 
@@ -43,11 +36,7 @@ const authSlice = createSlice({
         },
         signupSuccess: (state) => {
             state.isLoading = false;
-        },
-        duplicateMsg: (state,action)=>{
-            state.isCheckMsg= action.payload;
         }
-        
     },
 });
 

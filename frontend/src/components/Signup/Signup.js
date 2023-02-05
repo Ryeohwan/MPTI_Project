@@ -111,34 +111,36 @@ const Signup = () => {
         setFile(file[0]);
     }
     const onSubmitHandler = (e) => {
-        e.preventDefault();
-        if (!name.isName) {
-            nameInputRef.current.focus();
-            return
-        } else if (!email.isEmail) {
-            emailInputRef.current.focus();
-            return
-        } else if (!gender.isGender) {
-            genderInputRef.current.focus();
-            return
-        } else if (!birth.isBirth) {
-            birthInputRef.current.focus();
-            return
-        } else if (!phoneInputRef.current.value) {
-            phoneInputRef.current.focus();
-            return
-        }
-        const formData = new FormData();
-        formData.append('email', "vksek222@gmail.com");
-        formData.append('file', file);
-        console.log(file)
+         e.preventDefault();
+        // if (!name.isName) {
+        //     nameInputRef.current.focus();
+        //     return
+        // } else if (!email.isEmail) {
+        //     emailInputRef.current.focus();
+        //     return
+        // } else if (!gender.isGender) {
+        //     genderInputRef.current.focus();
+        //     return
+        // } else if (!birth.isBirth) {
+        //     birthInputRef.current.focus();
+        //     return
+        // } else if (!phoneInputRef.current.value) {
+        //     phoneInputRef.current.focus();
+        //     return
+        // }
+        // const formData = new FormData();
+        // formData.append('email', "vksek222@gmail.com");
+        // formData.append('file', file);
+        // console.log(file)
      
-        axios.post('/api/user/upload', formData).then(res => {
-            console.log(res);
-        })
+        // axios.post('/api/user/upload', formData).then(res => {
+        //     console.log(res);
+        // })
     
         
-   
+        axios.get(`/api/trainer/list/0`).then(res=>{
+            console.log(res);
+        })
 
         const newObj = {
             name: name.name,
