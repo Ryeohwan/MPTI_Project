@@ -25,10 +25,6 @@ const ClientInfo = (props) => {
                 <ClientLogCard/>
                 <ClientLogCard/>
                 <ClientLogCard/>
-                <ClientLogCard/>
-                <ClientLogCard/>
-                <ClientLogCard/>
-                <ClientLogCard/>
             </div>
                 <Pagination  pages={3} select={select} setReviewPage={setSelect} />
 

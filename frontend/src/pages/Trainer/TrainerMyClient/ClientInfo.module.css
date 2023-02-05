@@ -19,7 +19,7 @@
     width: 100%;
     background-color: #ECECEC;
     border-radius: 7px;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-columns: repeat(4, 1fr) ;
     padding: 10px 20px 10px 20px;
     row-gap: 20px;
