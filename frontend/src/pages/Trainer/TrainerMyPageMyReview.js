@@ -3,17 +3,13 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import React from 'react'
 
-const request_url = '/opinion/review/list'
+const request_url = '/api/business/opinion/review/list'
 
-const TrainerMyPageMyReview=()=>{
-  const [reviews, setReviews] =useState([])
-
-  useEffect(()=> {
-    axios.get(request_url)
-      .then(res => setReviews(res.data))
-  }, [])
-
-  const deleteReview = reviewId => console.log(reviewId)
+const TrainerMyPageMyReview=async ()=>{
+  const [reviews, setReviews] =await useState(await axios.get(request_url).then((data)=> data.data))
+  const deleteReview = () => {
+    console.log(1)
+  }
 
   return(
     <div className={styles.container}>

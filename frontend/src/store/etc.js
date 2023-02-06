@@ -59,7 +59,6 @@ export const trainerDetail = (email) => async (dispatch) => {
     }
 }
 
-export const reviewList = ()
 
     
 
