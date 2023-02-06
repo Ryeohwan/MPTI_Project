@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./Home.module.css"
-<<<<<<< HEAD
-// import TrainerImg from "./../../assets/img/trainer.PNG"
-// import TopTitle from '../../components/Common/TopTitle'
-import Calendar from '../../components/Calendar/Calendar';
-=======
 import TrainerImg from "./../../assets/img/trainer.PNG"
 import axios from 'axios';
 
@@ -65,7 +60,6 @@ const dummyData2 = [
 ]
 
 
->>>>>>> a200ae4637366ed0bae70685f4cb0adb0eb6f971
 
 const Home = () => {
 
@@ -92,11 +86,6 @@ const Home = () => {
     
     return (
         <div className={styles.Home}>
-<<<<<<< HEAD
-            
-
-            <Calendar/>
-=======
            <div className={styles.home_header}>이달의 트레이너</div>
            <div className={styles.home_comment}>MPTI를 빛낸 우수한 강사진을 확인하세요!</div>
             {/* 트레이너 리스트 부분 - 분리예정 */}
@@ -162,7 +151,6 @@ const Home = () => {
 
 </div>
  
->>>>>>> a200ae4637366ed0bae70685f4cb0adb0eb6f971
         </div>
     );
 };

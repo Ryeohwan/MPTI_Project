@@ -14,23 +14,14 @@ import ClientMyPage from './pages/Client/ClientMyPage';
 import TrainerMyClient from './pages/Trainer/TrainerMyClient';
 import TrainerMyReservation from './pages/Trainer/TrainerMyReservation';
 import TrainerMyPage from './pages/Trainer/TrainerMyPage';
-<<<<<<< HEAD
-import Calendar from './components/Calendar/Calendar';
-
-
-=======
 import ClientTrainerDetail from './pages/Client/ClientTrainerDetail';
 import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
-import ManagerAccountManagement from './pages/Manager/ManagerAccountManagement'
 import ManagerHome from './pages/Manager/ManagerHome'
-import ManagerReportApproval from './pages/Manager/ManagerReportApproval'
-import ManagerSignupApproval from './pages/Manager/ManagerSignupApproval'
 import SignupSelect from './components/Signup/SignupSelect'
 import { useState } from 'react';
 import Landing from './pages/Landing/Landing';
 import { Link } from 'react-router-dom';
->>>>>>> a200ae4637366ed0bae70685f4cb0adb0eb6f971
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
@@ -78,10 +69,6 @@ export default function App(){
           <Route path="/manager/*" element={<ManagerHome/>}/>
         </Routes>
 
-<<<<<<< HEAD
-        <Calendar/>
-=======
->>>>>>> a200ae4637366ed0bae70685f4cb0adb0eb6f971
       </div>
   )
 }
