@@ -9,6 +9,7 @@ const MyPageProfile = (props) => {
                 <img className={styles.camera} src='/camera.png'></img>
             </div>
             <div className={styles.name}>{props.name} <span className={styles.name2}>{props.role}</span></div>
+
         </div>
     );
 }

@@ -7,12 +7,49 @@ const Landing = () => {
         <div className={styles.container}>
             <div className={styles.section}>
                 <div className={styles.section_content}>
-                    <h1>M arket by</h1>
-                    <h1>P ersonal</h1>
-                    <h1>T rainer</h1>
-                    <h1>& I</h1>
-                    <div className={styles.circle}></div>
-                    <Link to="/select"><button>시작하기</button></Link>
+                    <div className={styles.typingwrapper}>
+
+                    <h1 className={styles.typing}>
+                        M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        I</h1>
+                    </div>
+                    <h3 className={`${styles.loader} ${styles.typingwrapper} ${styles.typing2}`}>
+                        <span>M</span>
+                        <span>a</span>
+                        <span>r</span>
+                        <span>k</span>
+                        <span>e</span>
+                        <span>t</span>
+                        <span> &nbsp;</span>
+                        <span>b</span>
+                        <span>y</span>
+                        <span>&nbsp;</span>
+                        <span>P</span>
+                        <span>e</span>
+                        <span>r</span>
+                        <span>s</span>
+                        <span>o</span>
+                        <span>n</span>
+                        <span>a</span>
+                        <span>l</span>
+                        <span>&nbsp;</span>
+                        <span>T</span>
+                        <span>r</span>
+                        <span>a</span>
+                        <span>i</span>
+                        <span>n</span>
+                        <span>e</span>
+                        <span>r</span>
+                        <span>&nbsp;</span>
+                        <span>&</span>
+                        <span>&nbsp;</span>
+                        <span>I</span>
+                    </h3>
+                    
+                    <Link to="/login"><button className={styles.blink2}>시작하기</button></Link>
+                   
                 </div>
 
                 </div>
