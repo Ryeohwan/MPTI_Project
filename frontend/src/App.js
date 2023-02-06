@@ -55,18 +55,16 @@ export default function App(){
         {type==="trainer"?<TrainerHeader/>:null}
 
         <Routes>
-
-    {
-
-      token? 
-        <>
+        
+    
+        <Route path="/login" element={<Login/>}/>
       <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>
           <Route path="/clientmylog" element={<ClientMyLog/>}/>
            <Route path="/clientmyreservation" element={<ClientMyReservation/>}/>
            <Route path="/clientmypage" element={<ClientMyPage/>}/>
            <Route path="/clienttrainerdetail" element={<ClientTrainerDetail/>}/>
            <Route path="/home" element={<Home/>}/>
-           </>: <>
+         
            <Route path="/" element={<Landing/>}/>
      
      <Route path="/login" element={<Login/>}/>
@@ -74,9 +72,9 @@ export default function App(){
     
      <Route path="/signup" element={<Signup/>}/>
      <Route path="/select" element={<SignupSelect/>}/>
-           </>
+         
 
-    }
+    
         
           
         {/* 라우트 경로 목록들 */}

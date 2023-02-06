@@ -69,6 +69,7 @@ export const logout = () => async(dispatch)=>{
         console.log("로그아웃 성공");
         dispatch(authActions.logoutSuccess());
     } catch (error) {
+        console.log("로그아웃 실패");
         dispatch(authActions.logoutFailure(error));
     }
 }
@@ -78,9 +79,11 @@ export const signup = (type, userInfo)=> async(dispatch) =>{
     try {
         const response = await axios.post(`/api/${type}/join`, userInfo);
         console.log(response);
+        console.log("회원가입 성공");
         
     } catch (error) {
         console.log(error);
+        console.log("회원가입 실패");
     }
 }
 

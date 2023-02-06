@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { duplicateCheck } from '../../store/auth';
+import auth, { duplicateCheck } from '../../store/auth';
+import {logout} from '../../store/auth';
 import styles from "./Signup.module.css"
 const Signup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
@@ -10,12 +11,11 @@ const Signup = () => {
     const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: true });
     const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: true });
     const [birth, setBirth] = useState({ birth: "", birthMsg: "", isBirth: false });
-    const [award, setAward] = useState({ name: "", company: "", date: "" });
-    const [certificate, setCertificate] = useState({ name: "", company: "", date: "" });
-    const [career, setCareer] = useState({ name: "", company: "", date: "" });
+    const [award, setAward] = useState({ award1: "", award2: "", award3: ""});
+    const [certificate, setCertificate] = useState({ certificate1: "",certificate2: "", certificate3: ""});
+    const [career, setCareer] = useState({ career1: "", career2: "", career3: ""});
     const [file, setFile] = useState();
 
-    const {isCheckMsg}=useSelector((state)=> state.auth)
     
     const dispatch = useDispatch();
     const nameInputRef = useRef();
@@ -83,21 +83,9 @@ const Signup = () => {
         }
     }
 
-    const awardNameChangeHandler = (e => { setAward({ ...award, name: e.target.value }) })
-    const awardCompanyChangeHandler = (e => { setAward({ ...award, company: e.target.value }) })
-    const awardDateChangeHandler = (e => { setAward({ ...award, date: e.target.value }) })
 
-    const certificateNameChangeHandler = (e => { setCertificate({ ...certificate, name: e.target.value }) })
-    const certificateCompanyChangeHandler = (e => { setCertificate({ ...certificate, company: e.target.value }) })
-    const certificateDateChangeHandler = (e => { setCertificate({ ...certificate, date: e.target.value }) })
-
-    const careerNameChangeHandler = (e => { setCareer({ ...career, name: e.target.value }) })
-    const careerCompanyChangeHandler = (e => { setCareer({ ...career, company: e.target.value }) })
-    const careerDateChangeHandler = (e => { setCareer({ ...career, date: e.target.value }) })
-
- 
-
-    const duplicateHandler = () => {
+    const duplicateHandler = (e) => {
+        e.preventDefault();
         if (email.isEmail) {
             dispatch(duplicateCheck("trainer",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
         }else{
@@ -105,67 +93,48 @@ const Signup = () => {
             return;
         }
     }
-    const fileChangedHandler = (e) => {
-        const file = e.target.files;
-        //console.log(file);
-        setFile(file[0]);
-    }
-    const onSubmitHandler = (e) => {
+
+    // console.log(award)
+    const onSubmitHandler = async(e) => {
          e.preventDefault();
-        // if (!name.isName) {
-        //     nameInputRef.current.focus();
-        //     return
-        // } else if (!email.isEmail) {
-        //     emailInputRef.current.focus();
-        //     return
-        // } else if (!gender.isGender) {
-        //     genderInputRef.current.focus();
-        //     return
-        // } else if (!birth.isBirth) {
-        //     birthInputRef.current.focus();
-        //     return
-        // } else if (!phoneInputRef.current.value) {
-        //     phoneInputRef.current.focus();
-        //     return
-        // }
-        // const formData = new FormData();
-        // formData.append('email', "vksek222@gmail.com");
-        // formData.append('file', file);
-        // console.log(file)
-     
-        // axios.post('/api/user/upload', formData).then(res => {
-        //     console.log(res);
-        // })
+         
+        if (!name.isName) {
+            nameInputRef.current.focus();
+            return
+        } else if (!email.isEmail) {
+            emailInputRef.current.focus();
+            return
+        } else if (!gender.isGender) {
+            genderInputRef.current.focus();
+            return
+        } else if (!birth.isBirth) {
+            birthInputRef.current.focus();
+            return
+        } else if (!phoneInputRef.current.value) {
+            phoneInputRef.current.focus();
+            return
+        }
+
     
-        
-        axios.get(`/api/trainer/list/0`).then(res=>{
-            console.log(res);
+        // 회원가입 진행시 경력 수상등은 배열 문자열화
+        const awards = JSON.stringify([award.award1,award.award2,award.award3])
+        const license =JSON.stringify([certificate.certificate1,certificate.certificate2,certificate.certificate3])
+        const careers =JSON.stringify([career.career1, career.career2, career.career3]);
+     
+        const data=({
+            name : name.name,
+            email : email.email,
+            password: password.password,
+            birthday : birth.birth,
+            gender : gender.gender,
+            phone : phoneInputRef.current.value,
+            awards :  awards,
+            license :   license,
+            career : careers
         })
 
-        const newObj = {
-            name: name.name,
-            email: email.email,
-            password: password.password,
-            birth: birth.birth,
-            phone: phoneInputRef.current.value,
-            iprofileImage: file,
-            award: {
-                name: award.name,
-                company: award.company,
-                date: award.date
-            },
-            certificate: {
-                name: certificate.name,
-                company: certificate.company,
-                date: certificate.date
-            },
-            career: {
-                name: career.name,
-                company: career.company,
-                date: career.date
-            }
-        }
-        console.log(newObj);
+        dispatch(logout("trainer", data))
+      
     }
 
 
@@ -178,7 +147,7 @@ const Signup = () => {
 
             <div className={styles.form_title}>회원가입</div>
 
-            <form onSubmit={onSubmitHandler} className={styles.form_box}>
+            <form className={styles.form_box}>
                 <div className={styles.form_name} >
                     <label htmlFor='name'>성명</label>
                     <input ref={nameInputRef} type="text" id="name" onChange={nameChangeHandler} />
@@ -195,11 +164,7 @@ const Signup = () => {
                     <p></p>
                 </div>
 
-                <div className={styles.form_gender} >
-                    <label htmlFor='image'>이미지 첨부</label>
-                    <input type="file" onChange={fileChangedHandler} />
-                    <p></p>
-                </div>
+
 
 
                 <div className={styles.form_email}>
@@ -238,28 +203,28 @@ const Signup = () => {
 
                 <div className={styles.form_prize}>
                     <label htmlFor='prize'>수상(선택)</label>
-                    <input type="text" onChange={awardNameChangeHandler} />
-                    <input type="text" onChange={awardCompanyChangeHandler} />
-                    <input type="text" onChange={awardDateChangeHandler} />
+                    <input type="text" defaultValue={award.award1} onChange={e=> setAward({...award,award1: e.target.value})} />
+                    <input type="text" defaultValue={award.award2} onChange={e=> setAward({...award,award2: e.target.value})} />
+                    <input type="text" defaultValue={award.award3} onChange={e=> setAward({...award,award3: e.target.value})} />
                     <p></p>
                 </div>
 
                 <div className={styles.form_certificate}>
                     <label htmlFor='certificate'>자격증(선택)</label>
-                    <input type="text" onChange={certificateNameChangeHandler} />
-                    <input type="text" onChange={certificateCompanyChangeHandler} />
-                    <input type="text" onChange={certificateDateChangeHandler} />
+                    <input type="text" defaultValue={certificate.certificate1} onChange={e=> setCertificate({...certificate,certificate1: e.target.value})} />
+                    <input type="text" defaultValue={certificate.certificate2} onChange={e=> setCertificate({...certificate,certificate2: e.target.value})} />
+                    <input type="text" defaultValue={certificate.certificate3} onChange={e=> setCertificate({...certificate,certificate3: e.target.value})} />
                     <p></p>
                 </div>
 
                 <div className={styles.form_career}>
                     <label htmlFor='career'>경력(선택)</label>
-                    <input type="text" onChange={careerNameChangeHandler} />
-                    <input type="text" onChange={careerCompanyChangeHandler} />
-                    <input type="text" onChange={careerDateChangeHandler} />
+                    <input type="text" defaultValue={career.career1} onChange={e=>setCareer({...career, career1: e.target.value})}/>
+                    <input type="text" defaultValue={career.career2} onChange={e=>setCareer({...career, career2: e.target.value})} />
+                    <input type="text" defaultValue={career.career3} onChange={e=>setCareer({...career, career3: e.target.value})}/>
                     <p></p>
                 </div>
-                <button className={styles.form_sub_btn}>회원가입</button>
+                <button className={styles.form_sub_btn} onClick={onSubmitHandler}>회원가입</button>
             </form>
 
             <div className={styles.form_btn_box}>
@@ -270,3 +235,16 @@ const Signup = () => {
 };
 
 export default Signup;
+        // const formData = new FormData();
+        // formData.append('email', "vksek222@gmail.com");
+        // formData.append('file', file);
+        // console.log(file)
+     
+        // axios.post('/api/user/upload', formData).then(res => {
+        //     console.log(res);
+        // })
+        // const fileChangedHandler = (e) => {
+        //     const file = e.target.files;
+        //     //console.log(file);
+        //     setFile(file[0]);
+        // }
