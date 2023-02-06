@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import auth, { duplicateCheck } from '../../store/auth';
-import {logout} from '../../store/auth';
+import {signup} from '../../store/auth';
 import styles from "./Signup.module.css"
 const Signup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
-    const [gender, setGender] = useState({ gender: "", isGender: false });
+    const [gender, setGender] = useState({ gender: "male", isGender: false });
     const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: undefined });
     const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: true });
     const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: true });
@@ -133,7 +133,7 @@ const Signup = () => {
             career : careers
         })
 
-        dispatch(logout("trainer", data))
+        dispatch(signup("trainer", data))
       
     }
 
@@ -157,7 +157,7 @@ const Signup = () => {
 
                 <div className={styles.form_gender} >
                     <label htmlFor='gender'>성별</label>
-                    <select ref={genderInputRef} id="gender" onChange={genderChangeHandler}>
+                    <select ref={genderInputRef} defaultValue={"male"} id="gender" onChange={genderChangeHandler}>
                         <option value="male">남성</option>
                         <option value="female">여성</option>
                     </select>

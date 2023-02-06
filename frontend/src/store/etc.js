@@ -7,7 +7,6 @@ const initialState = {
     phone: "",
     image: "",
     isLoading: false,
-    isLoggedIn: false,
     error: null,
     isCheckMsg: ""
 };
@@ -16,36 +15,16 @@ const etcSlice = createSlice({
     name: 'etc',
     initialState,
     reducers: {
-        loginRequest: (state) => {
+        dataRequest: (state) => {
             state.isLoading = true;
         },
-        loginSuccess: (state) => {
+        dataSuccess: (state) => {
             state.isLoading = false;
-            state.isLoggedIn = true;
+       
         },
-        loginFailure: (state, action) => {
-            state.isLoading = false;
-            state.isLoggedIn = false;
-            state.error = action.payload;
-        },
-        logoutSuccess: (state) => {
-            state.isLoading = false;
-            state.isLoggedIn = false;
-        },
-        logoutFailure: (state, action) => {
-            state.isLoading = false;
-            state.isLoggedIn = false;
-            state.error = action.payload;
-        },signupRequest: (state) => {
-            state.isLoading = true;
-        },
-        signupSuccess: (state) => {
+        dataFailure: (state, action) => {
             state.isLoading = false;
         },
-        duplicateMsg: (state,action)=>{
-            state.isCheckMsg= action.payload;
-        }
-        
     },
 });
 
@@ -59,13 +38,15 @@ export const trainerListByPage = (pagenum) => async (dispatch) => {
 }
 
 export const trainerListByStar = (pagenum) => async (dispatch) => {
+    dispatch(etcActions.dataRequest())
     try {
         const response = await axios.get(`/api/trainer/listbystar/${pagenum}`);
         console.log(response.data.content);
         console.log("별점순 트레이너 리스트 정보확인")
+        dispatch(etcActions.dataSuccess())
         return response.data.content;
     } catch (error) {
-
+        dispatch(etcActions.dataFailure())
     }
 }
 
@@ -77,6 +58,9 @@ export const trainerDetail = (email) => async (dispatch) => {
 
     }
 }
+
+export const reviewList = ()
+
     
 
 
