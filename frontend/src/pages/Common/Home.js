@@ -25,7 +25,7 @@ const Home = () => {
     dispatch(reviewList()).then((res) => {
         const reviewList = res;
         console.log(reviewList);
-        setReview(reviewList);
+        setReview(reviewList.slice(0,4));
       });
 
 
@@ -72,7 +72,7 @@ const Home = () => {
       </div>
 
       <div className={styles.home_review_box}>
-        {/* <ul className={styles.home_review_list}>
+        <ul className={styles.home_review_list}>
           {trainer.map((it) => {
             return (
               <li key={it.id} className={styles.home_review_item}>
@@ -94,7 +94,7 @@ const Home = () => {
               </li>
             );
           })}
-        </ul> */}
+        </ul>
       </div>
       
       </> : <>
@@ -136,29 +136,29 @@ const Home = () => {
       </div>
 
       <div className={styles.home_review_box}>
-        {/* <ul className={styles.home_review_list}>
-          {trainer.map((it) => {
+        <ul className={styles.home_review_list}>
+          {review.map((it) => {
             return (
               <li key={it.id} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>
                   <div className={styles.home_review_img}>
                     <img src={TrainerImg} />
                   </div>
-                  <div className={styles.home_review_name}>정원철 트레이너</div>
+                  <div className={styles.home_review_name}>{it.targetName} </div>
                 </div>
 
                 <div className={styles.home_review_mid}>
-                  <div className={styles.home_review_cusname}>정원철</div>
-                  <div className={styles.home_review_start}>★★★★★</div>
+                  <div className={styles.home_review_cusname}>{it.writerName}</div>
+                  <div className={styles.home_review_start}>★★★★★ </div>
                 </div>
 
                 <div className={styles.home_review_bottom}>
-                  선생님들을 만나고 제인생이 바뀌었읍니다.
+                {it.memo}
                 </div>
               </li>
             );
           })}
-        </ul> */}
+        </ul>
       </div>
       
       </>}
