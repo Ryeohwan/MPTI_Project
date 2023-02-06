@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './TrainerMyPage.module.css';
 import TopTitle from '../../components/Common/TopTitle'
 import MyPageProfile from '../../components/MyPage/MyPageProfile';
@@ -8,15 +9,32 @@ import TrainerMyPageMyInfo from './TrainerMyPageMyInfo'
 import TrainerMyPageMySchedule from './TrainerMyPageMySchedule'
 import {Routes, Route} from 'react-router-dom';
 
+const request_url = '/api/business/opinion/review/list'
+
 const TrainerMyPage = (props) => {
     const paths = ['myschedule', 'myreview', 'myinfo']
+    const [reviews, setReviews] = useState([]);
     const [url, setUrl] = useState(()=> {
         for(let i=0; i<paths.length; i++){
             if(window.location.pathname.endsWith(paths[i])){
                 return paths[i]
             }
         }
-})
+    })
+    
+    useEffect(() => {
+        async function getReview(){
+            const newReviews = await axios.get(request_url)
+            setReviews(newReviews.data)
+        }
+        if(url==="myreview"){
+            if(!reviews.length){
+                getReview()
+                console.log('리뷰 없어서 받기')
+            }
+        }
+    }, [url])
+
 
     return (
         <div className={styles.TrainerMyPage}>
@@ -28,8 +46,8 @@ const TrainerMyPage = (props) => {
                 </div>
                 <Routes>
                     <Route path='/myinfo' element={<TrainerMyPageMyInfo/>}/>
-                    <Route path='/myreview' element={<TrainerMyPageMyReview/>}/>
-                    <Route path='/myschedule' element={<TrainerMyPageMySchedule/>}/>
+                    <Route path='/myreview' element={<TrainerMyPageMyReview reviews={reviews}/>}/>
+                    <Route path='/myschedule' element={<TrainerMyPageMySchedule />}/>
                 </Routes>
             </div>
             <div>

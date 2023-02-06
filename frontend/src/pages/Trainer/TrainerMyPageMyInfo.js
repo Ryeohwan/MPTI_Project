@@ -1,19 +1,20 @@
 import styles from './TrainerMyPageMyInfo.module.css'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, memo} from 'react'
+import axios from 'axios';
+const request_url = '/api/trainer/info/'
+const trainer_id = 'qwer@naver.com'
 
-const TrainerMyPageMyInfo=()=>{
+const TrainerMyPageMyInfo=(props)=>{
     const [trainerinfo, setTrainerInfo] = useState(null);
     const [edit,setEdit] = useState(false);
-    const data_got = {email:'asfdd@naver.com', phone:'010-1234-5678', cert:['생활스포츠지도사','건강운동관리사','NSCA'], 
-    prize:['서울특별시장배 보디빌딩대회','나바(NABBA) 대회', 'WBC대회'], career:[{name:'저스트짐 역삼점', time:'2019.01~2020.03'},{name:'저스트쥠', time:'2021.03~2022.04'}]}
     
     useEffect(()=>{
         async function get_info(){
-            setTrainerInfo(()=>(data_got))
+            const data =await axios.get(request_url+trainer_id)
+            setTrainerInfo(data.data)
         }
         get_info()
     }, [])
-
     return(
         <div className={styles.container}> 
             <div className={styles.content_title}>내 개인정보</div>
@@ -41,7 +42,7 @@ const TrainerMyPageMyInfo=()=>{
                                 <div className={styles.in_box_content}>
                                     <div className={styles.left}>📜자격증</div> 
                                     <div className={styles.right}>
-                                        <div className={styles.right}>{trainerinfo.cert.map((value)=> 
+                                        <div className={styles.right}>{JSON.parse(trainerinfo.license).map((value)=>    
                                             <input className={`${styles.right} ${styles.input_box}`} defaultValue={value} key={value}></input>)}
                                         </div>
                                     </div>
@@ -52,7 +53,7 @@ const TrainerMyPageMyInfo=()=>{
                                 <div className={styles.in_box_content}>
                                     <div className={styles.left}>🏆수상</div> 
                                     <div className={styles.right}>
-                                        <div className={styles.right}>{trainerinfo.prize.map((value)=> 
+                                        <div className={styles.right}>{JSON.parse(trainerinfo.awards).map((value)=> 
                                             <input className={`${styles.right} ${styles.input_box}`} defaultValue={value} key={value}></input>)}
                                         </div>
                                     </div>
@@ -63,10 +64,9 @@ const TrainerMyPageMyInfo=()=>{
                                 <div className={styles.in_box_content}>
                                     <div className={styles.left}>👨‍🎓경력</div> 
                                     <div className={styles.right}>
-                                        <div className={styles.right}>{trainerinfo.career.map((value)=> 
-                                            <div className={`${styles.prize_box} ${styles.right}`}>
-                                                <input className={styles.input_box} defaultValue={value.name} key={value.name}></input>
-                                                <input   className={styles.input_box} defaultValue={value.time} key={value.time}></input>
+                                        <div className={styles.right}>{JSON.parse(trainerinfo.career).map((value)=> 
+                                            <div className={`${styles.awards_box} ${styles.right}`}>
+                                                <input className={styles.input_box} defaultValue={value} key={value}></input>
                                             </div>)
                                             }
                                         </div>
@@ -100,21 +100,21 @@ const TrainerMyPageMyInfo=()=>{
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{trainerinfo.cert.map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerinfo.license).map((value)=> <div key={value}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 수상 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{trainerinfo.prize.map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerinfo.awards).map((value)=> <div key={value}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 경력 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{trainerinfo.career.map((value)=> <div className={styles.prize_box} key={value.name}><div>{value.name}</div> <div>{value.time}</div></div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerinfo.career).map((value)=> <div className={styles.awards_box} key={value.name}>{value} </div>)}</div></div>
                                     </div>
                                 </div>
                             </div>
@@ -127,4 +127,4 @@ const TrainerMyPageMyInfo=()=>{
 
 
 
-export default TrainerMyPageMyInfo
+export default memo(TrainerMyPageMyInfo)
