@@ -1,12 +1,8 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { async } from 'q';
+
 
 const initialState = {
-    name: "",
-    email: "",
-    phone: "",
-    image: "",
     isLoading: false,
     error: null,
     isCheckMsg: ""

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './TrainerMyReservation.module.css';
 import TopTitle from '../../components/Common/TopTitle'
 import TodayLesson from './TrainerMyReservation/TodayLesson'
 import MySchedule from './TrainerMyReservation/MySchedule'
 import Pagination from '../../components/Common/Pagination'
 import { useState } from 'react';
+import axios from 'axios';
 const TrainerMyReservation = () => {
     const [pages, setPages]=useState(3);
     const [pageSelect, setPageSelect] = useState(1);
     const [tab, setTab] = useState('tab1')
+
+    //0206
+    useEffect(()=>{
+        
+        axios.get("/api/business/reservation/list").then((res)=>{
+            console.log(res.data);
+        })
+    }, [])
+
+    
     return (
         <div className={styles.TrainerMyReservation}>
             <TopTitle title='예약현황▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>

@@ -2,6 +2,10 @@ import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    name: "",
+    email: "",
+    phone: "",
+    image: "",
     isLoading: false,
     isLoggedIn:false,
     error: ""
