@@ -5,20 +5,23 @@ import axios from 'axios'
 const MyPageProfile = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [picture, setPicture] = useState(null);
-
+    const profilePicture = props.s3c;
+    
     const onChange = (e) => {
         const file = e.target.files;
         setPicture(file[0]);
         console.log(file[0])
     }
+
     const handlePictureUpload=async (e)=>{
         const formData =await new FormData();
         formData.append('email','arh999@aaa.com')
         await formData.append('file', picture)
         axios.post('/api/user/upload', formData).then((res) => {setShowModal(false)}).catch((err)=> 
         alert('파일이 비었어요'))
+    }   
 
-    } 
+
     return(
         <div className={styles.MyPage_body_profile}>
             {showModal && 
@@ -38,7 +41,7 @@ const MyPageProfile = (props) => {
                 </div>
             }
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src='/profilepic.png'></img>
+                <img className={styles.picture} src={profilePicture?'/profilepic.png':'/profile_base.png'}></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
             <div className={styles.name}>{props.name} <span className={styles.name2}>{props.role}</span></div>
