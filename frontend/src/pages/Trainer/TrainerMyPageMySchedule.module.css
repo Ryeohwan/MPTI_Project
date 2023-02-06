@@ -76,3 +76,7 @@
     padding:3px 10px;
     text-align: center;
 }
+
+.clicked_time {
+    background-color: #a1cd48;
+}
