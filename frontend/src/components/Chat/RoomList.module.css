@@ -1,0 +1,32 @@
+.room_box {
+    display: flex;
+    flex-flow: column;
+    color: #cecece;
+    border: 1pt solid #cecece;
+    margin-top: 10pt;
+    padding: 5pt 5pt;
+    border-radius: 5pt;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.room_content{
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 13pt;
+    margin-top: 10pt;
+    padding: 5pt 5pt;
+    border-radius: 5pt;
+    width:70px;
+    max-width: 100%;
+    
+}
+
+.room_profile{
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}

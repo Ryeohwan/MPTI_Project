@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
-
+import Chat from '../Chat/Chat'
+import logo from '../../assets/img/pxArt.png'
 //ClientHeader
 export default function ClientHeader(){
+
+	// 채팅 온
+	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
 	const [menuselect, setMenuSelect] = useState(null);
 	// 메시지 개수
 	const [messagecount, setMessageCount] = useState(99);
+	//채팅 끄기
+	function turnoffchat() {
+		setChatOn(false)
+	}
 	useEffect(() =>{
 		const LINK_LIST=['/home','/clientmyschedule','/clientmylog', '/clientmyreservation','/clientmypage']
 		LINK_LIST.forEach((link) => {
@@ -29,7 +37,7 @@ export default function ClientHeader(){
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-
+			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
 			MPTI</Link>	</div>
@@ -50,7 +58,7 @@ export default function ClientHeader(){
 				{/* 메일 + 프로필 담는 박스 */}
 				<div className={styles.mail_profile_box}>
 					{/* 메시지 */}
-					<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex';}}>
+					<div className={styles.mail_box} onClick={()=>{setChatOn(true)}}>
 						{/* 메시지 개수 */}
 						<div className={styles.mail_count_box}> {messagecount}+ </div>
 						{/* 메시지 이미지 */}

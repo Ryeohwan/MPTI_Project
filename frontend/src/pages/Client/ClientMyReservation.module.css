@@ -1,10 +1,11 @@
-.ClientMyReservation {
+.my_reservation {
     font-family: 'DungGeunMo';
     color: #ececec;
     /* background-color: red; */
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .SearchItem {
     font-family: 'DungGeunMo';
     font-size: 20px;
@@ -52,4 +53,11 @@
     font-size: 13px;
     margin-top: 10px;
     color: white;
+}
+
+
+.home_trainer_box {
+    height: 320px;
+    background-color: #D0E2A6;
+    border-radius: 10px;
 }

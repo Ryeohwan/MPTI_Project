@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
-
+import Chat from '../Chat/Chat'
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
+	// 채팅 온
+	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
 	const [menuselect, setMenuSelect] = useState(null);
 	// 메시지 개수
 	const [messagecount, setMessageCount] = useState(99);
+	//채팅 끄기
+	function turnoffchat() {
+		setChatOn(false)
+	}
+
 	useEffect(() =>{
 		const LINK_LIST=['/home', '/trainermyreservation','/trainermyclient', '/trainermypage']
 		LINK_LIST.forEach((link) => {
@@ -24,7 +31,7 @@ export default function TrainerHeader(){
 	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-
+			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'/home'} >
@@ -43,14 +50,14 @@ export default function TrainerHeader(){
 					{/* 메일 + 프로필 담는 박스 */}
 					<div className={styles.mail_profile_box}>
 						{/* 메시지 */}
-						<div className={styles.mail_box} onClick={()=>{document.getElementById('chat').style.display='flex';}}>
+						<div className={styles.mail_box} onClick={()=>{setChatOn(true)}}>
 						{/* 메시지 개수 */}
 						<div className={styles.mail_count_box}> {messagecount}+ </div>
 						{/* 메시지 이미지 */}
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /trainermypage 라우팅 */}
-					<Link to={'/trainermypage'} onClick={()=>{setMenuSelect('trainermypage')}}>
+					<Link to={'/trainermypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>
 						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
 					</Link>
 				</div>

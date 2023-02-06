@@ -1,7 +1,51 @@
 .TrainerMyReservation {
     font-family: 'DungGeunMo';
     color: #ececec;
-    background-color: red;
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.content {
+    display: none;
+}
+input[type="radio"] {
+    display: none;
+}
+
+.tabs{
+    display:flex;
+    flex-direction: row;
+    margin-top: 30px;
+    font-family: 'DungGeunMo';
+    font-style: normal;
+    text-align: center;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 56px;
+    color:black;
+}
+
+.tab1{
+    cursor: pointer;
+    background-color: #BCC4BB;
+    width: 160px;
+    height: 56px;
+    border-radius: 5px 0px 0px 0px;
+}
+
+input[id='tab1']:checked + div {
+    display: block;
+}
+
+input[id='tab2']:checked + div {
+    display: block;
+}
+
+.tab2{
+    cursor: pointer;
+    background-color: #AAD654;
+    width: 160px;
+    height: 56px;
+    border-radius: 0px 5px 0px 0px;
+}
+
