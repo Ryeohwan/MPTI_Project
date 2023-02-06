@@ -87,14 +87,18 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
           >
             {formattedDate}
           </div>
-          {/* schedule 박스 넣을 곳 */}
+
           <div>
-            <CalendarSchedule times={['서유진 7시']} date={formatDay}/>
+            {/* 데이터 통신 해봐야 어떻게 props 내릴지 알 것 같읍니다 */}
+            {formatDay === "2023-02-11" ? (
+              <div className={styles.calendar_schedule}>
+                <CalendarSchedule times={["서유진 7시"]} date={formatDay} />
+              </div>
+            ) : null}
           </div>
         </div>
       );
       day = addDays(day, 1);
-
     }
     rows.push(
       <div className={styles.bodyRow} key={day}>
@@ -132,15 +136,13 @@ const Calendar = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
   };
   const onDateClick = (day) => {
-    console.log(day)
     const formatDay = format(day, "yyyy-MM-dd");
-    const A = formatDay.split('-').map((item) => parseInt(item));
-    console.log(A)
-    console.log(formatDay)
+    const intDate = formatDay.split("-").map((item) => parseInt(item));
+    console.log(intDate);
     setSelectedDate(day);
-    // console.log(day);
-    console.log(document.getElementById(formatDay));
+    
   };
+
   return (
     <div className={styles.calendar}>
       <RenderHeader
