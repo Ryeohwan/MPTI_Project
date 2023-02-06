@@ -54,7 +54,7 @@ const onSubmitHandler = (e)=>{
 
 return (
     <div className={styles.Login}> 
-    {isLoading ? <BasicLoadingSpinner/>: 
+    {!isLoading ? <BasicLoadingSpinner/>: 
     <>
     <div className={styles.header_box}>
                 <div className={styles.header}>MPTI</div>
