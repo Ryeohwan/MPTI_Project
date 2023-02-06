@@ -54,8 +54,7 @@ const onSubmitHandler = (e)=>{
 
 return (
     <div className={styles.Login}> 
-    {!isLoading ? <BasicLoadingSpinner/>: 
-    <>
+
     <div className={styles.header_box}>
                 <div className={styles.header}>MPTI</div>
             </div>
@@ -84,7 +83,7 @@ return (
                 <div className={styles.simple_btn_naver} onClick={()=>window.location.href="http://i8a803.p.ssafy.io/api/auth/oauth2/authorize/naver?redirect_uri=http://localhost:3000/oauth2/redirect"}> <img src={naver}></img>Naver</div>
             </div>
 
-        </form></>}
+        </form>
     </div>
 );
 };

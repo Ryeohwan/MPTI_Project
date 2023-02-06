@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+import { async } from 'q';
 
 const initialState = {
     name: "",
@@ -59,7 +60,16 @@ export const trainerDetail = (email) => async (dispatch) => {
     }
 }
 
-export const reviewList = ()
+export const reviewList = () => async(dispatch) =>{
+    try {
+        const response = await axios.get(`/api/business/opinion/review/list`);
+        console.log(response.data);
+        console.log("리뷰 리스트 소환");
+        return response.data;
+    } catch (error) {
+
+    }
+}
 
     
 

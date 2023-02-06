@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import TrainerImg from "./../../assets/img/trainer.PNG";
 import axios from "axios";
-import { trainerListByStar } from "../../store/etc";
+import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpinner";
 
@@ -21,6 +21,12 @@ const Home = () => {
       console.log(trainerList[0]);
       setTrainer(trainerList.slice(0,4));
     });
+
+    dispatch(reviewList()).then((res) => {
+        const reviewList = res;
+        console.log(reviewList);
+        setReview(reviewList);
+      });
 
 
   }, []);
