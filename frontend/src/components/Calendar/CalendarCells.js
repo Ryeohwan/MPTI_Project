@@ -14,7 +14,6 @@ const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click }) => {
   let days = [];
   let day = startDate;
   let formattedDate = "";
-
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
@@ -59,10 +58,8 @@ const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click }) => {
                 <CalendarSchedule times={["12시 서유진"]} date={formatDay} />
                 <CalendarSchedule times={["18시 류하은"]} date={formatDay} />
                 <CalendarSchedule times={["19시 조현철"]} date={formatDay} />
-                
               </div>
             ) : null}
-
             
           </div>
         </div>

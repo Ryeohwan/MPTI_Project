@@ -16,4 +16,4 @@ const CalendarDays = () => {
     return <div className={styles.calendarDays}>{days}</div>;
   };
 
-export default CalendarDays
+export default CalendarDays;

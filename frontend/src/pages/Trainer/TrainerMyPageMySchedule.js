@@ -1,40 +1,53 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./TrainerMyPageMySchedule.module.css";
 import Calendar from "../../components/Calendar/Calendar";
-// import axios from 'axios'
-const morning = [
-  "06:00 ~ 07:00",
-  "07:00 ~ 08:00",
-  "08:00 ~ 09:00",
-  "09:00 ~ 10:00",
-  "10:00 ~ 11:00",
-  "11:00 ~ 12:00",
-];
-const afternoon = [
-  "12:00 ~ 13:00",
-  "13:00 ~ 14:00",
-  "14:00 ~ 15:00",
-  "15:00 ~ 16:00",
-  "16:00 ~ 17:00",
-  "17:00 ~ 18:00",
-  "18:00 ~ 19:00",
-  "19:00 ~ 20:00",
-  "20:00 ~ 21:00",
-  "21:00 ~ 22:00",
-  "22:00 ~ 23:00",
-  "23:00 ~ 24:00",
-];
+import axios from "axios";
 
 const TrainerMyPageMySchedule = () => {
-  const [edit, setEdit] = useState(false);
-  const [click, setClick] = useState(false);
-  // useEffect(() => {axios.get(`https://i8a803.p.ssafy.io/api/business/reservation/list`).then((res) => {
-  //     console.log(res)
-  // })}, [])
-  const handleClick = () => {
-    setClick(!click);
+  const morning = [6, 7, 8, 9, 10, 11];
+  const afternoon = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+  const [timeArray, setTimeArray] = useState([]);
+  const [newDay, setNewDay] = useState([]);
+
+  const getNewData = (data) => {
+    console.log(data)
+    setNewDay(data)
+  }
+
+  const getData = useRef([]);
+  const newData = getData.current
+    .map((item) => {
+      if (
+        item.year === newDay[0] &&
+        item.month === newDay[1] &&
+        item.day === newDay[2]
+      ) {
+        return item;
+      }
+      return false;
+    })
+    .filter(Boolean);
+  console.log(getData)
+  console.log(newData);
+
+  useEffect(() => {
+    axios.get("/api/business/reservation/list").then((res) => {
+      getData.current = res.data;
+    });
+  }, []);
+
+  const sendData = () => {
+    const data = {
+      // trainerId: {trainerId},
+
+      hour: { timeArray },
+    };
+    axios.post("/api/business/reservation/scheduling", data).then((res) => {
+      console.log(res);
+    });
   };
-  const time_array = [];
+
+  console.log(timeArray);
 
   return (
     <div className={styles.container}>
@@ -42,11 +55,13 @@ const TrainerMyPageMySchedule = () => {
       <div className={styles.smtxt}>
         수업이 가능한 날짜와 시간을 선택하세요!
       </div>
+
       <div className={styles.out_box}>
         <div className={styles.in_box}>
-          <Calendar />
+          <Calendar getNewData={getNewData} />
         </div>
       </div>
+
       <div className={styles.out_box}>
         {/* 오전 테이블 */}
         <div className={styles.time_table}>
@@ -55,14 +70,28 @@ const TrainerMyPageMySchedule = () => {
             {morning.map((time) => (
               <div
                 className={`${styles.time} ${
-                  click ? `${styles.clicked_time}` : null
+                   timeArray.includes(time)
+                    ? `${styles.clicked_time}`
+                    : null
                 }`}
                 key={time}
                 onClick={() => {
-                  handleClick();
+                  if (timeArray.includes(time)) {
+                    let newTimeArray = timeArray.filter((ele) => ele !== time);
+                    newTimeArray.sort(function (a, b) {
+                      return a - b;
+                    });
+                    setTimeArray(newTimeArray);
+                  } else {
+                    setTimeArray((prev) =>
+                      [...prev, time].sort(function (a, b) {
+                        return a - b;
+                      })
+                    );
+                  }
                 }}
               >
-                {time}
+                {time}시
               </div>
             ))}
           </div>
@@ -72,14 +101,36 @@ const TrainerMyPageMySchedule = () => {
           <div className={styles.table_text}>오후</div>
           <div className={styles.times_box}>
             {afternoon.map((time) => (
-              <div className={styles.time} key={time}>
-                {time}
+              <div
+                className={`${styles.time} ${
+                   timeArray.includes(time)
+                    ? `${styles.clicked_time}`
+                    : null
+                }`}
+                key={time}
+                onClick={() => {
+                  if (timeArray.includes(time)) {
+                    let newTimeArray = timeArray.filter((ele) => ele !== time);
+                    newTimeArray.sort(function (a, b) {
+                      return a - b;
+                    });
+                    setTimeArray(newTimeArray);
+                  } else {
+                    setTimeArray((prev) =>
+                      [...prev, time].sort(function (a, b) {
+                        return a - b;
+                      })
+                    );
+                  }
+                }}
+              >
+                {time}시
               </div>
             ))}
           </div>
         </div>
-        <div className={styles.edit} onClick={() => setEdit(true)}>
-          수정🖍
+        <div className={styles.edit} onClick={sendData}>
+          완료🖍
         </div>
       </div>
     </div>
