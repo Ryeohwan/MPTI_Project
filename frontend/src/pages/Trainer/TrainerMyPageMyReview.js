@@ -3,16 +3,17 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import React from 'react'
 
-const request_url = '/opinion/review/list'
+const request_url = '/api/business/opinion/review/list'
 
 const TrainerMyPageMyReview=()=>{
   const [reviews, setReviews] =useState([])
 
   useEffect(()=> {
+    console.log(1)
     axios.get(request_url)
-      .then(res => setReviews(res.data))
+      .then(res => {setReviews(res.data); console.log(res)})
   }, [])
-
+  
   const deleteReview = reviewId => console.log(reviewId)
 
   return(
@@ -36,6 +37,7 @@ const TrainerMyPageMyReview=()=>{
               </div>  
               <div className={styles.review_email}>{review.createdAt}</div>
               <div className={styles.review_content}>{review.memo}</div>
+              <input type='checkbox'></input>
             </div>
           )}
         </div>
