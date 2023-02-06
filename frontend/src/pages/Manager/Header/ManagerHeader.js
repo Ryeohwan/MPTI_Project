@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './ManagerHeader.module.css';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../store/auth';
+import { useNavigate } from 'react-router-dom';
 const ManagerHeader = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const logoutHandler= ()=>{
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
+      dispatch(logout());
+      navigate("/")
     }
 
     return (
