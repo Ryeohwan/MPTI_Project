@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from "./Home.module.css"
 import TrainerImg from "./../../assets/img/trainer.PNG"
 import axios from 'axios';
-
+import { trainerListByStar } from '../../store/etc';
+import { useDispatch } from 'react-redux';
 const dummyData = [
     {
         id: 1,
@@ -62,26 +63,35 @@ const dummyData2 = [
 
 
 const Home = () => {
-
+    const dispatch = useDispatch();
     const [trainerIntrocuce, setTraineIntroduce ]=useState("");
     const [review, setReview ]=useState("");
     
 
 
     useEffect(()=>{
-        axios.get("http://localhost:8080/trainer/list").then((res)=>{
-            const trainerIntrocuces=res.data;
-            setTraineIntroduce(trainerIntrocuces);
-        }).catch((err)=>{
-            console.log(err)
+        dispatch(trainerListByStar(0)).then(res =>{
+            const trainerList=res;
+            console.log(trainerList);
         })
+        // dispatch(trainerListByStar(0))
+        // console.log(  dispatch(trainerListByStar(0)));
+      
+        
+      // axios.get("http://localhost:8080/trainer/list").then((res)=>{
+        //     const trainerIntrocuces=res.data;
+        //     setTraineIntroduce(trainerIntrocuces);
+        // }).catch((err)=>{
+        //     console.log(err)
+        // })
 
-        axios.get("http://localhost:8080/trainer/review").then((res)=>{
-            const reviews=res.data;
-            setReview(reviews)
-        }).catch((err)=>{
-            console.log(err)
-        })
+        // axios.get("http://localhost:8080/trainer/review").then((res)=>{
+        //     const reviews=res.data;
+        //     setReview(reviews)
+        // }).catch((err)=>{
+        //     console.log(err)
+        // })
+  
     },[])
     
     return (

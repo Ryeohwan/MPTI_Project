@@ -52,7 +52,7 @@ const etcSlice = createSlice({
 export const trainerListByPage = (pagenum) => async (dispatch) => {
     try {
         const response = await axios.get(`/api/trainer/list/${pagenum}`);
-        console.log(response);
+        console.log(response.data);
     } catch (error) {
 
     }
@@ -61,7 +61,9 @@ export const trainerListByPage = (pagenum) => async (dispatch) => {
 export const trainerListByStar = (pagenum) => async (dispatch) => {
     try {
         const response = await axios.get(`/api/trainer/listbystar/${pagenum}`);
-        console.log(response);
+        console.log(response.data.content);
+        console.log("별점순 트레이너 리스트 정보확인")
+        return response.data.content;
     } catch (error) {
 
     }

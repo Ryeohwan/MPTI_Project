@@ -5,8 +5,6 @@ const initialState = {
     isLoading: false,
 };
 
-
-
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -36,7 +34,9 @@ const authSlice = createSlice({
         },
         signupSuccess: (state) => {
             state.isLoading = false;
-        }
+        },signupFailure: (state, action) => {
+            state.isLoading = false;
+        },
     },
 });
 
@@ -76,14 +76,16 @@ export const logout = () => async(dispatch)=>{
 
 
 export const signup = (type, userInfo)=> async(dispatch) =>{
+    dispatch(authActions.signupRequest());
     try {
         const response = await axios.post(`/api/${type}/join`, userInfo);
         console.log(response);
         console.log("회원가입 성공");
-        
+        dispatch(authActions.signupSuccess());
     } catch (error) {
         console.log(error);
         console.log("회원가입 실패");
+        dispatch(authActions.signupFailure());
     }
 }
 
