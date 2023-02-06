@@ -3,6 +3,7 @@ import styles from './TrainerClientBody.module.css'
 import CardItem3 from '../../../components/Card/CardItem3';
 import ClientInfo from './ClientInfo';
 import Pagination from '../../../components/Common/Pagination';
+import axios from 'axios';
 
 const TrainerClientBody = (props) => {
     const [searchValue, setSearchValue]=useState('') //검색어
@@ -17,6 +18,9 @@ const TrainerClientBody = (props) => {
 ];
 
 
+
+
+    
     
     return (
         targetClient?

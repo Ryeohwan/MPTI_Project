@@ -43,7 +43,7 @@ export const signupTrainerList = (pagenum) => async(dispatch)=>{
 // 관리자 페이지 가입 승인/반려 API, 인자로 {email: "", approved: true/false 기입}
 export const signupApproval = (choice) => async(dispatch)=>{
     try {
-        const response=await axios.post(`/api/trainer/application/process}`,choice);
+        const response=await axios.post(`/api/trainer/application/process`,choice);
         const data= response;
         console.log(data, "가입승인/반려 성공");
         return data;
@@ -51,6 +51,29 @@ export const signupApproval = (choice) => async(dispatch)=>{
         console.log(error, "가입승인/반려 실패");
     }
 }
+// 신고목록 API
+export const reportList = () => async(dispatch)=>{
+    try {
+        const response=await axios.get("/api/business/opinion/report/list");
+        const data= response.data;
+        console.log(data, "신고목록 불러오기 성공");
+        return data;
+    } catch (error) {
+        console.log(error, "신고목록 불러오기 성공");
+    }
+}
+
+// 신고 승인/반려 API
+export const reportApproval = (data) => async(dispatch)=>{
+    try {
+        const response=await axios.post("/api/business/opinion/report/process",{});
+        console.log(response, "신고 승인/반려처리 성공");
+    
+    } catch (error) {
+        console.log(error, "신고 승인/반려처리 실패");
+    }
+}
+
 
 
 export const adminActions = adminSlice.actions;

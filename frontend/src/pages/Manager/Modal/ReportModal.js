@@ -1,7 +1,7 @@
 import styles from "./ReportModal.module.css";
 import { useState } from 'react';
 import axios from "axios";
-const ReportModal = ({ name, report, reportman, onClose }) => {
+const ReportModal = ({ writerName, targetName,memo,reportType ,onClose }) => {
     const [days, setDays]= useState("");
     
     const selectHandler = (e)=>{
@@ -33,16 +33,18 @@ const ReportModal = ({ name, report, reportman, onClose }) => {
       <h1>신고처리</h1>
 
       <h3>신고 유저</h3>
-      <div className={styles.name}>{name}</div>
+      <div className={styles.name}>{writerName}</div>
       <h3>피신고 유저</h3>
-      <div className={styles.name}>{reportman}</div>
+      <div className={styles.name}>{targetName}</div>
+      <h3>신고분류</h3>
+      <div className={styles.name}>{reportType}</div>
       <h3>신고사유</h3>
-      <div className={styles.report}>{report}</div>
+      <div className={styles.report}>{memo}</div>
 
       <div className={styles.process}>
         <div className={styles.process_reportman}>
           <div className={styles.process_title}>제재유저</div>
-          <div className={styles.process_name}>{reportman}</div>
+          <div className={styles.process_name}>{targetName}</div>
         </div>
 
         <div className={styles.process_sanctions}>
