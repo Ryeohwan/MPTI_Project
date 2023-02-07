@@ -1,7 +1,7 @@
 import styles from "./ReportModal.module.css";
 import { useState } from 'react';
 import axios from "axios";
-const ReportModal = ({ writerName, targetName,memo,reportType ,onClose }) => {
+const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => {
     const [days, setDays]= useState("");
     
     const selectHandler = (e)=>{
@@ -14,10 +14,10 @@ const ReportModal = ({ writerName, targetName,memo,reportType ,onClose }) => {
         }
 
         const crimimnal = {
-          id: 1,
-          days: 2
+          id: id,
+          blockPeriod: 1,
         }
-        axios.post("/opinion/report/process", crimimnal).then((res)=>{
+        axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{
           console.log(res);
         }).catch((err)=>{
           console.log(err)
@@ -30,8 +30,7 @@ const ReportModal = ({ writerName, targetName,memo,reportType ,onClose }) => {
 
   return (
     <div className={styles.ReportModal}>
-      <h1>신고처리</h1>
-
+      <h1 className={styles.title}>신고처리</h1>
       <h3>신고 유저</h3>
       <div className={styles.name}>{writerName}</div>
       <h3>피신고 유저</h3>
@@ -51,7 +50,8 @@ const ReportModal = ({ writerName, targetName,memo,reportType ,onClose }) => {
           <div className={styles.process_title}>제재일수</div>
 
           <div className={styles.process_select}>
-            <select onChange={selectHandler} defaultValue={""}>
+            <select onChange={selectHandler} defaultValue={days}>
+              <option value={""}>기간</option>
               <option value={0}>무죄</option>
               <option value={1}>1일</option>
               <option value={3}>3일</option>

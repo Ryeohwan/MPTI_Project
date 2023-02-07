@@ -48,6 +48,7 @@ const ManagerSignupApproval = () => {
     //가입 승인 반려 신청 (승인, 반려 신청 반응 ok but 신청 목록이 변함이 없음)
     const approveHandler = (email)=>{
         if(window.confirm("가입신청을 승인 하시겠습니까?")){
+            console.log(email);
             dispatch(signupApproval({email:email, approved: true}))
         }else{
             return;

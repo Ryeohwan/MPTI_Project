@@ -30,16 +30,18 @@ const ManagerReportApproval = () => {
     writerName: "",
     targetName: "",
     reportType: "",
-    memo:""
+    memo:"",
+    id:""
   });
 
-  const handleOpenModal = (writerName, targetName ,reportType, memo) => {
+  const handleOpenModal = (writerName, targetName ,reportType, memo,id) => {
     setModal({
       show: true,
       writerName,
       targetName,
       reportType,
       memo,
+      id,
     });
   };
 
@@ -49,7 +51,7 @@ const ManagerReportApproval = () => {
       writerName: "",
       targetName: "",
       reportType: "",
-    
+      id:"",
       memo: "",
     });
   };
@@ -83,7 +85,7 @@ const ManagerReportApproval = () => {
                       <button
                         className={styles.btn_negative}
                         onClick={() =>
-                          handleOpenModal(it.writerName,it.targetName,  it.reportType, it.memo)
+                          handleOpenModal(it.writerName,it.targetName,  it.reportType, it.memo, it.id)
                         }
                       >
                         확인
@@ -98,6 +100,7 @@ const ManagerReportApproval = () => {
                         targetName={modal.targetName}
                         reportType={modal.reportType}
                         memo={modal.memo}
+                        id={modal.id}
                         onClose={handleCloseModal}
                       />
                     </ReportModalContainer>
