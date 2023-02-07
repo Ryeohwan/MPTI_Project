@@ -5,7 +5,7 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
 import CalendarCells from "./CalendarCells";
 
-const Calendar = ({getNewData}) => {
+const Calendar = ({getNewDay, timeArray, newData}) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [click, setClick] = useState(false);
@@ -19,8 +19,7 @@ const Calendar = ({getNewData}) => {
   const onDateClick = (day) => {
     const formatDay = format(day, "yyyy-MM-dd");
     const intDate = formatDay.split("-").map((item) => parseInt(item));
-    console.log(intDate);
-    getNewData(intDate)
+    getNewDay(intDate)
     setSelectedDate(day);
     setClick(!click)
   };
