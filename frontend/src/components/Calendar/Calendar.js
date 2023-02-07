@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format, addMonths, subMonths } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
 import CalendarCells from "./CalendarCells";
 
-const Calendar = ({getNewDay, timeArray, newData}) => {
+const Calendar = ({getNewDay, newData}) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [click, setClick] = useState(false);
@@ -24,6 +24,11 @@ const Calendar = ({getNewDay, timeArray, newData}) => {
     setClick(!click)
   };
 
+  useEffect(()=>{
+    
+
+  },[])
+
   return (
     <div className={styles.calendar}>
       <CalendarHeader
@@ -38,6 +43,7 @@ const Calendar = ({getNewDay, timeArray, newData}) => {
           selectedDate={selectedDate}
           onDateClick={onDateClick}
           click={click}
+          newData={newData}
         />
       </div>
     </div>

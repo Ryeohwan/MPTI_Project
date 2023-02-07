@@ -41,7 +41,7 @@ const TrainerMyPageMySchedule = () => {
 
   const getData = useRef([]);
   const newData = getData.current
-  
+
   useEffect(() => {
     const filteredData = getData.current.filter(
       (item) =>
@@ -52,11 +52,11 @@ const TrainerMyPageMySchedule = () => {
     const reservedNewData = filteredData.filter((item) => item.userId)
     const reservedNewHour = reservedNewData.map((item) => item.hour)
     console.log(filteredData)
+
     if (filteredData) {
       const newHour = filteredData.map((data) => data.hour);
       setTimeArray(newHour);
       setNewHour(reservedNewHour);
-
     }
 
   }, [newDay]);
@@ -93,7 +93,7 @@ const TrainerMyPageMySchedule = () => {
 
       <div className={styles.out_box}>
         <div className={styles.in_box}>
-          <Calendar getNewDay={getNewDay} timeArray={timeArray} newData={newData}/>
+          <Calendar getNewDay={getNewDay} newData={newData}/>
         </div>
       </div>
 

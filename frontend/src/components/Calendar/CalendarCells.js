@@ -5,7 +5,7 @@ import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
 
-const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click }) => {
+const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click, newData }) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -14,6 +14,7 @@ const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click }) => {
   let days = [];
   let day = startDate;
   let formattedDate = "";
+  
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
