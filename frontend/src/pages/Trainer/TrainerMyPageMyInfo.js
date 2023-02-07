@@ -6,27 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 const request_url = '/api/trainer/info/update/'
 // const trainer_id = 'qwer@naver.com'
 
-const TrainerMyPageMyInfo=(props)=>{
+const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
     const {email} = useSelector((state) => state.etc);
     const [edit,setEdit] = useState(false);
-    console.log('1번 랜더링')
     const setInfo = async (e) => {
         e.preventDefault()
-        if(e.target.phone.value!==props.trainerInfo.phone){
+        if(e.target.phone.value!==trainerInfo.phone){
             const data = await axios.post(request_url+email, {phone:e.target.phone.value})
-            props.setTrainerInfo(data.data)
+            setTrainerInfo(data.data)
             setEdit(false);
             return;
         }
         setEdit(false)
     }
 
-
     return(
         <div className={styles.container}> 
             <div className={styles.content_title}>내 개인정보</div>
             {
-                props.trainerInfo===null?null:
+                trainerInfo===null?null:
                 edit?
                     <form className={styles.out_box} method='PoST' onSubmit={(e) => {setInfo(e);}}>
                         <div className={styles.content_box}>
@@ -34,35 +32,35 @@ const TrainerMyPageMyInfo=(props)=>{
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>💌이메일</div> 
-                                        <div className={styles.right}>{props.trainerInfo.email}</div>
+                                        <div className={styles.right}>{trainerInfo.email}</div>
                                     </div>
                                 </div>
                             {/* 휴대폰 */}
                             <div className={styles.in_box}>
                                 <div className={styles.in_box_content}>
                                     <div className={styles.left}>📞휴대폰</div> 
-                                    <input name="phone" defaultValue={props.trainerInfo.phone} className={`${styles.right} ${styles.input_box}`}></input>
+                                    <input name="phone" defaultValue={trainerInfo.phone} className={`${styles.right} ${styles.input_box}`}></input>
                                 </div>
                             </div>
                             {/* 자격증 */}
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.license).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 수상 */}
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.awards).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 경력 */}
                             <div className={styles.in_box}> 
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value)=> <div className={styles.awards_box} key={value.name}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
                                     </div>
                             </div>
                             </div>
@@ -77,35 +75,35 @@ const TrainerMyPageMyInfo=(props)=>{
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>💌이메일</div> 
-                                        <div className={styles.right}>{props.trainerInfo.email}</div>
+                                        <div className={styles.right}>{trainerInfo.email}</div>
                                     </div>
                                 </div>
                                 {/* 휴대폰 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📞휴대폰</div> 
-                                        <div className={styles.right}>{props.trainerInfo.phone}</div>
+                                        <div className={styles.right}>{trainerInfo.phone}</div>
                                     </div>
                                 </div>
                                 {/* 자격증 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.license).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 수상 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.awards).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 경력 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value)=> <div className={styles.awards_box} key={value.name}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
                                     </div>
                                 </div>
                             </div>
