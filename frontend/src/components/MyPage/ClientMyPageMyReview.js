@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const ClientMyPageMyReview = () => {
     const [myreview, setMyReview] = useState([]);
+    console.log('렌더링했다')
     // const [reviewpage, setReviewPage] = useState(1);
     // const [showreview, setShowReview] = useState(myreview.slice((reviewpage-1)*3,(reviewpage-1)*3+3));
     // useEffect(()=>setShowReview(myreview.slice((reviewpage-1)*3, (reviewpage-1)*3+3)),
@@ -13,16 +14,7 @@ const ClientMyPageMyReview = () => {
     axios.get('/api/business/opinion/review/list').then((res) => {
         console.log(res)
     });
-    console.log(1)
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const response = await axios.get("/api/business/opinion/review/list");
-    //         setMyReview(response.data);
-    //       }
-    //       if (!myreview) {
-    //         fetchData();
-    //       }
-    //     }, []);
+
     console.log(myreview)
     return(
         <div className={styles.container} >

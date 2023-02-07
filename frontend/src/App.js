@@ -31,13 +31,7 @@ import SignupRedirect from './components/Signup/SignupRedirect';
 export default function App(){
    const [type, setType] = useState('client')
    const [token, setToken] = useState(localStorage.getItem("access_token"));
-    useEffect(()=>{
-      if(token){ 
-        
-      }else{
 
-      }
-    })
    //localStorage.setItem('token','123')
 
   return (
@@ -51,7 +45,7 @@ export default function App(){
           <Link to='/manager'><button onClick={()=>setType('manager')}>관리자</button></Link>
           <span style={{color:'white'}}>상태:{type?type:'not user'}</span>
         </div>
-        {type==="client" && token ?<ClientHeader/>:null}
+        {type==="client" ?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
 
         <Routes>

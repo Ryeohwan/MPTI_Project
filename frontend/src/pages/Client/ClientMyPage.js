@@ -5,7 +5,15 @@ import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
 import ClientMyPageMyReview from '../../components/MyPage/ClientMyPageMyReview';
 
+const infoUrl=""
+const reviewUrl="/api/business/opinion/review/list"
+
+
 const ClientMyPage = () => {
+    
+
+
+
     return (
         <div className={styles.ClientMyPage}>
              <TopTitle title='마이페이지▼' content='회원님의 개인정보를 확인해보세요 !'/>
