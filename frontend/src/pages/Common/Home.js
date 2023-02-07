@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import TrainerImg from "./../../assets/img/trainer.PNG";
-import Star from "./../../assets/img/thumsup1.png";
+import Star from "./../../assets/img/star.png";
 import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpinner";

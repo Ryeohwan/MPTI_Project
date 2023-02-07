@@ -10,17 +10,17 @@ const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers: {
-        loginRequest: (state) => {
+        dataRequest: (state) => {
             state.isLoading = true;
         },
-        loginSuccess: (state) => {
+        dataSuccess: (state) => {
             state.isLoading = false;
-            state.isLoggedIn = true;
+            //state.isLoggedIn = true;
         },
-        loginFailure: (state, action) => {
+        dataFailure: (state, action) => {
             state.isLoading = false;
-            state.isLoggedIn = false;
-            state.error = action.payload;
+            //state.isLoggedIn = false;
+            //state.error = action.payload;
         },
 
     },
@@ -29,61 +29,76 @@ const adminSlice = createSlice({
 
 // 관리자 페이지 가입신청 목록 API
 export const signupTrainerList = (pagenum) => async(dispatch)=>{
-
+        dispatch(adminActions.dataRequest())
     try {
         const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data.content;
         console.log(response)
         console.log("가입승인 목록 리스트 불러오기 성공");
+        dispatch(adminActions.dataSuccess())
         return response;
+        
     } catch (error) {
         console.log(error, "가입승인 목록 리스트 불러오기 실패");
+        dispatch(adminActions.dataFailure())
         return;
     }
 }
 
 // 관리자 페이지 가입 승인/반려 API, 인자로 {email: "", approved: true/false 기입}
 export const signupApproval = (choice) => async(dispatch)=>{
+    dispatch(adminActions.dataRequest())
     try {
         const response=await axios.post(`/api/trainer/application/process`,choice);
         const data= response;
         console.log(data, "가입승인/반려 성공");
+        dispatch(adminActions.dataSuccess())
         return data;
     } catch (error) {
         console.log(error, "가입승인/반려 실패");
+        dispatch(adminActions.dataFailure())
     }
 }
 // 신고목록 API
 export const reportList = () => async(dispatch)=>{
+    dispatch(adminActions.dataRequest())
     try {
         const response=await axios.get("/api/business/opinion/report/list");
         const data= response.data;
         console.log(data, "신고목록 불러오기 성공");
+        dispatch(adminActions.dataSuccess())
         return data;
     } catch (error) {
+        dispatch(adminActions.dataFailure())
         console.log(error, "신고목록 불러오기 성공");
     }
 }
 
 // 신고 승인/반려 API
 export const reportApproval = (data) => async(dispatch)=>{
+    dispatch(adminActions.dataRequest())
     try {
         const response=await axios.post("/api/business/opinion/report/process",{});
         console.log(response, "신고 승인/반려처리 성공");
+        dispatch(adminActions.dataSuccess())
     
     } catch (error) {
         console.log(error, "신고 승인/반려처리 실패");
+        dispatch(adminActions.dataFailure())
     }
 }
 
 // 모든 회원 목록 API
 export const accountList = () => async(dispatch)=>{
+    dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.get("/api/user/update/list");
+        const response=await axios.post(`/api/user/userlist/0`,{"id":1});
         const data= response.data;
         console.log("회원 목록 불러오기 성공");
+        dispatch(adminActions.dataSuccess())
         return data;
     } catch (error) {
         console.log("회원 목록 불러오기 실패");
+        dispatch(adminActions.dataFailure())
     }
 }
 

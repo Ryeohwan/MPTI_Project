@@ -27,19 +27,14 @@ import Landing from './pages/Landing/Landing';
 import { Link } from 'react-router-dom';
 import SignupRedirect from './components/Signup/SignupRedirect';
 import BasicLoadingSpinner from './components/Loading/BasicLoadingSpinner';
+import { useSelector } from 'react-redux';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
    const [type, setType] = useState('client')
    const [token, setToken] = useState(localStorage.getItem("access_token"));
-    useEffect(()=>{
-      if(token){ 
-        
-      }else{
-
-      }
-    })
-   //localStorage.setItem('token','123')
+   //const {isLoading} = useSelector(state=> state.auth);
+   const {isLoading} = useSelector(state=> state.admin);
 
   return (
       <div className="App">
@@ -55,9 +50,12 @@ export default function App(){
         {type==="client" ?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
         {/* <BasicLoadingSpinner/> */}
+        
+        
+        {isLoading ? <BasicLoadingSpinner/>: null}
         <Routes>
     
-    
+
         <Route path="/login" element={<Login/>}/>
       <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>
           <Route path="/clientmylog" element={<ClientMyLog/>}/>
