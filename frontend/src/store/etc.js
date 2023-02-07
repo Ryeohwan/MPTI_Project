@@ -2,9 +2,9 @@ import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    name: "",
-    email: "",
-    phone: "",
+    name: "윤동근",
+    email: "qwer@naver.com",
+    phone: "01012345678",
     image: "",
     isLoading: false,
     error: null,

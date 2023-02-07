@@ -2,7 +2,6 @@ import styles from './TrainerMyPageMyReview.module.css'
 import React from 'react'
 
 const TrainerMyPageMyReview= ({reviews})=>{
-  console.log('트레이너 마이페이지 마이리뷰 랜더링 (memo사용)')
   return(
     <div className={styles.container}>
       <div className={styles.content_title}>내 고객리뷰</div>
