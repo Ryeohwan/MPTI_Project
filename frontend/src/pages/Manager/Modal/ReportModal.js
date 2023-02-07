@@ -1,6 +1,7 @@
 import styles from "./ReportModal.module.css";
 import { useState } from 'react';
 import axios from "axios";
+import reportBell from '../../../assets/img/reportbell.png';
 const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => {
     const [days, setDays]= useState("");
     
@@ -30,7 +31,7 @@ const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => 
 
   return (
     <div className={styles.ReportModal}>
-      <h1 className={styles.title}>신고처리</h1>
+      <h1 className={styles.title}>신고처리 <img src={reportBell} style={{width:"60px", height: "60px"}}></img></h1>
       <h3>신고 유저</h3>
       <div className={styles.name}>{writerName}</div>
       <h3>피신고 유저</h3>

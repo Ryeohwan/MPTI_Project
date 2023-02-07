@@ -16,6 +16,8 @@
 .home_header {
     font-size: 32px;
     padding-bottom: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .home_comment {

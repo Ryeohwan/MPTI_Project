@@ -9,6 +9,7 @@
 .content_title{
     font-size: 20px;
     width: 100%;
+    text-shadow: 2px 2px 2px black; 
 }
 
 .content_content{

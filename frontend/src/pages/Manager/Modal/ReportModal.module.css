@@ -5,7 +5,7 @@
 }
 .ReportModal {
     width: 530px;
-    height: 700px;
+    height: 720px;
     padding: 25px;
     color: #ececec;
     background-color: red;
@@ -17,6 +17,8 @@
 .title{
     font-family: "DungGeunMo";
     color: #ececec;
+    display: flex;
+    align-items: center;
 }
 
 .name{
