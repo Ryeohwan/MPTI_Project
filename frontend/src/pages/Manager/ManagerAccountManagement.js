@@ -1,40 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./ManagerAccountManagement.module.css";
-
+import { useDispatch } from 'react-redux';
+import { accountList, accountDelete } from "../../store/admin";
 const ManagerAccountManagement = () => {
 
-
-  const [accountList, setAccountList] = useState([]);
+  const disapatch = useDispatch();
+  const [account, setAccount] = useState([]);
 
   useEffect(()=>{
-      const onAccountListCreate=() =>{
-          axios.get("i8a803.p.ssafy.io:3003")
-          .then((res)=>{
-              console.log(res);
-              setAccountList(res);
-          })
-          .catch((err)=>{
-              console.log(err);
-          })
-      }
-  }, [accountList])
+
+    disapatch(accountList()).then((res)=>{
+      console.log(res);
+      setAccount(res);
+    })
+  }, [])
 
 
-
-
-
-    const deleteAccountHandler = () =>{
-        axios.post("/user/info/delete",{id: 1})
-        .then((res) => {
-            console.log(res)
-        
-        
-        })
-        .catch((err)=>{
-
-        })
-
+  const deleteAccountHandler = (data) =>{
+       disapatch(accountDelete(data));
     }
   return (
     <>

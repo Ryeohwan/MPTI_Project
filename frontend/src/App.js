@@ -26,6 +26,7 @@ import { useState,useEffect } from 'react';
 import Landing from './pages/Landing/Landing';
 import { Link } from 'react-router-dom';
 import SignupRedirect from './components/Signup/SignupRedirect';
+import BasicLoadingSpinner from './components/Loading/BasicLoadingSpinner';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
@@ -53,9 +54,9 @@ export default function App(){
         </div>
         {type==="client" && token ?<ClientHeader/>:null}
         {type==="trainer"?<TrainerHeader/>:null}
-
+        {/* <BasicLoadingSpinner/> */}
         <Routes>
-        
+    
     
         <Route path="/login" element={<Login/>}/>
       <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>

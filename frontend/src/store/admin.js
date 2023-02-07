@@ -29,8 +29,9 @@ const adminSlice = createSlice({
 
 // 관리자 페이지 가입신청 목록 API
 export const signupTrainerList = (pagenum) => async(dispatch)=>{
+
     try {
-        const response=await (await axios.get(`/api/trainer/list/${pagenum}`)).data.content;
+        const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data.content;
         console.log(response)
         console.log("가입승인 목록 리스트 불러오기 성공");
         return response;
@@ -71,6 +72,28 @@ export const reportApproval = (data) => async(dispatch)=>{
     
     } catch (error) {
         console.log(error, "신고 승인/반려처리 실패");
+    }
+}
+
+// 모든 회원 목록 API
+export const accountList = () => async(dispatch)=>{
+    try {
+        const response=await axios.get("/api/user/update/list");
+        const data= response.data;
+        console.log("회원 목록 불러오기 성공");
+        return data;
+    } catch (error) {
+        console.log("회원 목록 불러오기 실패");
+    }
+}
+
+export const accountDelete = (data) => async(dispatch)=>{
+    try {
+        const response=await axios.post("/api/user/delete", data);
+        console.log(response);
+        console.log("회원 삭제 성공");
+    } catch (error) {
+        console.log("회원 삭제 실패");
     }
 }
 
