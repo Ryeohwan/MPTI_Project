@@ -1,24 +1,43 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './ClientMyLog.module.css'
 import TopTitle from '../../components/Common/TopTitle'
+import { workoutList } from '../../store/etc';
 import { Doughnut, Bar } from "react-chartjs-2";
 import { Chart, ArcElement } from 'chart.js'
-import axios from 'axios';
+
+import { useDispatch } from 'react-redux';
+
 Chart.register(ArcElement)
 
-const workoutData = [1, 2, 4, 5, 2, 1, 2, 0];
 
 const ClientMyLog = () => {
+  const dispatch=useDispatch();
   const [analyze, setAnalyze] = useState({
     labels: ["biceps", "triceps", "chest", "legs", "shoulder", "back", "core", "aerobic"],
     datasets: [
       {
         data: [1, 2, 4, 5, 2, 1, 2, 0],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
+        backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
       }
     ]
   });
+
+  useEffect(() => {
+    
+    dispatch(workoutList("asdf@naver.com")).then(res=>{
+      const workoutlist= Object.values(res);
+     setAnalyze({...analyze, datasets: [
+      {
+        data: workoutlist,
+        backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
+      }
+    ] })
+      console.log(workoutlist);
+    })
+  },[]);
+  
   const [userInfo, setUserInfo] = useState({
     age: 18,
     gender: "female",
@@ -51,17 +70,7 @@ const ClientMyLog = () => {
     }
   }
 
-  useEffect(() => {
-    axios.get("/api/")
-      .then((res) => {
-        console.log(res)
-        const sets = [{ ...analyze.datasets, data: workoutData }]
-        setAnalyze({ ...analyze, datasets: sets })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  })
+
 
 
   const bmiHandler = () => {
@@ -92,18 +101,61 @@ const ClientMyLog = () => {
 
       <div className={styles.log_box}>
         <div className={styles.log_graph}>
-          <div className={styles.graph_part}><Doughnut data={analyze}/></div>
-          <div className={styles.graph_chart}></div>
+          <div className={styles.graph_part}><Doughnut style={{width:"200px"}} data={analyze}/></div>
+          {/* <div className={styles.graph_chart}></div> */}
+          <div className={styles.graph_info}>
+            
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"red"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>가슴</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"pink"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>어깨</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"skyblue"}}  className={styles.part_color}></div>
+                  <div className={styles.part_name}>등부</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"green"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>하체</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"yellow"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>이두</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"purple"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>삼두</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"orange"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>산소</div>
+              </div>
+
+              <div className={styles.part}>
+                  <div style={{backgroundColor:"blue"}} className={styles.part_color}></div>
+                  <div className={styles.part_name}>코어</div>
+              </div>
         
+
+          </div>
         </div>
      
         <div className={styles.log_recommend}>
-          <div className={styles.recommend_text}>
-          고객님의 MPTI는 용맹한 상체충 BCSA 이십니다. 삼두와 어깨에 가장 관심을 갖고있습니다.
-          <br/> 상체운동도 좋지만 하체운동도 소홀해선 안되겠죠? 고객님에게 다음과 같은 운동을 추천드
-          <br/> 립니다. [불가리안 스쿼트, 런지]
+          <h3>추천</h3>
+          <br/>
           
-          </div>
+          고객님의 MPTI는 ABCD입니다.
+          <br></br>
+          [불가리안 스쿼트]
         </div>
       </div>
 

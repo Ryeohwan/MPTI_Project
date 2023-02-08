@@ -13,6 +13,7 @@
     border-radius: 10px;
     border: 1px solid #ececec;
     font-family: "DungGeunMo";
+    /* transition: all 0.3s ease-out; */
 }
 .title{
     font-family: "DungGeunMo";

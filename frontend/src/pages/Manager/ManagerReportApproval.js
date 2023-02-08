@@ -19,8 +19,8 @@ const ManagerReportApproval = () => {
   useEffect(()=>{
     // 신고목록 API 설정
     dispatch(reportList()).then((res)=>{
-      console.log(res);
-      setReport(res);
+      console.log(res.content);
+      setReport(res.content);
     })
 
   }, [])
@@ -58,12 +58,13 @@ const ManagerReportApproval = () => {
 
 
   // 신고 승인/반려 API 인자 설정중
-  const reportHandler = (name, days)=>{
-    if(!days || name){
-        return;
-    }
-    dispatch(reportApproval())
-  }
+  // const reportHandler = (name, days)=>{
+  //   if(!days || name){
+  //       return;
+  //   }
+  //   const data = {id: name, blockPeriod: days}
+  //   dispatch(reportApproval(data))
+  // }
   return (
     <>
       <div className={styles.info_content_box}>
@@ -75,7 +76,8 @@ const ManagerReportApproval = () => {
           <ul className={styles.content_list}>
             {report.map((it) => {
               return (
-                <li key={it.id} className={styles.content_item}>
+              
+                <li key={it.id} style={it.stopUntil? {backgroundColor:"red"}:null} className={styles.content_item}>
                   <div className={styles.item_info_box}>
                     <div className={styles.item_info}>
                       <div>신고자: {it.writerName}</div>| <div>피신고자: {it.targetName}</div> |<div>사건 분류: {it.reportType} </div>{" "}

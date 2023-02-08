@@ -22,6 +22,10 @@
     flex-direction: column;
     border-radius: 10px;  
 }
+canvas{
+
+    aspect-ratio: auto 500 / 500;
+}
 
 .trainer_img{
     padding: 5%;

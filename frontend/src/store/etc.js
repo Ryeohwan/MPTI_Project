@@ -67,6 +67,18 @@ export const reviewList = () => async(dispatch) =>{
     }
 }
 
+export const workoutList = (email) => async(dispatch) =>{
+
+    try {
+        const response = await axios.get(`/api/user/status/${email}`)
+        console.log(response.data);
+        console.log("운동 데이터 불러오기 성공");
+        return response.data;
+    } catch (error) {
+        console.log("운동 데이터 불러오기 실패");
+    }
+}
+
     
 
 

@@ -5,35 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { signupTrainerList, signupApproval } from '../../store/admin';
 
-const dummydata=[
-    {
-        id:1,
-        name: "정원철",
-        birth: "1997.03.16",
-        email: "GOOGLE@GMAIL.COM",
-        award: "NABBA KOREA -78KG 체급 1위",
-        cirt: "생활체육지도사 자격증 2급",
-        career: "마이짐 휘트니스 2001.03 - 2002.02",
-    },
-    {
-        id:2,
-        name: "정원철",
-        email: "GOOGLE@GMAIL.COM",
-        birth: "1997.03.16",
-        award: "NABBA KOREA -78KG 체급 1위",
-        cirt: "생활체육지도사 자격증 2급",
-        career: "마이짐 휘트니스 2001.03 - 2002.02",
-    },
-    {
-        id:3,
-        name: "정원철",
-        email: "GOOGLE@GMAIL.COM",
-        birth: "1997.03.16",
-        award: "NABBA KOREA -78KG 체급 1위",
-        cirt: "생활체육지도사 자격증 2급",
-        career: "마이짐 휘트니스 2001.03 - 2002.02",
-    },
-]
+
 
 const ManagerSignupApproval = () => {
     const [signupList, setSignupList] = useState([]);
@@ -71,6 +43,8 @@ const ManagerSignupApproval = () => {
               
                         <ul className={styles.content_list}>
                             {signupList.map(it=>{
+
+                                    
                                     return(
                                         <li  key={it.email} className={styles.content_item}>
                                         <div className={styles.item_img}>

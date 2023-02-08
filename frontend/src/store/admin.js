@@ -62,7 +62,7 @@ export const signupApproval = (choice) => async(dispatch)=>{
 export const reportList = () => async(dispatch)=>{
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.get("/api/business/opinion/report/list");
+        const response=await axios.get("/api/business/opinion/report/list/0");
         const data= response.data;
         console.log(data, "신고목록 불러오기 성공");
         dispatch(adminActions.dataSuccess())
@@ -75,9 +75,10 @@ export const reportList = () => async(dispatch)=>{
 
 // 신고 승인/반려 API
 export const reportApproval = (data) => async(dispatch)=>{
+    console.log(data);
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.post("/api/business/opinion/report/process",{});
+        const response=await axios.post("/api/business/opinion/report/process",data);
         console.log(response, "신고 승인/반려처리 성공");
         dispatch(adminActions.dataSuccess())
     
@@ -91,7 +92,7 @@ export const reportApproval = (data) => async(dispatch)=>{
 export const accountList = () => async(dispatch)=>{
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.post(`/api/user/userlist/0`,{"id":1});
+        const response=await axios.get(`/api/user/list/0`);
         const data= response.data;
         console.log("회원 목록 불러오기 성공");
         dispatch(adminActions.dataSuccess())
@@ -104,7 +105,8 @@ export const accountList = () => async(dispatch)=>{
 
 export const accountDelete = (data) => async(dispatch)=>{
     try {
-        const response=await axios.post("/api/user/delete", data);
+        console.log(data);
+        const response=await axios.post("/api/user/admin/delete", data);
         console.log(response);
         console.log("회원 삭제 성공");
     } catch (error) {

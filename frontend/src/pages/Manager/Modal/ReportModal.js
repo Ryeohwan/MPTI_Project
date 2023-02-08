@@ -2,8 +2,13 @@ import styles from "./ReportModal.module.css";
 import { useState } from 'react';
 import axios from "axios";
 import reportBell from '../../../assets/img/reportbell.png';
+import { useDispatch } from 'react-redux';
+import { reportApproval } from "../../../store/admin";
 const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => {
-    const [days, setDays]= useState("");
+    
+  const dispatch = useDispatch();
+  
+  const [days, setDays]= useState("");
     
     const selectHandler = (e)=>{
         setDays(e.target.value)
@@ -13,19 +18,21 @@ const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => 
             alert("제재 기간을 입력해주세요!")
             return;
         }
+        
 
-        const crimimnal = {
+        const criminal = {
           id: id,
-          blockPeriod: 1,
+          blockPeriod: days,
         }
-        axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{
-          console.log(res);
-        }).catch((err)=>{
-          console.log(err)
-        })
+        dispatch(reportApproval(criminal));
+        // axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{
+        //   console.log(res);
+        // }).catch((err)=>{
+        //   console.log(err)
+        // })
         
        
-        console.log(crimimnal);
+        console.log(criminal);
         
     }
 

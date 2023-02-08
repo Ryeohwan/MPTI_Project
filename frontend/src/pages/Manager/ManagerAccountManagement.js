@@ -11,8 +11,8 @@ const ManagerAccountManagement = () => {
   useEffect(()=>{
 
     disapatch(accountList()).then((res)=>{
-      console.log(res);
-      setAccount(res);
+      console.log(res.content);
+      setAccount(res.content);
     })
   }, [])
 
@@ -29,17 +29,24 @@ const ManagerAccountManagement = () => {
         <span>MPTI 고객님들의 소중한 계정정보를 확인하고 관리하세요.</span>
         <div className={styles.content_content}>
           <ul className={styles.content_list}>
-            <li  className={styles.content_item}>
-              <div className={styles.item_info_box}>
-                <div className={styles.item_info}>
-                  <div>성명: </div> |<div>E-MAIL: </div> |
-                  <div>생년월일 : </div>
-                </div>
-                <div className={styles.item_btn}>
-                  <button className={styles.btn_negative} onClick={deleteAccountHandler}>삭제</button>
-                </div>
-              </div>
-            </li>
+            {
+              account.map((it)=>{
+                return(
+                  <li key={it.email}  className={styles.content_item}>
+                  <div className={styles.item_info_box}>
+                    <div className={styles.item_info}>
+                      <div>성명:{it.name} </div> |<div>E-MAIL:{it.email} </div> |
+                      <div>age :{it.age} </div>
+                    </div>
+                    <div className={styles.item_btn}>
+                      <button className={styles.btn_negative} onClick={()=>deleteAccountHandler({email:it.email})}>삭제</button>
+                    </div>
+                  </div>
+                </li>
+                )
+              })    
+            }
+      
           </ul>
         </div>
       </div>
