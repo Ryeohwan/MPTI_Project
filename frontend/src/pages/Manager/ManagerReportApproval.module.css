@@ -10,6 +10,7 @@
 .content_title {
     font-size: 20px;
     width: 100%;
+    text-shadow: 2px 2px 2px black; 
 }
 
 .content_content {
@@ -50,6 +51,11 @@
     align-items: center;
 }
 
+.item_info_box:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
 .item_btn {}
 
 .item_btn button {
@@ -60,6 +66,12 @@
     font-family: 'DungGeunMo';
     font-size: 14px;
     /* color: #ececec; */
+}
+
+.item_btn button:hover {
+    border: 1px solid gray;
+    background-color: #ececec;
+    color: #242B3E;
 }
 
 .btn_positive {

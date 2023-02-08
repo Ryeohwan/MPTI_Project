@@ -57,7 +57,9 @@
 
 
 .home_trainer_box {
-    height: 320px;
     background-color: #D0E2A6;
     border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
+

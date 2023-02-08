@@ -10,6 +10,7 @@
 .content_title {
     font-size: 20px;
     width: 100%;
+    text-shadow: 2px 2px 2px black; 
 }
 
 .content_list {
@@ -48,6 +49,7 @@
 
 .item_info {
     margin-left: 20px;
+    width: 70%;
 }
 
 .item_info div {
