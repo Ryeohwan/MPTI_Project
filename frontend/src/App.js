@@ -48,7 +48,6 @@ export default function App(){
         {type==="trainer"?<TrainerHeader/>:null}
         {/* <BasicLoadingSpinner/> */}
         
-        
         {isLoading ? <BasicLoadingSpinner/>: null}
         <Routes>
     

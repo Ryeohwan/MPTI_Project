@@ -64,23 +64,25 @@ const TrainerMyPageMySchedule = () => {
       setNewData(data.data.content)
     }
     getReservation()
-  },[]);
+  }, []);
 
   const sendData = () => {
     const data = {
       trainerId: 1,
-      trainerName: "원쵸디",
+      // trainerName: "원쵸디",
       year: newDay[0],
       month: newDay[1],
       day: newDay[2],
       openHours: timeArray,
     };
-    
-    // post : header 넣어야 함
-    axios.post("/api/business/reservation/scheduling", data).then((res) => {
+    // // post : header 넣어야 함
+    const accessToken = localStorage.getItem('access_token');
+    const refreshToken = localStorage.getItem('refresh_token');
+    axios.post("/api/business/reservation/scheduling", data, {headers: {"authorization": accessToken, "refresh-token": refreshToken}}).then((res) => {
       console.log(res);
     });
-  };
+    };
+    
 
   return (
     <div className={styles.container}>
