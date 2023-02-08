@@ -78,7 +78,7 @@ export const reportApproval = (data) => async(dispatch)=>{
     console.log(JSON.stringify(data));
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.post("/api/business/opinion/report/process",);
+        const response=await axios.post(`/api/business/opinion/report/process`,data);
         console.log(response, "신고 승인/반려처리 성공");
         dispatch(adminActions.dataSuccess())
     

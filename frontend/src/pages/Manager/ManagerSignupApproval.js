@@ -4,11 +4,14 @@ import trainerImg from '../../assets/img/trainer.PNG';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { signupTrainerList, signupApproval } from '../../store/admin';
+import Pagination from './Pagination'
 
 
 
 const ManagerSignupApproval = () => {
     const [signupList, setSignupList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 10;
     const dispatch =useDispatch();
     
     useEffect( ()=>{
@@ -76,7 +79,12 @@ const ManagerSignupApproval = () => {
                     </div>
                     <div className={styles.pagenation}>
 
-
+                    <h1>Page {currentPage} of {totalPages}</h1>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
                         
                     </div>
                 </div>
