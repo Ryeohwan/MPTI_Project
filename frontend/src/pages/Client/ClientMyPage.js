@@ -1,41 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import styles from './ClientMyPage.module.css'
 import TopTitle from '../../components/Common/TopTitle'
 import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
 import ClientMyPageMyReview from '../../components/MyPage/ClientMyPageMyReview';
 import axios from 'axios';
-const infoUrl="/api/trainer/info"
+
+const infoUrl="/api/user/info"
 const reviewUrl="/api/business/opinion/review/list"
 
 
 const ClientMyPage = () => {
-    const [info, setInfo] = useState(undefined)
-    const [reviews, setReviews] = useState(undefined)
-    const {email} = useSelector((state) => state.etc);
-    useEffect(()=>{
-
+    const [info,setInfo] = useState(undefined);
+    if(!info){
         async function getInfo() {
-            if(!info){
-                console.log(email)
-                console.log(`${infoUrl}/${email}`)
-                const data = await axios.get(`${infoUrl}/${email}`)
-                console.log(data)
-                setInfo(data.data)
-            }
+            const data= await axios.post(infoUrl,{email:"wonchul97@gmail.com"})
+            console.log(data)
         }
-
-        async function getReview() {
-            if(!reviews){
-                const data = await axios.get(reviewUrl)
-                setReviews(data.data)
-            }
-        }
-        getInfo();
-        getReview();
-    },[])
-
+        getInfo()
+        
+        
+    }
 
     return (
         <div className={styles.ClientMyPage}>
@@ -46,7 +31,7 @@ const ClientMyPage = () => {
                     <div className={styles.content_title}>내 개인정보</div>
                     <ClientMyPageMyInfo info={info} setInfo={setInfo}/>
                     <div className={styles.content_title}>내가 쓴 리뷰</div>
-                    <ClientMyPageMyReview  reviews={reviews}/>
+                    <ClientMyPageMyReview/>
                 </div>
             </div>
         </div>
