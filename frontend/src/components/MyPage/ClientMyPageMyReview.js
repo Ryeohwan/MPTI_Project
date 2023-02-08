@@ -1,8 +1,8 @@
 import styles from './ClientMyPageMyReview.module.css'
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Pagination from '../Common/Pagination';
 
-const ClientMyPageMyReview = () => {
+const ClientMyPageMyReview = ({reviews}) => {
     const [myreview, setMyReview] = useState([{id:1, name:'정원철', email:'wonchool@naver.com', score:3, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
     {id:2, name:'정원철', email:'wonchool@naver.com', score:5, content: ' linebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktestlinebreaktest 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
     {id:3, name:'정원철', email:'wonchool@naver.com', score:4, content: '운동 자세를 자세히 가르쳐 주시고 지금 제 상태에 필요한 운동이 무엇인지 콕 찝어 알려주십니다. 대만족!'},
