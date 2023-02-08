@@ -5,7 +5,13 @@ import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
 
-const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click, newData }) => {
+const CalendarCells = ({
+  currentMonth,
+  selectedDate,
+  onDateClick,
+  click,
+  newData,
+}) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -14,14 +20,21 @@ const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click, newData
   let days = [];
   let day = startDate;
   let formattedDate = "";
-  
+
+//   const calendarScheduleList = reservedData.map((item) => <li><CalendarSchedule userName={item.userName} hour={item.hour} /></li>)
+
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, "d");
+      formattedDate = parseInt(format(day, "d"));
       const copyday = day;
       const parsedDay = new Date(copyday);
       const formatDay = format(parsedDay, "yyyy-MM-dd");
-
+      const intDate = formatDay.split("-").map((item) => parseInt(item));
+      const openedData = newData.filter(
+        (item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2]
+      );
+      const reservedData = newData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
+      
       days.push(
         <div
           className={`${styles.bodyRowCol} ${
@@ -54,14 +67,11 @@ const CalendarCells = ({ currentMonth, selectedDate, onDateClick, click, newData
           </div>
 
           <div>
-            {"2023-03-13" === formatDay  ? (
-              <div className={styles.calendar_schedule}>
-                <CalendarSchedule times={["12시 서유진"]} date={formatDay} />
-                <CalendarSchedule times={["18시 류하은"]} date={formatDay} />
-                <CalendarSchedule times={["19시 조현철"]} date={formatDay} />
+            {openedData.filter((item)=> item.day===intDate[2]).length && reservedData.length !== 0 ? (
+              <div>
+                { reservedData.map((item) => <li key={item.hour}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)}
               </div>
             ) : null}
-            
           </div>
         </div>
       );

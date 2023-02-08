@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "./TrainerMyPageMySchedule.module.css";
 import Calendar from "../../components/Calendar/Calendar";
 import axios from "axios";
@@ -39,11 +39,10 @@ const TrainerMyPageMySchedule = () => {
     };
   }
 
-  const getData = useRef([]);
-  const newData = getData.current
-
+  const [newData,setNewData] = useState([]);
+  console.log(newData)
   useEffect(() => {
-    const filteredData = getData.current.filter(
+    const filteredData = newData.filter(
       (item) =>
         item.year === newDay[0] &&
         item.month === newDay[1] &&
@@ -51,38 +50,37 @@ const TrainerMyPageMySchedule = () => {
     );
     const reservedNewData = filteredData.filter((item) => item.userId)
     const reservedNewHour = reservedNewData.map((item) => item.hour)
-    console.log(filteredData)
 
     if (filteredData) {
       const newHour = filteredData.map((data) => data.hour);
       setTimeArray(newHour);
       setNewHour(reservedNewHour);
     }
-
-  }, [newDay]);
+  }, [newData, newDay]);
 
   useEffect(() => {
-    axios.get("/api/business/reservation/list").then((res) => {
-      getData.current = res.data;
-    });
-  }, []);
+    async function getReservation(){
+      const data = await axios.get("/api/business/reservation/list/0")
+      setNewData(data.data.content)
+    }
+    getReservation()
+  },[]);
 
   const sendData = () => {
     const data = {
-      // trainerId: {},
-      // trainerName: {},
+      trainerId: 1,
+      trainerName: "원쵸디",
       year: newDay[0],
       month: newDay[1],
       day: newDay[2],
       openHours: timeArray,
     };
+    
     // post : header 넣어야 함
     axios.post("/api/business/reservation/scheduling", data).then((res) => {
       console.log(res);
     });
   };
-  console.log()
-  console.log(timeArray);
 
   return (
     <div className={styles.container}>
@@ -113,7 +111,7 @@ const TrainerMyPageMySchedule = () => {
                 onClick={(event) => {
                   handleClick(event, time);
                 }}
-              >
+              > 
                 {time}시
               </div>
             ))}
