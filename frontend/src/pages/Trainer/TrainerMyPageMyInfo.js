@@ -9,7 +9,9 @@ const request_url = '/api/trainer/info/update/'
 const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
     const {email} = useSelector((state) => state.etc);
     const [edit,setEdit] = useState(false);
-    const setInfo = async (e) => {
+
+    // 수정 버튼 누르면 실행.
+    async function setInfo(e) {
         e.preventDefault()
         if(e.target.phone.value!==trainerInfo.phone){
             const data = await axios.post(request_url+email, {phone:e.target.phone.value})
@@ -26,7 +28,7 @@ const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
             {
                 trainerInfo===null?null:
                 edit?
-                    <form className={styles.out_box} method='PoST' onSubmit={(e) => {setInfo(e);}}>
+                    <form className={styles.out_box} method='POST' onSubmit={(e) => {setInfo(e);}}>
                         <div className={styles.content_box}>
                             {/* 이메일 */}
                             <div className={styles.in_box}>
