@@ -21,8 +21,9 @@ const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => 
         
 
         const criminal = {
-          id: id,
           blockPeriod: days,
+          id: id,
+          
         }
         dispatch(reportApproval(criminal));
         // axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{

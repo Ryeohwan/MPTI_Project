@@ -58,12 +58,12 @@ export const trainerDetail = (email) => async (dispatch) => {
 
 export const reviewList = () => async(dispatch) =>{
     try {
-        const response = await axios.get(`/api/business/opinion/review/list`);
-        console.log(response.data);
+        const response = await axios.get(`/api/business/opinion/review/list/0`);
+        console.log(response.data.content);
         console.log("리뷰 리스트 소환");
-        return response.data;
+        return response.data.content;
     } catch (error) {
-
+        console.log("리뷰 리스트 실패");
     }
 }
 

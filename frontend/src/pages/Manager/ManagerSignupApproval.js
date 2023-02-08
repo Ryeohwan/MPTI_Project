@@ -13,7 +13,7 @@ const ManagerSignupApproval = () => {
     
     useEffect( ()=>{
     //가입신청 리스트
-    dispatch(signupTrainerList(0)).then((res)=> setSignupList(res))
+    dispatch(signupTrainerList(0)).then((res)=> setSignupList(res.slice(0,4)))
     }, [])
    
 
@@ -72,6 +72,11 @@ const ManagerSignupApproval = () => {
                                      
                             })}
                         </ul>
+                        
+                    </div>
+                    <div className={styles.pagenation}>
+
+
                         
                     </div>
                 </div>
