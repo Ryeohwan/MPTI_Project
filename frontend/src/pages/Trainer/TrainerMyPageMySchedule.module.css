@@ -50,7 +50,7 @@
     color: #111111;
     font-size: 20px;
     border-radius: 7px;
-    background-color: #DDE2E2;
+    background-color: whitesmoke;
     padding: 15px;
 }
 
@@ -72,7 +72,21 @@
     font-size: 16px;
     color: #ececec;
     border-radius: 5px;
-    background-color: rgba(0,0,0,0.53);
+    background-color: rgba(39, 38, 38, 0.53);
     padding:3px 10px;
     text-align: center;
+    cursor: pointer;
+}
+
+.clicked_time {
+    background-color: #a1cd48;
+}
+
+.prevent_clicked_time {
+    cursor: default !important;
+    background-color: #81a43a !important;
+}
+
+.edit {
+    color: black;
 }
