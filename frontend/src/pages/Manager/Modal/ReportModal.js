@@ -1,8 +1,14 @@
 import styles from "./ReportModal.module.css";
 import { useState } from 'react';
 import axios from "axios";
-const ReportModal = ({ name, report, reportman, onClose }) => {
-    const [days, setDays]= useState("");
+import reportBell from '../../../assets/img/reportbell.png';
+import { useDispatch } from 'react-redux';
+import { reportApproval } from "../../../store/admin";
+const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => {
+    
+  const dispatch = useDispatch();
+  
+  const [days, setDays]= useState("");
     
     const selectHandler = (e)=>{
         setDays(e.target.value)
@@ -12,44 +18,48 @@ const ReportModal = ({ name, report, reportman, onClose }) => {
             alert("제재 기간을 입력해주세요!")
             return;
         }
+        
 
-        const crimimnal = {
-          id: 1,
-          days: 2
+        const criminal = {
+          id: id,
+          blockPeriod: days,
         }
-        axios.post("/opinion/report/process", crimimnal).then((res)=>{
-          console.log(res);
-        }).catch((err)=>{
-          console.log(err)
-        })
+        dispatch(reportApproval(criminal));
+        // axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{
+        //   console.log(res);
+        // }).catch((err)=>{
+        //   console.log(err)
+        // })
         
        
-        console.log(crimimnal);
+        console.log(criminal);
         
     }
 
   return (
     <div className={styles.ReportModal}>
-      <h1>신고처리</h1>
-
+      <h1 className={styles.title}>신고처리 <img src={reportBell} style={{width:"60px", height: "60px"}}></img></h1>
       <h3>신고 유저</h3>
-      <div className={styles.name}>{name}</div>
+      <div className={styles.name}>{writerName}</div>
       <h3>피신고 유저</h3>
-      <div className={styles.name}>{reportman}</div>
+      <div className={styles.name}>{targetName}</div>
+      <h3>신고분류</h3>
+      <div className={styles.name}>{reportType}</div>
       <h3>신고사유</h3>
-      <div className={styles.report}>{report}</div>
+      <div className={styles.report}>{memo}</div>
 
       <div className={styles.process}>
         <div className={styles.process_reportman}>
           <div className={styles.process_title}>제재유저</div>
-          <div className={styles.process_name}>{reportman}</div>
+          <div className={styles.process_name}>{targetName}</div>
         </div>
 
         <div className={styles.process_sanctions}>
           <div className={styles.process_title}>제재일수</div>
 
           <div className={styles.process_select}>
-            <select onChange={selectHandler} defaultValue={""}>
+            <select onChange={selectHandler} defaultValue={days}>
+              <option value={""}>기간</option>
               <option value={0}>무죄</option>
               <option value={1}>1일</option>
               <option value={3}>3일</option>

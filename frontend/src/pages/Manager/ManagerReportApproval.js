@@ -1,119 +1,70 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import BasicLoadingSpinner from "../../components/Loading/BasicLoadingSpinner";
 import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
-const dummydata = [
-  {
-    id: 1,
-    name: "정원철",
-    gender: "남",
-    birth: "1997.03.16",
-    email: "GOOGLE@GMAIL.COM",
-    award: "NABBA KOREA -78KG 체급 1위",
-    cirt: "생활체육지도사 자격증 2급",
-    career: "마이짐 휘트니스 2001.03 - 2002.02",
-    report: "폭행을 했습니다.",
-    reportman: "이예은",
-  },
-  {
-    id: 2,
-    name: "정원철",
-    gender: "남",
-    email: "GOOGLE@GMAIL.COM",
-    birth: "1997.03.16",
-    award: "NABBA KOREA -78KG 체급 1위",
-    cirt: "생활체육지도사 자격증 2급",
-    career: "마이짐 휘트니스 2001.03 - 2002.02",
-    report: "추행을 했습니다.",
-    reportman: "안려환",
-  },
-  {
-    id: 3,
-    name: "정원철",
-    gender: "남",
-    email: "GOOGLE@GMAIL.COM",
-    birth: "1997.03.16",
-    award: "NABBA KOREA -78KG 체급 1위",
-    cirt: "생활체육지도사 자격증 2급",
-    career: "마이짐 휘트니스 2001.03 - 2002.02",
-    report: "강도질을 했습니다.",
-    reportman: "지선호",
-  },
-];
+import { reportList,reportApproval } from "../../store/admin";
+
 
 const ManagerReportApproval = () => {
-
-  const [loading, setLoading] = useState(false);
-  const [reportList, setReportList] = useState([]);
-  const onReportListCreate=() =>{
-    setLoading(true);
-
-    setTimeout(()=>{
-      axios.get("/api/business/opinion/report/list")
-      .then((res)=>{
-          console.log(res.data);
-          const data= res.data;
-          const reportlist= data.map(it=>{
-            //  형식 정해지면 넣을거임
-            return{
+  const dispatch= useDispatch();
   
-            }
-          })
-          setLoading(false);
-          setReportList(reportlist);
-        })
-        .catch((err)=>{
-        setLoading(false);
-          console.log(err);
-      })
-    },500)
-   
-}
+  const [loading, setLoading] = useState(false);
+  const [report, setReport] = useState([]);
+  
+  // setLoading(true);
+      
   useEffect(()=>{
-    onReportListCreate();
+    // 신고목록 API 설정
+    dispatch(reportList()).then((res)=>{
+      console.log(res.content);
+      setReport(res.content);
+    })
+
   }, [])
-
-
-
-
-
 
   const [modal, setModal] = useState({
     show: false,
-    name: "",
-    reportman: "",
-    report: "",
+    writerName: "",
+    targetName: "",
+    reportType: "",
+    memo:"",
+    id:""
   });
 
-  const handleOpenModal = (name, reportman, report) => {
+  const handleOpenModal = (writerName, targetName ,reportType, memo,id) => {
     setModal({
       show: true,
-      name,
-      reportman,
-      report,
+      writerName,
+      targetName,
+      reportType,
+      memo,
+      id,
     });
   };
 
   const handleCloseModal = () => {
     setModal({
       show: false,
-      name: "",
-      reportman: "",
-      report: "",
+      writerName: "",
+      targetName: "",
+      reportType: "",
+      id:"",
+      memo: "",
     });
   };
 
 
-  const reportHandler = (name, days)=>{
-    if(!days || name){
-        return;
-    }
-    const baseURL=""
-    axios.post(baseURL+"/report/process",{name: name, days:days})
-
-  }
+  // 신고 승인/반려 API 인자 설정중
+  // const reportHandler = (name, days)=>{
+  //   if(!days || name){
+  //       return;
+  //   }
+  //   const data = {id: name, blockPeriod: days}
+  //   dispatch(reportApproval(data))
+  // }
   return (
     <>
       <div className={styles.info_content_box}>
@@ -123,32 +74,35 @@ const ManagerReportApproval = () => {
         <span>불편함을 느낀 MPTI 고객님들의 목소리에 귀를 기울여 주세요!</span>
         <div className={styles.content_content}>
           <ul className={styles.content_list}>
-            {dummydata.map((it) => {
+            {report.map((it) => {
               return (
-                <li key={it.id} className={styles.content_item}>
+              
+                <li key={it.id} style={it.stopUntil? {backgroundColor:"red"}:null} className={styles.content_item}>
                   <div className={styles.item_info_box}>
                     <div className={styles.item_info}>
-                      <div>성명: {it.name}</div> |<div>E-MAIL: {it.email} </div>{" "}
-                      |<div>생년월일 : {it.birth}</div>
+                      <div>신고자: {it.writerName}</div>| <div>피신고자: {it.targetName}</div> |<div>사건 분류: {it.reportType} </div>{" "}
+                      
                     </div>
                     <div className={styles.item_btn}>
                       <button
                         className={styles.btn_negative}
                         onClick={() =>
-                          handleOpenModal(it.name, it.reportman, it.report)
+                          handleOpenModal(it.writerName,it.targetName,  it.reportType, it.memo, it.id)
                         }
                       >
                         확인
                       </button>
                     </div>
                   </div>
-                  {loading ? <BasicLoadingSpinner /> : null}
+                  
                   {modal.show && (
                     <ReportModalContainer onClose={handleCloseModal}>
                       <ReportModal
-                        name={modal.name}
-                        reportman={modal.reportman}
-                        report={modal.report}
+                        writerName={modal.writerName}
+                        targetName={modal.targetName}
+                        reportType={modal.reportType}
+                        memo={modal.memo}
+                        id={modal.id}
                         onClose={handleCloseModal}
                       />
                     </ReportModalContainer>

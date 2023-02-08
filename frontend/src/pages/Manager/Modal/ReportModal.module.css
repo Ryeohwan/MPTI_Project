@@ -1,19 +1,27 @@
 
-
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../../assets/fonts/DungGeunMo.ttf');
+}
 .ReportModal {
     width: 530px;
-    height: 700px;
+    height: 720px;
     padding: 25px;
     color: #ececec;
     background-color: red;
     background: #4E4E4E;
     border-radius: 10px;
     border: 1px solid #ececec;
+    font-family: "DungGeunMo";
+    /* transition: all 0.3s ease-out; */
+}
+.title{
+    font-family: "DungGeunMo";
+    color: #ececec;
+    display: flex;
+    align-items: center;
 }
 
-h1{
-    padding-bottom: 20px;
-}
 .name{
     width: 100%;
     height: 40px;
@@ -24,7 +32,7 @@ h1{
 }
 .report{
     width: 100%;
-    height: 160px;
+    height: 150px;
     padding: 15px;
     background-color: #6F768A;
     border-radius: 2px;
@@ -85,7 +93,7 @@ h1{
 }
 
 .btnbox{
-    margin-top: 40px;
+    margin-top: 15px;
     /* background-color: red; */
     width: 100%;
     display: flex;
@@ -94,13 +102,20 @@ h1{
 
 
 .btnbox button{
-font-family: 'DungGeunMo';
-  width: 140px;
-  height: 50px;
+  font-family: 'DungGeunMo';
+  width: 100px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
   font-size: 18px;
   border-style: none;
   border-radius: 5px;
   color: #ececec;
+  cursor: pointer;
+}
+
+.btnbox button:hover{
+    border: 1px solid white;
 }
 
 .btn_no{
@@ -108,5 +123,6 @@ font-family: 'DungGeunMo';
 }
 
 .btn_ok{
-    background-color: #ABD752;
+    background-color:palevioletred
+    /* #ABD752; */
 }

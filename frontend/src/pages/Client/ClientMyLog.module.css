@@ -18,21 +18,22 @@
 .log_graph {
     padding: 15px;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     /* background-color: pink; */
     background-color: black;
     border-radius: 5px;
-    width: 100%;
+    width: 60%;
     border: 1px solid white;
 }
 
 .log_recommend {
     padding: 15px;
-    width: 40%;
+    width: 35%;
     border-radius: 5px;
     background-color: black;
     border-radius: 5px;
     border: 1px solid white;
+    word-wrap: break-word;
 }
 
 .sub_content {
@@ -130,6 +131,24 @@
 }
 
 .graph_part {
-    background-color: blue;
+    /* background-color: blue; */
     display: flex;
+}
+.graph_info{
+    display: grid;
+    grid-template-columns:repeat(2,150px);
+    grid-template-rows: 41px 41px 41px 41px;
+    /* background-color: red; */
+}
+.part{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.part_color{
+    width: 40px;
+    height: 20px;
+
+    border-radius: 5px;
 }

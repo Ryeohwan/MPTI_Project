@@ -1,26 +1,26 @@
 .calendar {
-  width: 70%;
-  color: white;
+  width: 100%;
+  height: 100%;
   font-family: 'DungGeunMo';
-  border: 1px solid #808080;
+  /* border: 1px solid #808080; */
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
+  background-color: whitesmoke;
 }
 .calendarBody {
-  height: 80%;
+  height: 90%;
   margin-top: 1%;
   margin-left: 2%;
   margin-right: 2%;
   padding-left: 2%;
   padding-right: 2%;
   padding-top: 0.5%;
-  /* background: #7f7f7f; */
-  border: 1px solid grey;
+  border: 1px solid rgb(189, 189, 189);
   border-radius: 5px;
 }
 .header {
   width: 100%;
-  height: 30px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -28,6 +28,7 @@
   padding-left: 2%;
   padding-right: 2%;
   padding-top: 1%;
+  color:black;
 }
 
 .headerRow {
@@ -65,7 +66,7 @@
   font-weight: 600;
   font-size: 0.65em;
   padding: 2px;
-  color: white;
+  color: black;
 }
 
 .calendarDaysCol {
@@ -76,7 +77,6 @@
   justify-content: flex-end;
   align-items: center;
   padding: 1%;
-  /* background: grey; */
   border-radius: 2px;
   margin-bottom: 7px;
 }
@@ -86,14 +86,16 @@
   height: 89%;
   display: flex;
   flex-direction: column;
+  color: black;
 }
 
 .bodyRow {
   width: 100%;
   height: 100%;
+  margin-left: 1%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: space-between;
+  color: black;
 }
 
 .bodyRowCol {
@@ -101,10 +103,9 @@
   margin-bottom: 1px;
   height: 78px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  /* border: 0.4px solid rgba(0, 0, 0, 0.4); */
   border-radius: 3px;
   font-size: 0.8em;
 }
@@ -114,19 +115,22 @@
 }
 
 .bodyRowColNotValid {
-  color: #808080;
+  color: #6e6e6e;
+  border-radius: 3px;
+  font-size: 0.8em;
+  opacity: 60%;
 }
 
 .bodyRowColValid:hover {
   cursor: pointer;
   transform: scale(1.01);
-  border: 2px solid #C9FD61;
-  color: #C9FD61;
+  border: 2px solid #c5c5c5;
+  color: #c5c5c5;
 }
 
 .bodyRowColSellect {
   transform: scale(1.02);
-  /* border: 1.5px solid #808080; */
+  border: 2px solid #C9FD61;
   color: #C9FD61;
-  font-weight: 600;
+  font-weight: 500;
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ClientMyReservation.module.css";
 import TopTitle from "../../components/Common/TopTitle";
@@ -8,12 +8,28 @@ import moment from "moment";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "./DateTimePickerCustom.css";
 import TrainerCard from "../../components/Card/TrainerCard";
+import axios from "axios";
+import { async } from "q";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());
   const [text, setText] = useState("");
+  const [trainer, setTrainer] = useState([]);
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    const asyncfunc = async () => {
+      try {
+        const response = await axios.get("/api/trainer/list/0");
+        const trainer = response.data.content;
+        await setTrainer(trainer);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    asyncfunc();
+  }, []);
   const [item, setItem] = useState("");
 
   const onChange = (e) => {
@@ -96,9 +112,8 @@ const ClientMyReservation = () => {
       )}
 
       <div className={styles.home_trainer_box}>
-        <Link to={"/clienttrainerdetail"}>
-          <TrainerCard />
-        </Link>
+        <TrainerCard trainers={trainer} />
+
       </div>
     </div>
   );

@@ -1,11 +1,8 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
-    name: "",
-    email: "",
-    phone: "",
-    image: "",
     isLoading: false,
     error: null,
     isCheckMsg: ""
@@ -59,7 +56,28 @@ export const trainerDetail = (email) => async (dispatch) => {
     }
 }
 
-export const reviewList = ()
+export const reviewList = () => async(dispatch) =>{
+    try {
+        const response = await axios.get(`/api/business/opinion/review/list`);
+        console.log(response.data);
+        console.log("리뷰 리스트 소환");
+        return response.data;
+    } catch (error) {
+
+    }
+}
+
+export const workoutList = (email) => async(dispatch) =>{
+
+    try {
+        const response = await axios.get(`/api/user/status/${email}`)
+        console.log(response.data);
+        console.log("운동 데이터 불러오기 성공");
+        return response.data;
+    } catch (error) {
+        console.log("운동 데이터 불러오기 실패");
+    }
+}
 
     
 
