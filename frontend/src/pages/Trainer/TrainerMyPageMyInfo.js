@@ -48,21 +48,21 @@ const TrainerMyPageMyInfo=(props)=>{
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value, index)=> <div key={index}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 수상 */}
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value, index)=> <div key={index}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 경력 */}
                             <div className={styles.in_box}> 
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value)=> <div className={styles.awards_box} key={value.name}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value, index)=> <div className={styles.awards_box} key={index}>{value} </div>)}</div></div>
                                     </div>
                             </div>
                             </div>
@@ -91,21 +91,21 @@ const TrainerMyPageMyInfo=(props)=>{
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.license).map((value,index)=> <div key={index}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 수상 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value)=> <div key={value}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.awards).map((value,index)=> <div key={index}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 경력 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value)=> <div className={styles.awards_box} key={value.name}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(props.trainerInfo.career).map((value,index)=> <div className={styles.awards_box} key={index}>{value} </div>)}</div></div>
                                     </div>
                                 </div>
                             </div>
