@@ -33,13 +33,8 @@ import { useSelector } from 'react-redux';
 export default function App(){
    const [type, setType] = useState('client')
    const [token, setToken] = useState(localStorage.getItem("access_token"));
-<<<<<<< HEAD
    //const {isLoading} = useSelector(state=> state.auth);
    const {isLoading} = useSelector(state=> state.admin);
-=======
-
-   //localStorage.setItem('token','123')
->>>>>>> feature/FE/trainer/mypage/api
 
   return (
       <div className="App">
