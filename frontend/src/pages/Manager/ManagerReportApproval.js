@@ -6,11 +6,16 @@ import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
 import { reportList,reportApproval } from "../../store/admin";
-
+import Pagination from "react-js-pagination";
 
 const ManagerReportApproval = () => {
   const dispatch= useDispatch();
-  
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    console.log(page);
+    setPage(page);
+  };
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState([]);
   
@@ -111,6 +116,17 @@ const ManagerReportApproval = () => {
               );
             })}
           </ul>
+        </div>
+        <div className={styles.pagenation}>
+          <Pagination
+      activePage={page}
+      itemsCountPerPage={5}
+      totalItemsCount={37}
+      pageRangeDisplayed={5}
+      prevPageText={"‹"}
+      nextPageText={"›"}
+      onChange={handlePageChange}
+    />
         </div>
       </div>
     </>

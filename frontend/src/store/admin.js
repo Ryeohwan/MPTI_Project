@@ -31,7 +31,7 @@ const adminSlice = createSlice({
 export const signupTrainerList = (pagenum) => async(dispatch)=>{
         dispatch(adminActions.dataRequest())
     try {
-        const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data.content;
+        const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data;
         console.log(response)
         console.log("가입승인 목록 리스트 불러오기 성공");
         dispatch(adminActions.dataSuccess())
