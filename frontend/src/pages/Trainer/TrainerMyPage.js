@@ -10,18 +10,40 @@ import TrainerMyPageMySchedule from './TrainerMyPageMySchedule'
 import {Routes, Route} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
+<<<<<<< HEAD
 
 
 const review_url = '/api/business/opinion/review/trainer/list/'
 const info_url = '/api/trainer/info/'
+=======
+// 트레이너 review, info api
+const request_url_review = '/api/business/opinion/review/trainer/list/'
+const request_url_info = '/api/trainer/info/'
+>>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
 const paths = ['myschedule', 'myreview', 'myinfo']
 
 const TrainerMyPage = (props) => {
+<<<<<<< HEAD
     const {email, id} = useSelector((state) => state.etc);
     const [myInfo, setMyInfo] = useState(null);
     
     const [myReview, setMyReview] = useState([]);
     const [reviewPage, setReviewPage] = useState(0);
+=======
+    // 트레이너 email
+    const {email} = useSelector((state) => state.etc);
+    //트레이너 id
+    const id =1
+    // 트레이너 info
+    const [trainerInfo, setTrainerInfo] = useState(undefined);
+    // 트레이너 review
+    const [reviews, setReviews] = useState([]);
+    // 총 리뷰 페이지수
+    const [pages, setPages] = useState(undefined)
+    // 리뷰 페이지
+    const [selectPage, setSelectPage] = useState(1)
+    // 현재 클릭한 메뉴(url)
+>>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
     const [url, setUrl] = useState(()=> {
         for(let i=0; i<paths.length; i++){
             if(window.location.pathname.endsWith(paths[i])){
@@ -30,6 +52,19 @@ const TrainerMyPage = (props) => {
         }
     })
     useEffect(() => {
+<<<<<<< HEAD
+=======
+        async function getReview(){
+            const newReviews = await axios.get(request_url_review+(id).toString()+'/'+(selectPage-1).toString())
+            setReviews(newReviews.data.content)
+            setPages(newReviews.data.totalElements)
+        }
+        async function getInfo(){
+            const newInfo =await axios.get(request_url_info+email)
+            setTrainerInfo(newInfo.data)
+        }
+        // url(선택한 메뉴)에 따라 받아오는 정보가 다르다.
+>>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
         switch (url) {
             case "myreview":
                 if(!myReview.length){
@@ -61,8 +96,13 @@ const TrainerMyPage = (props) => {
                     <TrainerMyPageMenu id='my_page_menu' url={url} setUrl={setUrl}/>
                 </div>
                 <Routes>
+<<<<<<< HEAD
                     {myInfo && <Route path='/myinfo' element={<TrainerMyPageMyInfo myInfo={myInfo} setMyInfo={setMyInfo} />}/>}
                     <Route path='/myreview' element={<TrainerMyPageMyReview reviews={myReview}/>}/>
+=======
+                    {trainerInfo && <Route path='/myinfo' element={<TrainerMyPageMyInfo trainerInfo={trainerInfo} setTrainerInfo={setTrainerInfo} />}/>}
+                    <Route path='/myreview' element={<TrainerMyPageMyReview reviews={reviews}/>}/>
+>>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
                     <Route path='/myschedule' element={<TrainerMyPageMySchedule />}/>
                 </Routes>
             </div>
