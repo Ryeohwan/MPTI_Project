@@ -23,7 +23,7 @@ const Calendar = ({ allData, getDaySchedule }) => {
     setClick(!click);
     getDaySchedule(intDate);
   }
-
+  
   return (
     <div className={styles.calendar}>
       <CalendarHeader

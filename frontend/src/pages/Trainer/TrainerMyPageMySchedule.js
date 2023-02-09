@@ -3,14 +3,30 @@ import styles from "./TrainerMyPageMySchedule.module.css";
 import Calendar from "../../components/Calendar/Calendar";
 import axios from "axios";
 
+
 const TrainerMyPageMySchedule = () => {
   const morning = [6, 7, 8, 9, 10, 11];
   const afternoon = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-  const [allData,setAllData] = useState([]);        // get으로 처음 가져온 모든 데이터(예약된 거 + 안 된 거)
-  const [timeArray, setTimeArray] = useState([]);   // 이미 예약된 레슨 시간 + 내가 열어둔 레슨 시간
+  
+  const [allData,setAllData] = useState([]);                  // get으로 처음 가져온 모든 데이터(예약된 거 + 안 된 거)
   const [reservedHour, setReservedHour] = useState([]);       // 클릭한 날짜의 가능 레슨 시간들 중 회원이 예약한 시간만 담은 데이터
-  const [clickedDay, setClickedDay] = useState([]);         // 캘린더에서 클릭한 날짜
-  const [daySchedule, setDaySchedule] = useState([]);   // 캘린더에서 클릭한 날짜의 데이터를 daySchedule에 저장
+  const [clickedDay, setClickedDay] = useState([]);           // 캘린더에서 클릭한 날짜
+  const [daySchedule, setDaySchedule] = useState([]);         // 캘린더에서 클릭한 날짜의 데이터를 daySchedule에 저장
+  const [timeArray, setTimeArray] = useState([]);             // 이미 예약된 레슨 시간 + 내가 열어둔 레슨 시간
+  const [click, setClick] = useState(false)
+
+  const postClick = () => {
+    setClick(!click)
+  }
+  
+  // 수정 완료 버튼 누를 때(post)마다 재렌더링
+  useEffect(() => {
+    async function getReservation(){
+      const data = await axios.get("/api/business/reservation/list/0");
+      setAllData(data.data.content);
+    };
+    getReservation();
+  }, [click])
 
   // # 캘린더에서 클릭한 날짜의 특정 스케쥴 받아온 clickedDaySchedule을 props로 올려받음
   async function getDaySchedule(intDate){
@@ -133,7 +149,7 @@ const TrainerMyPageMySchedule = () => {
             ))}
           </div>
         </div>
-        <div className={styles.edit} onClick={() => {sendData();}}>완료🖍</div>
+        <div className={styles.edit} onClick={() => {sendData();postClick();}}>완료🖍</div>
       </div>
     </div>
   );

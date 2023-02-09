@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ClientMyLog.module.css'
 import TopTitle from '../../components/Common/TopTitle'
 import { workoutList } from '../../store/etc';

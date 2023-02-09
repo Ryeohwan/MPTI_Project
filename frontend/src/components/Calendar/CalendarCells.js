@@ -4,6 +4,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
+import { Icon } from '@iconify/react';
 
 const CalendarCells = ({
   currentMonth,
@@ -30,7 +31,11 @@ const CalendarCells = ({
       const intDate = formatDay.split("-").map((item) => parseInt(item));
     
       const reservedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
-      
+      const openedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2])
+      const openedHour = openedData.map((item) => item.hour)
+      const reservedSchedule =  reservedData.map((item) => <li key={item.id}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
+      const [first, second, third, ...rest] = reservedSchedule;
+
       days.push(
         <div
           className={`${styles.bodyRowCol} ${
@@ -60,12 +65,18 @@ const CalendarCells = ({
             }
           >
             {formattedDate}
+            <span>
+              { openedHour.length !== 0 ? <Icon icon="material-symbols:lens" className={styles.openedHourIcon}/> : null}
+            </span>
           </div>
 
           <div>
             { reservedData.length !== 0 ? (
               <div>
-                { reservedData.map((item) => <li key={item.id}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)}
+                {first}
+                {second}
+                {third}
+                {rest.length !== 0 ? "..." : null}
               </div>
             ) : null}
           </div>
