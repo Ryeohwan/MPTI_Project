@@ -7,7 +7,6 @@ const update_url = "/api/user/update"
 const ClientMyPageMyInfo = ({userInfo, setUserInfo}) => {
     const info_list=['이름', '성별', '생년월일', '이메일', '핸드폰']
     const [edit, setEdit] = useState(false);
-<<<<<<< HEAD
     const [showModal, setShowModal] = useState(false);
 // userInfo({name:'이름', gender:'성별', })
 
@@ -32,10 +31,6 @@ const ClientMyPageMyInfo = ({userInfo, setUserInfo}) => {
             document.getElementById('password').focus()
         }
     }
-=======
-
-
->>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
     
     return(
         <div className={styles.container}> 

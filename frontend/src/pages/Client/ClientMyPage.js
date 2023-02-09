@@ -10,19 +10,6 @@ const infoUrl="/api/user/info"
 const reviewUrl="/api/business/opinion/review/list"
 
 
-<<<<<<< HEAD
-=======
-const ClientMyPage = () => {
-    const [info,setInfo] = useState(undefined);
-    if(!info){
-        // email로 내 개인정보 가져오기
-        async function getInfo() {
-            const data= await axios.post(infoUrl,{email:"wonchul97@gmail.com"})
-            console.log(data)
-        }
-        getInfo()
-    }
->>>>>>> 3f985f2bdecff38d9e098d6c6af5101e040ad38a
 
 const email = 'asdf@naver.com'
 const user_url ='/api/user/upload'

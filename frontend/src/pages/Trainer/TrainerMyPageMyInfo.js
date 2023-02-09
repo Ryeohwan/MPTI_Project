@@ -9,9 +9,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
     console.log(myInfo)
     const email = myInfo.email
     const [edit,setEdit] = useState(false);
-
-    // 수정 버튼 누르면 실행.
-    async function setInfo(e) {
+    const setInfo = async (e) => {
         e.preventDefault()
         if(e.target.phone.value!==myInfo.phone){
             const data = await axios.post(request_url+email, {phone:e.target.phone.value})
@@ -28,7 +26,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
             {
                 !myInfo?null:
                 edit?
-                    <form className={styles.out_box} method='POST' onSubmit={(e) => {setInfo(e);}}>
+                    <form className={styles.out_box} method='PoST' onSubmit={(e) => {setInfo(e);}}>
                         <div className={styles.content_box}>
                             {/* 이메일 */}
                             <div className={styles.in_box}>
