@@ -1,10 +1,33 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+// 트레이너 더미 데이터
+// const initialState = {
+//     id:12,
+//     name: "이예은",
+//     email: "dodamond@naver.com",
+//     phone: "01012345678",
+//     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
+//     isLoading: false,
+//     error: null,
+//     role:"trainer",
+//     isCheckMsg: ""
+// };
 
+<<<<<<< HEAD
 
 const initialState = {
+=======
+// 회원 더미 데이터
+const initialState = {
+    id:1,
+    name: "Axe",
+    email: "aschettini0@biglobe.ne.jp",
+    phone: "107-463-1245",
+    s3url: "https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/220px-Eulyongta+(1).jpg",
+>>>>>>> feature/FE/trainer/mypage/api
     isLoading: false,
     error: null,
+    role:"ROLE_USER",
     isCheckMsg: ""
 };
 
@@ -56,6 +79,7 @@ export const trainerDetail = (email) => async (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 export const reviewList = () => async(dispatch) =>{
     try {
         const response = await axios.get(`/api/business/opinion/review/list/0`);
@@ -78,6 +102,8 @@ export const workoutList = (email) => async(dispatch) =>{
         console.log("운동 데이터 불러오기 실패");
     }
 }
+=======
+>>>>>>> feature/FE/trainer/mypage/api
 
     
 

@@ -54,7 +54,12 @@ const onSubmitHandler = (e)=>{
 
 return (
     <div className={styles.Login}> 
+<<<<<<< HEAD
 
+=======
+    {isLoading ? <BasicLoadingSpinner/>: 
+    <>
+>>>>>>> feature/FE/trainer/mypage/api
     <div className={styles.header_box}>
                 <div className={styles.header}>MPTI</div>
             </div>
