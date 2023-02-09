@@ -17,7 +17,16 @@ const TrainerClientBody = (props) => {
     {id: 6, name: '안려환', gender:'남', age:28, time:'14:00 - 15:00'}
 ];
 
+    useEffect(()=>{
+    const data=JSON.stringify({id:0});
+    console.log(data);
+    axios.post("/api/user/userList/0", {id:1}).then(res=>{
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    })
 
+    },[])
 
 
     

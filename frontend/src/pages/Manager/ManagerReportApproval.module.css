@@ -2,6 +2,8 @@
     /* background-color: skyblue; */
     width: 100%;
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -14,7 +16,8 @@
 }
 
 .content_content {
-    margin-top: 10px;
+    /* background-color: red; */
+    height: 100%;
 }
 
 .content_list {

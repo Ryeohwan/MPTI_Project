@@ -6,24 +6,37 @@ import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
 import { reportList,reportApproval } from "../../store/admin";
-
+import Pagination from "react-js-pagination";
 
 const ManagerReportApproval = () => {
   const dispatch= useDispatch();
-  
-  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [report, setReport] = useState([]);
-  
-  // setLoading(true);
-      
+  const [totalPage, setTotalPage]= useState(0);
+  const handlePageChange = (page) => {
+    console.log(page);
+    setPage(page);
+  };
+
   useEffect(()=>{
     // 신고목록 API 설정
-    dispatch(reportList()).then((res)=>{
-      console.log(res.content);
-      setReport(res.content);
+    dispatch(reportList(page-1)).then((res)=>{
+      console.log(res);
+      setTotalPage(res.totalElements);
+      const sortedReport =res.content.sort((a,b)=> {
+        if (a.stopUntil === null) {
+          return -1;
+        }
+        if (b.stopUntil === null) {
+          return 1;
+        }
+        return a.stopUntil.localeCompare(b.stopUntil);
+      } );
+      console.log(sortedReport[0].stopUntil);
+      setReport(sortedReport);
     })
 
-  }, [])
+  }, [page])
 
   const [modal, setModal] = useState({
     show: false,
@@ -111,6 +124,17 @@ const ManagerReportApproval = () => {
               );
             })}
           </ul>
+        </div>
+        <div className={styles.pagenation}>
+          <Pagination
+      activePage={page}
+      itemsCountPerPage={8}
+      totalItemsCount={totalPage}
+      pageRangeDisplayed={5}
+      prevPageText={"‹"}
+      nextPageText={"›"}
+      onChange={handlePageChange}
+    />
         </div>
       </div>
     </>

@@ -1,7 +1,10 @@
 .info_content_box {
     /* background-color: skyblue; */
     width: 100%;
+    height: 660px;
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -18,11 +21,12 @@
 }
 
 .content_content {
-    margin-top: 10px;
+    /* background-color: red; */
+    height: 100%;
 }
 
 .content_item {
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     width: 100%;
     height: 130px;
     background-color: #454648;

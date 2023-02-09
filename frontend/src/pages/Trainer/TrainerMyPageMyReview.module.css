@@ -36,6 +36,7 @@
 .content_box{
     display: flex;
     flex-flow: column;
+    width: 100%;
     min-height: 385px;
     gap: 20px;
 }
@@ -47,22 +48,15 @@
 }
 
 .review_top_left{
-    display: flex;
-    flex-flow: row;
+    display: grid;
+    grid-template-columns: 130px 370px 1fr;
     align-items:center;
-    line-height: 0;
+    justify-content: center;
+    align-content: center;
 
 }
 
-.review_top_right{
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-    font-size: 25px;
-}
-
-.review_email{
-    margin-top: 0;
+.review_time{
     font-size: 15px;
 }
 

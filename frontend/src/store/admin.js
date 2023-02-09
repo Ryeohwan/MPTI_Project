@@ -31,7 +31,7 @@ const adminSlice = createSlice({
 export const signupTrainerList = (pagenum) => async(dispatch)=>{
         dispatch(adminActions.dataRequest())
     try {
-        const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data.content;
+        const response=await (await axios.get(`/api/trainer/application/list/${pagenum}`)).data;
         console.log(response)
         console.log("가입승인 목록 리스트 불러오기 성공");
         dispatch(adminActions.dataSuccess())
@@ -59,10 +59,10 @@ export const signupApproval = (choice) => async(dispatch)=>{
     }
 }
 // 신고목록 API
-export const reportList = () => async(dispatch)=>{
+export const reportList = (pagenum) => async(dispatch)=>{
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.get("/api/business/opinion/report/list/0");
+        const response=await axios.get(`/api/business/opinion/report/list/${pagenum}`);
         const data= response.data;
         console.log(data, "신고목록 불러오기 성공");
         dispatch(adminActions.dataSuccess())
@@ -75,10 +75,10 @@ export const reportList = () => async(dispatch)=>{
 
 // 신고 승인/반려 API
 export const reportApproval = (data) => async(dispatch)=>{
-    console.log(data);
+    console.log(JSON.stringify(data));
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.post("/api/business/opinion/report/process",data);
+        const response=await axios.post(`/api/business/opinion/report/process`,data);
         console.log(response, "신고 승인/반려처리 성공");
         dispatch(adminActions.dataSuccess())
     

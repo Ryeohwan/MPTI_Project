@@ -3,11 +3,18 @@ import React, { useEffect, useState } from "react";
 import styles from "./ManagerAccountManagement.module.css";
 import { useDispatch } from 'react-redux';
 import { accountList, accountDelete } from "../../store/admin";
+import './Paging.css';
+import Pagination from "react-js-pagination";
 const ManagerAccountManagement = () => {
 
   const disapatch = useDispatch();
   const [account, setAccount] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage]= useState(0);
+  const handlePageChange = (page) => {
+    console.log(page);
+    setPage(page);
+  };
   useEffect(()=>{
 
     disapatch(accountList()).then((res)=>{
@@ -48,6 +55,17 @@ const ManagerAccountManagement = () => {
             }
       
           </ul>
+        </div>
+        <div className={styles.pagenation}>
+          <Pagination
+      activePage={page}
+      itemsCountPerPage={8}
+      totalItemsCount={totalPage}
+      pageRangeDisplayed={5}
+      prevPageText={"‹"}
+      nextPageText={"›"}
+      onChange={handlePageChange}
+    />
         </div>
       </div>
     </>

@@ -1,10 +1,23 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+// 트레이너 더미 데이터
+// const initialState = {
+//     id:12,
+//     name: "이예은",
+//     email: "dodamond@naver.com",
+//     phone: "01012345678",
+//     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
+//     isLoading: false,
+//     error: null,
+//     role:"trainer",
+//     isCheckMsg: ""
+// };
 
 
 const initialState = {
     isLoading: false,
     error: null,
+    role:"ROLE_USER",
     isCheckMsg: ""
 };
 
@@ -58,12 +71,12 @@ export const trainerDetail = (email) => async (dispatch) => {
 
 export const reviewList = () => async(dispatch) =>{
     try {
-        const response = await axios.get(`/api/business/opinion/review/list`);
-        console.log(response.data);
+        const response = await axios.get(`/api/business/opinion/review/list/0`);
+        console.log(response.data.content);
         console.log("리뷰 리스트 소환");
-        return response.data;
+        return response.data.content;
     } catch (error) {
-
+        console.log("리뷰 리스트 실패");
     }
 }
 
