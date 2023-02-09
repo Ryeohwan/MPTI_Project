@@ -70,3 +70,9 @@
     font-size: 15px;
     overflow-wrap: break-word;
 }
+
+.no_review{
+    text-align: center;
+    font-size: 30px;
+    color: #222222;
+}
