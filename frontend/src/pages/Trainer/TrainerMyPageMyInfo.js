@@ -4,16 +4,16 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 
 const request_url = '/api/trainer/info/update/'
-// const trainer_id = 'qwer@naver.com'
 
-const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
-    const {email} = useSelector((state) => state.etc);
+const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
+    console.log(myInfo)
+    const email = myInfo.email
     const [edit,setEdit] = useState(false);
     const setInfo = async (e) => {
         e.preventDefault()
-        if(e.target.phone.value!==trainerInfo.phone){
+        if(e.target.phone.value!==myInfo.phone){
             const data = await axios.post(request_url+email, {phone:e.target.phone.value})
-            setTrainerInfo(data.data)
+            setMyInfo(data.data)
             setEdit(false);
             return;
         }
@@ -24,7 +24,7 @@ const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
         <div className={styles.container}> 
             <div className={styles.content_title}>내 개인정보</div>
             {
-                trainerInfo===null?null:
+                !myInfo?null:
                 edit?
                     <form className={styles.out_box} method='PoST' onSubmit={(e) => {setInfo(e);}}>
                         <div className={styles.content_box}>
@@ -32,35 +32,35 @@ const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>💌이메일</div> 
-                                        <div className={styles.right}>{trainerInfo.email}</div>
+                                        <div className={styles.right}>{myInfo.email}</div>
                                     </div>
                                 </div>
                             {/* 휴대폰 */}
                             <div className={styles.in_box}>
                                 <div className={styles.in_box_content}>
                                     <div className={styles.left}>📞휴대폰</div> 
-                                    <input name="phone" defaultValue={trainerInfo.phone} className={`${styles.right} ${styles.input_box}`}></input>
+                                    <input name="phone" defaultValue={myInfo.phone} className={`${styles.right} ${styles.input_box}`}></input>
                                 </div>
                             </div>
                             {/* 자격증 */}
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.license).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.license).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 수상 */}
                             <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.awards).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.awards).map((value,index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                             {/* 경력 */}
                             <div className={styles.in_box}> 
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
                                     </div>
                             </div>
                             </div>
@@ -75,35 +75,35 @@ const TrainerMyPageMyInfo=({trainerInfo, setTrainerInfo})=>{
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>💌이메일</div> 
-                                        <div className={styles.right}>{trainerInfo.email}</div>
+                                        <div className={styles.right}>{myInfo.email}</div>
                                     </div>
                                 </div>
                                 {/* 휴대폰 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📞휴대폰</div> 
-                                        <div className={styles.right}>{trainerInfo.phone}</div>
+                                        <div className={styles.right}>{myInfo.phone}</div>
                                     </div>
                                 </div>
                                 {/* 자격증 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>📜자격증</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.license).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.license).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 수상 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>🏆수상</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.awards).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.awards).map((value, index)=> <div key={`${value}-${index}`}>{value}</div>)}</div></div>
                                     </div>
                                 </div>
                                 {/* 경력 */}
                                 <div className={styles.in_box}>
                                     <div className={styles.in_box_content}>
                                         <div className={styles.left}>👨‍🎓경력</div> 
-                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(trainerInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
+                                        <div className={styles.right}><div className={styles.right}>{JSON.parse(myInfo.career).map((value, index)=> <div className={styles.awards_box} key={`${value}-${index}`}>{value} </div>)}</div></div>
                                     </div>
                                 </div>
                             </div>

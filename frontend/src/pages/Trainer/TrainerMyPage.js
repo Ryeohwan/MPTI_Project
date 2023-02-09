@@ -11,14 +11,17 @@ import {Routes, Route} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 
-const request_url_review = '/api/business/opinion/review/list'
-const request_url_info = '/api/trainer/info/'
-const trainer_id = 'qwer@naver.com'
+
+const review_url = '/api/business/opinion/review/trainer/list/'
+const info_url = '/api/trainer/info/'
 const paths = ['myschedule', 'myreview', 'myinfo']
+
 const TrainerMyPage = (props) => {
-    const {email} = useSelector((state) => state.etc);
-    const [trainerInfo, setTrainerInfo] = useState(null);
-    const [reviews, setReviews] = useState([]);
+    const {email, id} = useSelector((state) => state.etc);
+    const [myInfo, setMyInfo] = useState(null);
+    
+    const [myReview, setMyReview] = useState([]);
+    const [reviewPage, setReviewPage] = useState(0);
     const [url, setUrl] = useState(()=> {
         for(let i=0; i<paths.length; i++){
             if(window.location.pathname.endsWith(paths[i])){
@@ -27,28 +30,21 @@ const TrainerMyPage = (props) => {
         }
     })
     useEffect(() => {
-        async function getReview(){
-            const newReviews = await axios.get(request_url_review)
-            setReviews(newReviews.data)
-        }
-        async function getInfo(){
-            const newInfo =await axios.get(request_url_info+email)
-            setTrainerInfo(newInfo.data)
-        }
         switch (url) {
             case "myreview":
-                if(!reviews.length){
-                    getReview()
-                    console.log('리뷰 없어서 받기')
+                if(!myReview.length){
+                    axios.get(review_url+id+'/'+reviewPage).then((data)=> {setMyReview(data.data.content);setReviewPage(data.data.pageable.pageNumber)})
+                    console.log('트레이너id의 0번째 페이지 리뷰 뽑아오기')
                 }
                 break;
             case "myschedule":
                 console.log(url)
                 break;
             case "myinfo":
-                if(!trainerInfo){
-                    getInfo()
+                if(!myInfo){
+                    axios.get(info_url+email).then((data)=> {setMyInfo(data.data)})
                     console.log('인포 없어서 받기')
+                    console.log(myInfo)
                 }
                 break;
             default:
@@ -56,18 +52,17 @@ const TrainerMyPage = (props) => {
         }
     }, [url])
 
-
     return (
         <div className={styles.TrainerMyPage}>
                 <TopTitle title='마이페이지▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>
             <div className={styles.MyPage_body}>
                 <div className={styles.left_body}>
-                    <MyPageProfile name='정원철' role='트레이너'/>
+                <MyPageProfile/>
                     <TrainerMyPageMenu id='my_page_menu' url={url} setUrl={setUrl}/>
                 </div>
                 <Routes>
-                    <Route path='/myinfo' element={<TrainerMyPageMyInfo trainerInfo={trainerInfo} setTrainerInfo={setTrainerInfo} />}/>
-                    <Route path='/myreview' element={<TrainerMyPageMyReview reviews={reviews}/>}/>
+                    {myInfo && <Route path='/myinfo' element={<TrainerMyPageMyInfo myInfo={myInfo} setMyInfo={setMyInfo} />}/>}
+                    <Route path='/myreview' element={<TrainerMyPageMyReview reviews={myReview}/>}/>
                     <Route path='/myschedule' element={<TrainerMyPageMySchedule />}/>
                 </Routes>
             </div>

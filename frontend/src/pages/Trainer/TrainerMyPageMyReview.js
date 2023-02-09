@@ -1,7 +1,8 @@
-import styles from './TrainerMyPageMyReview.module.css'
 import React from 'react'
+import styles from './TrainerMyPageMyReview.module.css'
 
 const TrainerMyPageMyReview= ({reviews})=>{
+  console.log(reviews)
   return(
     <div className={styles.container}>
       <div className={styles.content_title}>내 고객리뷰</div>

@@ -1,13 +1,28 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+// 트레이너 더미 데이터
+// const initialState = {
+//     id:1,
+//     name: "윤동근",
+//     email: "qwer@naver.com",
+//     phone: "01012345678",
+//     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
+//     isLoading: false,
+//     error: null,
+//     role:"trainer",
+//     isCheckMsg: ""
+// };
 
+// 회원 더미 데이터
 const initialState = {
-    name: "윤동근",
-    email: "qwer@naver.com",
-    phone: "01012345678",
-    image: "",
+    id:2,
+    name: "Axe",
+    email: "aschettini0@biglobe.ne.jp",
+    phone: "107-463-1245",
+    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
     isLoading: false,
     error: null,
+    role:"USER",
     isCheckMsg: ""
 };
 
