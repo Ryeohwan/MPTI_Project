@@ -89,11 +89,11 @@ export const reportApproval = (data) => async(dispatch)=>{
 }
 
 // 모든 회원 목록 API
-export const accountList = () => async(dispatch)=>{
+export const accountList = (pagenum) => async(dispatch)=>{
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.get(`/api/user/list/0`);
-        const data= response.data;
+        const response=await axios.get(`/api/user/list/${pagenum}`);
+        const data= response;
         console.log("회원 목록 불러오기 성공");
         dispatch(adminActions.dataSuccess())
         return data;
