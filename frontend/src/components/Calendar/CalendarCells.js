@@ -4,13 +4,14 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
+import { Icon } from '@iconify/react';
 
 const CalendarCells = ({
   currentMonth,
   selectedDate,
   onDateClick,
   click,
-  newData,
+  allData,
 }) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
@@ -20,9 +21,7 @@ const CalendarCells = ({
   let days = [];
   let day = startDate;
   let formattedDate = "";
-
-//   const calendarScheduleList = reservedData.map((item) => <li><CalendarSchedule userName={item.userName} hour={item.hour} /></li>)
-
+  console.log(allData)
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = parseInt(format(day, "d"));
@@ -30,11 +29,13 @@ const CalendarCells = ({
       const parsedDay = new Date(copyday);
       const formatDay = format(parsedDay, "yyyy-MM-dd");
       const intDate = formatDay.split("-").map((item) => parseInt(item));
-      const openedData = newData.filter(
-        (item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2]
-      );
-      const reservedData = newData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
-      
+    
+      const reservedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
+      const openedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2])
+      const openedHour = openedData.map((item) => item.hour)
+      const reservedSchedule =  reservedData.map((item) => <li key={item.id}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
+      const [first, second, third, ...rest] = reservedSchedule;
+
       days.push(
         <div
           className={`${styles.bodyRowCol} ${
@@ -64,12 +65,18 @@ const CalendarCells = ({
             }
           >
             {formattedDate}
+            <span>
+              { openedHour.length !== 0 ? <Icon icon="material-symbols:lens" className={styles.openedHourIcon}/> : null}
+            </span>
           </div>
 
           <div>
-            {openedData.filter((item)=> item.day===intDate[2]).length && reservedData.length !== 0 ? (
+            { reservedData.length !== 0 ? (
               <div>
-                { reservedData.map((item) => <li key={item.hour}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)}
+                {first}
+                {second}
+                {third}
+                {rest.length !== 0 ? "..." : null}
               </div>
             ) : null}
           </div>
