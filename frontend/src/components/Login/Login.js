@@ -69,7 +69,7 @@ return (
             <div className={styles.comment}><p>{userInfo.passwordMsg}</p></div>
             </div>
 
-            <div className={styles.form_sign_box}><div className={styles.form_sign}>회원가입</div></div>
+            <div className={styles.form_sign_box}><div className={styles.form_sign} onClick={()=> navigate("/select")}>회원가입</div></div>
             {(userInfo.isEmail && userInfo.isPassword)?
              <div className={styles.form_btn_box}><button >LOGIN</button></div>:
               <div className={styles.form_btn_box_none}>< button  disabled={true}>로그인</button></div>  }

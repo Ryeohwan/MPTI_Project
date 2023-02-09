@@ -43,6 +43,9 @@
 
   }
 
+  .form_sign{
+    cursor: pointer;
+  }
 
   .form_btn {
     width: 530px;

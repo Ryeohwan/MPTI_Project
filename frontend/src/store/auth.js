@@ -6,6 +6,7 @@ const initialState = {
     email: "",
     phone: "",
     image: "",
+    role: "",
     isLoading: false,
     isLoggedIn:false,
     error: ""
@@ -18,9 +19,11 @@ const authSlice = createSlice({
         loginRequest: (state) => {
             state.isLoading = true;
         },
-        loginSuccess: (state) => {
+        loginSuccess: (state, action) => {
             state.isLoading = false;
             state.isLoggedIn = true;
+            state.role= action.payload.selectedRole;
+            state.email= action.payload.selectedRole
         },
         loginFailure: (state, action) => {
             state.isLoading = false;
@@ -54,9 +57,12 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        console.log(response);
+        const selectedRole= response.headers.role;
+        const selectedRole1= response.headers.role+"2";
+        
+        console.log( selectedRole);
         console.log("로그인성공");
-        dispatch(authActions.loginSuccess());
+        dispatch(authActions.loginSuccess({selectedRole, selectedRole1}));
     } catch (error) {
         dispatch(authActions.loginFailure(error));
     }
