@@ -22,8 +22,7 @@ const authSlice = createSlice({
         loginSuccess: (state, action) => {
             state.isLoading = false;
             state.isLoggedIn = true;
-            state.role= action.payload.selectedRole;
-            state.email= action.payload.selectedRole
+            state.role= action.payload;
         },
         loginFailure: (state, action) => {
             state.isLoading = false;
@@ -57,12 +56,10 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        const selectedRole= response.headers.role;
-        const selectedRole1= response.headers.role+"2";
-        
-        console.log( selectedRole);
+        localStorage.setItem("mpti_role", response.headers["role"]);
+       // console.log( selectedRole);
         console.log("로그인성공");
-        dispatch(authActions.loginSuccess({selectedRole, selectedRole1}));
+        dispatch(authActions.loginSuccess(response.headers["role"]));
     } catch (error) {
         dispatch(authActions.loginFailure(error));
     }
@@ -74,6 +71,7 @@ export const logout = () => async(dispatch)=>{
         const refreshToken = localStorage.getItem('refresh_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('access_token');
+        localStorage.removeItem('mpti_role');
         axios.defaults.headers.common['authorization'] = accessToken;
         axios.defaults.headers.common['refresh-token'] = refreshToken;
         const response= await axios.post("/api/auth/logout");

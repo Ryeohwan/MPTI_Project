@@ -33,40 +33,46 @@ export default function App() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
-  const [roles, setRole] = useState("client");
+
+  const [role, setRole] = useState(
+    localStorage.getItem("mpti_role")
+  );
+
+  console.log(accessToken, role);
   const { isLoading } = useSelector((state) => state.admin);
-  const { isLoggedIn, email, role } = useSelector((state) => state.auth);
-  console.log(email,role);
+  // const { isLoggedIn, email, role } = useSelector((state) => state.auth);
+  // console.log("@@@@@@@@@",role);
   return (
     <div className="App">
       {isLoading ? <BasicLoadingSpinner /> : null}
+      {role === "[ROLE_TRAINER]" &&<TrainerHeader />}
+      {role === "[ROLE_CLIENT]" &&<ClientHeader />}
+
+    <Routes>
+      <Route exact path="/trainer" element={<TrainerHeader />} />
+      <Route path="/client" element={<ClientHeader />} />
+    </Routes>
+
+
 
       <Routes>
-        {!accessToken && (
-          <>
-            {" "}
-            <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/oauth2/redirect" element={<SignupRedirect />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/select" element={<SignupSelect />} />
-          </>
-        )}
-
-        {accessToken && roles === "client" ? <></> : <></>}
-
+        <Route path="/home" element={<Home />} />
+        <Route path="/trainermyclient" element={<TrainerMyClient />} />
+        <Route path="/trainermyreservation" element={<TrainerMyReservation />} />
+        <Route path="/trainermypage/*" element={<TrainerMyPage />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/oauth2/redirect" element={<SignupRedirect />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/select" element={<SignupSelect />} />
         <Route path="/clientmyschedule" element={<ClientMySchedule />} />
         <Route path="/clientmylog" element={<ClientMyLog />} />
         <Route path="/clientmyreservation" element={<ClientMyReservation />} />
         <Route path="/clientmypage" element={<ClientMyPage />} />
         <Route path="/clienttrainerdetail" element={<ClientTrainerDetail />} />
         <Route path="/home" element={<Home />} />
-
         <Route path="/trainermyclient" element={<TrainerMyClient />} />
-        <Route
-          path="/trainermyreservation"
-          element={<TrainerMyReservation />}
-        />
+        <Route path="/trainermyreservation" element={<TrainerMyReservation />} />
         <Route path="/trainermypage/*" element={<TrainerMyPage />} />
         <Route path="/manager/*" element={<ManagerHome />} />
       </Routes>
