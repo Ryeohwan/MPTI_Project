@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from './TrainerMyPage.module.css';
 import TopTitle from '../../components/Common/TopTitle'
 import MyPageProfile from '../../components/MyPage/MyPageProfile';
-import TrainerMyPageMenu from '../../components/MyPage/TrainerMyPageMenu';
-import TrainerMyPageMyReview from './TrainerMyPageMyReview';
-import TrainerMyPageMyInfo from './TrainerMyPageMyInfo'
-import TrainerMyPageMySchedule from './TrainerMyPageMySchedule'
+import TrainerMyPageMenu from './TrainerMyPage/TrainerMyPageMenu';
+import TrainerMyPageMyReview from './TrainerMyPage/TrainerMyPageMyReview';
+import TrainerMyPageMyInfo from './TrainerMyPage/TrainerMyPageMyInfo'
+import TrainerMyPageMySchedule from './TrainerMyPage/TrainerMyPageMySchedule'
 import {Routes, Route} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { trainerDetail, trainerReview } from '../../store/etc';

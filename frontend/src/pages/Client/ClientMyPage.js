@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useReducer} from 'react';
 import styles from './ClientMyPage.module.css'
 import TopTitle from '../../components/Common/TopTitle'
 import MyPageProfile from '../../components/MyPage/MyPageProfile';
-import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
-import ClientMyPageMyReview from '../../components/MyPage/ClientMyPageMyReview';
+import ClientMyPageMyInfo from './ClientMyPage/ClientMyPageMyInfo';
+import ClientMyPageMyReview from './ClientMyPage/ClientMyPageMyReview';
 import { useSelector, useDispatch } from 'react-redux';
 import { clientDetail, clientReview } from '../../store/etc';
 
 
 const ClientMyPage = () => {
+
     const dispatch = useDispatch()
     const {email, id} = useSelector((state) => state.etc)
     const [myInfo, setMyInfo] = useState(undefined);
@@ -20,7 +21,6 @@ const ClientMyPage = () => {
             const infoData = await dispatch(clientDetail(email))
             setMyInfo(infoData)
             setMyReview(reviewData.content)
-            console.log('받았습니다.')
         }
         getData()
     }

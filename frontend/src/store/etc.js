@@ -8,8 +8,8 @@ import { createSlice } from '@reduxjs/toolkit';
 //     phone: "01012345678",
 //     s3Url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
 //     isLoading: false,
-//     error: null,
-//     role:"ROLE_TRAINER",
+//     error: null,W
+//     role:"[ROLE_TRAINER]",
 //     isCheckMsg: ""
 // };
 
@@ -22,7 +22,7 @@ const initialState = {
     s3Url:'https://i8a803.p.ssafy.io.baguni.s3.ap-northeast-2.amazonaws.com/logo5.png',
     isLoading: false,
     error: null,
-    role:"ROLE_USER",
+    role:"[ROLE_USER]",
     isCheckMsg: ""
 };
 

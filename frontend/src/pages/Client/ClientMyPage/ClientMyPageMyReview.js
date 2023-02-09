@@ -5,7 +5,6 @@ import axios from 'axios'
 // import Pagination from '../Common/Pagination';
 
 const ClientMyPageMyReview = ({reviews}) => {
-    console.log('리뷰입니다')
     return(
         <div className={styles.container} >
             <div className={styles.out_box}>

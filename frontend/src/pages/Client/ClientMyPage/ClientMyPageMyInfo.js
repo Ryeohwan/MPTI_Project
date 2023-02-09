@@ -1,14 +1,13 @@
 import styles from './ClientMyPageMyInfo.module.css'
 import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { clientEditInfo } from '../../store/etc';
+import { clientEditInfo } from '../../../store/etc';
 
 const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
     const dispatch = useDispatch();
     const info_list=['이름', '성별', '생년월일', '이메일', '핸드폰'];
     const [edit, setEdit] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    console.log('인포입니다')
     async function infoEdit(e){
         e.preventDefault();
         if(myInfo){

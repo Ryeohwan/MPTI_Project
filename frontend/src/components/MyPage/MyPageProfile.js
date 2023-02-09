@@ -11,16 +11,15 @@ const MyPageProfile = () => {
     const {name, email, role, s3Url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
-    console.log(123)
     const handlePictureUpload=async (e)=>{
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
-        if(role==='ROLE_USER'){
+        if(role==='[ROLE_USER]'){
             axios.post(user_url, formData).then((res) => {setShowModal(false);console.log(res.data)}).catch((err)=> 
             alert('오류'))
         }
-        else if(role==='ROLE_TRAINER'){
+        else if(role==='[ROLE_TRAINER]'){
             axios.post(trainer_url, formData).then((res)=>{setShowModal(false)}).catch((err)=>
             alert('오류'))
         }
