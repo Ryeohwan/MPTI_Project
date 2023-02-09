@@ -59,10 +59,10 @@ export const signupApproval = (choice) => async(dispatch)=>{
     }
 }
 // 신고목록 API
-export const reportList = () => async(dispatch)=>{
+export const reportList = (pagenum) => async(dispatch)=>{
     dispatch(adminActions.dataRequest())
     try {
-        const response=await axios.get("/api/business/opinion/report/list/0");
+        const response=await axios.get(`/api/business/opinion/report/list/${pagenum}`);
         const data= response.data;
         console.log(data, "신고목록 불러오기 성공");
         dispatch(adminActions.dataSuccess())

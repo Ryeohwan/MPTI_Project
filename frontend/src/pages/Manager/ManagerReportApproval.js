@@ -11,24 +11,32 @@ import Pagination from "react-js-pagination";
 const ManagerReportApproval = () => {
   const dispatch= useDispatch();
   const [page, setPage] = useState(1);
-
+  const [report, setReport] = useState([]);
+  const [totalPage, setTotalPage]= useState(0);
   const handlePageChange = (page) => {
     console.log(page);
     setPage(page);
   };
-  const [loading, setLoading] = useState(false);
-  const [report, setReport] = useState([]);
-  
-  // setLoading(true);
-      
+
   useEffect(()=>{
     // 신고목록 API 설정
-    dispatch(reportList()).then((res)=>{
-      console.log(res.content);
-      setReport(res.content);
+    dispatch(reportList(page-1)).then((res)=>{
+      console.log(res);
+      setTotalPage(res.totalElements);
+      const sortedReport =res.content.sort((a,b)=> {
+        if (a.stopUntil === null) {
+          return -1;
+        }
+        if (b.stopUntil === null) {
+          return 1;
+        }
+        return a.stopUntil.localeCompare(b.stopUntil);
+      } );
+      console.log(sortedReport[0].stopUntil);
+      setReport(sortedReport);
     })
 
-  }, [])
+  }, [page])
 
   const [modal, setModal] = useState({
     show: false,
@@ -120,8 +128,8 @@ const ManagerReportApproval = () => {
         <div className={styles.pagenation}>
           <Pagination
       activePage={page}
-      itemsCountPerPage={5}
-      totalItemsCount={37}
+      itemsCountPerPage={8}
+      totalItemsCount={totalPage}
       pageRangeDisplayed={5}
       prevPageText={"‹"}
       nextPageText={"›"}
