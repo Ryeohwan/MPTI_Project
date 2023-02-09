@@ -8,7 +8,7 @@ const user_url ='/api/user/upload'
 const trainer_url = '/api/trainer/upload'
 
 const MyPageProfile = () => {
-    const {name, email, role, image_url} = useSelector((state) => state.etc)
+    const {name, email, role, s3url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
 
@@ -16,11 +16,11 @@ const MyPageProfile = () => {
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
-        if(role==='USER'){
-            axios.post(user_url, formData).then((res) => {setShowModal(false);console.log('보냄')}).catch((err)=> 
+        if(role==='ROLE_USER'){
+            axios.post(user_url, formData).then((res) => {setShowModal(false);console.log(res.data)}).catch((err)=> 
             alert('오류'))
         }
-        else if(role==='trainer'){
+        else if(role==='ROLE_TRAINER'){
             axios.post(trainer_url, formData).then((res)=>{setShowModal(false)}).catch((err)=>
             alert('오류'))
         }
@@ -46,7 +46,7 @@ const MyPageProfile = () => {
                 </div>
             }
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src={image_url?image_url:'/profile_base.png'} alt='profile_pic'></img>
+                <img className={styles.picture} src={s3url?s3url:'/profile_base.png'} alt='profile_pic'></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
             <div className={styles.name}>{name} <span className={styles.name2}>{role}</span></div>

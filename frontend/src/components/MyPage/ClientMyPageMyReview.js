@@ -12,7 +12,7 @@ const ClientMyPageMyReview = ({reviews}) => {
                 <div className={styles.content_box}>
                     {reviews && reviews.map((review) => 
                     <div className={styles.in_box} key={review.id}>
-                        <div className={styles.review_top}> <div className={styles.review_top_left}>{review.writerName}<div>{'⭐'.repeat(review.star)}</div> </div>  <div className={styles.review_top_right}>🗑</div>  </div>  
+                        <div className={styles.review_top}> <div className={styles.review_top_left}>{review.writerName}<div>{'⭐'.repeat(review.star)}</div> </div>   </div>  
                         <div className={styles.review_email}>{review.createdAt.substr(0,10)}</div>
                         <div className={styles.review_content}>{review.memo}</div>
                     </div>

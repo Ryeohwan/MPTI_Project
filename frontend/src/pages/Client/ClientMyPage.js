@@ -18,15 +18,13 @@ const ClientMyPage = () => {
 
     if(!myInfo){
         async function getMyReviews(myInfo){
-            
-            const data = await axios.post(review_url+id+'/'+page).then(data => data.data)
-            setMyReview(data)
+            console.log(review_url+id+'/'+page)
+            const data = await axios.get(review_url+id+'/'+page).then(data => data.data)
+            setMyReview(data.content)
         }
 
         async function getInfo(){
-            console.log(email, id)
-            console.log(review_url+id+'/'+page)
-            const infoData = await axios.get(info_url,{email:email}).then(data => data.data)
+            const infoData = await axios.post(info_url,{email:email}).then(data => data.data)
             console.log(infoData,111)
             setMyInfo(infoData)
             getMyReviews(infoData)

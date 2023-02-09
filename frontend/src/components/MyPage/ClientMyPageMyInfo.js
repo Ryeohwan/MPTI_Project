@@ -27,7 +27,6 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
         }
         else{
             setShowModal(true)
-            document.getElementById('password').focus()
         }
     }
     
