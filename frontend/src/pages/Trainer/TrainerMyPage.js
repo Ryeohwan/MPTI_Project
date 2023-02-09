@@ -57,7 +57,7 @@ const TrainerMyPage = (props) => {
                 <TopTitle title='마이페이지▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>
             <div className={styles.MyPage_body}>
                 <div className={styles.left_body}>
-                <MyPageProfile/>
+                    <MyPageProfile/>
                     <TrainerMyPageMenu id='my_page_menu' url={url} setUrl={setUrl}/>
                 </div>
                 <Routes>

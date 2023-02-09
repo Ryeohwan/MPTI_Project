@@ -15,9 +15,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 회원 더미 데이터
 const initialState = {
-    id:2,
-    name: "Axe",
-    email: "aschettini0@biglobe.ne.jp",
+    id:3,
+    name: "이예은",
+    email: "aaaa_1111@naver.com",
     phone: "107-463-1245",
     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
     isLoading: false,

@@ -5,56 +5,51 @@ import TopTitle from '../../components/Common/TopTitle'
 import MyPageProfile from '../../components/MyPage/MyPageProfile';
 import ClientMyPageMyInfo from '../../components/MyPage/ClientMyPageMyInfo';
 import ClientMyPageMyReview from '../../components/MyPage/ClientMyPageMyReview';
+import { useSelector } from 'react-redux';
 
-const infoUrl="/api/user/info"
-const reviewUrl="/api/business/opinion/review/list"
-
-
-
-const email = 'asdf@naver.com'
-const user_url ='/api/user/upload'
 const info_url = '/api/user/info'
 const review_url = '/api/business/opinion/review/user/list/'
-const userId = 16
 const ClientMyPage = () => {
-    const [userInfo,setUserInfo] = useState(null);
-    const [myReviews,setMyReview] = useState([]);
+    const {email, id} = useSelector((state) => state.etc)
+    const [myInfo, setMyInfo] = useState(null);
+    const [myReviews, setMyReview] = useState([]);
     const [page,setPage] = useState(0);
     
-    useEffect(()=>{
-        if(!userInfo){
-            async function getMyReviews(userInfo){
-                const data = await axios.post(review_url+userInfo.email+'/'+page).then(data => data.data)
-                setMyReview(data)
-                console.log(data)
-            }
 
-            async function getInfo(){
-                const infoData = await axios.post(info_url,{email:email}).then(data => data.data)
-                console.log(infoData)
-                setUserInfo(infoData)
-                getMyReviews(infoData)
-            }
-            console.log(111111)
-            getInfo()
-            console.log(22)
-            }
+    if(!myInfo){
+        async function getMyReviews(myInfo){
+            
+            const data = await axios.post(review_url+id+'/'+page).then(data => data.data)
+            setMyReview(data)
+        }
 
-    },[])
-    console.log(userInfo,123)
+        async function getInfo(){
+            console.log(email, id)
+            console.log(review_url+id+'/'+page)
+            const infoData = await axios.get(info_url,{email:email}).then(data => data.data)
+            console.log(infoData,111)
+            setMyInfo(infoData)
+            getMyReviews(infoData)
+        }
+        console.log(111111)
+        getInfo()
+        console.log(22)
+        }
+
+    
     return (
         <div className={styles.ClientMyPage}>
              <TopTitle title='마이페이지▼' content='회원님의 개인정보를 확인해보세요 !'/>
-            {userInfo && <div className={styles.ClientMyPage_body}>
-                {<MyPageProfile userInfo={userInfo}/>}
+            <div className={styles.ClientMyPage_body}>
+                <MyPageProfile/>
                 <div className={styles.ClientMyPage_body_content}>
                     <div className={styles.content_title}>내 개인정보</div>
-                    <ClientMyPageMyInfo userInfo={{name:userInfo.name, gender:userInfo.gender, age:userInfo.age, email:userInfo.email,phone:userInfo.phone }} setUserInfo={setUserInfo}/>
+                    {myInfo && <ClientMyPageMyInfo myInfo={{name:myInfo.name, gender:myInfo.gender, age:myInfo.age, email:myInfo.email,phone:myInfo.phone }} setMyInfo={setMyInfo}/>}
                     <div className={styles.content_title}>내가 쓴 리뷰</div>
-                    <ClientMyPageMyReview/>
+                    <ClientMyPageMyReview reviews={myReviews}/>
                 </div>
             </div>
-            }
+            
         </div>
     );
 };

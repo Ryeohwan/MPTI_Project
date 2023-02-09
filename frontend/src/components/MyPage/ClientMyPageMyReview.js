@@ -5,10 +5,6 @@ import axios from 'axios'
 // import Pagination from '../Common/Pagination';
 
 const ClientMyPageMyReview = ({reviews}) => {
-    // const [reviewpage, setReviewPage] = useState(1);
-    // const [showreview, setShowReview] = useState(myreview.slice((reviewpage-1)*3,(reviewpage-1)*3+3));
-    // useEffect(()=>setShowReview(myreview.slice((reviewpage-1)*3, (reviewpage-1)*3+3)),
-    // [reviewpage])
 
     return(
         <div className={styles.container} >
@@ -22,7 +18,6 @@ const ClientMyPageMyReview = ({reviews}) => {
                     </div>
                     )}
                 </div>
-                {/* <Pagination pages={Math.ceil(reviews.length/3)} select={reviewpage} setReviewPage={setReviewPage}/> */}
             </div>
         </div>
     )

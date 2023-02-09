@@ -7,7 +7,7 @@ import etc from '../../store/etc'
 const user_url ='/api/user/upload'
 const trainer_url = '/api/trainer/upload'
 
-const MyPageProfile = ({userInfo}) => {
+const MyPageProfile = () => {
     const {name, email, role, image_url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
@@ -16,8 +16,8 @@ const MyPageProfile = ({userInfo}) => {
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
-        if(role==='user'){
-            axios.post(user_url, formData).then((res) => {setShowModal(false)}).catch((err)=> 
+        if(role==='USER'){
+            axios.post(user_url, formData).then((res) => {setShowModal(false);console.log('보냄')}).catch((err)=> 
             alert('오류'))
         }
         else if(role==='trainer'){
@@ -39,8 +39,8 @@ const MyPageProfile = ({userInfo}) => {
                             <input id='file' className={styles.picture_upload} type="file" placeholder='파일' onChange={(e) => setUploadPicture(e.target.files[0])}  accept="image/*"/>
                         </div>
                         <div className={`${styles.row_flex} ${styles.button_box}`}>
-                            <button className={styles.button_upload} onClick={() => {handlePictureUpload()}}>Submit</button>
-                            <button className={styles.button_back} onClick={() => {setShowModal(false); setUploadPicture(null)}}>Close</button>
+                            <button className={styles.button_upload} onClick={() => {handlePictureUpload()}}>변경</button>
+                            <button className={styles.button_back} onClick={() => {setShowModal(false); setUploadPicture(null)}}>취소</button>
                         </div>
                     </div>
                 </div>
