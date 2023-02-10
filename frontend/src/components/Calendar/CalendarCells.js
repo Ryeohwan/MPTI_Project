@@ -34,12 +34,11 @@ const CalendarCells = ({
       const reservedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
       const openedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2])
       const openedHour = openedData.map((item) => item.hour)
-      const reservedSchedule =  reservedData.map((item) => <li key={item.id}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
-      const [first, second, third, ...rest] = reservedSchedule;
+      const reservedSchedule =  reservedData.map((item) => <li key={item.id} className={styles.time}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
 
       days.push(
         <div
-          className={`${styles.bodyRowCol} ${
+          className={`${styles.bodyRowCol} ${styles.cell} ${
             !isSameMonth(day, monthStart)
               ? `${styles.bodyRowColNotValid}`
               : isSameDay(day, selectedDate) && click
@@ -75,11 +74,9 @@ const CalendarCells = ({
           
           <div>
             { reservedData.length !== 0 ? (
-              <div>
-                {first}
-                {second}
-                {third}
-                {rest.length !== 0 ? "..." : null}
+              <div className={styles.reservedSchedule}>
+                {reservedSchedule}
+                {reservedSchedule.length > 3 ? <div className={styles.etc}>...</div> : null}
               </div>
             ) : null}
           </div>
