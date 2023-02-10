@@ -5,11 +5,10 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarDays from "./CalendarDays";
 import CalendarCells from "./CalendarCells";
 
-const Calendar = ({ getNewDay, newData, reservedData }) => {
+const Calendar = ({ allData, getDaySchedule }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [click, setClick] = useState(false);
-  // const [intDate, setIntDate] = useState([]);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -20,22 +19,10 @@ const Calendar = ({ getNewDay, newData, reservedData }) => {
   const onDateClick = (day) => {
     const formatDay = format(day, "yyyy-MM-dd");
     const intDate = formatDay.split("-").map((item) => parseInt(item));
-    getNewDay(intDate);
     setSelectedDate(day);
     setClick(!click);
-    // setIntDate(intDate);
-  };
-
-  // useEffect(() => {
-  //   const filteredData = newData.filter(
-  //     (item) =>
-  //       item.year === intDate[0] &&
-  //       item.month === intDate[1] &&
-  //       item.day === intDate[2]
-  //   );
-  //   const openedReservationHours = filteredData.map((item) => item.hour)
-  //   console.log(openedReservationHours)
-  // }, [newData, intDate]);
+    getDaySchedule(intDate);
+  }
 
   return (
     <div className={styles.calendar}>
@@ -51,7 +38,7 @@ const Calendar = ({ getNewDay, newData, reservedData }) => {
           selectedDate={selectedDate}
           onDateClick={onDateClick}
           click={click}
-          newData={newData}
+          allData={allData}
         />
       </div>
     </div>
