@@ -1,7 +1,15 @@
 import styles from './Landing.module.css'
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const Landing = () => {
+const { role, isLoggedIn} = useSelector((state) => state.auth);
+const [roleToken, setRoleToken] = useState(
+    localStorage.getItem("mpti_role")
+);
+
+
 
     return(
         <div className={styles.container}>

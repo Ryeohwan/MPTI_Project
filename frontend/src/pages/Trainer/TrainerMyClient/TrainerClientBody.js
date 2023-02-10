@@ -18,6 +18,7 @@ const TrainerClientBody = (props) => {
     { id: 5, name: "지선호", gender: "남", age: 28, time: "14:00 - 15:00" },
     { id: 6, name: "안려환", gender: "남", age: 28, time: "14:00 - 15:00" },
   ];
+  const [signupList, setSignupList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage]= useState(0);
   const handlePageChange = (page) => {
@@ -27,21 +28,27 @@ const TrainerClientBody = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .post("/api/user/userList/0", { id: 1 })
+      .post(`/api/user/userList/${page-1}`, { id: 1 })
       .then((res) => {
-        console.log(res);
+
+        console.log(res.data.totalElements);
+        console.log(res.data.content);
+        setSignupList(res.data.content)
+        setTotalPage(res.data.totalElements);
+        // setSignupList(res.content)
+
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [page]);
 
   return targetClient ? (
     // 클릭한 고객 있으면 고객 상세페이지 띄우기
     <div>
       <div className={styles.container2}>
         <ClientInfo
-          {...data.find((item) => item.id === targetClient)}
+          {...data.find((item) => item.email === targetClient)}
           setTargetClient={setTargetClient}
         />
       </div>
@@ -57,11 +64,11 @@ const TrainerClientBody = (props) => {
         onKeyDown={(e) => (e.keyCode === 13 ? setSearchValue("") : null)}
       ></input>
       <div className={styles.container}>
-        {data
+        {signupList
           .filter((item) => item.name.includes(searchValue))
           .map((item) => (
             <CardItem3
-              key={item.id}
+              key={item.email}
               className={styles.item}
               {...item}
               targetClient={targetClient}
@@ -72,8 +79,8 @@ const TrainerClientBody = (props) => {
       <div className={styles.pagenation}>
         <Pagination
           activePage={page}
-          itemsCountPerPage={4}
-          totalItemsCount={44}
+          itemsCountPerPage={6}
+          totalItemsCount={totalPage}
           pageRangeDisplayed={5}
           prevPageText={"‹"}
           nextPageText={"›"}

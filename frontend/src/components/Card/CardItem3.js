@@ -13,14 +13,14 @@ function CardItem3(props) {
         <div className={styles.card_item_info}>
           <div className={styles.card_item_info_txt}>성명</div>
           <div className={styles.card_item_info_txt}>성별/나이</div>
-          <div className={styles.card_item_info_txt}>예약한 수업</div>
+          <div className={styles.card_item_info_txt}>핸드폰 번호</div>
         </div>
         <div className={styles.card_item_info}>
-          <div className={styles.card_item_info_txt}>{name}</div>
-          <div className={styles.card_item_info_txt}>({gender}), {age}세</div>
-          <div>{time}</div>
+          <div className={styles.card_item_info_txt}>{props.name}</div>
+          <div className={styles.card_item_info_txt}>({props.gender}), {age}세</div>
+          <div>{props.phone}</div>
         </div>
-        <button className={styles.button} onClick={()=>{setTargetClient(props.id)}}>관리</button>
+        <button className={styles.button} onClick={()=>{setTargetClient(props.email)}}>관리</button>
       </div>
     );
   }
