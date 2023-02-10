@@ -1,11 +1,15 @@
 import React from "react";
+import styles from "./ClientTrainerDetail.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import TopTitle from "../../components/Common/TopTitle";
-import styles from "./ClientTrainerDetail.module.css";
-import TrainerImg from "./../../assets/img/trainer.PNG";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getChatRoom } from "../../store/etc";
 const ClientTrainerDetail = () => {
+  const {id, role} = useSelector((state) => state.etc)
+  const dispatch = useDispatch()
   const location = useLocation();
+  const targetId = 1;
+  console.log(location)
   const name= location.state.name;
   const gender = location.state.gender;
   const age = new Date().getFullYear()-parseInt(location.state.birthday.slice(0,4))+1
@@ -45,7 +49,12 @@ const ClientTrainerDetail = () => {
             {gender}, {age}세
           </div>
           <div className={styles.trainer_detail_btn_wrapper}>
-            <button className={styles.trainer_talk_btn}>상담하기</button>
+            <button 
+              className={styles.trainer_talk_btn}
+              onClick={() => dispatch(getChatRoom(id,role,targetId))}
+            >
+              상담하기
+            </button>
             <button
               className={styles.trainer_reservation_btn}
               onClick={navigateToPayment}
