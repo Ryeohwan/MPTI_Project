@@ -19,7 +19,7 @@ const initialState = {
     name:'Axe',
     email:'aschettini0@biglobe.ne.jp',
     phone: "107-463-1222",
-    s3Url:'https://i8a803.p.ssafy.io.baguni.s3.ap-northeast-2.amazonaws.com/logo5.png',
+    s3Url:'https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/aschettini0',
     isLoading: false,
     error: null,
     role:"[ROLE_USER]",

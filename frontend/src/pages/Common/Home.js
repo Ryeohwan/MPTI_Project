@@ -47,7 +47,6 @@ const Home = () => {
             return (
               <li key={it.email} className={styles.home_trainer_item}>
                 <div className={styles.home_trainer_img}>
-                  <img src={TrainerImg} />
                 </div>
                 <div className={styles.home_trainer_info}>
                   <div className={styles.home_trainer_name}>

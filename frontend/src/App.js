@@ -28,6 +28,7 @@ import { Link } from 'react-router-dom';
 import SignupRedirect from './components/Signup/SignupRedirect';
 import BasicLoadingSpinner from './components/Loading/BasicLoadingSpinner';
 import { useSelector } from 'react-redux';
+import Lesson from './pages/Common/Lesson';
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App(){
@@ -90,6 +91,7 @@ export default function App(){
            <Route path="/trainermypage/*" element={<TrainerMyPage/>}/>
           {/* 관리자 */}
           <Route path="/manager/*" element={<ManagerHome/>}/>
+            <Route path="/lesson" element={<Lesson/>}/>
         </Routes>
 
       </div>

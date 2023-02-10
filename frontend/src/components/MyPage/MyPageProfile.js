@@ -1,22 +1,27 @@
 import React, {useEffect, useState} from 'react'
 import styles from './MyPageProfile.module.css'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import etc from '../../store/etc'
+import { clientDetail } from "../../store/etc";
+import { useSelector, useDispatch } from "react-redux";    
 
 const user_url ='/api/user/upload'
 const trainer_url = '/api/trainer/upload'
 
 const MyPageProfile = () => {
-    const {name, email, role, s3Url} = useSelector((state) => state.etc)
+    const dispatch = useDispatch()
+    const {email,name,role, s3Url} = useSelector((state) => state.etc)
+    // const {name, email, role, s3Url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
+
     const handlePictureUpload=async (e)=>{
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
         if(role==='[ROLE_USER]'){
-            axios.post(user_url, formData).then((res) => {setShowModal(false);console.log(res.data)}).catch((err)=> 
+            axios.post(user_url, formData).then((res) => {setShowModal(false);}).catch((err)=> 
             alert('오류'))
         }
         else if(role==='[ROLE_TRAINER]'){
@@ -45,7 +50,7 @@ const MyPageProfile = () => {
                 </div>
             }
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src={s3Url?{s3Url}:'/profile_base.png'} alt='/profile_base.png'></img>
+                <img className={styles.picture} src={s3Url?s3Url:'/profile_base.png'} alt='/profile_base.png'></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
             <div className={styles.name}>{name} <span className={styles.name2}>{role}</span></div>

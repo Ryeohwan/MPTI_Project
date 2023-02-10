@@ -32,7 +32,7 @@
     display: grid;
     row-gap: 10px;
     column-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(33.3%, auto));
+    grid-template-columns: repeat(2, 1fr);
 }
 .card_list_top button {
     background-color: #C9FD61;
@@ -43,5 +43,9 @@
     grid-template-columns: repeat(2, 1fr);
     row-gap: 10px;
     column-gap: 10px;
+}
+
+.card_list_bottom button {
+    background-color: #999999;
 }
 
