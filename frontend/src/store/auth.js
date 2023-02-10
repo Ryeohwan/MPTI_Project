@@ -56,10 +56,10 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        localStorage.setItem("mpti_role", response.headers["role"]);
-       // console.log( selectedRole);
-        console.log("로그인성공");
-        dispatch(authActions.loginSuccess(response.headers["role"]));
+        const role=response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_CLIENT]"? "client": "manager"; 
+        localStorage.setItem("mpti_role", role);
+        console.log(role);
+        dispatch(authActions.loginSuccess(role));
     } catch (error) {
         dispatch(authActions.loginFailure(error));
     }

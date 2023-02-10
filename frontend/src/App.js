@@ -27,6 +27,8 @@ import Landing from "./pages/Landing/Landing";
 import SignupRedirect from "./components/Signup/SignupRedirect";
 import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
+
+
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
 export default function App() {
@@ -34,47 +36,51 @@ export default function App() {
     localStorage.getItem("access_token")
   );
 
-  const [role, setRole] = useState(
+  const [roleToken, setRoleToken] = useState(
     localStorage.getItem("mpti_role")
   );
-
-  console.log(accessToken, role);
   const { isLoading } = useSelector((state) => state.admin);
-  // const { isLoggedIn, email, role } = useSelector((state) => state.auth);
-  // console.log("@@@@@@@@@",role);
+  const { role } = useSelector((state) => state.auth);
+    console.log(role);
+    console.log(roleToken);
+
   return (
     <div className="App">
       {isLoading ? <BasicLoadingSpinner /> : null}
-      {role === "[ROLE_TRAINER]" &&<TrainerHeader />}
-      {role === "[ROLE_CLIENT]" &&<ClientHeader />}
 
-    <Routes>
-      <Route exact path="/trainer" element={<TrainerHeader />} />
-      <Route path="/client" element={<ClientHeader />} />
-    </Routes>
+        <Routes>
+          <Route path="/trainer/*" element={<TrainerHeader/>} />
+          <Route path="/client/*" element={<ClientHeader/>} />
+        </Routes>
 
 
-
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/trainermyclient" element={<TrainerMyClient />} />
-        <Route path="/trainermyreservation" element={<TrainerMyReservation />} />
-        <Route path="/trainermypage/*" element={<TrainerMyPage />} />
-        <Route path="/" element={<Landing />} />
+        <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/trainer/home" element={<Home/>} />
+        <Route path="/trainer/myclient" element={<TrainerMyClient />} />
+        <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
+        <Route path="/trainer/mypage" element={<TrainerMyPage />} />
+       
+
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/select" element={<SignupSelect />} />
-        <Route path="/clientmyschedule" element={<ClientMySchedule />} />
-        <Route path="/clientmylog" element={<ClientMyLog />} />
-        <Route path="/clientmyreservation" element={<ClientMyReservation />} />
-        <Route path="/clientmypage" element={<ClientMyPage />} />
-        <Route path="/clienttrainerdetail" element={<ClientTrainerDetail />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/trainermyclient" element={<TrainerMyClient />} />
-        <Route path="/trainermyreservation" element={<TrainerMyReservation />} />
-        <Route path="/trainermypage/*" element={<TrainerMyPage />} />
+        
+        
+        <Route path="/client/myschedule" element={<ClientMySchedule />} />
+        <Route path="/client/mylog" element={<ClientMyLog />} />
+        <Route path="/client/myreservation" element={<ClientMyReservation />} />
+        <Route path="/client/mypage" element={<ClientMyPage />} />
+        <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
+        {/* <Route path="/home" element={<Home />} /> */}
+
+        <Route path="/trainer/myclient" element={<TrainerMyClient />} />
+        <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
+        <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
         <Route path="/manager/*" element={<ManagerHome />} />
+        <Route element={<Landing />}/>
+      
       </Routes>
     </div>
   );

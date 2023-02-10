@@ -11,7 +11,11 @@ import BasicLoadingSpinner from '../Loading/BasicLoadingSpinner';
 const Login = () => {
 const dispatch = useDispatch();
 const navigate=useNavigate();
-const { isLoading, isLoggedIn} = useSelector((state) => state.auth);
+const { role, isLoggedIn} = useSelector((state) => state.auth);
+const [roleToken, setRoleToken] = useState(
+    localStorage.getItem("mpti_role")
+);
+
 const [userInfo, setUserInfo] = useState({
     email: "",
     isEmail: undefined,
@@ -22,10 +26,11 @@ const [userInfo, setUserInfo] = useState({
 })
 
 
+console.log("로그인상태", isLoggedIn);
 
 useEffect(()=>{
-    if(isLoggedIn){
-        navigate("/home");
+    if(roleToken || role){
+        navigate(`/${roleToken}/home`);
     }
 },[isLoggedIn])
 
