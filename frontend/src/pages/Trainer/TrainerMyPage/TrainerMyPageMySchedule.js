@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./TrainerMyPageMySchedule.module.css";
-import Calendar from "../../components/Calendar/Calendar";
+import Calendar from "../../../components/Calendar/Calendar";
 import axios from "axios";
 
 

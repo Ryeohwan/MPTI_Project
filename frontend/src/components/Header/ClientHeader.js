@@ -39,20 +39,20 @@ export default function ClientHeader(){
 		<div className={styles.Header}>
 			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
-			<div className={styles.head_logo}> <Link to={'/home'} onClick={()=>{setMenuSelect('home')}}>
+			<div className={styles.head_logo}> <Link to={'home'} onClick={()=>{setMenuSelect('home')}}>
 			MPTI</Link>	</div>
 			
 
 			{/* head menu담는 박스 */}
 			<div className = {styles.head_menu}>
 				{/* 내 스케줄 클릭시 /clientmyschedule로 라우팅 */}
-				<div className={styles.head_text}><Link id='clientmyschedule' to={'/clientmyschedule'} style={menuselect === 'clientmyschedule'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyschedule')}}>
+				<div className={styles.head_text}><Link id='clientmyschedule' to={'myschedule'} style={menuselect === 'clientmyschedule'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyschedule')}}>
 					내 스케줄</Link></div>
 				{/* 내 운동기록 클릭시 /clientptlog 라우팅 */}
-				<div className={styles.head_text}><Link id='clientmylog' to={'/clientmylog'}  style={menuselect === 'clientmylog'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmylog')}}>
+				<div className={styles.head_text}><Link id='clientmylog' to={'mylog'}  style={menuselect === 'clientmylog'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmylog')}}>
 					운동기록</Link></div>
 				{/* 내 예약하기 클릭시 /clientreservation 라우팅 */}
-				<div className={styles.head_text}><Link id='clientmyreservation' to={'/clientmyreservation'} style={menuselect === 'clientmyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyreservation')}}>
+				<div className={styles.head_text}><Link id='clientmyreservation' to={'myreservation'} style={menuselect === 'clientmyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('clientmyreservation')}}>
 					예약하기</Link></div>
 
 				{/* 메일 + 프로필 담는 박스 */}
@@ -65,7 +65,7 @@ export default function ClientHeader(){
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /clientmypage 라우팅 */}
-					<Link to={'/clientmypage'} onClick={()=>{setMenuSelect('clientmypage')}}>
+					<Link to={'mypage'} onClick={()=>{setMenuSelect('clientmypage')}}>
 						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
 					</Link>
 				</div>

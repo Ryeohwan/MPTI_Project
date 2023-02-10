@@ -56,10 +56,6 @@
 
 }
 
-.review_top_right{
-    cursor: pointer;
-}
-
 .review_time{
     font-size: 15px;
 }
@@ -69,4 +65,10 @@
     margin-top: 10px;
     font-size: 15px;
     overflow-wrap: break-word;
+}
+
+.no_review{
+    text-align: center;
+    font-size: 30px;
+    color: #222222;
 }

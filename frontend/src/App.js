@@ -1,103 +1,87 @@
 // 라이브러리
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
 //CSS
-import './App.css';
+import "./App.css";
 // 컴포넌트
-import ClientHeader from './components/Header/ClientHeader';
-import TrainerHeader from './components/Header/TrainerHeader';
+import ClientHeader from "./components/Header/ClientHeader";
+import TrainerHeader from "./components/Header/TrainerHeader";
 // 라우트 페이지
-import Home from './pages/Common/Home';
-import ClientMySchedule from './pages/Client/ClientMySchedule';
-import ClientMyLog from './pages/Client/ClientMyLog';
-import ClientMyReservation from './pages/Client/ClientMyReservation';
-import ClientMyPage from './pages/Client/ClientMyPage';
-import TrainerMyClient from './pages/Trainer/TrainerMyClient';
-import TrainerMyReservation from './pages/Trainer/TrainerMyReservation';
-import TrainerMyPage from './pages/Trainer/TrainerMyPage';
-import ClientTrainerDetail from './pages/Client/ClientTrainerDetail';
-import Login from './components/Login/Login'
-import Signup from './components/Signup/Signup'
-import ManagerAccountManagement from './pages/Manager/ManagerAccountManagement'
-import ManagerHome from './pages/Manager/ManagerHome'
-import ManagerReportApproval from './pages/Manager/ManagerReportApproval'
-import ManagerSignupApproval from './pages/Manager/ManagerSignupApproval'
-import SignupSelect from './components/Signup/SignupSelect'
-import { useState,useEffect } from 'react';
-import Landing from './pages/Landing/Landing';
-import { Link } from 'react-router-dom';
-import SignupRedirect from './components/Signup/SignupRedirect';
-import BasicLoadingSpinner from './components/Loading/BasicLoadingSpinner';
-import { useSelector } from 'react-redux';
+import Home from "./pages/Common/Home";
+import ClientMySchedule from "./pages/Client/ClientMySchedule";
+import ClientMyLog from "./pages/Client/ClientMyLog";
+import ClientMyReservation from "./pages/Client/ClientMyReservation";
+import ClientMyPage from "./pages/Client/ClientMyPage";
+import TrainerMyClient from "./pages/Trainer/TrainerMyClient";
+import TrainerMyReservation from "./pages/Trainer/TrainerMyReservation";
+import TrainerMyPage from "./pages/Trainer/TrainerMyPage";
+import ClientTrainerDetail from "./pages/Client/ClientTrainerDetail";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
+import ManagerAccountManagement from "./pages/Manager/ManagerAccountManagement";
+import ManagerHome from "./pages/Manager/ManagerHome";
+import ManagerReportApproval from "./pages/Manager/ManagerReportApproval";
+import ManagerSignupApproval from "./pages/Manager/ManagerSignupApproval";
+import SignupSelect from "./components/Signup/SignupSelect";
+import { useState, useEffect } from "react";
+import Landing from "./pages/Landing/Landing";
+import SignupRedirect from "./components/Signup/SignupRedirect";
+import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
+import { useSelector } from "react-redux";
+
+
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
-export default function App(){
-   const [type, setType] = useState('client')
-   const [token, setToken] = useState(localStorage.getItem("access_token"));
-   //const {isLoading} = useSelector(state=> state.auth);
-   const {isLoading} = useSelector(state=> state.admin);
+export default function App() {
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("access_token")
+  );
+
+  const [roleToken, setRoleToken] = useState(
+    localStorage.getItem("mpti_role")
+  );
+  const { isLoading } = useSelector((state) => state.admin);
+  const { role } = useSelector((state) => state.auth);
+    console.log(role);
+    console.log(roleToken);
 
   return (
-      <div className="App">
-        {/* {localStorage.getItem('token') ? <ClientHeader/> : <랜딩페이지/>}  */}
-        {/* 테스트용 이동 버튼 삭제시 import link도 삭제 */}
-         <div style={{display:'flex', flexDirection:'column', position:'absolute', zIndex:100, top:0, left:0 }}>
-          <Link to='/'><button onClick={()=>setType('')}>비회원</button></Link>
-          <Link to='/home'><button onClick={()=>setType('trainer')}>트레이너</button></Link>
-          <Link to='/home'><button onClick={()=>setType('client')}>고객</button></Link>
-          <Link to='/manager'><button onClick={()=>setType('manager')}>관리자</button></Link>
-          <span style={{color:'white'}}>상태:{type?type:'not user'}</span>
-        </div>
-        {type==="client" ?<ClientHeader/>:null}
-        {type==="trainer"?<TrainerHeader/>:null}
-        {/* <BasicLoadingSpinner/> */}
-        
-        
-        {isLoading ? <BasicLoadingSpinner/>: null}
+    <div className="App">
+      {isLoading ? <BasicLoadingSpinner /> : null}
+
         <Routes>
-    
-
-        <Route path="/login" element={<Login/>}/>
-      <Route path="/clientmyschedule" element={<ClientMySchedule/>}/>
-          <Route path="/clientmylog" element={<ClientMyLog/>}/>
-           <Route path="/clientmyreservation" element={<ClientMyReservation/>}/>
-           <Route path="/clientmypage" element={<ClientMyPage/>}/>
-           <Route path="/clienttrainerdetail" element={<ClientTrainerDetail/>}/>
-           <Route path="/home" element={<Home/>}/>
-         
-           <Route path="/" element={<Landing/>}/>
-     
-     <Route path="/login" element={<Login/>}/>
-     <Route path="/oauth2/redirect" element={<SignupRedirect/>}/>
-    
-     <Route path="/signup" element={<Signup/>}/>
-     <Route path="/select" element={<SignupSelect/>}/>
-         
-
-    
-        
-          
-        {/* 라우트 경로 목록들 */}
-       
-                   {/* 공통 */}
-          
-
-           {/* 회원 */}
-         
-
-           {/* 트레이너 */}
-           <Route path="/trainermyclient" element={<TrainerMyClient/>}/>
-           <Route path="/trainermyreservation" element={<TrainerMyReservation/>}/>
-           <Route path="/trainermypage/*" element={<TrainerMyPage/>}/>
-          {/* 관리자 */}
-          <Route path="/manager/*" element={<ManagerHome/>}/>
+          <Route path="/trainer/*" element={<TrainerHeader/>} />
+          <Route path="/client/*" element={<ClientHeader/>} />
         </Routes>
 
-      </div>
-  )
+
+        <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/trainer/home" element={<Home/>} />
+        <Route path="/trainer/myclient" element={<TrainerMyClient />} />
+        <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
+        <Route path="/trainer/mypage" element={<TrainerMyPage />} />
+       
+
+        <Route path="/oauth2/redirect" element={<SignupRedirect />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/select" element={<SignupSelect />} />
+        
+        
+        <Route path="/client/myschedule" element={<ClientMySchedule />} />
+        <Route path="/client/mylog" element={<ClientMyLog />} />
+        <Route path="/client/myreservation" element={<ClientMyReservation />} />
+        <Route path="/client/mypage" element={<ClientMyPage />} />
+        <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
+        {/* <Route path="/home" element={<Home />} /> */}
+
+        <Route path="/trainer/myclient" element={<TrainerMyClient />} />
+        <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
+        <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
+        <Route path="/manager/*" element={<ManagerHome />} />
+        <Route element={<Landing />}/>
+      
+      </Routes>
+    </div>
+  );
 }
-
-// {/* ClientNavbar 는 client의 네비게이션 바/ TrainerNavBar는 Trainer의 네비게이션 바 */}
-// {/* <NaverLogin></NaverLogin>
-// <SignUP/> */}
-
- 

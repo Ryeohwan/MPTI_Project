@@ -87,23 +87,26 @@ const ManagerReportApproval = () => {
         <span>불편함을 느낀 MPTI 고객님들의 목소리에 귀를 기울여 주세요!</span>
         <div className={styles.content_content}>
           <ul className={styles.content_list}>
-            {report.map((it) => {
+            {report.map((it,index) => {
               return (
               
-                <li key={it.id} style={it.stopUntil? {backgroundColor:"red"}:null} className={styles.content_item}>
+                <li key={it.id} style={it.stopUntil? {backgroundColor:"grey"}:null} className={styles.content_item}>
                   <div className={styles.item_info_box}>
                     <div className={styles.item_info}>
-                      <div>신고자: {it.writerName}</div>| <div>피신고자: {it.targetName}</div> |<div>사건 분류: {it.reportType} </div>{" "}
+                      <div>{(8*(page-1))+index+1}</div> <div>신고자: {it.writerName}</div> <div>피신고자: {it.targetName}</div> <div>사건 분류: {it.reportType} </div>
                       
                     </div>
                     <div className={styles.item_btn}>
-                      <button
+                      <button disabled={it.stopUntil}
                         className={styles.btn_negative}
                         onClick={() =>
                           handleOpenModal(it.writerName,it.targetName,  it.reportType, it.memo, it.id)
                         }
                       >
-                        확인
+                        {
+                          !it.stopUntil? <span>확인</span> : <span style={{color:"black"}}>완료</span>
+                      }
+                        <span></span>
                       </button>
                     </div>
                   </div>

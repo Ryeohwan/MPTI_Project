@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import auth, { duplicateCheck } from '../../store/auth';
 import {signup} from '../../store/auth';
 import styles from "./Signup.module.css"
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
     const [gender, setGender] = useState({ gender: "male", isGender: false });
@@ -24,6 +25,8 @@ const Signup = () => {
     const genderInputRef = useRef();
     const birthInputRef = useRef();
     const phoneInputRef = useRef();
+
+    const navigate = useNavigate();
 
     const nameChangeHandler = (e) => {
         const curName = e.target.value;
@@ -228,7 +231,7 @@ const Signup = () => {
             </form>
 
             <div className={styles.form_btn_box}>
-                <button className={styles.form_sub_btn} >뒤로가기</button>
+                <button className={styles.form_sub_btn} onClick={()=> navigate(-1)}>뒤로가기</button>
             </div>
         </div>
     );
