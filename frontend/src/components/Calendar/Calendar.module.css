@@ -134,3 +134,11 @@
   color: #C9FD61;
   font-weight: 500;
 }
+
+.openedHourIcon {
+  width: 8px;
+  height: 8px;
+  color: #C9FD61;
+  margin-top: 5px;
+  margin-left: 5px;
+}
