@@ -24,7 +24,7 @@ const TrainerMyReservation = () => {
     const dispatch = useDispatch();
     //0206
     useEffect(()=>{
-        axios.get(`/api/business/reservation/page/1/2023/2/7/${page-1}`).then((res)=>{
+        axios.get(`/api/business/reservation/page/1/2023/2/10/${page-1}`).then((res)=>{
             console.log(res.data);
             setTotalPage(res.data.totalElements);
             setSignupList(res.data.content)
