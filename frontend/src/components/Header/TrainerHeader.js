@@ -34,7 +34,7 @@ export default function TrainerHeader(){
 			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
-				<Link to={'/home'} >
+				<Link to={'./home'} >
 						MPTI</Link>	
 			</div>
 			

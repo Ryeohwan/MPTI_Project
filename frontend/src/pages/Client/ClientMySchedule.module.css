@@ -6,8 +6,8 @@
 .schedule {
     font-family: 'DungGeunMo';
     color: #ececec;
-    width: 75%;
-    position: fixed;
+    position: flex;
+    flex-direction: column;
     margin-top: 40px;
 }
 
@@ -28,11 +28,24 @@
     margin-bottom: 15px;
 }
 
-.card_list {
-    border: 1px solid grey;
-    padding: 1%;
-    display: flex;
-    border-radius: 6px;
-    justify-content: space-between;
+.card_list_top {
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.card_list_top button {
+    background-color: #C9FD61;
+}
+
+.card_list_bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.card_list_bottom button {
+    background-color: #999999;
 }
 
