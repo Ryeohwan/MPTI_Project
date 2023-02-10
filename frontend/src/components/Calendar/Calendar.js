@@ -9,7 +9,7 @@ const Calendar = ({ allData, getDaySchedule }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [click, setClick] = useState(false);
-  
+
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
   };
@@ -23,7 +23,7 @@ const Calendar = ({ allData, getDaySchedule }) => {
     setClick(!click);
     getDaySchedule(intDate);
   }
-  
+
   return (
     <div className={styles.calendar}>
       <CalendarHeader

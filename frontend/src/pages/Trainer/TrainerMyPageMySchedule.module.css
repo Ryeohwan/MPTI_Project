@@ -89,4 +89,6 @@
 
 .edit {
     color: black;
+    cursor: pointer;
+    margin-left: 91%;
 }

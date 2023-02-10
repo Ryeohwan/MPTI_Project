@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { format } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
 import { Icon } from '@iconify/react';
+import CalendarModal from "./CalendarModal";
 
 const CalendarCells = ({
   currentMonth,
   selectedDate,
   onDateClick,
   click,
-  allData,
+  allData
 }) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
@@ -21,7 +22,7 @@ const CalendarCells = ({
   let days = [];
   let day = startDate;
   let formattedDate = "";
-  console.log(allData)
+
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = parseInt(format(day, "d"));
@@ -29,7 +30,7 @@ const CalendarCells = ({
       const parsedDay = new Date(copyday);
       const formatDay = format(parsedDay, "yyyy-MM-dd");
       const intDate = formatDay.split("-").map((item) => parseInt(item));
-    
+      
       const reservedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
       const openedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2])
       const openedHour = openedData.map((item) => item.hour)
@@ -56,7 +57,9 @@ const CalendarCells = ({
                 }
               : () => {}
           }
+
         >
+          {/* <CalendarModal open={modalOpen} close={closeModal} reservedData={reservedData}></CalendarModal> : null */}
           <div
             className={
               format(currentMonth, "M") !== format(day, "M")
@@ -66,10 +69,10 @@ const CalendarCells = ({
           >
             {formattedDate}
             <span>
-              { openedHour.length !== 0 ? <Icon icon="material-symbols:lens" className={styles.openedHourIcon}/> : null}
+              { openedHour.length !== 0 ? <Icon icon="material-symbols:lens" className={styles.openedHourIcon}/> : null }
             </span>
           </div>
-
+          
           <div>
             { reservedData.length !== 0 ? (
               <div>
