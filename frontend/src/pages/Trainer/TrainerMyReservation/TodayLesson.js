@@ -3,19 +3,16 @@ import styles from './TodayLesson.module.css'
 import ScheduleCardItem2 from '../../../components/Card/ScheduleCardItem2';
 
 
-const TrainerMyClient = () => {
+const TrainerMyClient = (props) => {
 
-    const data = {name: '정원철', gender:'남', age:28, time:'14:00 - 15:00'};
+    const data = props.signupList;
+    console.log(data);
 
     return (
         <div className={styles.container}>
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
-            <ScheduleCardItem2 className={styles.item} {...data} />
+            {data.map(it=>{
+                return <ScheduleCardItem2 key={it.id}  className={styles.item} {...it} />
+            })}
         </div>
     );
 };
