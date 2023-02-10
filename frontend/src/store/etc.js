@@ -80,11 +80,11 @@ export const trainerDetail = (email) => async (dispatch) => {
     }
 }
 
-// 전체 리뷰 리스트
-export const reviewList = () => async(dispatch) =>{
+export const reviewList = (pagenum) => async(dispatch) =>{
     try {
-        const response = await axios.get(`/api/business/opinion/review/list/0`);
-        console.log(response.data.content);
+        const response = await axios.get(`/api/business/opinion/review/list/${pagenum}`);
+        console.log("여가야ㅑㅑㅑㅑ");
+        console.log(response);
         console.log("리뷰 리스트 소환");
         return response.data.content;
     } catch (error) {

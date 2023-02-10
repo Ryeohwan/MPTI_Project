@@ -37,9 +37,12 @@
 }
 
 .item_info {
-    display: flex;
+    display: grid;
     width: 100%;
-    justify-content: space-around;
+    grid-template-columns:5% 25% 40% 25% 25%;
+    grid-template-rows: 10px;
+   
+   
 }
 
 .item_info div {
@@ -54,20 +57,19 @@
     align-items: center;
 }
 
-.item_info_box:hover {
-    background-color: grey;
-    cursor: pointer;
-}
+
 
 .item_btn {}
 
 .item_btn button {
+    cursor: pointer;
     width: 50px;
     height: 30px;
     border: none;
     border-radius: 3px;
     font-family: 'DungGeunMo';
     font-size: 14px;
+   
     /* color: #ececec; */
 }
 

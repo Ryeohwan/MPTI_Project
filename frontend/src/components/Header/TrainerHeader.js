@@ -34,17 +34,17 @@ export default function TrainerHeader(){
 			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
-				<Link to={'./home'} >
+				<Link to={'home'} >
 						MPTI</Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}
 			<div className = {styles.head_menu}>
 					{/* 예약현황 클릭시 /trainermyreservation로 라우팅 */}
-					<div><Link id='trainermyreservation' className={styles.head_text} to={'/trainermyreservation'} style={menuselect === 'trainermyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyreservation')}}>
+					<div><Link id='trainermyreservation' className={styles.head_text} to={'myreservation'} style={menuselect === 'trainermyreservation'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyreservation')}}>
 						예약현황</Link></div>
 					{/* 고객관리 클릭시 /trainermyclient 라우팅 */}
-					<div><Link id='trainermyclient'className={styles.head_text} to={'/trainermyclient'}  style={menuselect === 'trainermyclient'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyclient')}}>
+					<div><Link id='trainermyclient'className={styles.head_text} to={'myclient'}  style={menuselect === 'trainermyclient'?{color:"#C9FD61"}:null} onClick={()=>{setMenuSelect('trainermyclient')}}>
 						고객관리</Link></div>
 
 					{/* 메일 + 프로필 담는 박스 */}
@@ -57,7 +57,7 @@ export default function TrainerHeader(){
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /trainermypage 라우팅 */}
-					<Link to={'/trainermypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>
+					<Link to={'mypage'} onClick={()=>{setMenuSelect('trainermypage')}}>
 						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
 					</Link>
 				</div>
