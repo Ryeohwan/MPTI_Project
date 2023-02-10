@@ -4,14 +4,14 @@ import TrainerImg from "./../../assets/img/trainer.PNG";
 import Star from "./../../assets/img/star.png";
 import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpinner";
-
 const Home = () => {
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state) => state.etc);
   const [trainer, setTrainer] = useState([]);
   const [review, setReview] = useState([]);
-
+  const [role, setrole] = useState('client')
   //console.log(isLoading);
   //console.log(isLoading)
   useEffect(() => {
@@ -49,22 +49,24 @@ const Home = () => {
         <ul className={styles.home_trainer_list}>
           {trainer.map((it) => {
             return (
-              <li key={it.email} className={styles.home_trainer_item}>
-                <div className={styles.home_trainer_img}>
-                  <img src={TrainerImg} />
-                </div>
-                <div className={styles.home_trainer_info}>
-                  <div className={styles.home_trainer_name}>
-                    {it.name} 트레이너
+              <Link to={`/${role}/trainerdetail`} state={it}>
+                <li key={it.email} className={styles.home_trainer_item}>
+                  <div className={styles.home_trainer_img}>
+                    <img src={TrainerImg} />
                   </div>
-                  <div className={styles.home_trainer_rate}>
-                    <span>★★★★★</span> {it.stars}점{" "}
+                  <div className={styles.home_trainer_info}>
+                    <div className={styles.home_trainer_name}>
+                      {it.name} 트레이너
+                    </div>
+                    <div className={styles.home_trainer_rate}>
+                      <span>★★★★★</span> {it.stars}점{" "}
+                    </div>
+                    <div className={styles.home_trainer_introduce}>
+                      {it.birthday}
+                    </div>
                   </div>
-                  <div className={styles.home_trainer_introduce}>
-                    {it.birthday}
-                  </div>
-                </div>
-              </li>
+                </li>
+              </Link>
             );
           })}
         </ul>
