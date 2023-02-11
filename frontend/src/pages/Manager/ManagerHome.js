@@ -14,7 +14,7 @@ const ManagerHome = () => {
             <div className={styles.info_box}>
                 <ManagerNavigation/>
                 <Routes>
-                    <Route path='/' element={<ManagerSignupApproval/>}/>
+                    <Route path='/sign' element={<ManagerSignupApproval/>}/>
                     <Route path='/account' element={<ManagerAccountManagement/>}/>
                     <Route path='/report' element={<ManagerReportApproval/>}/>
                 </Routes>

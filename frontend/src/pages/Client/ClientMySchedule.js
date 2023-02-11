@@ -3,18 +3,26 @@ import styles from "./ClientMySchedule.module.css"
 import ScheduleCardItem from "../../components/Card/ScheduleCardItem";
 import TopTitle from '../../components/Common/TopTitle'
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { clientSchedule } from '../../store/etc';
 
 function MySchedule() {
     const [schedule, setSchedule] =useState([]);
+    const dispatch = useDispatch();
     const today = new Date().toLocaleString().split('.').slice(0,3).map((item)=> parseInt(item))
     console.log(today)
     console.log(schedule)
     useEffect(()=>{
-        async function getSchedule(){
-            const data = await axios.get('/api/business/reservation/1')
-            setSchedule([data.data])
-        }
-        getSchedule()
+        dispatch(clientSchedule(1)).then(res=>{
+            setSchedule( [res]);
+            // console.log(res);
+        })
+        // setSchedule();
+        // async function getSchedule(){
+        //     const data = await axios.get('/api/business/reservation/1')
+        //     setSchedule([data.data])
+        // }
+        // getSchedule()
     }, [])
     console.log(schedule)
     return (

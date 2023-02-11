@@ -147,6 +147,20 @@ export const clientEditInfo = (email, password, phone) => async(dispatch) => {
         return false;
     }
 }
+//고객 내 스케줄
+export const clientSchedule = (pagenum) => async(dispatch) => {
+    dispatch(etcActions.dataRequest())
+    try{
+        const response = await (await axios.get(`/api/business/reservation/${pagenum}`)).data;
+        console.log(response);
+        dispatch(etcActions.dataSuccess())
+        return response;
+    } catch(error) {
+        console.log("고객 스케줄 불러오기 실패 수정 axios 에러")
+        dispatch(etcActions.dataFailure())
+        return false;
+    }
+}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;

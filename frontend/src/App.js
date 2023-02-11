@@ -39,7 +39,9 @@ export default function App() {
   const [roleToken, setRoleToken] = useState(
     localStorage.getItem("mpti_role")
   );
-  const { isLoading } = useSelector((state) => state.admin);
+  // const { isLoading } = useSelector((state) => state.admin);
+  const { isLoading } = useSelector((state) => state.etc);
+  
   const { role } = useSelector((state) => state.auth);
     console.log(role);
     console.log(roleToken);
@@ -74,7 +76,7 @@ export default function App() {
         <Route path="/client/mypage" element={<ClientMyPage />} />
         <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
         {/* <Route path="/home" element={<Home />} /> */}
-
+        <Route path="/client/home" element={<Home/>} />
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
