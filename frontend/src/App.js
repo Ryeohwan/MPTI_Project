@@ -27,7 +27,7 @@ import Landing from "./pages/Landing/Landing";
 import SignupRedirect from "./components/Signup/SignupRedirect";
 import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
-
+import Lesson from "./pages/Common/Lesson";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -47,7 +47,6 @@ export default function App() {
   return (
     <div className="App">
       {isLoading ? <BasicLoadingSpinner /> : null}
-
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
           <Route path="/client/*" element={<ClientHeader/>} />
@@ -62,7 +61,7 @@ export default function App() {
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage" element={<TrainerMyPage />} />
         <Route path="/trainer/trainerdetail" element={<ClientTrainerDetail />} />
-       
+        <Route path="/lesson" element={<Lesson/>}/>       
 
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
         <Route path="/signup" element={<Signup />} />

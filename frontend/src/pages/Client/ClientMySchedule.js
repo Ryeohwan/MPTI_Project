@@ -17,18 +17,17 @@ const MySchedule =()=> {
     
     useEffect(()=>{
         async function getSchedule(){
-            
             // 고객 스케줄표
             const data = await dispatch(clientSchedule(id))
-            console.log(data)
             let temp_data1=[], temp_data2 = [];
-            data.length && data.foreach((item, index) => {
+            data.length && data.map((item, index) => {
                 item.year === today[0] && 
                 item.month === today[1] && 
                 item.day === today[2]?
                 // 오늘 수업이면 temp_data1으로 오늘 수업 아니면 temp_data2로
                 temp_data1.push(item) : temp_data2.push(item)
             })
+            console.log('오전:', temp_data1, '오후:', temp_data2)
             setTodaySchedule(temp_data1)
             setOtherSchedule(temp_data2)
         }

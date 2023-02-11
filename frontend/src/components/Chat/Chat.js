@@ -73,7 +73,9 @@ const Chat = ({chaton, turnoffchat}) => {
     }
     // 소켓 서버 해체
     function disconnect_socket_server() {
-        stompClient.current.disconnect(() => {console.log("소켓 서버와 연결을 끊었습니다.")})
+        if(stompClient.current){
+            stompClient.current.disconnect(() => {console.log("소켓 서버와 연결을 끊었습니다.")})
+        }
     }
 
     // 채팅 룸 접속
