@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { accountList, accountDelete } from "../../store/admin";
 import "./Paging.css";
 import Pagination from "react-js-pagination";
+import ReportModalContainer from "./Modal/ReportModalContainer";
+import AccountModal from "./Modal/AccountModal";
 const ManagerAccountManagement = () => {
   const disapatch = useDispatch();
   const [account, setAccount] = useState([]);
@@ -14,6 +16,7 @@ const ManagerAccountManagement = () => {
     console.log(page);
     setPage(page);
   };
+  
   useEffect(() => {
     disapatch(accountList(page - 1)).then((res) => {
       console.log(res.data);
@@ -25,6 +28,44 @@ const ManagerAccountManagement = () => {
   const deleteAccountHandler = (data) => {
     disapatch(accountDelete(data));
   };
+
+
+
+  const [modal, setModal] = useState({
+    show: false,
+    name: "",
+    email: "",
+    birth: "",
+    gender:"",
+    phone:"",
+    id:""
+  });
+
+  const handleOpenModal = (name, email ,birth, gender,phone,id) => {
+    setModal({
+      show: true,
+      name,
+      email,
+      birth,
+      gender,
+      phone,
+      id,
+    });
+  };
+
+  const handleCloseModal = () => {
+    console.log("sss");
+    setModal({
+      show: false,
+      name: "",
+      email: "",
+      birth: "",
+      gender:"",
+      phone: "",
+      id: "",
+    });
+  };
+
   return (
     <>
       <div className={styles.info_content_box}>
@@ -37,7 +78,10 @@ const ManagerAccountManagement = () => {
             {account.map((it,index) => {
               return (
                 <li key={it.email} className={styles.content_item}>
-                  <div className={styles.item_info_box}>
+                  <div className={styles.item_info_box}
+                  onClick={() =>
+                    handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, it.id)
+                  }>
                     <div className={styles.item_info}>
                       <div>{(8*(page-1))+index+1}</div>
                       <div>성명:{it.name} </div>
@@ -55,10 +99,24 @@ const ManagerAccountManagement = () => {
                       </button>
                     </div>
                   </div>
+                  {modal.show && (
+                    <ReportModalContainer onClose={handleCloseModal}>
+                      <AccountModal
+                        name={modal.name}
+                        email={modal.email}
+                        birth={modal.birth}
+                        gender={modal.gender}
+                        phone={modal.phone}
+                        id={modal.id}
+                        onClose={handleCloseModal}
+                      />
+                    </ReportModalContainer>
+                  )}
                 </li>
               );
             })}
           </ul>
+          
         </div>
         <div className={styles.pagenation}>
           <Pagination
