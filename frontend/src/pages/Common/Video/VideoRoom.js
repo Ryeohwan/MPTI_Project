@@ -30,7 +30,6 @@ const VideoRoom = (props) => {
     let hasBeenUpdated = false
     let localUserAccessAllowed = false;
     const [seconds, setSeconds] = useState(30);
-    const recentSeconds = useRef(30);
     const [timeStop,setTimeStop] = useState(true)
     // const [localUser, setLocalUser]= useState(undefined)
     const [subscribers, setSubscribers]= useState([])
@@ -38,7 +37,6 @@ const VideoRoom = (props) => {
     const [currentVideoDevice, setCurrentVideoDevice]= useState(undefined)
     const [logDisplay, setLogDisplay] = useState('none')
     const OV = useRef(undefined);
-    console.log(props.clientId, props.trainerId, '클라이언트아이디')
     // func 
     const joinSession = () => {
         OV.current = new openviduBrowser.OpenVidu();
@@ -57,12 +55,10 @@ const VideoRoom = (props) => {
         return () => timeStop?null:clearInterval(timer)
     },[seconds, timeStop])
     const timerStart = () => {
-        console.log('타이머 시작')
         setTimeStop(false)
     }
 
     const timerStop = () => {
-        console.log('타이머 중지')
         setTimeStop(true)
     }
 
@@ -94,15 +90,11 @@ const VideoRoom = (props) => {
         }
         layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
         window.addEventListener('beforeunload', onbeforeunload);
-        window.addEventListener('resize', updateLayout);
-        window.addEventListener('resize', checkSize);
-        console.log('1번 조인 시작')
+
         joinSession();
 
         return() =>{
             window.removeEventListener('beforeunload', onbeforeunload);
-            window.removeEventListener('resize', updateLayout);
-            window.removeEventListener('resize', checkSize);
             leaveSession();
         }
     },[])
@@ -117,7 +109,7 @@ const VideoRoom = (props) => {
             })
         }
         checkSomeoneShareScreen();
-        updateLayout()
+        // updateLayout()
     },[subscribers])
 
 
@@ -128,7 +120,6 @@ const VideoRoom = (props) => {
         if(props.token !== undefined){
             connect(props.token)
         } else {
-            console.log('토큰')
             getToken()
         }
     }
@@ -177,7 +168,7 @@ const VideoRoom = (props) => {
         });
         setCurrentVideoDevice(videoDevices[0]);
         localUser.current.getStreamManager().on('streamPlaying', (e) =>{
-            updateLayout()
+            // updateLayout()
             publisher.videos[0].video.parentElement.classList.remove('custom-class')
         })
       };
@@ -235,7 +226,6 @@ const VideoRoom = (props) => {
         }
     }
     const subscribeToStreamCreated = () => {
-        console.log('3번 세션 확인')
         session.current.on('streamCreated', (e) => {
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
@@ -262,7 +252,7 @@ const VideoRoom = (props) => {
                 checkSomeoneShareScreen();
             }, 20)
             e.preventDefault();
-            updateLayout()
+            // updateLayout()
         })
     }
 
@@ -290,11 +280,11 @@ const VideoRoom = (props) => {
         })
     }
     
-    const updateLayout = () => {
-        setTimeout(() => {
-             layout.current.updateLayout()
-        }, 20)
-    }
+    // const updateLayout = () => {
+    //     setTimeout(() => {
+    //          layout.current.updateLayout()
+    //     }, 20)
+    // }
 
     const sendSignalUserChanged = (data) => {
         let signalOptions = {
@@ -307,7 +297,7 @@ const VideoRoom = (props) => {
     const toggleFullscreen = () => {
         let document = window.document
         let fs = document.getElementById('container')
-        
+        console.log(fs)
         if(!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
             if (fs.requestFullscreen) {
                 fs.requestFullscreen();
@@ -356,7 +346,7 @@ const VideoRoom = (props) => {
     }
 
     const screenShare = () => {
-        let videoSource = navigator.userAgent.indexOf('Firefox') !== 1 ? 'window' : 'screen';
+        let videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
         let publisher = OV.current.initPublisher(undefined, {
             videoSource: videoSource,
             publishAudio: localUser.current.isAudioActive(),
@@ -373,7 +363,9 @@ const VideoRoom = (props) => {
                 alert('You need to choose a window or application to share');
             }
         });
+        console.log(videoSource, '비디오소스')
         publisher.once('accessAllowed', () => {
+            console.log('왔니')
             session.current.unpublish(localUser.current.getStreamManager());
             localUser.current.setStreamManager(publisher)
             session.current.publish(localUser.current.getStreamManager()).then(()=> {
@@ -381,7 +373,7 @@ const VideoRoom = (props) => {
             sendSignalUserChanged({ isScreenShareActive : localUser.current.isScreenShareActive() })
             })
             publisher.on('streamPlaying', () => {
-                updateLayout();
+                // updateLayout();
                 publisher.video[0].video.parentElement.classList.remove('custom-class');
             })
     })}
@@ -413,7 +405,7 @@ const VideoRoom = (props) => {
             animate: true
         }
         layout.current.setLayoutOptions(openviduLayoutOptions);
-        updateLayout();
+        // updateLayout();
     }
 
     const toggleChat = (property) => {
@@ -428,7 +420,7 @@ const VideoRoom = (props) => {
           } else {
             setChatDisplay(display)
           }
-          updateLayout();
+        //   updateLayout();
     }
 
     // 토글 로그

@@ -11,7 +11,6 @@ const VideoClientLog = (props) => {
 const handleSubmit = (e) => {
     e.preventDefault()
     const data = [props.clientId, props.trainerId]
-    console.log(formRef.current)
     Array.from(formRef.current).map((item,index) => {index<8?(item.checked && data.push(item.name)):(index===8 && data.push(item.value))})
     dispatch(sendLog(data)).then(res=>alert(res))
 }

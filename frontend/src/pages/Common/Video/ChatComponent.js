@@ -46,7 +46,6 @@ const ChatComponent = (props) => {
     const sendMessage = () => {
         if(props.user && message) {
             let message_temp = message.replace(/ +(?= )/g, '');
-            console.log(message_temp)
             if (message_temp !== '' && message_temp !== '') {
               let data = {
                 message: message_temp,

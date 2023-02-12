@@ -36,6 +36,7 @@ const ToolbarComponent = (props) => {
         props.stopScreenShare()
     }
     const toggleFullscreen=()=> {
+        setFullScreen(true)
         props.toggleFullscreen()
     }
     const switchCamera=()=> {
@@ -53,7 +54,6 @@ const ToolbarComponent = (props) => {
                 time.current.value = 1
             } else {
                 time.current.value = parseInt(time.current.value)+parseInt(second)
-                console.log(time.current.value)
             }
             props.setSeconds(time.current.value)
         } else {
