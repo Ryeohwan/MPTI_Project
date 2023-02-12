@@ -3,7 +3,7 @@ import { useState } from 'react';
 import reportBell from '../../../assets/img/reportbell.png';
 
 const AccountModal = ({ name, email, gender, phone, birth, id ,onClose }) => {
-
+  
 
   return (
     <div className={styles.ReportModal}>
@@ -11,9 +11,9 @@ const AccountModal = ({ name, email, gender, phone, birth, id ,onClose }) => {
       <h3>이름</h3>
       <div className={styles.name}>{name}</div>
       <h3>성별</h3>
-      <div className={styles.name}>{gender}</div>
+      <div className={styles.name}>{gender === 'F' ? "남성" : "여성"}</div>
       <h3>생년월일</h3>
-      <div className={styles.name}>{birth}</div>
+      <div className={styles.name}>{birth.slice(0, 10)}</div>
       <h3>이메일</h3>
       <div className={styles.name}>{email}</div>
       <h3>휴대폰 번호</h3>

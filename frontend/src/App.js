@@ -41,14 +41,15 @@ export default function App() {
   );
   // const { isLoading } = useSelector((state) => state.admin);
   const { isLoading } = useSelector((state) => state.etc);
+  const  admin = useSelector((state) => state.admin);
   
   const { role } = useSelector((state) => state.auth);
     console.log(role);
     console.log(roleToken);
-
+    
   return (
     <div className="App">
-      {isLoading ? <BasicLoadingSpinner /> : null}
+      {isLoading || admin.isLoading ? <BasicLoadingSpinner /> : null}
 
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
