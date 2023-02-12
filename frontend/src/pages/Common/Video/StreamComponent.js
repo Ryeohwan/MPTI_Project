@@ -1,95 +1,81 @@
 import React, { useState } from "react"
 import OvVideo from "./OvVideo"
-
+import MicOff from "@material-ui/icons/MicOff"
+import VideocamOff from "@material-ui/icons/VideocamOff"
+import VolumeUp from "@material-ui/icons/VolumeUp"
+import VolumeOff from "@material-ui/icons/VolumeOff"
+import FormControl from "@material-ui/core/FormControl"
+import Input from "@material-ui/core/Input"
+import InputLabel from "@material-ui/core/InputLabel"
+import IconButton from "@material-ui/core/IconButton"
+import HighlightOff from "@material-ui/icons/HighlightOff"
+import FormHelperText from "@material-ui/core/FormHelperText"
 const StreamComponent = (props) => {
     const [nickname, setNickname] = useState(props.user.getNickname())
     const [showForm, setShowForm] = useState(false)
     const [mutedSound, setMutedSound] = useState(false)
     const [isFormValid, setIsFormValid] = useState(true)
     console.log(props.user, '유저데이터')
-    const handleChange = (e) => {
-        setNickname(e.target.value)
-        e.preventDefault();
-    };
+    // const handleChange = (e) => {
+    //     setNickname(e.target.value)
+    //     e.preventDefault();
+    // };
 
-    const toggleNicknameForm = () => {
-        if(props.user.isLocal()) {
-            setShowForm(!showForm)
-        }
-    }
+    // const toggleNicknameForm = () => {
+    //     if(props.user.isLocal()) {
+    //         setShowForm(!showForm)
+    //     }
+    // }
 
     const toggleSound = () => {
         setMutedSound(!mutedSound)
     }
 
-    const handlePressKey = (e) => {
-        if(e.key === 'Enter') {
-            if(nickname.length >= 3 && nickname.length <=20) {
-                props.handleNickname(nickname);
-                toggleNicknameForm();
-                setIsFormValid(true)
-            } else {
-                setIsFormValid(false)
-            }
-        }
-    }
-    return <div className="OT_widget-container">
-        <div className="pointer nickname">
-            {showForm? 
-            <div id='nicknameForm'>
-                <button id='closeButton' onClick={toggleNicknameForm} color='inherit'>
-                    <label htmlFor="name-simple" id="label">Nickname</label>
-                    <input color="inherit" id="input" value={nickname} onChange={handleChange} onKeyPress={handlePressKey} required>
-                        {!isFormValid && nickname.length <=3 && <div id="name-error-text">닉네임이 짧아요</div>}
-                        {!isFormValid && nickname.length >= 20 && <div id="name-error-text">닉네임이 너무 길어요</div>}
-                    </input>
-                </button>
-            </div>
-            :
-            <div id="nickname">
-                {props.user.getNickname() && <span> (edit)</span>}
-            </div>
-            }
-        </div>
+    // const handlePressKey = (e) => {
+    //     if(e.key === 'Enter') {
+    //         if(nickname.length >= 3 && nickname.length <=20) {
+    //             props.handleNickname(nickname);
+    //             toggleNicknameForm();
+    //             setIsFormValid(true)
+    //         } else {
+    //             setIsFormValid(false)
+    //         }
+    //     }
+    // }
+
+    return <div className="">
         {
             props.user !== undefined && props.user.getStreamManager() !== undefined
             ?
             <div className="streamComponent">
+                {/* <div className="pointer nickname">
+                    {showForm?                    <FormControl id="nicknameForm">
+                        <IconButton id="closeButton" color="inherit" onClick={toggleNicknameForm}></IconButton>
+                    </FormControl>:null}</div> */}
                 <OvVideo user={props.user} mutedSound={mutedSound}>
                     <div id='statusIcons'>
                         {!props.user.isVideoActive()
                         ?
                         <div id='camIcon'> 
-                        캠온
-                            <div id="statusCam">
-                                캠 상태
-                            </div>
+                            <VideocamOff id="statusCam"/>
                         </div>
                         :
                         null
                         }
-
                         {!props.user.isAudioActive() 
                         ? 
                         <div id='micIcon'>
-                            마이크온
-                            <div id="statusMic">
-                                마잌
-                            </div>
+                            <MicOff id="statusMic"/>
                         </div>
                         :
                         null
                         }
-
                         <div>
                         {!props.user.isLocal()
-                        && <div id = "volumeButton" onClick={toggleSound}>
-                            {mutedSound?<div color="secondary">소리온</div>:<div>소리오프</div>}
-                        </div>}
-
+                        && <IconButton id = "volumeButton" onClick={toggleSound}>
+                            {mutedSound?<VolumeOff color="secondary"></VolumeOff>:<VolumeUp></VolumeUp>}
+                        </IconButton>}
                         </div>
-                        
-                            
                     </div>
                 </OvVideo>
             </div>

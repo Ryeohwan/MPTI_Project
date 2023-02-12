@@ -192,6 +192,10 @@ export const getChatList = (channelId) => async (dispatch) => {
         alert('etc getChatList 채팅방 대화 기록 가져오기 에러!')
     }
 }
+// 회원 운동기록 추가
+export const sendLog = (data) => async (dispatch) =>{
+    (await axios.post('/api/user/count',data).then((res) => {alert('보내기 성공')}).catch((res)=>{alert('Error')}))
+}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;

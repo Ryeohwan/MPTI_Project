@@ -1,10 +1,27 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import './ToolbarComponent.css'
-
+import styles from './ToolbarComponent.module.css'
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Mic from "@material-ui/icons/Mic"
+import MicOff from "@material-ui/icons/MicOff"
+import Videocam from "@material-ui/icons/Videocam"
+import VideocamOff from "@material-ui/icons/VideocamOff"
+import Fullscreen from "@material-ui/icons/Fullscreen"
+import FullscreenExit from "@material-ui/icons/FullscreenExit"
+import SwitchVideo from "@material-ui/icons/SwitchVideo"
+import PictureInPicture from "@material-ui/icons/PictureInPicture"
+import ScreenShare from "@material-ui/icons/ScreenShare"
+import StopScreenShare from "@material-ui/icons/StopScreenShare"
+import Tooltip from "@material-ui/core/Tooltip"
+import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew"
+import QuestionAnswer from "@material-ui/icons/QuestionAnswer"
+import IconButton from "@material-ui/core/IconButton"
+import Assignment from "@material-ui/icons/Assignment"
 const ToolbarComponent = (props) => {
 
     const [fullScreen, setFullScreen] = useState(false)
-
+    const time = useRef()
     const micStatusChanged=()=> {
         props.micStatusChanged()
     }
@@ -30,53 +47,75 @@ const ToolbarComponent = (props) => {
     const toggleChat=()=>{
         props.toggleChat()
     }
+    const setTimePlus = (second) => {
+        if(props.timeStop) {
+            if(parseInt(time.current.value)+parseInt(second)<1){
+                time.current.value = 1
+            } else {
+                time.current.value = parseInt(time.current.value)+parseInt(second)
+                console.log(time.current.value)
+            }
+            props.setSeconds(time.current.value)
+        } else {
+            props.timeSetWhile(second)
+        }
+
+    }
 
 
-
-
-
-    return <div className='toolbar' id='header'>
-        <div className='toolbar'>
-            <div id='navSessionInfo'>
-                <img id='header_img' alt='logo' src='/MPTIlogo.png'>
-                </img>
-                {props.sessionId
-                && <div id='titleContent'>
-                    <span id='session-title'>
-                        방이름 : {props.sessionId}
-                    </span>
-                    </div>}
+    return <AppBar className='toolbar' id='header'>
+            <div className="logOpen">
+                <IconButton color='inherit' onClick={props.toggleLog} className="logOpen2">
+                    <Tooltip title="운동 체크">
+                        <Assignment></Assignment>
+                    </Tooltip>
+                </IconButton>
             </div>
-            <div className='buttonsContent'>
-                <div color='inherit' className='navButton' id='navMicButton' onClick={micStatusChanged}>
-                    {props.user !== undefined && props.user.isAudioActive() ? <div>마익</div>:<div color='secondary'>마익오프</div>}
+                <div className='timer_buttons'>
+                    <input type="number" ref={time} className="timer_button"  defaultValue={parseInt(30)}></input>
+                    <button className="timer_button" onClick={() => setTimePlus(parseInt(30))}>+30초</button>
+                    <button className="timer_button" onClick={() => setTimePlus(parseInt(10))}>+10초</button>
+                    <button className="timer_button" onClick={() => setTimePlus(parseInt(-10))}>-10초</button>
+                    {props.timeStop?<button className="timer_button" onClick={props.timerStart}>시작</button>:<button className="timer_button_stop" onClick={props.timerStop}>정지</button>}
+                    <button className="timer_button" onClick={() => props.timerReset(time.current.value)}>초기화</button>
+                </div>
+            <div className={styles.buttonsContent}>
+                <IconButton color='inherit' className='navButton' id='navMicButton' onClick={micStatusChanged}>
+                    {props.user !== undefined && props.user.isAudioActive() ? <Mic></Mic>:<MicOff color='secondary'></MicOff>}
 
-                </div>
-                <div color='inherit' className='navButton' id='navCamButton' onClick={camStatusChanged}>
-                    {props.user !== undefined && props.user.isVideoActive() ? <div>캠 온</div>:<div color='secondary'>캠 오프</div>}
-                </div>
-                <div color='inherit' className='navButton' onClick={screenShare}>
-                    {props.user !== undefined && props.user.isScreenShareActive() ? <div>스크린</div> : <div>스크린x</div>}
-                    {props.user !== undefined && props.user.isScreenShareActive() 
-                        && <div onClick={stopScreenShare} id='navScreenButton'></div>}
-                </div>
-                <div color='inherit' className='navButton' onClick={switchCamera}>
-                    <div>비디오 스위치</div>
+                </IconButton>
+                <IconButton color='inherit' className='navButton' id='navCamButton' onClick={camStatusChanged}>
+                    {props.user !== undefined && props.user.isVideoActive() ? <Videocam></Videocam>:<VideocamOff color='secondary'></VideocamOff>}
+                </IconButton>
+                <IconButton color='inherit' className='navButton' onClick={screenShare}>
+                    {props.user !== undefined && props.user.isScreenShareActive() ? <PictureInPicture></PictureInPicture> : <ScreenShare></ScreenShare>}
+                </IconButton>
+                {props.user !== undefined && props.user.isScreenShareActive() 
+                    && <IconButton onClick={stopScreenShare} id='navScreenButton'>
+                        <StopScreenShare color="secondary">
 
-                </div>
-                <div color='inherit' className='navButton' onClick={toggleFullscreen}>
-                    {props.user !== undefined && fullScreen? <div>풀스크린 닫기버튼</div>:<div>풀스크린 열기 버튼</div>}
-                </div>
-                <div color='secondary' className='navButton' onClick={leaveSession} id='navLeaveButton'>
-                    <div>온오프</div>
-                </div>
-                <div color='inherit' onClick={toggleChat} id='navChatButton'>
-                    <div id='point' className=''></div>
-                </div>
+                        </StopScreenShare>
+                </IconButton>}
+
+                <IconButton color='inherit' className='navButton' onClick={switchCamera}>
+                    <SwitchVideo></SwitchVideo>
+                </IconButton>
+                <IconButton color='inherit' className='navButton' onClick={toggleFullscreen}>
+                    {props.user !== undefined && fullScreen? <FullscreenExit></FullscreenExit>:<Fullscreen></Fullscreen>}
+                </IconButton>
+                <IconButton color='secondary' className='navButton' onClick={leaveSession} id='navLeaveButton'>
+                    <PowerSettingsNew></PowerSettingsNew>
+                </IconButton>
             </div>
-                
-        </div>
-    </div>
+            <div>
+
+            </div>
+            <IconButton color='inherit' onClick={toggleChat} id='navChatButton'>
+                    {props.showNotification && <div id="point" className=""></div>}
+                    <Tooltip title="채팅"><QuestionAnswer></QuestionAnswer></Tooltip>
+            </IconButton>
+
+    </AppBar>
 }
 
 export default ToolbarComponent

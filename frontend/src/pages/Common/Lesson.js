@@ -36,11 +36,10 @@ const Lesson = ()=>{
         }
     }
 
-
     return(
         <div>
             {session === undefined ? (
-                    <div id="join">
+                    <div>
                     </div>
                 ) : (
                     <div id="session">
@@ -52,6 +51,8 @@ const Lesson = ()=>{
                             joinSession={handlerJoinSessionEvent}
                             leaveSession={handlerLeaveSessionEvent}
                             error={handlerErrorEvent}
+                            clientId={location.state.clientId}
+                            trainerId={location.state.trainerId}
                         />
                     </div>
                 )}
@@ -62,7 +63,7 @@ const Lesson = ()=>{
 
     async function getToken() {
         return await createSession(sessionId)
-            .then((sessionId)=> {console.log(sessionId); return createToken(sessionId)})
+            .then((sessionId)=> {return createToken(sessionId)})
             .catch((Err)=>console.error(Err))
     }
     async function createSession(sessionId) {
@@ -74,7 +75,6 @@ const Lesson = ()=>{
             },
         })
         .then((response) => {
-            console.log('세션을 만들었습니다 - ',response);
             return (response.data.id); //resolve
         })
         .catch((response => {
@@ -102,7 +102,6 @@ const Lesson = ()=>{
                 },
         })
         .then((response) => {
-            console.log('TOKEN :', response.data);
             return (response.data.token); //resolve
         })
         .catch((error)=> console.log(error));

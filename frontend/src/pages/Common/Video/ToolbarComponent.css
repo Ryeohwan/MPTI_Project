@@ -1,25 +1,31 @@
 #header {
+    display: grid;
+    grid-template-columns: 50px 1.1fr 400px 0.9fr 50px;
+    justify-content: space-between;
     color: #ffffff;
-    height: 40px;
-    background-color: #333333;
-    padding: 0 14px 0 0;
-    position: absolute;
-    top: 0;
+    border-top: #ececec 1px solid;
+    height: 50px;
+    background-color: transparent;
+    padding:0 0 0 0;
+    position: relative;
+    bottom: 0;
     left: 0;
-    z-index: 999999;
-    min-width: 400px !important;
+    z-index: 100;
   }
-  .toolbar{
-    padding: 0 !important;
-  }
+
   
   .headerLight{
-    color: #706969 !important;
+    color: transparent !important;
     background-color: #eeeeee !important;
   }
-  
-  #navSessionInfo {
-    position: absolute;
+  .buttonsContent {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    height: 100% !important;
+    width: 240px;
+    margin: 0;
   }
 
   #navButtons {
@@ -29,14 +35,12 @@
     min-width: 400px;
   }
   #navChatButton {
-    position: absolute;
-    right: 10px;
-    top: 0;
+    height: 100%;
   }
   
   #titleContent{
     max-width: 100px;
-    background-color: #494949;
+    background-color: transparent;
     margin: 5px -18px;
     padding: 0px 15px;
     font-size: 16px;
@@ -47,7 +51,7 @@
   }
   
   .titleContentLight{
-    background-color: #dfdfdf !important; 
+    background-color: transparent !important; 
     color: #000;
   }
   
@@ -61,21 +65,54 @@
     font-family: 'Open Sans', sans-serif; 
   }
 
-
-#point{
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 12px;
-  right: 33px;
-  border-radius: 50%;
-  background-color: #ffa600;
-  border: 1px solid #000;
-  z-index: 99999;
-}
 .pointLight{
   border: 1px solid #ffffff !important;
 }
+#navChatButton, #navLogButton {
+  z-index: 10;
+}
+
+.logOpen {
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logOpen2 {
+  height: 100%;
+}
+
+.timer_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.timer_button {
+  font-family: 'DungGeunMo';
+  width: 70px;
+  height: 35px;
+  border: #C9FD61 solid 2px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: black;
+  color: #C9FD61;
+  cursor: pointer;
+}
+
+.timer_button_stop {
+  font-family: 'DungGeunMo';
+  width: 70px;
+  height: 35px;
+  border: red solid 2px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: black;
+  color: red;
+  cursor: pointer;
+}
+
 
 
 @media only screen and (max-width: 700px) {

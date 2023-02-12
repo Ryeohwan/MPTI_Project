@@ -1,16 +1,16 @@
 import * as openviduBrowser from 'openvidu-browser'
 import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
-import styles from './VideoRoom.module.css'
 import './VideoRoom.css'
 import userModel from './userModel'
-
+import VideoClientLog from './VideoClientLog'
 import ToolbarComponent from './ToolbarComponent'
 import StreamComponent from './StreamComponent'
-import OvVideo from './OvVideo'
 import openviduLayout from './OpenviduLayout'
 import DialogExtension from './DialogExtension'
 import ChatComponent from './ChatComponent'
+import HeaderComponent from './HeaderComponent'
+import styles from './VideoRoom.module.css'
 
 
 const VideoRoom = (props) => {
@@ -29,30 +29,57 @@ const VideoRoom = (props) => {
     const [messageReceived, setMessageReceived] = useState(false)
     let hasBeenUpdated = false
     let localUserAccessAllowed = false;
+    const [seconds, setSeconds] = useState(30);
+    const recentSeconds = useRef(30);
+    const [timeStop,setTimeStop] = useState(true)
     // const [localUser, setLocalUser]= useState(undefined)
     const [subscribers, setSubscribers]= useState([])
     const [chatDisplay, setChatDisplay]= useState('none')
     const [currentVideoDevice, setCurrentVideoDevice]= useState(undefined)
+    const [logDisplay, setLogDisplay] = useState('none')
     const OV = useRef(undefined);
-
-
+    console.log(props.clientId, props.trainerId, '클라이언트아이디')
     // func 
     const joinSession = () => {
-        console.log('2번 joinSession 함수 안에 도착')
         OV.current = new openviduBrowser.OpenVidu();
-        console.log('joinSession 함수에서 OV.cuurnt 할당', OV.current.initSession())
         session.current=OV.current.initSession()
-        console.log('subscribeToStreamCreated 함수 실행')
         subscribeToStreamCreated()
         connectToSession()
     }
     const onbeforeunload = (e) => {leaveSession()}
 
+    useEffect(() => {
+        const timer = timeStop?undefined
+        :setInterval(() => {
+            seconds>0?setSeconds((prev)=>(prev-1)):setTimeStop(true)
+        },1000)
 
+        return () => timeStop?null:clearInterval(timer)
+    },[seconds, timeStop])
+    const timerStart = () => {
+        console.log('타이머 시작')
+        setTimeStop(false)
+    }
+
+    const timerStop = () => {
+        console.log('타이머 중지')
+        setTimeStop(true)
+    }
+
+    const timerReset = (value) => {
+        setSeconds(value)
+    }
+
+    const timeSetWhile = (value) => {
+        if(seconds+value>0){
+            setSeconds(seconds+value)
+        } else {
+            setSeconds(0)
+        }
+    }
 
     // DidMoubnt
     useEffect(()=>{
-        console.log('video 마운트')
         const layoutOptions = {
             maxRatio: 3 / 2,
             minRatio: 9 / 16,
@@ -65,7 +92,6 @@ const VideoRoom = (props) => {
             bigFirst: true,
             animate: true
         }
-        console.log(layout.current.initLayoutContainer, '레이아웃')
         layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
         window.addEventListener('beforeunload', onbeforeunload);
         window.addEventListener('resize', updateLayout);
@@ -81,9 +107,7 @@ const VideoRoom = (props) => {
         }
     },[])
 
-
     useEffect(()=>{
-        console.log('여기 왜오니', localUser.current)
         if(localUser.current){
             sendSignalUserChanged({
                 isAudioActive: localUser.current.isAudioActive(),
@@ -94,22 +118,18 @@ const VideoRoom = (props) => {
         }
         checkSomeoneShareScreen();
         updateLayout()
-        console.log(subscribers,'확인용')
     },[subscribers])
-    console.log(subscribers, '확인용2')
 
 
 
 
 
     const connectToSession = () =>{
-        console.log(props,'connetionToSession')
         if(props.token !== undefined){
-            console.log('토큰 받음:', props.token)
             connect(props.token)
         } else {
+            console.log('토큰')
             getToken()
-            console.log('토큰이 없어서 받았습니다..')
         }
     }
 
@@ -139,7 +159,6 @@ const VideoRoom = (props) => {
           publisher.on('accessAllowed', () => {
             session.current.publish(publisher).then(() => {
               updateSubscribers();
-            console.log('localUser true')
               localUserAccessAllowed = true;
               if (props.joinSession) {
                 props.joinSession();
@@ -147,7 +166,6 @@ const VideoRoom = (props) => {
             });
           });
         }
-        console.log(publisher, '스트림매니저')
         localUser.current.setNickname(myUserName);
         localUser.current.setConnectionId(session.current.connection.connectionId);
         localUser.current.setScreenShareActive(false);
@@ -164,59 +182,7 @@ const VideoRoom = (props) => {
         })
       };
 
-    // const connectWebCam = () => {
-    //     let devices, videoDevices, publisher;
-    //     const callee = async(context) => {
-    //         while(1){
-    //             switch(context){
-    //                 case 1:
-    //                     context = 2;
-    //                     return OV.current.getDevice();
-    //                 case 2:
-    //                     devices = context.sent;
-    //                     videoDevices = devices.filter((device) => {
-    //                         return device.kind === 'videoinput';
-    //                     });
-    //                     publisher = OV.current.initPublisher(undefined, {
-    //                         audioSource: undefined,
-    //                         videoSource: videoDevices[0].deviceId,
-    //                         publishAudio: localUser.isAudioActive(),
-    //                         publishVideo: localUser.isVideoActive(),
-    //                         resolution: '640x480',
-    //                         frameRate: 30,
-    //                         insertMode: 'APPEND'
-    //                     });
-
-    //                     if(session.capabilities.publish) {
-    //                         publisher.on('accessAllowed', () => {
-    //                             session.publish(publisher).then(() =>{
-    //                                 updateSubscriber();
-    //                                 localUserAccessAllowed = true;
-    //                                 if(joinSession){
-    //                                     props.joinSession()
-    //                                 }
-    //                             });
-    //                         });
-    //                     }
-    //                     localUser.setNickname(myUserName);
-    //                     localUser.setConnectionId(session.connection.connectionId);
-    //                     localUser.setScreenShareActive(false);
-    //                     localUser.setStreamManager(publisher);
-    //                     subscribeToUserChanged();
-    //                     subscribeToStreamDestroyed();
-    //                     sendSignalUserChanged({
-    //                       isScreenShareActive: localUser.isScreenShareActive()
-    //                     });
-    //                     setCurrentVideoDevice(videoDevices[0]);
-    //                     setLocalUser(localUser);
-    //                 default:
-    //                     return context.stop()
-    //                 }
-    //         }
-    //     }
-    // }
     const updateSubscribers = () => {
-        console.log(remotes.current, 'set할 내용')
         let subscribers = remotes.current;
         setSubscribers(subscribers);
       }
@@ -271,7 +237,6 @@ const VideoRoom = (props) => {
     const subscribeToStreamCreated = () => {
         console.log('3번 세션 확인')
         session.current.on('streamCreated', (e) => {
-            console.log(e,'session.current.on 시행')
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
                 checkSomeoneShareScreen();
@@ -285,7 +250,6 @@ const VideoRoom = (props) => {
             newUser.setNickname(JSON.parse(nickname).clientData);
             remotes.current.push(newUser);
             if(localUserAccessAllowed) {
-                console.log('allowed')
                 updateSubscribers();
             }
 
@@ -462,11 +426,17 @@ const VideoRoom = (props) => {
             setChatDisplay(display)
             setMessageReceived(false)
           } else {
-            console.log('chat', display);
             setChatDisplay(display)
           }
           updateLayout();
     }
+
+    // 토글 로그
+    const toggleLog = () => {
+        logDisplay==='none'?setLogDisplay('block'):setLogDisplay('none')
+
+    }
+
 
     const checkNotification = () => {
         setMessageReceived(chatDisplay === 'none')
@@ -482,9 +452,58 @@ const VideoRoom = (props) => {
           }
     }
 
-    console.log('111',localUser.current.getStreamManager(), subscribers)
     return(
-        <div id='container' className='container'>
+        <div id='container' className={styles.container}>
+            <div className={styles.container2}>
+
+            
+            <HeaderComponent
+                seconds={seconds}/>
+
+                <DialogExtension
+                showDialog = {showExtensionDialog}
+                cancelClicked = {closeDialogExtension}
+                />
+                <VideoClientLog
+                    logDisplay={logDisplay}
+                    toggleLog={toggleLog}
+                    trainerId={props.trainerId}
+                    clientId={props.clientId}
+                />
+            <div className={styles.container_body}>  
+
+                {localUser.current !== undefined
+                && localUser.current.getStreamManager() !== undefined
+                && <div id='localUser' className="">
+                    <StreamComponent
+                    user={localUser.current}
+                    handleNickname={nicknameChanged}
+                    />
+                    </div>
+                }
+
+                {subscribers.map((sub, index) => {
+                    return <div key={index} className="OT_root OT_publisher custom-class" id='remoteUsers'>
+                            <StreamComponent 
+                            user={sub} 
+                            streamId={sub.streamManager.stream.streamId}/>
+                        </div>
+                    })
+                }
+
+
+            </div>        
+                {
+                    localUser.current !== undefined 
+                    && localUser.current.getStreamManager() !== undefined
+                    && <div className="OT_root OT_publisher custom-class" style={{display:chatDisplay}}>
+                            <ChatComponent
+                            user={localUser.current}
+                            chatDisplay={chatDisplay}
+                            close={toggleChat}
+                            messageReceived={checkNotification}/>
+                        </div>
+                }
             <ToolbarComponent
             sessionId= {mySessionId}
             user= {localUser.current}
@@ -497,52 +516,21 @@ const VideoRoom = (props) => {
             switchCamera= {switchCamera}
             leaveSession= {leaveSession}
             toggleChat= {toggleChat}
+            toggleLog={toggleLog}
+            setSeconds={setSeconds}
+            timerStart={timerStart}
+            timerStop={timerStop}
+            timerReset={timerReset}
+            timeStop = {timeStop}
+            timeSetWhile= {timeSetWhile}
             />
-
-            <DialogExtension
-            showDialog = {showExtensionDialog}
-            cancelClicked = {closeDialogExtension}
-            />
-
-            <div id="layout" className='bounds'>
-                {localUser.current !== undefined
-                && localUser.current.getStreamManager() !== undefined
-                && <div id='localUser' className='OT_root OT_publisher custom-class'>
-                    <StreamComponent
-                    user={localUser.current}
-                    handleNickname={nicknameChanged}
-                    />
-                    </div>
-                }
-
-                {subscribers.map((sub, index) => {
-                    return <div key={index} className='OT_root OT_publisher custom-class' id='remoteUsers'>
-                            <StreamComponent 
-                            user={sub} 
-                            streamId={sub.streamManager.stream.streamId}/>
-                        </div>
-                    })
-                }
-
-                {
-                    localUser.current !== undefined
-                    && localUser.current.getStreamManager() !== undefined
-                    && <div className='OT_root OT_publisher custom-class' style={{chatDisplay}}>
-                            <ChatComponent
-                            user={localUser.current}
-                            chatDisplay={chatDisplay}
-                            close={toggleChat}
-                            messageReceived={checkNotification}/>
-                        </div>
-                }
             </div>
-
         </div>
     )
 
     async function getToken() {
         return await createSession(mySessionId)
-            .then((sessionId)=> { console.log(444);return createToken(sessionId)})
+            .then((sessionId)=> { return createToken(sessionId)})
             .catch((Err)=>console.error(Err))
     }
     async function createSession(sessionId) {
@@ -554,7 +542,7 @@ const VideoRoom = (props) => {
             },
         })
         .then((response) => {
-            console.log('세션을 만들었습니다 - ',response);
+
             return (response.data.id); //resolve
         })
         .catch((response => {
@@ -582,7 +570,6 @@ const VideoRoom = (props) => {
                 },
         })
         .then((response) => {
-            console.log('TOKEN :', response.data);
             return (response.data.token); //resolve
         })
         .catch((error)=> console.log(error));
