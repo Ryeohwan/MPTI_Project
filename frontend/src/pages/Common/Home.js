@@ -18,7 +18,7 @@ const Home = () => {
     // 홈에서 트레이너 상위 0페이지 존재하는 트레이너 불러옴
     dispatch(trainerListByStar(0)).then((res) => {
       const trainerList = res;
-      //console.log(trainerList[0]);
+      console.log(trainerList[0]);
       setTrainer(trainerList.slice(0,4));
     });
 
@@ -47,6 +47,7 @@ const Home = () => {
 
       <div className={styles.home_trainer_box}>
         <ul className={styles.home_trainer_list}>
+
           {trainer.map((it) => {
             return (
               <li key={it.email} className={styles.home_trainer_item}>

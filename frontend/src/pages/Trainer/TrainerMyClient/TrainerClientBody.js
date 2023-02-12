@@ -27,11 +27,12 @@ const TrainerClientBody = (props) => {
   };
   const dispatch = useDispatch();
   useEffect(() => {
+    
     axios
-      .post(`/api/user/userList/${page-1}`, { id: 1 })
+      .post(`/api/user/userList/0`, { id: 1 })
       .then((res) => {
 
-        console.log(res.data.totalElements);
+        console.log(res);
         console.log(res.data.content);
         setSignupList(res.data.content)
         setTotalPage(res.data.totalElements);

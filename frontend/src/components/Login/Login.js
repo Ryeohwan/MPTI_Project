@@ -30,7 +30,7 @@ console.log("로그인상태", isLoggedIn);
 
 useEffect(()=>{
     if(roleToken || role){
-        navigate(`/manager/sign`);
+        navigate(`/${roleToken}/home`);
     }
 },[roleToken])
 
