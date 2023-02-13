@@ -38,7 +38,7 @@ export default function ClientHeader(){
 
 
 
-	if(roleToken!=="client" ){
+	if(roleToken!=="user" ){
 		Navigate({to:"/"})
 	}
 
