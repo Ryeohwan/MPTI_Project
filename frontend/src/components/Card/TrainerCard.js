@@ -8,7 +8,7 @@ const TrainerCard = (trainers) => {
   useEffect(()=>{
     setTrainerList(trainers.trainers);
   },[trainers.trainers]);
-
+ 
   return (
     <ul className={styles.trainer_list}>
       {trainerList.map((it) => {

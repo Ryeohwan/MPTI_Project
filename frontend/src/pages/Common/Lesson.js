@@ -1,9 +1,9 @@
 import React from 'react';
 import './Lesson.css';
 import axios from 'axios';
-import OpenViduSession from 'openvidu-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import VideoRoom from './Video/VideoRoom';
 const SERVER_URL = 'https://i8a803.p.ssafy.io';
 const SERVER_SECRET = 'mpti';
 const Lesson = ()=>{
@@ -36,15 +36,14 @@ const Lesson = ()=>{
         }
     }
 
-
     return(
         <div>
             {session === undefined ? (
-                    <div id="join">
+                    <div>
                     </div>
                 ) : (
                     <div id="session">
-                        <OpenViduSession
+                        <VideoRoom
                             id="opv-session"
                             sessionName={sessionId}
                             user={userName}
@@ -52,6 +51,8 @@ const Lesson = ()=>{
                             joinSession={handlerJoinSessionEvent}
                             leaveSession={handlerLeaveSessionEvent}
                             error={handlerErrorEvent}
+                            clientId={location.state.clientId}
+                            trainerId={location.state.trainerId}
                         />
                     </div>
                 )}
@@ -62,7 +63,7 @@ const Lesson = ()=>{
 
     async function getToken() {
         return await createSession(sessionId)
-            .then((sessionId)=> {console.log(sessionId); return createToken(sessionId)})
+            .then((sessionId)=> {return createToken(sessionId)})
             .catch((Err)=>console.error(Err))
     }
     async function createSession(sessionId) {
@@ -74,7 +75,6 @@ const Lesson = ()=>{
             },
         })
         .then((response) => {
-            console.log('세션을 만들었습니다 - ',response);
             return (response.data.id); //resolve
         })
         .catch((response => {
@@ -102,7 +102,6 @@ const Lesson = ()=>{
                 },
         })
         .then((response) => {
-            console.log('TOKEN :', response.data);
             return (response.data.token); //resolve
         })
         .catch((error)=> console.log(error));

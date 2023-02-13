@@ -1,8 +1,5 @@
 import React from 'react'
 import styles from './ClientMyPageMyReview.module.css'
-import {useState, useEffect, memo} from 'react'
-import axios from 'axios'
-// import Pagination from '../Common/Pagination';
 
 const ClientMyPageMyReview = ({reviews}) => {
     return(
@@ -24,4 +21,4 @@ const ClientMyPageMyReview = ({reviews}) => {
 }
 
 
-export default memo(ClientMyPageMyReview)
+export default ClientMyPageMyReview
