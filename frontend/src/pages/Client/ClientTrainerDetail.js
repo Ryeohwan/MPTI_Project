@@ -113,5 +113,5 @@ const ClientTrainerDetail = () => {
     </div>
   );
 };
-
+}
 export default ClientTrainerDetail;
