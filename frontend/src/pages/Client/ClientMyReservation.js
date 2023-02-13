@@ -9,7 +9,6 @@ import "react-datetime-picker/dist/DateTimePicker.css";
 import "./DateTimePickerCustom.css";
 import TrainerCard from "../../components/Card/TrainerCard";
 import axios from "axios";
-import { async } from "q";
 
 const ClientMyReservation = () => {
   const [value, setValue] = useState(new Date());

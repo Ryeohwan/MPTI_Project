@@ -10,9 +10,10 @@ const ClientTrainerDetail = () => {
 
   // }
   const navigate = useNavigate();
-  const navigateToPayment = () => {
-    navigate("/clientpayment");
+  const navigateToRealReservation = () => {
+    navigate("/client/trainerdetail/realreservation");
   };
+  
   const data_got = {
     name: "윤뒝근",
     email: "asfdd@naver.com",
@@ -53,7 +54,7 @@ const ClientTrainerDetail = () => {
             <button className={styles.trainer_talk_btn}>상담하기</button>
             <button
               className={styles.trainer_reservation_btn}
-              onClick={navigateToPayment}
+              onClick={navigateToRealReservation}
             >
               예약하기
             </button>

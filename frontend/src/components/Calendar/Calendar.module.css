@@ -102,7 +102,7 @@
 .bodyRowCol {
   width: 20%;
   margin-bottom: 1px;
-  height: 78px;
+  height: 73px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -131,6 +131,7 @@
 .bodyRowColSellect {
   transform: scale(1.02);
   color: #C9FD61;
+  background-color: #f3f9e4;
   font-weight: 500;
 }
 
