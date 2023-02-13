@@ -17,7 +17,7 @@ const MySchedule = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Calendar allData={allData} />
+        <Calendar allData={allData}/>
       </div>
     </div>
   );

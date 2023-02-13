@@ -24,6 +24,22 @@ const ClientTrainerDetail = () => {
   const navigate = useNavigate();
   const navigateToPayment = () => {
     navigate("clientpayment");
+  const navigateToRealReservation = () => {
+    navigate("/client/trainerdetail/realreservation");
+  };
+  
+  const data_got = {
+    name: "윤뒝근",
+    email: "asfdd@naver.com",
+    phone: "010-1234-5678",
+    cert: ["생활스포츠지도사", "건강운동관리사", "NSCA"],
+    gender: "남",
+    age: 28,
+    prize: ["서울특별시장배 보디빌딩대회", "나바(NABBA) 대회", "WBC대회"],
+    career: [
+      { name: "저스트짐 역삼점", time: "2019.01~2020.03" },
+      { name: "저스트쥠", time: "2021.03~2022.04" },
+    ],
   };
 
   return (
@@ -57,7 +73,7 @@ const ClientTrainerDetail = () => {
             </button>
             <button
               className={styles.trainer_reservation_btn}
-              onClick={navigateToPayment}
+              onClick={navigateToRealReservation}
             >
               예약하기
             </button>

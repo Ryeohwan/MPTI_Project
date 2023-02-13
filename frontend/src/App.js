@@ -28,6 +28,7 @@ import SignupRedirect from "./components/Signup/SignupRedirect";
 import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
 import Lesson from "./pages/Common/Lesson";
+import ClientRealReservation from "./pages/Client/ClientRealReservation";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -74,6 +75,8 @@ export default function App() {
         <Route path="/client/mypage" element={<ClientMyPage />} />
         <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
         <Route path="/client/home" element={<Home />} />
+        <Route path="/client/trainerdetail/realreservation" element={<ClientRealReservation/>} />
+        {/* <Route path="/home" element={<Home />} /> */}
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
