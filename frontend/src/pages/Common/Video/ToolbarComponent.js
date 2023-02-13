@@ -21,27 +21,29 @@ import Assignment from "@material-ui/icons/Assignment"
 const ToolbarComponent = (props) => {
 
     const [fullScreen, setFullScreen] = useState(false)
+    const [reRender, setReRender] = useState(true)
     const time = useRef()
     const micStatusChanged=()=> {
         props.micStatusChanged()
+        setReRender(!reRender)
     }
     const camStatusChanged=()=>{
         props.camStatusChanged()
-    }
+        setReRender(!reRender)    }
     const screenShare=() => {
         props.screenShare()
-    }
+        setReRender(!reRender)    }
 
     const stopScreenShare=()=> {
         props.stopScreenShare()
-    }
+        setReRender(!reRender)    }
     const toggleFullscreen=()=> {
         setFullScreen(true)
         props.toggleFullscreen()
-    }
+        setReRender(!reRender)    }
     const switchCamera=()=> {
         props.switchCamera()
-    }
+        setReRender(!reRender)    }
     const leaveSession=()=>{
         props.leaveSession()
     }
@@ -59,7 +61,6 @@ const ToolbarComponent = (props) => {
         } else {
             props.timeSetWhile(second)
         }
-
     }
 
 

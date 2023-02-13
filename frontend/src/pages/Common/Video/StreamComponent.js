@@ -56,7 +56,7 @@ const StreamComponent = (props) => {
                     <div id='statusIcons'>
                         {!props.user.isVideoActive()
                         ?
-                        <div id='camIcon'> 
+                        <div id='camIcon'>
                             <VideocamOff id="statusCam"/>
                         </div>
                         :

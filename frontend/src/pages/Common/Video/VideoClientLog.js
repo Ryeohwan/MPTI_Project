@@ -12,7 +12,7 @@ const handleSubmit = (e) => {
     e.preventDefault()
     const data = [props.clientId, props.trainerId]
     Array.from(formRef.current).map((item,index) => {index<8?(item.checked && data.push(item.name)):(index===8 && data.push(item.value))})
-    dispatch(sendLog(data)).then(res=>alert(res))
+    dispatch(sendLog(data)).then(res=>console.log(res))
 }
     return(
         <div style={{display:props.logDisplay}}>
@@ -67,7 +67,7 @@ const handleSubmit = (e) => {
                 </div>
                 <textarea placeholder="고객님의 특이사항을 적어주세요." type="text" className={styles.input_box} name="content"/>
                 <div className={styles.button_box}>
-                    <button className={styles.exit_button} onClick={(e)=>{e.preventDefault();props.toggleLog();}}>나가기</button>
+                    <button className={styles.exit_button} onClick={(e)=>{e.preventDefault();props.toggleLog();}}>닫기</button>
                     <button className={styles.send_button} type="submit">제출</button>
                 </div>
             </form>

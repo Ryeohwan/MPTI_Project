@@ -11,16 +11,19 @@ import DialogExtension from './DialogExtension'
 import ChatComponent from './ChatComponent'
 import HeaderComponent from './HeaderComponent'
 import styles from './VideoRoom.module.css'
+import { useNavigate } from 'react-router-dom'
 
 
 const VideoRoom = (props) => {
+    const navigate = useNavigate()
     const localUser = useRef(new userModel())
     const serverUrl = props.openviduServerUrl?props.openviduServerUrl:'https://i8a803.p.ssafy.io'
     const serverKey = props.openviduSecret?props.openviduSecret:'mpti'
     const userName = props.user
     const sessionName = props.sessionName
     const remotes = useRef([]);
-    const layout = useRef(new openviduLayout())
+    const layout = useRef(new openviduLayout()) 
+
     // state
     const [showExtensionDialog, setShowExtensionDialog] = useState(false)
     const [mySessionId, setMySessionId]= useState(sessionName)
@@ -40,9 +43,9 @@ const VideoRoom = (props) => {
     // func 
     const joinSession = () => {
         OV.current = new openviduBrowser.OpenVidu();
-        session.current=OV.current.initSession()
-        subscribeToStreamCreated()
-        connectToSession()
+        session.current=OV.current.initSession();
+        subscribeToStreamCreated();
+        connectToSession();
     }
     const onbeforeunload = (e) => {leaveSession()}
 
@@ -171,6 +174,7 @@ const VideoRoom = (props) => {
             // updateLayout()
             publisher.videos[0].video.parentElement.classList.remove('custom-class')
         })
+
       };
 
     const updateSubscribers = () => {
@@ -183,13 +187,15 @@ const VideoRoom = (props) => {
         if(mySession) {
             mySession.disconnect();
         }
-
         OV.current = null;
-        session.current = undefined
+        // session.current = undefined
         setSubscribers([])
         setMySessionId('SessionA')
         setMyUserName('트레이너')
-        localUser.current = undefined;
+        // localUser.current = undefined;
+        console.log('여기까지 왔어')
+        navigate('/client/home')
+        
     }
 
     const camStatusChanged = () => {
@@ -363,9 +369,7 @@ const VideoRoom = (props) => {
                 alert('You need to choose a window or application to share');
             }
         });
-        console.log(videoSource, '비디오소스')
         publisher.once('accessAllowed', () => {
-            console.log('왔니')
             session.current.unpublish(localUser.current.getStreamManager());
             localUser.current.setStreamManager(publisher)
             session.current.publish(localUser.current.getStreamManager()).then(()=> {
@@ -568,10 +572,6 @@ const VideoRoom = (props) => {
     }
     
 }
-
-
-
-
 
 
 export default VideoRoom
