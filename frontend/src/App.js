@@ -53,7 +53,7 @@ export default function App() {
 
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
-          <Route path="/client/*" element={<ClientHeader/>} />
+          <Route path="/user/*" element={<ClientHeader/>} />
         </Routes>
 
 
@@ -71,13 +71,13 @@ export default function App() {
         <Route path="/select" element={<SignupSelect />} />
         
         
-        <Route path="/client/myschedule" element={<ClientMySchedule />} />
-        <Route path="/client/mylog" element={<ClientMyLog />} />
-        <Route path="/client/myreservation" element={<ClientMyReservation />} />
-        <Route path="/client/mypage" element={<ClientMyPage />} />
-        <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
+        <Route path="/user/myschedule" element={<ClientMySchedule />} />
+        <Route path="/user/mylog" element={<ClientMyLog />} />
+        <Route path="/user/myreservation" element={<ClientMyReservation />} />
+        <Route path="/user/mypage" element={<ClientMyPage />} />
+        <Route path="/user/trainerdetail" element={<ClientTrainerDetail />} />
         {/* <Route path="/home" element={<Home />} /> */}
-        <Route path="/client/home" element={<Home/>} />
+        <Route path="/user/home" element={<Home/>} />
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />

@@ -56,7 +56,7 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        const role=response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_CLIENT]"? "client": "manager"; 
+        const role=response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "client": "manager"; 
         localStorage.setItem("mpti_role", role);
         console.log(role);
         dispatch(authActions.loginSuccess(role));
