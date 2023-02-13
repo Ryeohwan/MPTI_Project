@@ -46,7 +46,7 @@ const TrainerMyPage = (props) => {
 
     return (
         <div className={styles.TrainerMyPage}>
-                <TopTitle title='마이페이지▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>
+                <TopTitle title='마이페이지▼' content='내 개인정보와 레슨 시간을 관리하고 리뷰를 열람해보세요!'/>
             <div className={styles.MyPage_body}>
                 <div className={styles.left_body}>
                     <MyPageProfile/>

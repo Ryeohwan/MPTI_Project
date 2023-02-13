@@ -8,7 +8,6 @@ import CalendarCells from "./CalendarCells";
 const Calendar = ({ allData, getDaySchedule }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [click, setClick] = useState(false);
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));
@@ -19,9 +18,18 @@ const Calendar = ({ allData, getDaySchedule }) => {
   const onDateClick = (day) => {
     const formatDay = format(day, "yyyy-MM-dd");
     const intDate = formatDay.split("-").map((item) => parseInt(item));
-    setSelectedDate(day);
-    setClick(!click);
-    getDaySchedule(intDate);
+    const formatToday = format(new Date(), "yyyy-MM-dd");
+    const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
+    if (intDate[0] > intFormatToday[0]) {
+      setSelectedDate(day);
+      getDaySchedule(intDate);
+    } else if (intDate[0] === intFormatToday[0] && intDate[1] > intFormatToday[1]) {
+        setSelectedDate(day);
+        getDaySchedule(intDate);
+      } else if (intDate[0] === intFormatToday[0] && intDate[1] === intFormatToday[1] && intDate[2] >= intFormatToday[2]) {
+        setSelectedDate(day);
+        getDaySchedule(intDate);
+    }
   }
 
   return (
@@ -37,7 +45,6 @@ const Calendar = ({ allData, getDaySchedule }) => {
           currentMonth={currentMonth}
           selectedDate={selectedDate}
           onDateClick={onDateClick}
-          click={click}
           allData={allData}
         />
       </div>

@@ -1,0 +1,69 @@
+.real_reservation_container {
+  font-family: "DungGeunMo";
+}
+
+.reservation_box {
+  height: 450px;
+  margin-top: 25px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: black;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date_time_box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 15px 10px 15px;
+}
+
+.calendar_picker {
+  width: 50%;
+}
+
+.date_info {
+  margin-bottom: 10px;
+}
+.time_picker {
+  width: 40%;
+  height: 528.05px;
+  border-radius: 5px;
+  /* border: 1px solid white; */
+  /* background-color: black; */
+  padding: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time_item {
+  width: 60%;
+  height: 23px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: rgb(18, 18, 18);
+  margin-top: 2px;
+  margin-bottom: 3px;
+  display: flex;
+  justify-content: center;
+  padding-top: 2.5px;
+}
+
+.no_reservation {
+  margin-top: 50px;
+  font-size: 14px;
+}
+
+.reserved_time {
+  background-color: rgb(192, 192, 192);
+}
+
+.clicked_time {
+  border: 1px solid #C9FD61;
+  
+}
