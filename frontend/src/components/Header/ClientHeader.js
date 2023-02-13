@@ -6,11 +6,14 @@ import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
 import logo from '../../assets/img/pxArt.png'
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 //ClientHeader
 export default function ClientHeader(){
 	const [roleToken, setRoleToken]=useState(
 		localStorage.getItem("mpti_role")
 	);
+	const navigate= useNavigate();
+
 	// 채팅 온
 	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
@@ -41,6 +44,7 @@ export default function ClientHeader(){
 
 	const logout = () => {
 		localStorage.clear()
+		navigate("/login")
 		console.log('로그아웃')
 	}
 

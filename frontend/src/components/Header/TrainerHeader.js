@@ -6,12 +6,14 @@ import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	// const {role}=useSelector(state=> state.auth);
 	const [roleToken, setRoleToken]=useState(
 		localStorage.getItem("mpti_role")
 	);
+	const navigate= useNavigate();
 
 	const [view, setView] = useState(false);
 	// 채팅 온
@@ -41,6 +43,7 @@ export default function TrainerHeader(){
 
 	const logout = () => {
 		localStorage.clear()
+		navigate("/login")
 		console.log('로그아웃')
 	}
 

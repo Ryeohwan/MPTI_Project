@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    id: "",
     name: "",
     email: "",
     phone: "",
@@ -23,6 +24,15 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isLoggedIn = true;
             state.role= action.payload;
+        },
+        loginGetData: (state, action) => {
+            console.log("여기임 ㅋㅋ 여기 ㅋㅋ",  action.payload.payload);
+            state.name = action.payload.payload.name;
+            state.email = action.payload.payload.email;
+            state.phone = action.payload.payload.phone;
+            state.gender = action.payload.payload.gender;
+            state.image = action.payload.payload.s3Url;
+            state.id = action.payload.payload.id;
         },
         loginFailure: (state, action) => {
             state.isLoading = false;
@@ -56,9 +66,13 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        const role=response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_CLIENT]"? "client": "manager"; 
+        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
         localStorage.setItem("mpti_role", role);
-        console.log(role);
+        
+        const userInfo = await (await axios.get(`/api/${role}/info/${email}`)).data;
+        console.log(userInfo);
+        dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+
         dispatch(authActions.loginSuccess(role));
     } catch (error) {
         dispatch(authActions.loginFailure(error));
@@ -87,6 +101,7 @@ export const logout = () => async(dispatch)=>{
 
 export const signup = (type, userInfo)=> async(dispatch) =>{
     dispatch(authActions.signupRequest());
+    console.log(userInfo);
     try {
         const response = await axios.post(`/api/${type}/join`, userInfo);
         console.log(response);
@@ -101,7 +116,8 @@ export const signup = (type, userInfo)=> async(dispatch) =>{
 
 export const duplicateCheck = (type,email) => async(dispatch)=>{
     try {
-        const response= await axios.get(`/api/${type}/duplicate/${email}`);
+        const response2=await axios.get(`/api/user/duplicate/${email}`);
+        const response= await axios.get(`/api/trainer/duplicate/${email}`);
         console.log(response);
         console.log("중복확인 성공");
         return "중복된 아이디가 없습니다";

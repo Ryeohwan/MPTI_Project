@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 const ClientSignup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
     const [gender, setGender] = useState({ gender: "male", isGender: false });
-    const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: undefined });
-    const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: true });
-    const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: true });
+    const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: false });
+    const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: false });
+    const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: false });
     const [birth, setBirth] = useState({ birth: "", birthMsg: "", isBirth: false });
 
     
@@ -85,7 +85,9 @@ const ClientSignup = () => {
     const duplicateHandler = (e) => {
         e.preventDefault();
         if (email.isEmail) {
-            dispatch(duplicateCheck("client",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
+            dispatch(duplicateCheck("client",email.email)).then((res)=> setEmail({...email, isEmail: true,emailMsg:res}) ).catch(err=>{
+                setEmail({...email, isEmail: false,emailMsg:err})
+            })
         }else{
             emailInputRef.current.focus();
             return;
@@ -111,7 +113,12 @@ const ClientSignup = () => {
         } else if (!phoneInputRef.current.value) {
             phoneInputRef.current.focus();
             return
+        } else if(!password.isPassword || !passwordConfirm.isPasswordConfirm){
+            passwordInputRef.current.focus();
         }
+
+        console.log(birth.birth);
+    
 
      
         const data=({
@@ -123,8 +130,13 @@ const ClientSignup = () => {
             phone : phoneInputRef.current.value,
         })
 
-        dispatch(signup("client", data))
-      
+        dispatch(signup("user", data)).then(res=>{
+            alert("회원가입 성공");
+            navigate("/login")
+        }).catch((err)=>{
+            alert("회원가입 실패")
+        })
+        
     }
 
 
