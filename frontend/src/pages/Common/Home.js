@@ -9,6 +9,9 @@ import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpin
 const Home = () => {
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state) => state.etc);
+  const a= useSelector((state) => state.auth);
+  console.log(a);
+  
   const [trainer, setTrainer] = useState([]);
   const [review, setReview] = useState([]);
   const [role, setrole] = useState('client')
@@ -51,7 +54,7 @@ const Home = () => {
           {trainer.map((it) => {
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>
-                <li key={it.email} className={styles.home_trainer_item}>
+                <li key={it.name} className={styles.home_trainer_item}>
                   <div className={styles.home_trainer_img}>
                     <img src={TrainerImg} />
                   </div>
