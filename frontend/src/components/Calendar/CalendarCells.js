@@ -1,17 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import { format } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, isSameDay, addDays } from "date-fns";
 import styles from "./Calendar.module.css";
 import CalendarSchedule from "./CalendarSchedule.js";
 import { Icon } from '@iconify/react';
-import CalendarModal from "./CalendarModal";
 
 const CalendarCells = ({
   currentMonth,
   selectedDate,
   onDateClick,
-  click,
   allData
 }) => {
   const monthStart = startOfMonth(currentMonth);
@@ -31,18 +29,17 @@ const CalendarCells = ({
       const formatDay = format(parsedDay, "yyyy-MM-dd");
       const intDate = formatDay.split("-").map((item) => parseInt(item));
       
-      const reservedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null)
-      const openedData = allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2])
+      const reservedData = allData ? allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2] && item.userId !== null) : []
+      const openedData = allData ? allData.filter((item) => item.year === intDate[0] && item.month === intDate[1] && item.day === intDate[2]) : []
       const openedHour = openedData.map((item) => item.hour)
-      const reservedSchedule =  reservedData.map((item) => <li key={item.id}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
-      const [first, second, third, ...rest] = reservedSchedule;
+      const reservedSchedule =  reservedData.map((item) => <li key={item.id} className={styles.time}><CalendarSchedule userName={item.userName} hour={item.hour}/></li>)
 
       days.push(
         <div
-          className={`${styles.bodyRowCol} ${
+          className={`${styles.bodyRowCol} ${styles.cell} ${
             !isSameMonth(day, monthStart)
               ? `${styles.bodyRowColNotValid}`
-              : isSameDay(day, selectedDate) && click
+              : isSameDay(day, selectedDate)
               ? `${styles.bodyRowColSellect}`
               : format(currentMonth, "M") !== format(day, "M")
               ? `${styles.bodyRowColNotValid}`
@@ -56,10 +53,10 @@ const CalendarCells = ({
                   onDateClick(copyday);
                 }
               : () => {}
+              
           }
 
         >
-          {/* <CalendarModal open={modalOpen} close={closeModal} reservedData={reservedData}></CalendarModal> : null */}
           <div
             className={
               format(currentMonth, "M") !== format(day, "M")
@@ -75,11 +72,9 @@ const CalendarCells = ({
           
           <div>
             { reservedData.length !== 0 ? (
-              <div>
-                {first}
-                {second}
-                {third}
-                {rest.length !== 0 ? "..." : null}
+              <div className={styles.reservedSchedule}>
+                {reservedSchedule}
+                {reservedSchedule.length > 3 ? <div className={styles.etc}>...</div> : null}
               </div>
             ) : null}
           </div>

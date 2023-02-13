@@ -15,14 +15,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 트레이너 더미 데이터
 const initialState = {
-    id:1,
-    name:'Axe',
-    email:'aschettini0@biglobe.ne.jp',
-    phone: "107-463-1222",
-    s3Url:'https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/aschettini0',
+    id:undefined,
+    name:'',
+    email:'',
+    phone: "",
+    s3Url:'',
     isLoading: false,
     error: null,
-    role:"[ROLE_USER]",
+    role:"",
     isCheckMsg: ""
 };
 
@@ -147,19 +147,54 @@ export const clientEditInfo = (email, password, phone) => async(dispatch) => {
         return false;
     }
 }
-//고객 내 스케줄
-export const clientSchedule = (pagenum) => async(dispatch) => {
-    dispatch(etcActions.dataRequest())
+// 고객의 내 스케줄
+export const clientSchedule = (id) => async (dispatch) => {
     try{
-        const response = await (await axios.get(`/api/business/reservation/${pagenum}`)).data;
-        console.log(response);
-        dispatch(etcActions.dataSuccess())
-        return response;
+        const response = await axios.get(`/api/business/reservation/user/list/${id}`)
+        return response.data
     } catch(error) {
-        console.log("고객 스케줄 불러오기 실패 수정 axios 에러")
-        dispatch(etcActions.dataFailure())
-        return false;
+        alert('정상적인 경로가 아닙니다.')
     }
+}
+// 상대방과 대화방 만들기
+export const getChatRoom = (myId, myRole, targetId) => async (dispatch) => {
+    try{
+        const requestUrl = '/api/chat/channel/'+ (myRole && myRole==='[ROLE_USER]'?`${targetId}/${myId}`:`${myId}/${targetId}`)
+        console.log(requestUrl,'여기')
+        const response = await axios.get(requestUrl)
+        console.log(response,'여기2')
+        return response.data
+    } catch (error) {
+        alert('etc getChatRoom 채팅룸 받기 에러!')
+    }
+}
+// 나의 모든 대화방 가져오기
+export const getChatRoomList = (id, role) => async (dispatch) => {
+    try{
+        let temp
+        if(role==='[ROLE_USER]'){
+            temp = 'user'
+        } else if (role ==='[ROLE_TRAINER]'){
+            temp = 'trainer'
+        }
+        const response = await axios.get(`/api/chat/load/list/${id}/${temp}`)
+        return response.data
+    } catch (error) {
+        alert('etc getChatRoomList 채팅룸 목록 받기 에러!')
+    }
+}
+// 채팅방 대화 기록 가져오기
+export const getChatList = (channelId) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/chat/load/${channelId}`)
+        return response.data
+    } catch(error) {
+        alert('etc getChatList 채팅방 대화 기록 가져오기 에러!')
+    }
+}
+// 회원 운동기록 추가
+export const sendLog = (data) => async (dispatch) =>{
+    (await axios.post('/api/user/count',data).then((res) => {alert('보내기 성공')}).catch((res)=>{alert('Error')}))
 }
 
 export const etcActions = etcSlice.actions;

@@ -5,7 +5,7 @@ import auth, { duplicateCheck } from '../../store/auth';
 import {signup} from '../../store/auth';
 import styles from "./Signup.module.css"
 import { useNavigate } from 'react-router-dom';
-const Signup = () => {
+const TrainerSignup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
     const [gender, setGender] = useState({ gender: "male", isGender: false });
     const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: undefined });
@@ -136,7 +136,8 @@ const Signup = () => {
             career : careers
         })
 
-        dispatch(signup("trainer", data))
+        dispatch(signup("trainer", data));
+        navigate("/login")
       
     }
 
@@ -237,17 +238,6 @@ const Signup = () => {
     );
 };
 
-export default Signup;
-        // const formData = new FormData();
-        // formData.append('email', "vksek222@gmail.com");
-        // formData.append('file', file);
-        // console.log(file)
-     
-        // axios.post('/api/user/upload', formData).then(res => {
-        //     console.log(res);
-        // })
-        // const fileChangedHandler = (e) => {
-        //     const file = e.target.files;
-        //     //console.log(file);
-        //     setFile(file[0]);
-        // }
+export default TrainerSignup;
+ 
+ 

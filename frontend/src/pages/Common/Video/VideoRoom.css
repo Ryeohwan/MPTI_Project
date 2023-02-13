@@ -1,0 +1,34 @@
+
+.buttonsContent{
+	height: 30px !important;
+	text-align: center;
+	margin: auto;
+    min-width: 400px;
+}
+.navButton{
+	height: 40px !important;
+	width : 40px !important;
+}
+
+#navChatButton{
+  position: absolute;
+  right: 0;
+}
+
+.container{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bounds {
+  position: relative;
+  left: 0;
+}
+
+.container_body {
+  height: 100%;
+  width: 100%;
+}

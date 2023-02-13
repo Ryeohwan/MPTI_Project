@@ -16,7 +16,6 @@ import TrainerMyReservation from "./pages/Trainer/TrainerMyReservation";
 import TrainerMyPage from "./pages/Trainer/TrainerMyPage";
 import ClientTrainerDetail from "./pages/Client/ClientTrainerDetail";
 import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
 import ManagerAccountManagement from "./pages/Manager/ManagerAccountManagement";
 import ManagerHome from "./pages/Manager/ManagerHome";
 import ManagerReportApproval from "./pages/Manager/ManagerReportApproval";
@@ -27,7 +26,10 @@ import Landing from "./pages/Landing/Landing";
 import SignupRedirect from "./components/Signup/SignupRedirect";
 import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
-
+import ClientSignup from "./components/Signup/ClientSignup";
+import TrainerSignup from "./components/Signup/TrainerSignup";
+import Lesson from "./pages/Common/Lesson";
+import ClientRealReservation from "./pages/Client/ClientRealReservation";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -49,8 +51,7 @@ export default function App() {
     
   return (
     <div className="App">
-      {isLoading || admin.isLoading ? <BasicLoadingSpinner /> : null}
-
+      {isLoading ? <BasicLoadingSpinner /> : null}
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
           <Route path="/user/*" element={<ClientHeader/>} />
@@ -64,13 +65,16 @@ export default function App() {
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage" element={<TrainerMyPage />} />
-       
+        <Route path="/trainer/trainerdetail" element={<ClientTrainerDetail />} />
+        <Route path="/lesson" element={<Lesson/>}/>       
 
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/trainersignup" element={<TrainerSignup />} />
+        <Route path="/clientsignup" element={<ClientSignup />} />
         <Route path="/select" element={<SignupSelect />} />
         
         
+
         <Route path="/user/myschedule" element={<ClientMySchedule />} />
         <Route path="/user/mylog" element={<ClientMyLog />} />
         <Route path="/user/myreservation" element={<ClientMyReservation />} />
@@ -78,6 +82,7 @@ export default function App() {
         <Route path="/user/trainerdetail" element={<ClientTrainerDetail />} />
         {/* <Route path="/home" element={<Home />} /> */}
         <Route path="/user/home" element={<Home/>} />
+
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
@@ -87,4 +92,4 @@ export default function App() {
       </Routes>
     </div>
   );
-}
+} 

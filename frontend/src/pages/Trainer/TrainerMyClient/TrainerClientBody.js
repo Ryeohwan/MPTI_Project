@@ -10,7 +10,6 @@ const TrainerClientBody = (props) => {
   const [searchValue, setSearchValue] = useState(""); //검색어
   const [select, setSelect] = useState(1); //선택한 페이지
   const [targetClient, setTargetClient] = useState(undefined); //상세페이지 볼 클라이언트 id
-
   const [signupList, setSignupList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage]= useState(0);

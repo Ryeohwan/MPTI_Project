@@ -8,6 +8,7 @@
   background-color: whitesmoke;
 }
 .calendarBody {
+  width: 95%;
   height: 90%;
   margin-top: 1%;
   margin-left: 2%;
@@ -99,9 +100,9 @@
 }
 
 .bodyRowCol {
-  width: 14%;
+  width: 20%;
   margin-bottom: 1px;
-  height: 78px;
+  height: 73px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -124,14 +125,13 @@
 .bodyRowColValid:hover {
   cursor: pointer;
   transform: scale(1.01);
-  border: 2px solid #c5c5c5;
   color: #c5c5c5;
 }
 
 .bodyRowColSellect {
   transform: scale(1.02);
-  border: 2px solid #C9FD61;
   color: #C9FD61;
+  background-color: #f3f9e4;
   font-weight: 500;
 }
 
@@ -141,4 +141,32 @@
   color: #C9FD61;
   margin-top: 5px;
   margin-left: 5px;
+}
+.etc {
+  color: #b8e858;
+}
+.cell:hover .etc{
+  display:none;
+}
+
+.time{
+  display: none;
+}
+
+.cell .time:nth-child(1){
+  display: block;
+}
+.cell .time:nth-child(2){
+  display: block;
+}
+.cell .time:nth-child(3){
+  display: block;
+}
+.cell:hover .time{
+  display: block;
+}
+
+.cell:hover .reservedSchedule {
+  background-color: white;
+  padding: 5px 3px 10px 3px;
 }

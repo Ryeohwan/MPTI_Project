@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 import { useEffect } from 'react';
 import axios from 'axios';
 
+
 const ClientInfo = (props) => {    
     const setTargetClient= props.setTargetClient
     const [logList, setLogList]= useState([]);
@@ -29,6 +30,7 @@ const ClientInfo = (props) => {
             <div className={styles.flex_row}>
                 <ClientProfile name={props.name} gender={props.gender} age={props.age} image={props.s3Url} />
                 <ClientLog email={props.email}/>
+
             </div>
             <div className={styles.grid_2_row}>
                 {logList.map((it, index)=>{

@@ -7,6 +7,7 @@ function CardItem3(props) {
   const time = props.hour;
   const image = props.s3Url;
   const setTargetClient = props.setTargetClient;
+  
     return (
       <div className={styles.card_item}>
         <img className={styles.card_item_img} src={props.s3Url} alt="profile"></img>

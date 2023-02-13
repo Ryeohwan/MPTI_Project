@@ -24,14 +24,13 @@ const TrainerMyReservation = () => {
     const dispatch = useDispatch();
     //0206
     useEffect(()=>{
-        axios.get(`/api/business/reservation/page/1/2023/2/10/${page-1}`).then((res)=>{
+        axios.get(`/api/business/reservation/page/1/2023/2/7/${page-1}`).then((res)=>{
             console.log(res.data);
             setTotalPage(res.data.totalElements);
             setSignupList(res.data.content)
         })
     }, [page])
 
-    
     return (
         <div className={styles.TrainerMyReservation}>
             <TopTitle title='예약현황▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>
