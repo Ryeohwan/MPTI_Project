@@ -31,7 +31,8 @@
 
 .home_trainer_box {
     height: 320px;
-    background-color: #454648;
+    /* background-color: #454648; */
+    background-color: black;
     border-radius: 10px;
     /* border: 1px solid #ececec; */
 }
@@ -53,6 +54,7 @@
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #ececec;
+    background-color: #454648; 
 }
 
 .home_trainer_img {
@@ -109,7 +111,7 @@ li {
 
 .home_review_box {
     height: 170px;
-    background-color: #454648;
+    background-color: black;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #ececec;
 }
@@ -133,6 +135,7 @@ li {
     margin-right: 5px;
     color: #000000;
     border: 1px solid white;
+    background-color: #454648; 
 }
 
 .home_review_top {

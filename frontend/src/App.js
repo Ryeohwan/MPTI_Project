@@ -16,7 +16,6 @@ import TrainerMyReservation from "./pages/Trainer/TrainerMyReservation";
 import TrainerMyPage from "./pages/Trainer/TrainerMyPage";
 import ClientTrainerDetail from "./pages/Client/ClientTrainerDetail";
 import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
 import ManagerAccountManagement from "./pages/Manager/ManagerAccountManagement";
 import ManagerHome from "./pages/Manager/ManagerHome";
 import ManagerReportApproval from "./pages/Manager/ManagerReportApproval";
@@ -27,6 +26,8 @@ import Landing from "./pages/Landing/Landing";
 import SignupRedirect from "./components/Signup/SignupRedirect";
 import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
+import ClientSignup from "./components/Signup/ClientSignup";
+import TrainerSignup from "./components/Signup/TrainerSignup";
 
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
@@ -67,7 +68,8 @@ export default function App() {
        
 
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/trainersignup" element={<TrainerSignup />} />
+        <Route path="/clientsignup" element={<ClientSignup />} />
         <Route path="/select" element={<SignupSelect />} />
         
         

@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import auth, { duplicateCheck } from '../../store/auth';
 import {signup} from '../../store/auth';
 import styles from "./Signup.module.css"
 import { useNavigate } from 'react-router-dom';
-const Signup = () => {
+const ClientSignup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
     const [gender, setGender] = useState({ gender: "male", isGender: false });
     const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: undefined });
@@ -15,7 +14,6 @@ const Signup = () => {
     const [award, setAward] = useState({ award1: "", award2: "", award3: ""});
     const [certificate, setCertificate] = useState({ certificate1: "",certificate2: "", certificate3: ""});
     const [career, setCareer] = useState({ career1: "", career2: "", career3: ""});
-    const [file, setFile] = useState();
 
     
     const dispatch = useDispatch();
@@ -90,7 +88,7 @@ const Signup = () => {
     const duplicateHandler = (e) => {
         e.preventDefault();
         if (email.isEmail) {
-            dispatch(duplicateCheck("trainer",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
+            dispatch(duplicateCheck("client",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
         }else{
             emailInputRef.current.focus();
             return;
@@ -136,7 +134,7 @@ const Signup = () => {
             career : careers
         })
 
-        dispatch(signup("trainer", data))
+        dispatch(signup("client", data))
       
     }
 
@@ -204,29 +202,6 @@ const Signup = () => {
 
 
 
-                <div className={styles.form_prize}>
-                    <label htmlFor='prize'>수상(선택)</label>
-                    <input type="text" defaultValue={award.award1} onChange={e=> setAward({...award,award1: e.target.value})} />
-                    <input type="text" defaultValue={award.award2} onChange={e=> setAward({...award,award2: e.target.value})} />
-                    <input type="text" defaultValue={award.award3} onChange={e=> setAward({...award,award3: e.target.value})} />
-                    <p></p>
-                </div>
-
-                <div className={styles.form_certificate}>
-                    <label htmlFor='certificate'>자격증(선택)</label>
-                    <input type="text" defaultValue={certificate.certificate1} onChange={e=> setCertificate({...certificate,certificate1: e.target.value})} />
-                    <input type="text" defaultValue={certificate.certificate2} onChange={e=> setCertificate({...certificate,certificate2: e.target.value})} />
-                    <input type="text" defaultValue={certificate.certificate3} onChange={e=> setCertificate({...certificate,certificate3: e.target.value})} />
-                    <p></p>
-                </div>
-
-                <div className={styles.form_career}>
-                    <label htmlFor='career'>경력(선택)</label>
-                    <input type="text" defaultValue={career.career1} onChange={e=>setCareer({...career, career1: e.target.value})}/>
-                    <input type="text" defaultValue={career.career2} onChange={e=>setCareer({...career, career2: e.target.value})} />
-                    <input type="text" defaultValue={career.career3} onChange={e=>setCareer({...career, career3: e.target.value})}/>
-                    <p></p>
-                </div>
                 <button className={styles.form_sub_btn} onClick={onSubmitHandler}>회원가입</button>
             </form>
 
@@ -237,17 +212,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
-        // const formData = new FormData();
-        // formData.append('email', "vksek222@gmail.com");
-        // formData.append('file', file);
-        // console.log(file)
-     
-        // axios.post('/api/user/upload', formData).then(res => {
-        //     console.log(res);
-        // })
-        // const fileChangedHandler = (e) => {
-        //     const file = e.target.files;
-        //     //console.log(file);
-        //     setFile(file[0]);
-        // }
+export default ClientSignup;

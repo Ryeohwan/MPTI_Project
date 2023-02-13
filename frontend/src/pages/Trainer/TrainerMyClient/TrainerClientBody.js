@@ -29,7 +29,7 @@ const TrainerClientBody = (props) => {
   useEffect(() => {
     
     axios
-      .post(`/api/user/userList/0`, { id: 1 })
+      .post(`/api/user/userList/${3}`, { id: 1 })
       .then((res) => {
 
         console.log(res);
@@ -67,9 +67,9 @@ const TrainerClientBody = (props) => {
       <div className={styles.container}>
         {signupList
           .filter((item) => item.name.includes(searchValue))
-          .map((item) => (
+          .map((item, index) => (
             <CardItem3
-              key={item.email}
+              key={index}
               className={styles.item}
               {...item}
               targetClient={targetClient}
