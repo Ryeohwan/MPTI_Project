@@ -63,7 +63,13 @@
   background-color: rgb(192, 192, 192);
 }
 
+.not_reserved_time {
+  cursor: pointer;
+}
+
+.not_reserved_time:hover {
+  background-color: rgb(65, 64, 64);
+}
 .clicked_time {
-  border: 1px solid #C9FD61;
-  
+  border: 2px solid #C9FD61;
 }

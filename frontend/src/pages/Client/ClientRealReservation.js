@@ -10,33 +10,28 @@ const ClientRealReservation = () => {
   const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
 
   const [clickDay, setClickDay] = useState(intFormatToday); // 클릭한 날짜 [2023, 2, 11]
-  const [clickTime, setClickTime] = useState([]); // 클릭한 시간 (날짜 바뀔 때마다 초기화)
-  const [clickTimeData, setClickTimeData] = useState([]); // 클릭한 시간의 모든 데이터
-  const [clickId, setClickId] = useState(null); // 클릭한 시간 데이터의 id 
   const [clickIdArray, setClickIdArray] = useState([]); // 유저가 클릭한 시간들의 데이터 id 배열 (post로 보냄)
-  
+
   const [openedData, setOpenedData] = useState([]); // 최초 렌더링시 이미 예약된 시간 제외, 예약 가능한 데이터만 담음
-  const [time, setTime] = useState([]); // 특정 트레이너의 특정 날짜 데이터 받아와서 시간만 담은 배열
+  const [time, setTime] = useState([]); // 특정 트레이너의 특정 날짜 데이터 받아와서 시간만 담은 배열 => 그 날 타임 박스에 띄움
+  const [timeArray, setTimeArray] = useState([]); // 클릭한 날짜의 데이터 중 클릭한 시간들만 담은 배열
   const [dayReservation, setDayReservation] = useState([]); // 특정 트레이너의 특정 날짜 데이터
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
   
   // 바꿔야 됨
   const trainerId = 1;
-  
-  console.log(clickIdArray);
+
   const getDaySchedule = (intDate) => {
     setClickDay(intDate);
   };
-  
-  console.log("clicked Id", clickId)
-  console.log("clicked Ids Array", clickIdArray)
-  console.log("clicked time", clickTime)
-  console.log(clickTimeData)
-  console.log(dayReservation)
 
-  const handleClickTime = (time) => {
-    setClickTimeData(dayReservation.filter((item) => item.hour === time));
+  const handleClickTime = (event, time) => {
+    const newTimeArray = [clickDay[0], clickDay[1], clickDay[2], time].join(" ");
+    console.log(newTimeArray)           // localStorage에 저장 , useEffect(()=>{ localStorage에서 불러옴 },[clickDay]) , 날짜 비교 -> 같은 날에 있는 애들 timeArray에 저장 
+    
   };
+
+  console.log(clickIdArray)
 
   useEffect(() => {
     async function getReservation() {
@@ -50,7 +45,7 @@ const ClientRealReservation = () => {
           item.month === intFormatToday[1] &&
           item.day === intFormatToday[2]
       );
-      
+
       setTime(
         todayData
           .map((item) => item.hour)
@@ -75,7 +70,7 @@ const ClientRealReservation = () => {
       setReservedHour(reservedDataTime);
     }
     getDayReservation(clickDay);
-    setClickTime(null);
+    // setTimeArray([])
   }, [clickDay]);
 
   useEffect(() => {
@@ -106,11 +101,11 @@ const ClientRealReservation = () => {
             time.map((item) => (
               <div
                 className={`${styles.time_item} ${
-                  reservedHour.includes(item) ? `${styles.reserved_time}` : null
-                } ${clickTime === item ? `${styles.clicked_time}` : null}`}
+                  reservedHour.includes(item) ? `${styles.reserved_time}` : `${styles.not_reserved_time}`
+                } ${timeArray.includes(item) ? `${styles.clicked_time}` : null}`}
                 key={item}
-                onClick={() => {
-                  handleClickTime(item);
+                onClick={(event) => {
+                  handleClickTime(event, item);
                 }}
               >
                 {item}:00 ~ {item + 1}:00
