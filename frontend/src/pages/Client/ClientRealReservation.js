@@ -15,6 +15,7 @@ const ClientRealReservation = () => {
   const [openedData, setOpenedData] = useState([]); // 최초 렌더링시 이미 예약된 시간 제외, 예약 가능한 데이터만 담음
   const [time, setTime] = useState([]); // 특정 트레이너의 특정 날짜 데이터 받아와서 시간만 담은 배열 => 그 날 타임 박스에 띄움
   const [timeArray, setTimeArray] = useState([]); // 클릭한 날짜의 데이터 중 클릭한 시간들만 담은 배열
+  const [clickTimeArray, setClickTimeArray] = useState([]);
   const [dayReservation, setDayReservation] = useState([]); // 특정 트레이너의 특정 날짜 데이터
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
   
@@ -26,12 +27,21 @@ const ClientRealReservation = () => {
   };
 
   const handleClickTime = (event, time) => {
-    const newTimeArray = [clickDay[0], clickDay[1], clickDay[2], time].join(" ");
-    console.log(newTimeArray)           // localStorage에 저장 , useEffect(()=>{ localStorage에서 불러옴 },[clickDay]) , 날짜 비교 -> 같은 날에 있는 애들 timeArray에 저장 
+    const newTime = [clickDay[0], clickDay[1], clickDay[2], time].join(" ");
+    const newReservation = dayReservation.filter((item) => item.hour === time)
+    if (reservedHour.includes(time)) {
+      event.preventDefault();
+    } else if (clickIdArray.includes(newReservation[0].id) && timeArray.includes(newTime)) {
+      setClickIdArray(clickIdArray.filter((item) => item !== newReservation[0].id))
+      setTimeArray(timeArray.filter((item) => item !== newTime))
+    } else if (!clickIdArray.includes(newReservation[0].id) && !timeArray.includes(newTime)) {
+      setClickIdArray((prev) => [...prev, newReservation[0].id])
+      setTimeArray((prev) => [...prev, newTime])
+    }
     
   };
 
-  console.log(clickIdArray)
+  console.log("clickIdArray", clickIdArray)
 
   useEffect(() => {
     async function getReservation() {
@@ -70,9 +80,11 @@ const ClientRealReservation = () => {
       setReservedHour(reservedDataTime);
     }
     getDayReservation(clickDay);
-    // setTimeArray([])
+    
+    
   }, [clickDay]);
-
+  console.log(clickTimeArray)
+  
   useEffect(() => {
     setTime(
       dayReservation
@@ -81,7 +93,10 @@ const ClientRealReservation = () => {
           return a - b;
         })
     );
-  }, [dayReservation]);
+    const splitTimeArray = timeArray.map((item) => item.split(" "))
+    const clickDayTimes = splitTimeArray.filter((item) => item[0] === clickDay[0].toString() && item[1] === clickDay[1].toString() && item[2] === clickDay[2].toString())
+    setClickTimeArray(clickDayTimes.map((item) => parseInt(item[3])))
+  }, [dayReservation, timeArray]);
 
   return (
     <div className={styles.real_reservation_container}>
@@ -102,7 +117,7 @@ const ClientRealReservation = () => {
               <div
                 className={`${styles.time_item} ${
                   reservedHour.includes(item) ? `${styles.reserved_time}` : `${styles.not_reserved_time}`
-                } ${timeArray.includes(item) ? `${styles.clicked_time}` : null}`}
+                } ${clickTimeArray.includes(item) ? `${styles.clicked_time}` : null}`}
                 key={item}
                 onClick={(event) => {
                   handleClickTime(event, item);
