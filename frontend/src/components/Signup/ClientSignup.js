@@ -11,9 +11,6 @@ const ClientSignup = () => {
     const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: false });
     const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: false });
     const [birth, setBirth] = useState({ birth: "", birthMsg: "", isBirth: false });
-    const [award, setAward] = useState({ award1: "", award2: "", award3: ""});
-    const [certificate, setCertificate] = useState({ certificate1: "",certificate2: "", certificate3: ""});
-    const [career, setCareer] = useState({ career1: "", career2: "", career3: ""});
 
     
     const dispatch = useDispatch();
