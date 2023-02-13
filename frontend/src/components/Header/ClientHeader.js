@@ -5,9 +5,12 @@ import { useEffect, useState } from 'react'
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
 import logo from '../../assets/img/pxArt.png'
+import { Navigate } from 'react-router-dom';
 //ClientHeader
 export default function ClientHeader(){
-
+	const [roleToken, setRoleToken]=useState(
+		localStorage.getItem("mpti_role")
+	);
 	// 채팅 온
 	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
@@ -29,6 +32,10 @@ export default function ClientHeader(){
 	} , [])
 
 
+
+	if(roleToken!=="client" ){
+		Navigate({to:"/"})
+	}
 
 
 

@@ -7,7 +7,7 @@ import Pagination from '../../../components/Common/Pagination'
 
 const ClientInfo = (props) => {
 
-    const clientId = props.id
+    const clientEmail = props.email
     const clientName = props.name
     const clientGender = props.gender
     const clientAge = props.age
@@ -18,7 +18,7 @@ const ClientInfo = (props) => {
         <div className={styles.container}>
             <div className={styles.flex_row}>
                 <ClientProfile/>
-                <ClientLog id={clientId}/>
+                <ClientLog id={clientEmail}/>
             </div>
             <div className={styles.grid_2_row}>
                 <ClientLogCard/>

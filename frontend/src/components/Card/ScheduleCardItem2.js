@@ -1,11 +1,6 @@
 import styles from "./ScheduleCardItem2.module.css"
 
 function ScheduleCardItem2(props) {
-  const name = props.name;
-  const gender = props.gender;
-  const age = props.age;
-  const time = props.time;
-  const picture = props.picture;
 
     return (
       <div className={styles.card_item}>
@@ -16,9 +11,9 @@ function ScheduleCardItem2(props) {
           <div className={styles.card_item_info_txt}>예약한 수업</div>
         </div>
         <div className={styles.card_item_info}>
-          <div className={styles.card_item_info_txt}>{name}</div>
-          <div className={styles.card_item_info_txt}>({gender}), {age}세</div>
-          <div>{time}</div>
+          <div className={styles.card_item_info_txt}>{props.trainerName}</div>
+          <div className={styles.card_item_info_txt}>({"남"}), {props.month+12}세</div>
+          <div>{props.year}.{props.month}.{props.day} {props.hour}pm</div>
         </div>
         <button className={styles.button}>입장</button>
       </div>

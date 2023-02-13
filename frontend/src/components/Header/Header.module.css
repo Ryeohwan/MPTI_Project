@@ -25,7 +25,8 @@
     font-size: 56px;
     color: #ececec;
     border-bottom: 4pt solid #C9FD61;
-    border-top: 4pt solid #C9FD61
+    border-top: 4pt solid #C9FD61;
+    text-shadow: 2px 2px 2px black;
 }
 
 
@@ -37,6 +38,7 @@
     align-items: center;
     width: 40%;
     font-size: 18px;
+    text-shadow: 2px 4px 2px black;
 }
 
 

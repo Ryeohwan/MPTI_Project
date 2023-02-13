@@ -4,8 +4,16 @@ import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
+	// const {role}=useSelector(state=> state.auth);
+	const [roleToken, setRoleToken]=useState(
+		localStorage.getItem("mpti_role")
+	);
+
+
 	// 채팅 온
 	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
@@ -15,6 +23,10 @@ export default function TrainerHeader(){
 	//채팅 끄기
 	function turnoffchat() {
 		setChatOn(false)
+	}
+
+	if(roleToken!=="trainer" ){
+		Navigate({to:"/"})
 	}
 
 	useEffect(() =>{

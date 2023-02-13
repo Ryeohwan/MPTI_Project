@@ -9,7 +9,7 @@ import Pagination from "react-js-pagination";
 const ManagerSignupApproval = () => {
   const [signupList, setSignupList] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage]= useState(0);
+  const [totalPage, setTotalPage] = useState(0);
   const handlePageChange = (page) => {
     console.log(page);
     setPage(page);
@@ -18,9 +18,14 @@ const ManagerSignupApproval = () => {
 
   useEffect(() => {
     //가입신청 리스트
-    dispatch(signupTrainerList(page-1)).then((res) =>{
-      
+    dispatch(signupTrainerList(page - 1)).then((res) => {
+
       setTotalPage(res.totalElements);
+
+      const licensesString = res.content[0].awards;
+      const licensesArray = JSON.parse(licensesString);
+      const [licenseA, licenseB] = licensesArray;
+      console.log(licenseA);
       console.log(res);
       setSignupList(res.content)
     });
@@ -64,9 +69,38 @@ const ManagerSignupApproval = () => {
                       <div>신청자 성명: {it.name}</div>
                       <div>E-MAIL: {it.email} </div>
                       <div>생년월일 : {it.birthday}</div>
-                      <div>수상내역 : {it.awards}</div>
-                      <div>자격증 : {it.license}</div>
-                      <div>근무이력 : {it.career}</div>
+                      <div>수상내역 :  {(() => {
+                        const Awards = JSON.parse(it.awards);
+                        return (
+                          <React.Fragment>
+                            {Awards.map((award, index) => (
+                              <span key={index}> {award}</span>
+                            ))}
+                          </React.Fragment>
+                        );
+                      })()}
+                      </div>
+                      <div>자격증 :  {(() => {
+                        const Licenses = JSON.parse(it.license);
+                        return (
+                          <React.Fragment>
+                            {Licenses.map((license, index) => (
+                              <span key={index}> {license}</span>
+                            ))}
+                          </React.Fragment>
+                        );
+                      })()}
+                      </div>
+                      <div>근무이력 :  {(() => {
+                        const Careers = JSON.parse(it.career);
+                        return (
+                          <React.Fragment>
+                            {Careers.map((career, index) => (
+                              <span key={index}> {career}</span>
+                            ))}
+                          </React.Fragment>
+                        );
+                      })()}</div>
                     </div>
 
                     <div className={styles.item_btn}>
@@ -84,6 +118,7 @@ const ManagerSignupApproval = () => {
                       </button>
                     </div>
                   </div>
+
                 </li>
               );
             })}
@@ -91,14 +126,14 @@ const ManagerSignupApproval = () => {
         </div>
         <div className={styles.pagenation}>
           <Pagination
-      activePage={page}
-      itemsCountPerPage={4}
-      totalItemsCount={totalPage}
-      pageRangeDisplayed={5}
-      prevPageText={"‹"}
-      nextPageText={"›"}
-      onChange={handlePageChange}
-    />
+            activePage={page}
+            itemsCountPerPage={4}
+            totalItemsCount={totalPage}
+            pageRangeDisplayed={5}
+            prevPageText={"‹"}
+            nextPageText={"›"}
+            onChange={handlePageChange}
+          />
         </div>
       </div>
     </>
