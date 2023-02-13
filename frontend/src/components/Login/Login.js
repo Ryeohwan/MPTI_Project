@@ -32,7 +32,7 @@ useEffect(()=>{
     if(roleToken || role){
         navigate(`/${roleToken}/home`);
     }
-},[roleToken])
+},[roleToken]) 
 
 const userInfoHandler= (e)=>{
     switch(e.target.name){
