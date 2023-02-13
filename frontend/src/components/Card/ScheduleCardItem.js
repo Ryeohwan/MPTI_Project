@@ -7,7 +7,7 @@ function ScheduleCardItem({schedule, active}) {
   const dispatch = useDispatch()
   dispatch(trainerDetail)
   const {name, s3Url} = useSelector((state)=>(state.etc))
-  
+console.log(schedule.trainerId)
   return (
     <li className={styles.card_item}>
       <img className={styles.card_item_img} src={s3Url?s3Url:'/profile_base.png'} alt='/profile_base.png'></img>
@@ -16,7 +16,7 @@ function ScheduleCardItem({schedule, active}) {
         <div>{schedule.year}.{schedule.month}.{schedule.day} {schedule.hour}:00 - {schedule.hour+1}:00</div>
       </div>
       {active?<button className={styles.button}>
-          <Link to="/lesson" state={{tarinerId:schedule.tarinerId, userId:schedule.userId, name:name,sessionId:schedule.sessionId}} >
+          <Link to="/lesson" state={{trainerId:schedule.trainerId, clientId:schedule.userId, name:name,sessionId:schedule.sessionId}} >
           <div>입장</div>
           </Link>
         </button>

@@ -25,7 +25,7 @@ const SignupSelect = () => {
         </div>
 
         <div className={styles.select_btn_box}>
-           <button className={styles.select_btn} >뒤로가기</button>
+           <button className={styles.select_btn} onClick={() => navigate(-1)}>뒤로가기</button>
         </div>
 
 

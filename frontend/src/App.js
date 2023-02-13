@@ -28,7 +28,8 @@ import BasicLoadingSpinner from "./components/Loading/BasicLoadingSpinner";
 import { useSelector } from "react-redux";
 import ClientSignup from "./components/Signup/ClientSignup";
 import TrainerSignup from "./components/Signup/TrainerSignup";
-
+import Lesson from "./pages/Common/Lesson";
+import ClientRealReservation from "./pages/Client/ClientRealReservation";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -50,8 +51,7 @@ export default function App() {
     
   return (
     <div className="App">
-      {isLoading || admin.isLoading ? <BasicLoadingSpinner /> : null}
-
+      {isLoading ? <BasicLoadingSpinner /> : null}
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
           <Route path="/client/*" element={<ClientHeader/>} />
@@ -65,7 +65,8 @@ export default function App() {
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage" element={<TrainerMyPage />} />
-       
+        <Route path="/trainer/trainerdetail" element={<ClientTrainerDetail />} />
+        <Route path="/lesson" element={<Lesson/>}/>       
 
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
         <Route path="/trainersignup" element={<TrainerSignup />} />
@@ -78,8 +79,9 @@ export default function App() {
         <Route path="/client/myreservation" element={<ClientMyReservation />} />
         <Route path="/client/mypage" element={<ClientMyPage />} />
         <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
+        <Route path="/client/home" element={<Home />} />
+        <Route path="/client/trainerdetail/realreservation" element={<ClientRealReservation/>} />
         {/* <Route path="/home" element={<Home />} /> */}
-        <Route path="/client/home" element={<Home/>} />
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route path="/trainer/myreservation" element={<TrainerMyReservation />} />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
