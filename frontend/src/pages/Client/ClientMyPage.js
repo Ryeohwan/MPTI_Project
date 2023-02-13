@@ -11,7 +11,7 @@ import { clientDetail, clientReview } from '../../store/etc';
 const ClientMyPage = () => {
 
     const dispatch = useDispatch()
-    const {email, id} = useSelector((state) => state.etc)
+    const {email, id} = useSelector((state) => state.auth)
     const [myInfo, setMyInfo] = useState(undefined);
     const [myReviews, setMyReview] = useState([]);
     const [page, setPage] = useState(0);

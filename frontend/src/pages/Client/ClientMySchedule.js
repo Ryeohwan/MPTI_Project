@@ -8,7 +8,7 @@ import { clientSchedule } from "../../store/etc";
 const MySchedule =()=> {
     const dispatch = useDispatch()
     // 고객 본인 아이디(api 요청에 사용)
-    const {id} = useSelector((state) => state.etc)
+    const {id}= useSelector((state) => state.auth)
     // 시간 표시용
     const [todaySchedule, setTodaySchedule] =useState([]);
     const [otherSchedule, setOtherSchedule] = useState([]);
@@ -18,7 +18,6 @@ const MySchedule =()=> {
         async function getSchedule(){
             // 고객 스케줄표
             const data = await dispatch(clientSchedule(id))
-            console.log(data)
             // 1번=오늘 수업, 2번=미래 수업, 3번=과거수업
             let temp_data1=[], temp_data2 = [], temp_data3 = [];
             data.length && data.map((item) => {
