@@ -147,6 +147,55 @@ export const clientEditInfo = (email, password, phone) => async(dispatch) => {
         return false;
     }
 }
+// 고객의 내 스케줄
+export const clientSchedule = (id) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/business/reservation/user/list/${id}`)
+        return response.data
+    } catch(error) {
+        alert('정상적인 경로가 아닙니다.')
+    }
+}
+// 상대방과 대화방 만들기
+export const getChatRoom = (myId, myRole, targetId) => async (dispatch) => {
+    try{
+        const requestUrl = '/api/chat/channel/'+ (myRole && myRole==='[ROLE_USER]'?`${targetId}/${myId}`:`${myId}/${targetId}`)
+        console.log(requestUrl,'여기')
+        const response = await axios.get(requestUrl)
+        console.log(response,'여기2')
+        return response.data
+    } catch (error) {
+        alert('etc getChatRoom 채팅룸 받기 에러!')
+    }
+}
+// 나의 모든 대화방 가져오기
+export const getChatRoomList = (id, role) => async (dispatch) => {
+    try{
+        let temp
+        if(role==='[ROLE_USER]'){
+            temp = 'user'
+        } else if (role ==='[ROLE_TRAINER]'){
+            temp = 'trainer'
+        }
+        const response = await axios.get(`/api/chat/load/list/${id}/${temp}`)
+        return response.data
+    } catch (error) {
+        alert('etc getChatRoomList 채팅룸 목록 받기 에러!')
+    }
+}
+// 채팅방 대화 기록 가져오기
+export const getChatList = (channelId) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/chat/load/${channelId}`)
+        return response.data
+    } catch(error) {
+        alert('etc getChatList 채팅방 대화 기록 가져오기 에러!')
+    }
+}
+// 회원 운동기록 추가
+export const sendLog = (data) => async (dispatch) =>{
+    (await axios.post('/api/user/count',data).then((res) => {alert('보내기 성공')}).catch((res)=>{alert('Error')}))
+}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;
