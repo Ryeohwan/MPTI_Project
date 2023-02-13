@@ -11,9 +11,6 @@ const ClientSignup = () => {
     const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: true });
     const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: true });
     const [birth, setBirth] = useState({ birth: "", birthMsg: "", isBirth: false });
-    const [award, setAward] = useState({ award1: "", award2: "", award3: ""});
-    const [certificate, setCertificate] = useState({ certificate1: "",certificate2: "", certificate3: ""});
-    const [career, setCareer] = useState({ career1: "", career2: "", career3: ""});
 
     
     const dispatch = useDispatch();
@@ -116,11 +113,6 @@ const ClientSignup = () => {
             return
         }
 
-    
-        // 회원가입 진행시 경력 수상등은 배열 문자열화
-        const awards = JSON.stringify([award.award1,award.award2,award.award3])
-        const license =JSON.stringify([certificate.certificate1,certificate.certificate2,certificate.certificate3])
-        const careers =JSON.stringify([career.career1, career.career2, career.career3]);
      
         const data=({
             name : name.name,
@@ -129,9 +121,6 @@ const ClientSignup = () => {
             birthday : birth.birth,
             gender : gender.gender,
             phone : phoneInputRef.current.value,
-            awards :  awards,
-            license :   license,
-            career : careers
         })
 
         dispatch(signup("client", data))

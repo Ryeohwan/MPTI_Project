@@ -15,14 +15,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 트레이너 더미 데이터
 const initialState = {
-    id:1,
-    name:'Axe',
-    email:'aschettini0@biglobe.ne.jp',
-    phone: "107-463-1222",
-    s3Url:'https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/aschettini0',
+    id:undefined,
+    name:'',
+    email:'',
+    phone: "",
+    s3Url:'',
     isLoading: false,
     error: null,
-    role:"[ROLE_USER]",
+    role:"",
     isCheckMsg: ""
 };
 

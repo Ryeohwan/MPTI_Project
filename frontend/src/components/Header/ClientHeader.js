@@ -21,6 +21,8 @@ export default function ClientHeader(){
 	function turnoffchat() {
 		setChatOn(false)
 	}
+	const [view, setView] = useState(false);
+
 	useEffect(() =>{
 		const LINK_LIST=['/home','/clientmyschedule','/clientmylog', '/clientmyreservation','/clientmypage']
 		LINK_LIST.forEach((link) => {
@@ -37,7 +39,10 @@ export default function ClientHeader(){
 		Navigate({to:"/"})
 	}
 
-
+	const logout = () => {
+		localStorage.clear()
+		console.log('로그아웃')
+	}
 
 
 
@@ -72,9 +77,16 @@ export default function ClientHeader(){
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /clientmypage 라우팅 */}
-					<Link to={'mypage'} onClick={()=>{setMenuSelect('clientmypage')}}>
-						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
-					</Link>
+					<div className={styles.mypage_box}>
+						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png' onClick={() => setView((prev)=>!prev)}></img>
+						{
+							view &&
+							<div className={styles.dropdown}>
+								<div className={styles.dropdown_content}><Link to={'mypage'} onClick={()=>{setMenuSelect('clientmypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content} onClick={()=>{logout()}}>로그아웃</div>
+							</div>
+						}
+					</div>	
 				</div>
 			</div>
 		</div>
