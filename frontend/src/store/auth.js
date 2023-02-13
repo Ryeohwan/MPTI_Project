@@ -61,6 +61,7 @@ const authSlice = createSlice({
 
 
 export const login = (email, password) => async (dispatch) => {
+    console.log(email, password, 'adadasdasd')
         dispatch(authActions.loginRequest());
     try {
         const response = await axios.post("/api/auth/login", { email, password });
@@ -68,9 +69,11 @@ export const login = (email, password) => async (dispatch) => {
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
         const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
         localStorage.setItem("mpti_role", role);
-        
-        const userInfo = await (await axios.get(`/api/${role}/info/${email}`)).data;
-        console.log(userInfo);
+        console.log(role, email, '여기가 문제 user는 post, ')
+        const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):
+        await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+
+        console.log(userInfo,'여긴안와');
         dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
 
         dispatch(authActions.loginSuccess(role));
