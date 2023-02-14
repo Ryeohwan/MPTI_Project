@@ -83,7 +83,6 @@ const ClientRealReservation = () => {
     
     
   }, [clickDay]);
-  console.log(clickTimeArray)
   
   useEffect(() => {
     setTime(
@@ -133,10 +132,10 @@ const ClientRealReservation = () => {
           )}
         </div>
       </div>
-      <div>
-        <button>결제하기</button>
-        <button>돌아가기</button>
-      </div>
+          <div className={styles.btn_wrapper}>
+            <button className={styles.payment_btn}>결제하기</button>
+            <button className={styles.back_btn}>돌아가기</button>
+          </div>
     </div>
   );
 };
