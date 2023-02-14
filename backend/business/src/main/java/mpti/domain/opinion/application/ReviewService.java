@@ -1,11 +1,15 @@
 package mpti.domain.opinion.application;
 
 import lombok.RequiredArgsConstructor;
+import mpti.common.errors.ReviewNotFoundException;
 import mpti.domain.opinion.api.request.CreateReviewRequest;
 import mpti.domain.opinion.api.response.GetReviewResponse;
 import mpti.domain.opinion.dao.ReviewRepository;
 import mpti.domain.opinion.dto.ReviewDto;
 import mpti.domain.opinion.entity.Review;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,30 +24,48 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    public List<GetReviewResponse> getReviewList() {
-        List<Review> reviewList = reviewRepository.findAll();
+    public Page<GetReviewResponse> getReviewList(int page, int size, String orderType) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, orderType));
 
-        List<GetReviewResponse> getReviewResponse = reviewList.stream()
-                .map((review) -> new GetReviewResponse(review))
-                .collect(Collectors.toList());
+        Page<Review> reviewList = reviewRepository.findAll(pageRequest);
+
+        Page<GetReviewResponse> getReviewResponse = reviewList
+                .map((review) -> new GetReviewResponse(review));
+//                .collect(Collectors.toList());
         return getReviewResponse;
     }
 
-    public List<GetReviewResponse> getReviewListByWriterId(Long writerId) {
-        List<Review> reviewList = reviewRepository.findByWriterId(writerId);
+    public Page<GetReviewResponse> getTrainerReviewList(Long trainerId, int page, int size, String orderType) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, orderType));
 
-        List<GetReviewResponse> getReviewResponse = reviewList.stream()
-                .map((review) -> new GetReviewResponse(review))
-                .collect(Collectors.toList());
+        Page<Review> reviewList = reviewRepository.findAllByTargetId(trainerId, pageRequest);
+
+        Page<GetReviewResponse> getReviewResponse = reviewList
+                .map((review) -> new GetReviewResponse(review));
+//                .collect(Collectors.toList());
+        return getReviewResponse;
+    }
+
+    public Page<GetReviewResponse> getReviewListByWriterId(Long writerId, int page, int size, String orderType) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, orderType));
+
+        Page<Review> reviewList = reviewRepository.findByWriterId(writerId, pageRequest);
+
+        Page<GetReviewResponse> getReviewResponse = reviewList
+                .map((review) -> new GetReviewResponse(review));
+//                .collect(Collectors.toList());
         return getReviewResponse;
     }
 
     public ReviewDto create(CreateReviewRequest createReviewRequest) {
-        Review review = new Review();
-        review.setWriterId(createReviewRequest.getWriterId());
-        review.setTargetId(createReviewRequest.getTargetId());
-        review.setStar(createReviewRequest.getStar());
-        review.setMemo(createReviewRequest.getMemo());
+        Review review = Review.builder()
+                .writerId(createReviewRequest.getWriterId())
+                .writerName(createReviewRequest.getWriterName())
+                .targetId(createReviewRequest.getTargetId())
+                .targetName(createReviewRequest.getTargetName())
+                .memo(createReviewRequest.getMemo())
+                .star(createReviewRequest.getStar())
+                .build();
 
         Optional<Review> SavedReview = Optional.of(reviewRepository.save(review));
 
@@ -54,11 +76,12 @@ public class ReviewService {
 
     public Optional<GetReviewResponse> getReview(Long id) {
 
-        Optional<Review> review = reviewRepository.findById(id);
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new ReviewNotFoundException(id));
 
-        Optional<GetReviewResponse> getReviewResponse = Optional.of(new GetReviewResponse(review.orElseThrow()));
+        Optional<GetReviewResponse> getReviewResponse = Optional.of(new GetReviewResponse(review));
 
         return getReviewResponse;
     }
+
 
 }

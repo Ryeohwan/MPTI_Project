@@ -9,4 +9,11 @@ public class ProcessReportRequest {
 
     int blockPeriod;
 
+    public ProcessReportRequest() {
+    }
+
+    public ProcessReportRequest(Long id, int blockPeriod) {
+        this.id = id;
+        this.blockPeriod = blockPeriod;
+    }
 }

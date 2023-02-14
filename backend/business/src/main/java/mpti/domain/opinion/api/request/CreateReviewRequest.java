@@ -9,6 +9,10 @@ public class CreateReviewRequest {
 
     private Long targetId;
 
+    private String writerName;
+
+    private String targetName;
+
     private Double star;
 
     private String memo;

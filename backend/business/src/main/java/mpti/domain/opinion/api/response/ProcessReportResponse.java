@@ -8,6 +8,9 @@ public class ProcessReportResponse {
 
     private Long id;
 
+    public ProcessReportResponse() {
+    }
+
     @Builder
     public ProcessReportResponse(Long id){
         this.id = id;

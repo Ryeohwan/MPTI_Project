@@ -14,6 +14,10 @@ public class GetReviewResponse {
 
     private Long targetId;
 
+    private String writerName;
+
+    private String targetName;
+
     private String memo;
 
     private LocalDateTime createdAt;
@@ -24,6 +28,8 @@ public class GetReviewResponse {
         this.id = review.getId();
         this.writerId = review.getWriterId();
         this.targetId = review.getTargetId();
+        this.writerName = review.getWriterName();
+        this.targetName = review.getTargetName();
         this.memo = review.getMemo();
         this.createdAt = review.getCreatedAt();
         this.star = review.getStar();

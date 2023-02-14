@@ -15,6 +15,10 @@ public class ReviewDto {
 
     private Long targetId;
 
+    private String writerName;
+
+    private String targetName;
+
     private LocalDateTime createdAt;
 
     private Double star;

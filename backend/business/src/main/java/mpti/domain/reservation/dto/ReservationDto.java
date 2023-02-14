@@ -5,6 +5,7 @@ import mpti.domain.reservation.entity.Reservation;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Getter
 public class ReservationDto {
@@ -12,21 +13,32 @@ public class ReservationDto {
     private Long id;
 
     private Long trainerId;
+    private String trainerName;
 
     private Long userId;
+    private String userName;
 
     private int year, month, day, hour;
 
+    private String sessionId;
+
     private LocalDateTime createdAt;
 
-    public ReservationDto(Optional<Reservation> reservation) {
-        this.id = reservation.orElseThrow().getId();
-        this.trainerId = reservation.orElseThrow().getTrainerId();
-        this.userId = reservation.orElseThrow().getUserId();
-        this.year = reservation.orElseThrow().getYear();
-        this.month = reservation.orElseThrow().getMonth();
-        this.day = reservation.orElseThrow().getDay();
-        this.hour = reservation.orElseThrow().getHour();
-        this.createdAt = reservation.orElseThrow().getCreatedAt();
+    public ReservationDto() {
+    }
+
+    public ReservationDto(Reservation reservation) {
+
+        this.id = reservation.getId();
+        this.trainerId = reservation.getTrainerId();
+        this.trainerName = reservation.getTrainerName();
+        this.userId = reservation.getUserId();
+        this.userName = reservation.getUserName();
+        this.year = reservation.getYear();
+        this.month = reservation.getMonth();
+        this.day = reservation.getDay();
+        this.hour = reservation.getHour();
+        this.sessionId = reservation.getSessionId();
+        this.createdAt = reservation.getCreatedAt();
     }
 }

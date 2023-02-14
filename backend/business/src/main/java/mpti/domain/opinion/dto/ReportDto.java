@@ -14,6 +14,10 @@ public class ReportDto {
 
     private Long targetId;
 
+    private String writerName;
+
+    private String targetName;
+
     private LocalDateTime createdAt;
 
     private String memo;
@@ -24,6 +28,8 @@ public class ReportDto {
         this.id = report.orElseThrow().getId();
         this.writerId = report.orElseThrow().getWriterId();
         this.targetId = report.orElseThrow().getTargetId();
+        this.writerName = report.orElseThrow().getWriterName();
+        this.targetName = report.orElseThrow().getTargetName();
         this.createdAt = report.orElseThrow().getCreatedAt();
         this.memo = report.orElseThrow().getMemo();
         this.stopUntil = report.orElseThrow().getStopUntil();

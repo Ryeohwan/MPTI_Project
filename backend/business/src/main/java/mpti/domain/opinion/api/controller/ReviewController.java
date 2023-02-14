@@ -5,14 +5,16 @@ import mpti.domain.opinion.api.request.CreateReviewRequest;
 import mpti.domain.opinion.api.response.CreateReviewResponse;
 import mpti.domain.opinion.api.response.GetReviewResponse;
 import mpti.domain.opinion.application.ReviewService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/opinion")
+@RequestMapping("/api/business/opinion")
 @RequiredArgsConstructor
 public class ReviewController {
 
@@ -21,26 +23,37 @@ public class ReviewController {
     // [GET] 현재 모든 리뷰 리스트 반환
     // Pageable
 
-    @GetMapping("/review/list")
-    public ResponseEntity<List<GetReviewResponse>> getReviewList() {
+    @GetMapping("/review/list/{page}")
+    public ResponseEntity<Page<GetReviewResponse>> getReviewList(@PathVariable int page) {
 
-        List<GetReviewResponse> getReviewResponseList = reviewService.getReviewList();
+        Page<GetReviewResponse> getReviewResponseList = reviewService.getReviewList(page, 5, "id");
+
+        return ResponseEntity.ok(getReviewResponseList);
+    }
+
+    // [GET] 특정 트레이너의 리뷰 리스트 조회
+    // Pageable
+
+    @GetMapping("/review/trainer/list/{trainerId}/{page}")
+    public ResponseEntity<Page<GetReviewResponse>> getTrainerReviewList(@PathVariable Long trainerId, @PathVariable int page) {
+
+        Page<GetReviewResponse> getReviewResponseList = reviewService.getTrainerReviewList(trainerId, page, 5, "id");
 
         return ResponseEntity.ok(getReviewResponseList);
     }
 
     // [GET] 특정 회원이 작성한 리뷰 리스트 반환
     // Pageable
+    @GetMapping("/review/user/list/{writerId}/{page}")
+    public ResponseEntity<Page<GetReviewResponse>> getReviewListByWriterId(@PathVariable Long writerId, @PathVariable int page) {
 
-    @GetMapping("/review/list/{writerId}")
-    public ResponseEntity<List<GetReviewResponse>> getReviewListByWriterId(@PathVariable Long writerId) {
-
-        List<GetReviewResponse> getReviewByWriterIdResponseList = reviewService.getReviewListByWriterId(writerId);
+        Page<GetReviewResponse> getReviewByWriterIdResponseList = reviewService.getReviewListByWriterId(writerId, page, 5, "id");
 
         return ResponseEntity.ok(getReviewByWriterIdResponseList);
     }
 
     // [GET] 리뷰 상세 정보 반환
+    // 예외(O) : 해당 id의 리뷰가 없는 경우
     @GetMapping("/review/{reviewId}")
     public ResponseEntity<Optional<GetReviewResponse>> getReview(@PathVariable Long reviewId) {
 
@@ -57,5 +70,6 @@ public class ReviewController {
 
         return ResponseEntity.ok(Optional.of(new CreateReviewResponse(id)));
     }
+
 
 }

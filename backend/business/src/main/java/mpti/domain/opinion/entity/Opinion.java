@@ -1,5 +1,6 @@
 package mpti.domain.opinion.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,8 +22,15 @@ public abstract class Opinion {
     @Column(name ="opinion_id")
     private Long id;
 
+    @Column(nullable = false)
     private Long writerId;
+    @Column(nullable = false)
+    private String writerName;
+
+    @Column(nullable = false)
     private Long targetId;
+    @Column(nullable = false)
+    private String targetName;
 
     @CreatedDate
     @Column(name = "created_at")
@@ -30,4 +38,15 @@ public abstract class Opinion {
 
     private String memo;
 
+    public Opinion() {
+
+    }
+
+    public Opinion(Long writerId, Long targetId, String writerName, String targetName, String memo) {
+        this.writerId = writerId;
+        this.targetId = targetId;
+        this.writerName = writerName;
+        this.targetName = targetName;
+        this.memo = memo;
+    }
 }
