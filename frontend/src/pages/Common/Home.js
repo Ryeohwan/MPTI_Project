@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import TrainerImg from "./../../assets/img/trainer.PNG";
-import Star from "./../../assets/img/star.png";
 import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpinner";
 
 const Home = () => {
   const dispatch = useDispatch();

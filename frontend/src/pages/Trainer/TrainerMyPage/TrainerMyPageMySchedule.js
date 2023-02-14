@@ -53,11 +53,6 @@ const TrainerMyPageMySchedule = () => {
       setReservedHour(filterReservedHour);                                            // 회원이 예약한 데이터 시간 배열
     }
   }, [daySchedule])
-  
-  
-  // totalTimeArray : setTimeArray()에 담아 최종적으로 timeArray로 저장하고 싶은 배열 (예약O + 오픈O)
-  // reservedHour : 회원이 예약을 한 시간(예약 O + 오픈 ㅇ)
-
 
   console.log("timeArray",timeArray)
 

@@ -51,7 +51,7 @@ const ClientRealReservation = () => {
       setTimeArray((prev) => [...prev, newTime]);
     }
   };
-
+  
   const kakaoPay = () => {
     axios
       .post("/api/business/pay/order/request", {
@@ -80,7 +80,7 @@ const ClientRealReservation = () => {
           item.month === intFormatToday[1] &&
           item.day === intFormatToday[2]
       );
-
+      
       setTime(
         todayData
           .map((item) => item.hour)

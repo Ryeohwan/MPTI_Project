@@ -1,19 +1,6 @@
 
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-// 트레이너 더미 데이터
-// const initialState = {
-//     id:12,
-//     name: "이예은",
-//     email: "dodamond@naver.com",
-//     phone: "01012345678",
-//     s3Url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFQjXi0ek-BPMjHrRVkmrEfilPmd45P8aXrt1Ga4T6n3NLxlCwA_G1SG4r1WNHxov0pY&usqp=CAU",
-//     isLoading: false,
-//     error: null,W
-//     role:"[ROLE_TRAINER]",
-//     isCheckMsg: ""
-// };
 
 // 트레이너 더미 데이터
 const initialState = {
@@ -74,7 +61,7 @@ export const trainerListByPage = (pagenum) => async (dispatch) => {
         const response = await axios.get(`/api/trainer/list/${pagenum}`);
         console.log(response.data);
     } catch (error) {
-
+        console.log(error)
     }
 }
 

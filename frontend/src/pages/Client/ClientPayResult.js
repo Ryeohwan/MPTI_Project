@@ -13,7 +13,7 @@ const ClientPayResult = () => {
   const navigateToClientMySchedule = () => {
     navigate('/user/myschedule')
   }
-
+  
   useEffect(() => {
       setPgToken(new URLSearchParams(window.location.search).get("pg_token"));
     }, []);
