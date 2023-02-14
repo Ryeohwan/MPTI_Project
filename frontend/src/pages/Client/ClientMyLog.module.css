@@ -1,0 +1,154 @@
+.ClientMyLog {
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.log_box {
+    display: flex;
+    height: 200px;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.log_graph {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: pink; */
+    background-color: black;
+    border-radius: 5px;
+    width: 60%;
+    border: 1px solid white;
+}
+
+.log_recommend {
+    padding: 15px;
+    width: 35%;
+    border-radius: 5px;
+    background-color: black;
+    border-radius: 5px;
+    border: 1px solid white;
+    word-wrap: break-word;
+}
+
+.sub_content {
+    margin-top: 10px;
+    height: 56px;
+}
+
+.sub_info {
+    height: 250px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: black;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info_question {
+    width: 35%;
+    padding: 10px;
+    /* background-color: blue; */
+}
+
+.info_question input[type='number'] {
+    /* background-color: red; */
+    width: 50px;
+    height: 20px;
+    font-size: 18px;
+    padding-left: 3px;
+    border-style: none;
+    border-radius: 3px;
+    margin-left: 10px;
+    font-family: 'DungGeunMo';
+}
+
+.info_question input[type='range'] {
+    width: 200px;
+}
+
+.info_question select {
+    border-style: none;
+    border-radius: 3px;
+    margin-left: 78px;
+    width: 50px;
+    height: 20px;
+    font-family: 'DungGeunMo';
+}
+
+.title {
+    margin-top: 15px;
+}
+
+.bmi {
+    width: 500px;
+    word-wrap: break-word;
+}
+
+.info_select {
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 13px; */
+}
+
+.info_result {
+    width: 65%;
+}
+
+.info_result h3 {
+    margin-top: 5px;
+}
+
+.bmi_btn {
+    width: 70%;
+    text-align: center;
+    font-family: 'DungGeunMo';
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: rgb(201, 253, 97);
+}
+
+.result {
+    margin-top: 18px;
+}
+
+.result span {
+    font-size: 26px;
+}
+
+.graph_chart {
+    display: flex;
+    background-color: red;
+}
+
+.graph_part {
+    /* background-color: blue; */
+    display: flex;
+}
+.graph_info{
+    display: grid;
+    grid-template-columns:repeat(2,150px);
+    grid-template-rows: 41px 41px 41px 41px;
+    /* background-color: red; */
+}
+.part{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.part_color{
+    width: 40px;
+    height: 20px;
+
+    border-radius: 5px;
+}

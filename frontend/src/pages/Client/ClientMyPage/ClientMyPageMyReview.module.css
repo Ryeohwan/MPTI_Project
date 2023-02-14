@@ -1,0 +1,78 @@
+.container {
+    font-family: 'DungGeunMo';
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+}
+
+.content_title {
+    font-size: 20px;
+}
+
+.out_box{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 30px 30px 30px;
+    background-color: #D0E2A6;
+    border-radius: 7px;
+    align-items:center;
+    gap:20px;   
+    justify-content: space-between;
+}
+.in_box {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #DDE2E2;
+    padding: 20px;
+}
+
+.content_box{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    min-height: 385px;
+    gap: 20px;
+}
+
+.review_top{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.review_top_left{
+    display: grid;
+    grid-template-columns: 130px 370px 1fr;
+    align-items:center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.review_top_right{
+    cursor: pointer;
+}
+
+.review_time{
+    font-size: 15px;
+}
+
+.review_content{
+    max-width: 580px;
+    margin-top: 10px;
+    font-size: 15px;
+    overflow-wrap: break-word;
+}
+
+.no_review{
+    text-align: center;
+    font-size: 30px;
+    color: #222222;
+}

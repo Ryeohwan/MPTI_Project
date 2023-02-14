@@ -1,0 +1,116 @@
+*{
+    box-sizing: border-box
+}
+.modal {
+    top: 100px;
+    position: absolute;
+    width: 450px;
+    height: 800px;
+    right: 20%;
+    display: no;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+    border: 1px solid #C9FD61;
+    padding: 5px 20px;
+    border-radius: 25pt;
+}
+.chat_title_box {
+    display: flex;
+    width: 100%;
+    flex-flow: row;
+    justify-content: space-between;
+    font-family: 'DungGeunMo';
+    font-size: 25px;
+    padding-bottom: 1px;
+    color: #cecece;
+}
+
+.chat_exit_btn {
+    display: flex;
+    font-size: 25px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat_search_bar{
+    background-color: #cecece;
+    border-radius: 6pt;
+    width: 100%;
+    font-family: 'DungGeunMo';
+    color: black;
+    font-size: 13pt;
+    padding: 1%;
+}
+
+.chat_temp {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height:86%;
+    flex-flow: column;
+    justify-content: space-between;
+    color:#cecece;
+    overflow-y: scroll;
+}
+
+.chat_temp::-webkit-scrollbar{
+    width: 3px;
+
+}
+
+.chat_temp::-webkit-scrollbar-thumb{
+    background: #C9FD61; /* 스크롤바의 색상 */
+    border-radius: 10px;
+
+}
+
+.chat_temp::-webkit-scrollbar-track{
+    background: black;
+
+}
+
+.modal_box{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.chat_input {
+    border-radius: 10px;
+    width: 100%;
+    font-size: 20px;
+}
+
+
+.message_form{
+    position: relative;
+    display: flex;
+    flex-flow: row;
+}
+
+.title_search{
+    height: 10%;
+}
+
+.chat_list_day{
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    width:40%;
+    background-color: #444444;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.input_button{
+    position: absolute;
+    font-size: 20px;
+    right: 1px;
+    height: 100%;
+    border-radius: 12px;
+    vertical-align: center;
+    background-color: #C9FD61;
+}

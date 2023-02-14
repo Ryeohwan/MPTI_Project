@@ -1,0 +1,21 @@
+.TrainerMyClient {
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.search_bar{
+    background-color: #cecece;
+    border-radius: 6pt;
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'DungGeunMo';
+    color: black;
+    font-size: 13pt;
+    padding: 1%;
+}
+
+.body_box{
+    margin-top: 20px;
+}
