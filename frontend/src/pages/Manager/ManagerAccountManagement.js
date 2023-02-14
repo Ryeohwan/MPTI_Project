@@ -7,8 +7,10 @@ import "./Paging.css";
 import Pagination from "react-js-pagination";
 import ReportModalContainer from "./Modal/ReportModalContainer";
 import AccountModal from "./Modal/AccountModal";
+import { useNavigate } from 'react-router-dom';
 const ManagerAccountManagement = () => {
   const disapatch = useDispatch();
+  const navigate= useNavigate();
   const [account, setAccount] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -26,7 +28,10 @@ const ManagerAccountManagement = () => {
   }, [page]);
 
   const deleteAccountHandler = (data) => {
-    disapatch(accountDelete(data));
+    if(window.confirm("정말로 삭제하시겠습니까?")){
+      disapatch(accountDelete(data));
+      window.location.reload();
+    }
   };
 
 
@@ -38,10 +43,11 @@ const ManagerAccountManagement = () => {
     birth: "",
     gender:"",
     phone:"",
+    image: "",
     id:""
   });
 
-  const handleOpenModal = (name, email ,birth, gender,phone,id) => {
+  const handleOpenModal = (name, email ,birth, gender,phone,image,id) => {
     setModal({
       show: true,
       name,
@@ -49,6 +55,7 @@ const ManagerAccountManagement = () => {
       birth,
       gender,
       phone,
+      image,
       id,
     });
   };
@@ -62,6 +69,7 @@ const ManagerAccountManagement = () => {
       birth: "",
       gender:"",
       phone: "",
+      image:"",
       id: "",
     });
   };
@@ -79,10 +87,11 @@ const ManagerAccountManagement = () => {
               return (
                 <li key={it.email} className={styles.content_item}>
                   <div className={styles.item_info_box}
-                  onClick={() =>
-                    handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, it.id)
-                  }>
-                    <div className={styles.item_info}>
+                 >
+                    <div className={styles.item_info}
+                     onClick={() =>
+                      handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, index)
+                    }>
                       <div>{(8*(page-1))+index+1}</div>
                       <div>성명:{it.name} </div>
                       <div>E-MAIL:{it.email} </div>
@@ -108,6 +117,7 @@ const ManagerAccountManagement = () => {
                         gender={modal.gender}
                         phone={modal.phone}
                         id={modal.id}
+                        
                         onClose={handleCloseModal}
                       />
                     </ReportModalContainer>
