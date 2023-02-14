@@ -1,5 +1,7 @@
+
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 // 트레이너 더미 데이터
 // const initialState = {
 //     id:12,
@@ -23,7 +25,10 @@ const initialState = {
     isLoading: false,
     error: null,
     role:"",
-    isCheckMsg: ""
+    isCheckMsg: "",
+    chatOn: false,
+    chatRoom: undefined,
+    chatTarget:"",
 };
 
 const etcSlice = createSlice({
@@ -40,6 +45,25 @@ const etcSlice = createSlice({
         dataFailure: (state, action) => {
             state.isLoading = false;
         },
+        chatToggle: (state) => {
+            state.chatOn = !state.chatOn
+        },
+        chatEnter: (state, action) => {
+            console.log(action)
+            switch(action.payload.type){
+                case 'exit':
+                    state.chatRoom=undefined
+                    break;
+                case 'enter':
+                    state.chatRoom = action.payload.payload
+                    break;
+                default:
+                    state.chatRoom=undefined
+            }
+    },
+    chatTarget: (state,payload) => {
+        state.chatTarget = payload.payload
+    }
     },
 });
 
@@ -140,6 +164,7 @@ export const clientReview = (id, page) => async(dispatch) => {
 export const clientEditInfo = (email, password, phone) => async(dispatch) => {
     try{
         const response = await axios.post('/api/user/update', {email:email, password:password, phone:phone})
+        console.log(response,'여기옴')
         return response.data;
     } catch(error) {
         alert('비밀번호가 틀립니다.')
@@ -157,13 +182,12 @@ export const clientSchedule = (id) => async (dispatch) => {
     }
 }
 // 상대방과 대화방 만들기
-export const getChatRoom = (myId, myRole, targetId) => async (dispatch) => {
+export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async (dispatch) => {
     try{
-        const requestUrl = '/api/chat/channel/'+ (myRole && myRole==='[ROLE_USER]'?`${targetId}/${myId}`:`${myId}/${targetId}`)
-        console.log(requestUrl,'여기')
-        const response = await axios.get(requestUrl)
-        console.log(response,'여기2')
-        return response.data
+        const response = await axios.get('/api/chat/channel/'+
+        (myRole==='user'?`${targetId}/${myId}/${targetName}/${myName}`
+        :`${myId}/${targetId}/${myName}/${targetName}`))
+        return response.data.id
     } catch (error) {
         alert('etc getChatRoom 채팅룸 받기 에러!')
     }
@@ -171,13 +195,8 @@ export const getChatRoom = (myId, myRole, targetId) => async (dispatch) => {
 // 나의 모든 대화방 가져오기
 export const getChatRoomList = (id, role) => async (dispatch) => {
     try{
-        let temp
-        if(role==='[ROLE_USER]'){
-            temp = 'user'
-        } else if (role ==='[ROLE_TRAINER]'){
-            temp = 'trainer'
-        }
-        const response = await axios.get(`/api/chat/load/list/${id}/${temp}`)
+        const response = await axios.get(`/api/chat/load/list/${id}/${role}`)
+        console.log(response)
         return response.data
     } catch (error) {
         alert('etc getChatRoomList 채팅룸 목록 받기 에러!')
@@ -195,6 +214,33 @@ export const getChatList = (channelId) => async (dispatch) => {
 // 회원 운동기록 추가
 export const sendLog = (data) => async (dispatch) =>{
     (await axios.post('/api/user/count',data).then((res) => {alert('보내기 성공')}).catch((res)=>{alert('Error')}))
+}
+// 프로필 사진 업로드
+export const uploadImage = (role, formData) => async (dispatch) => {
+    try {
+        if(role==='user'){
+            return axios.post('/api/user/upload', formData).then((res) => res).catch((err)=> 
+            alert('업로드 실패'))
+        }
+        else if(role==='trainer'){
+            return axios.post('/api/trainer/upload', formData).then((res)=>res).catch((err)=>
+            alert('업로드 실패'))
+        }
+
+    } catch(error) {
+        return '에러'
+    }
+}
+
+export const chatToggle = () => async (dispatch) => {
+    try{
+
+        console.log(123123)
+        return 1
+    } catch(error) {
+        return "에러"
+    }
+    // dispatch(etcActions.chatToggle())
 }
 
 export const etcActions = etcSlice.actions;

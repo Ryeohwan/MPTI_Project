@@ -2,32 +2,24 @@ import React, {useEffect, useState} from 'react'
 import styles from './MyPageProfile.module.css'
 import axios from 'axios'
 // import { useSelector } from 'react-redux'
-import etc from '../../store/etc'
-import { clientDetail } from "../../store/etc";
 import { useSelector, useDispatch } from "react-redux";    
+import { uploadImage } from '../../store/etc';
 
-const user_url ='/api/user/upload'
-const trainer_url = '/api/trainer/upload'
 
 const MyPageProfile = () => {
     const dispatch = useDispatch()
-    const {email,name,role, s3Url} = useSelector((state) => state.etc)
+    const {email, name, role, image} = useSelector((state) => state.auth)
+    const [profileImage,setProfileImage] = useState(image)
     // const {name, email, role, s3Url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
-
+    console.log(email,name, role, image)
     const handlePictureUpload=async (e)=>{
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
-        if(role==='[ROLE_USER]'){
-            axios.post(user_url, formData).then((res) => {setShowModal(false);}).catch((err)=> 
-            alert('오류'))
-        }
-        else if(role==='[ROLE_TRAINER]'){
-            axios.post(trainer_url, formData).then((res)=>{setShowModal(false)}).catch((err)=>
-            alert('오류'))
-        }
+        // 업로드한 사진을 URL로 만들어서 성공하면 그 URL을 소스에. (window.URL.createObjectURL)
+        dispatch(uploadImage(role, formData)).then((res) => {setProfileImage(window.URL.createObjectURL(uploadPicture));setShowModal(false);})
     }
 
 
@@ -50,7 +42,7 @@ const MyPageProfile = () => {
                 </div>
             }
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src={s3Url?s3Url:'/profile_base.png'} alt='/profile_base.png'></img>
+                <img className={styles.picture} src={profileImage?profileImage:'/profile_base.png'} alt='/profile_base.png'></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
             <div className={styles.name}>{name} <span className={styles.name2}>{role}</span></div>

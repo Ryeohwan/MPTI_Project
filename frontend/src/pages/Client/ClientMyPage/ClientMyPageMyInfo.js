@@ -8,15 +8,18 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
     const info_list=['이름', '성별', '생년월일', '이메일', '핸드폰'];
     const [edit, setEdit] = useState(false);
     const [showModal, setShowModal] = useState(false);
+
+    console.log(myInfo)
     async function infoEdit(e){
         e.preventDefault();
         if(myInfo){
             const email = myInfo.email;
             const phone = document.getElementById('phone');
             const password = document.getElementById('password');
+            
             dispatch(clientEditInfo(email, password.value, phone.value)).then((data) => {
                 if(data){
-                    setMyInfo((prev) => ({...prev, phone:phone}));
+                    setMyInfo((prev) => ({...prev, phone:phone.value}));
                     setShowModal(false);
                     setEdit(false);
             }})} 

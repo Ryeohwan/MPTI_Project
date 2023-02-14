@@ -22,11 +22,12 @@
     border-radius: 5pt;
     width:70px;
     max-width: 100%;
-    
+    min-width: 90%;
 }
 
 .room_profile{
     display: flex;
+    justify-content: space-between;
     vertical-align: middle;
     align-items: center;
 }

@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { etcActions } from '../../store/etc';
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
+	const dispatch = useDispatch();
 	// const {role}=useSelector(state=> state.auth);
 	const [roleToken, setRoleToken]=useState(
 		localStorage.getItem("mpti_role")
@@ -17,15 +19,12 @@ export default function TrainerHeader(){
 
 	const [view, setView] = useState(false);
 	// 채팅 온
-	const [chaton, setChatOn] = useState(false);
+	const {chatOn} = useSelector(state=>state.etc)
 	// 선택한 메뉴
 	const [menuselect, setMenuSelect] = useState(null);
 	// 메시지 개수
 	const [messagecount, setMessageCount] = useState(99);
 	//채팅 끄기
-	function turnoffchat() {
-		setChatOn(false)
-	}
 
 	if(roleToken!=="trainer" ){
 		Navigate({to:"/"})
@@ -50,7 +49,7 @@ export default function TrainerHeader(){
 	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
+			{chatOn && <Chat />}
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
@@ -69,7 +68,7 @@ export default function TrainerHeader(){
 					{/* 메일 + 프로필 담는 박스 */}
 					<div className={styles.mail_profile_box}>
 						{/* 메시지 */}
-						<div className={styles.mail_box} onClick={()=>{setChatOn(true)}}>
+						<div className={styles.mail_box} onClick={()=>{dispatch(etcActions.chatToggle())}}>
 						{/* 메시지 개수 */}
 						<div className={styles.mail_count_box}> {messagecount}+ </div>
 						{/* 메시지 이미지 */}
