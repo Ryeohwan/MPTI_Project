@@ -1,0 +1,19 @@
+.TrainerMyPage {
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.MyPage_body    {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.left_body {
+    display: flex;
+    flex-direction: column;
+    gap:100px;
+}

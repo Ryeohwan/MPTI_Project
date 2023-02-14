@@ -1,0 +1,122 @@
+#header {
+    display: grid;
+    grid-template-columns: 50px 1.1fr 400px 0.9fr 50px;
+    justify-content: space-between;
+    color: #ffffff;
+    border-top: #ececec 1px solid;
+    height: 50px;
+    background-color: transparent;
+    padding:0 0 0 0;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  
+  .headerLight{
+    color: transparent !important;
+    background-color: #eeeeee !important;
+  }
+  .buttonsContent {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    height: 100% !important;
+    width: 240px;
+    margin: 0;
+  }
+
+  #navButtons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    min-width: 400px;
+  }
+  #navChatButton {
+    height: 100%;
+  }
+  
+  #titleContent{
+    max-width: 100px;
+    background-color: transparent;
+    margin: 5px -18px;
+    padding: 0px 15px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: right;
+    margin-top: 20px;
+  }
+  
+  .titleContentLight{
+    background-color: transparent !important; 
+    color: #000;
+  }
+  
+  #header_img {
+    max-width: 135px;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+  #session-title{
+    font-family: 'Open Sans', sans-serif; 
+  }
+
+.pointLight{
+  border: 1px solid #ffffff !important;
+}
+#navChatButton, #navLogButton {
+  z-index: 10;
+}
+
+.logOpen {
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logOpen2 {
+  height: 100%;
+}
+
+.timer_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.timer_button {
+  font-family: 'DungGeunMo';
+  width: 70px;
+  height: 35px;
+  border: #C9FD61 solid 2px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: black;
+  color: #C9FD61;
+  cursor: pointer;
+}
+
+.timer_button_stop {
+  font-family: 'DungGeunMo';
+  width: 70px;
+  height: 35px;
+  border: red solid 2px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: black;
+  color: red;
+  cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 700px) {
+  #titleContent, #navChatButton {
+      display: none;
+  }
+}
