@@ -7,13 +7,10 @@ import { useNavigate } from 'react-router-dom';
 const ClientSignup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
     const [gender, setGender] = useState({ gender: "male", isGender: false });
-    const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: undefined });
-    const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: true });
-    const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: true });
+    const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: false });
+    const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: false });
+    const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: false });
     const [birth, setBirth] = useState({ birth: "", birthMsg: "", isBirth: false });
-    const [award, setAward] = useState({ award1: "", award2: "", award3: ""});
-    const [certificate, setCertificate] = useState({ certificate1: "",certificate2: "", certificate3: ""});
-    const [career, setCareer] = useState({ career1: "", career2: "", career3: ""});
 
     
     const dispatch = useDispatch();
@@ -88,7 +85,9 @@ const ClientSignup = () => {
     const duplicateHandler = (e) => {
         e.preventDefault();
         if (email.isEmail) {
-            dispatch(duplicateCheck("client",email.email)).then((res)=> setEmail({...email, emailMsg:res}));
+            dispatch(duplicateCheck("client",email.email)).then((res)=> setEmail({...email, isEmail: true,emailMsg:res}) ).catch(err=>{
+                setEmail({...email, isEmail: false,emailMsg:err})
+            })
         }else{
             emailInputRef.current.focus();
             return;
@@ -114,13 +113,13 @@ const ClientSignup = () => {
         } else if (!phoneInputRef.current.value) {
             phoneInputRef.current.focus();
             return
+        } else if(!password.isPassword || !passwordConfirm.isPasswordConfirm){
+            passwordInputRef.current.focus();
         }
 
+        console.log(birth.birth);
     
-        // 회원가입 진행시 경력 수상등은 배열 문자열화
-        const awards = JSON.stringify([award.award1,award.award2,award.award3])
-        const license =JSON.stringify([certificate.certificate1,certificate.certificate2,certificate.certificate3])
-        const careers =JSON.stringify([career.career1, career.career2, career.career3]);
+
      
         const data=({
             name : name.name,
@@ -129,13 +128,15 @@ const ClientSignup = () => {
             birthday : birth.birth,
             gender : gender.gender,
             phone : phoneInputRef.current.value,
-            awards :  awards,
-            license :   license,
-            career : careers
         })
 
-        dispatch(signup("client", data))
-      
+        dispatch(signup("user", data)).then(res=>{
+            alert("회원가입 성공");
+            navigate("/login")
+        }).catch((err)=>{
+            alert("회원가입 실패")
+        })
+        
     }
 
 

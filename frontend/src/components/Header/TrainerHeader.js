@@ -6,14 +6,16 @@ import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	// const {role}=useSelector(state=> state.auth);
 	const [roleToken, setRoleToken]=useState(
 		localStorage.getItem("mpti_role")
 	);
+	const navigate= useNavigate();
 
-
+	const [view, setView] = useState(false);
 	// 채팅 온
 	const [chaton, setChatOn] = useState(false);
 	// 선택한 메뉴
@@ -39,6 +41,11 @@ export default function TrainerHeader(){
 		})
 	} , [])
 
+	const logout = () => {
+		localStorage.clear()
+		navigate("/login")
+		console.log('로그아웃')
+	}
 
 	return(
 		// nav_box 스타일 지정
@@ -69,9 +76,17 @@ export default function TrainerHeader(){
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /trainermypage 라우팅 */}
-					<Link to={'mypage'} onClick={()=>{setMenuSelect('trainermypage')}}>
-						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png'></img>
-					</Link>
+					<div className={styles.mypage_box}>
+						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png' onClick={() => setView((prev)=>!prev)}></img>
+						{
+							view &&
+							<div className={styles.dropdown}>
+								<div className={styles.dropdown_content}><Link  to={'mypage'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content} onClick={()=>logout()}>로그아웃</div>
+							</div>
+						}
+					</div>
+					
 				</div>
 			</div>
 		</div>

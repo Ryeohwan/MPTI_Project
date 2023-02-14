@@ -8,17 +8,22 @@ import Pagination from '../../../components/Common/Pagination'
 const ClientInfo = (props) => {
 
     const clientEmail = props.email
-    const clientName = props.name
+    console.log(clientEmail);
+    const clientName = props.name;
+    console.log(clientName);
+    const clientImage = props.s3Url;
+    console.log(clientImage);
     const clientGender = props.gender
     const clientAge = props.age
     const clientTime = props.time
     const setTargetClient= props.setTargetClient
+
     const [select, setSelect] = useState(1)
     return (
         <div className={styles.container}>
             <div className={styles.flex_row}>
-                <ClientProfile/>
-                <ClientLog id={clientEmail}/>
+                <ClientProfile image={clientImage} name ={clientName}/>
+                <ClientLog email={clientEmail}/>
             </div>
             <div className={styles.grid_2_row}>
                 <ClientLogCard/>

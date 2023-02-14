@@ -5,13 +5,16 @@ import { workoutList } from '../../store/etc';
 import { Doughnut, Bar } from "react-chartjs-2";
 import { Chart, ArcElement } from 'chart.js'
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 Chart.register(ArcElement)
 
 
 const ClientMyLog = () => {
   const dispatch=useDispatch();
+  const {email} = useSelector((state) => state.auth)
+
+
   const [analyze, setAnalyze] = useState({
     labels: ["biceps", "triceps", "chest", "legs", "shoulder", "back", "core", "aerobic"],
     datasets: [
@@ -25,7 +28,7 @@ const ClientMyLog = () => {
 
   useEffect(() => {
     
-    dispatch(workoutList("asdf@naver.com")).then(res=>{
+    dispatch(workoutList(email)).then(res=>{
       const workoutlist= Object.values(res);
      setAnalyze({...analyze, datasets: [
       {

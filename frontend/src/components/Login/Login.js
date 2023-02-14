@@ -7,7 +7,6 @@ import google from "../../assets/img/login_google.png";
 import { useNavigate } from 'react-router-dom';
 import { login }  from '../../store/auth';
 
-import BasicLoadingSpinner from '../Loading/BasicLoadingSpinner';
 const Login = () => {
 const dispatch = useDispatch();
 const navigate=useNavigate();
@@ -29,11 +28,14 @@ const [userInfo, setUserInfo] = useState({
 console.log("로그인상태", isLoggedIn);
 
 useEffect(()=>{
-    if(roleToken || role){
+    if(roleToken === null){
+        setRoleToken(localStorage.getItem("mpti_role"))
+    }else{
         navigate(`/${roleToken}/home`);
         // navigate(`/client/home`);
     }
-},[roleToken]) 
+
+},[roleToken,isLoggedIn ]) 
 
 const userInfoHandler= (e)=>{
     switch(e.target.name){

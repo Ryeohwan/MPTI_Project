@@ -50,10 +50,11 @@ export default function App() {
   return (
     <div className="App">
       {isLoading ? <BasicLoadingSpinner /> : null}
-      <Routes>
-        <Route path="/trainer/*" element={<TrainerHeader />} />
-        <Route path="/client/*" element={<ClientHeader />} />
-      </Routes>
+        <Routes>
+          <Route path="/trainer/*" element={<TrainerHeader/>} />
+          <Route path="/user/*" element={<ClientHeader/>} />
+        </Routes>
+
 
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -75,17 +76,15 @@ export default function App() {
         <Route path="/trainersignup" element={<TrainerSignup />} />
         <Route path="/clientsignup" element={<ClientSignup />} />
         <Route path="/select" element={<SignupSelect />} />
-
-        <Route path="/client/myschedule" element={<ClientMySchedule />} />
-        <Route path="/client/mylog" element={<ClientMyLog />} />
-        <Route path="/client/myreservation" element={<ClientMyReservation />} />
-        <Route path="/client/mypage" element={<ClientMyPage />} />
-        <Route path="/client/trainerdetail" element={<ClientTrainerDetail />} />
-        <Route path="/client/home" element={<Home />} />
-        <Route
-          path="/client/trainerdetail/realreservation"
-          element={<ClientRealReservation />}
-        />
+        
+        
+        <Route path="/user/myschedule" element={<ClientMySchedule />} />
+        <Route path="/user/mylog" element={<ClientMyLog />} />
+        <Route path="/user/myreservation" element={<ClientMyReservation />} />
+        <Route path="/user/mypage" element={<ClientMyPage />} />
+        <Route path="/user/trainerdetail" element={<ClientTrainerDetail />} />
+        <Route path="/user/home" element={<Home />} />
+        <Route path="/user/trainerdetail/realreservation" element={<ClientRealReservation/>} />
         {/* <Route path="/home" element={<Home />} /> */}
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route
