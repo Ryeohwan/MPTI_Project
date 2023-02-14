@@ -1,0 +1,191 @@
+#chatContainer {
+    position: absolute;
+    right: 0;
+    z-index: 0;
+    bottom: 100px;
+    width: 350px;
+    height: 80%;
+    
+  }
+  
+  #chatToolbar {
+    border: 1px solid #C9FD61;
+    height: 30px;
+    background-color: #222222;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 4px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #ffffff;
+  }
+  
+  #closeButton {
+    position: absolute;
+    right: 0;
+    top: -8px;
+  }
+  
+  #chatComponent {
+    border: 1px solid #C9FD61;
+    background-color: #b8b8b8;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height: calc(100% - 30px);
+    width: calc(100% - 30px);
+    border-radius: 20px;
+  }
+  
+  .message-wrap {
+    padding: 0 15px;
+    height: calc(100% - 66px);
+    overflow: auto;
+  }
+  
+  .message {
+    position: relative;
+    padding: 7px 0;
+  }
+  .user-img {
+    position: absolute;
+    border-radius: 45px;
+    width: 50px;
+    height: 50px;
+    top: 15px;
+  }
+  
+  .msg-detail {
+    width: calc(100% - 5px);
+    display: inline-block;
+  }
+  
+  .msg-detail p {
+    margin: 0;
+    font-size: 15px;
+  }
+  
+  .msg-info p {
+    font-size: 0.9em;
+    color: #000000;
+    font-family: "DungGeunMo";
+  }
+  
+  .msg-content {
+    position: relative;
+    display: block;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 8px;
+    color: #ececec;
+    max-width: 80%;
+  }
+  
+  .text {
+    word-break: break-all;color: #000000;
+  }
+  
+  /* Start message from other user */
+  
+  .message > .left .msg-detail .msg-info {
+    text-align: left;
+  }
+  
+  .message.left .msg-detail {
+    padding-left: 65px;
+  }
+  
+  .message.left .user-img {
+    left: -5px;
+    border: 1px solid #f0f0f094;
+  }
+  
+  .message.left .msg-detail .msg-content {
+    background-color: #f0f0f0;
+    float: left;
+  }
+  .message.left .msg-detail .msg-content span.triangle {
+    background-color: #f0f0f0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    left: -5px;
+  }
+  
+  /* End message from other user */
+  
+  /* Start my messages */
+  
+  .message.right .msg-detail .msg-info {
+    text-align: right;
+  }
+  .message.right .user-img {
+    right: -5px;
+    border: 1px solid #c8ffe8ab;
+  }
+  
+  .message.right .msg-detail .msg-content {
+    background-color: #c8ffe8;
+    float: right;
+  }
+  .message.right .msg-detail .msg-content span.triangle {
+    background-color: #c8ffe8;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    right: -5px;
+  }
+  
+  /* End my messages */
+  
+  #messageInput {
+    display: grid;
+    grid-template-columns: 88% 12%;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    height: 35px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  #messageInput input {
+    width: 90%;
+    height: 85%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  #sendButton {
+    width: 30px;
+    height: 30px;
+    background-color: #81e9b0;
+    position: relative;
+
+    border: 1px solid #7ae2a9;
+    box-shadow: none !important;
+  }
+  #sendButton {
+    margin-left: 3px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+  }
+  
+  .chatComponentLight ::-webkit-scrollbar-thumb {
+    background-color: #eeeeee !important;
+  }
+  

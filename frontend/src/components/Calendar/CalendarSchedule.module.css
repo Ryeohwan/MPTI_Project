@@ -1,0 +1,12 @@
+.calendar_schedule {
+    width: 73px;
+    margin-top: 2px;
+    background-color: #C9FD61;
+    border-radius: 3px;
+    font-size: 13px;
+    color: black !important;
+}
+
+li {
+    list-style: none;
+}
