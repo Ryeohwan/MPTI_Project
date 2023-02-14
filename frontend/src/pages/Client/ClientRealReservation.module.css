@@ -1,0 +1,114 @@
+.real_reservation_container {
+  font-family: "DungGeunMo";
+}
+
+.reservation_box {
+  height: 450px;
+  margin-top: 25px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: black;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date_time_box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 15px 10px 15px;
+}
+
+.calendar_picker {
+  width: 50%;
+}
+
+.date_info {
+  margin-bottom: 10px;
+}
+.time_picker {
+  width: 40%;
+  height: 528.05px;
+  border-radius: 5px;
+  /* border: 1px solid white; */
+  /* background-color: black; */
+  padding: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time_item {
+  width: 60%;
+  height: 23px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: rgb(18, 18, 18);
+  margin-top: 2px;
+  margin-bottom: 3px;
+  display: flex;
+  justify-content: center;
+  padding-top: 2.5px;
+}
+
+.no_reservation {
+  margin-top: 50px;
+  font-size: 14px;
+}
+
+.reserved_time {
+  background-color: rgb(192, 192, 192);
+}
+
+.not_reserved_time {
+  cursor: pointer;
+}
+
+.not_reserved_time:hover {
+  background-color: rgb(65, 64, 64);
+}
+
+.clicked_time {
+  border: 2px solid #C9FD61;
+}
+
+.btn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0% 12% 2% 0%;
+}
+
+.payment_btn {
+  width: 10%;
+  height: 40px;
+  background-color: #C9FD61;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: "DungGeunMo";
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 7px;
+}
+
+.payment_btn:hover {
+  background-color: #afdd53;
+}
+
+.back_btn {
+  width: 10%;
+  height: 40px;
+  background-color: rgb(214, 214, 214);
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: "DungGeunMo";
+  font-size: 15px;
+  cursor: pointer;
+
+}
+
+.back_btn:hover {
+  background-color: rgb(188, 188, 188);
+}

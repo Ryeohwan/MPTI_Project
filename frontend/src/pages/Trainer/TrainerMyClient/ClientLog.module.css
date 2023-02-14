@@ -1,0 +1,107 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #ECECEC;
+    border-radius: 10px;
+    padding: 20px;
+}
+.flex_column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.flex_column div{
+    color: #222222
+}
+
+.grid_2_column {
+    display:grid;
+    height: 100%;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.big_txt{
+    font-size: 24px;
+}
+
+.medium_txt{
+    font-size: 13px;
+}
+
+.box_small{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+
+
+
+/* 아래는 부위별 색깔들 */
+.shoulder {
+    border-radius: 5px;
+    background-color: #A07AF0;
+    width: 35px;
+    height: 17px;
+}
+
+
+.back {
+    border-radius: 5px;
+    background-color: #FF3131;
+    width: 35px;
+    height: 17px;
+}
+
+
+.bicep {
+    border-radius: 5px;
+    background-color: #B0F07A;
+    width: 35px;
+    height: 17px;
+}
+
+
+.triceps {
+    border-radius: 5px;
+    background-color: #FA9D69;
+    width: 35px;
+    height: 17px;
+}
+
+
+.chest {
+    border-radius: 5px;
+    background-color: #CAD7F2;
+    width: 35px;
+    height: 17px;
+}
+
+
+.core {
+    border-radius: 5px;
+    background-color: #F5F94E;
+    width: 35px;
+    height: 17px;
+}
+
+
+.lower_body {
+    border-radius: 5px;
+    background-color: #6C5DCD;
+    width: 35px;
+    height: 17px;
+}
+
+.aerobic {
+    border-radius: 5px;
+    background-color: #6E6B7B;
+    width: 35px;
+    height: 17px;
+}
+

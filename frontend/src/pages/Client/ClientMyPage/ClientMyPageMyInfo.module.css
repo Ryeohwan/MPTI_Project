@@ -1,0 +1,102 @@
+.container{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+}
+
+.out_box{
+    width: 680px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 30px 10px 30px;
+    height: 100%;
+    background-color: #D0E2A6;
+    border-radius: 7px;
+    align-items:center;
+}
+.in_box {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #DDE2E2;
+    padding: 20px;
+}
+
+.in_box_title {
+    margin-bottom: 10px;
+}
+
+.in_box_content {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.left{
+    width: 100%;
+}
+
+.right{
+    width: 100%;
+
+}   
+
+.edit{
+    font-size: 20px;
+    color: #222222;
+    text-align: right;
+    cursor: pointer;
+
+}
+
+.edit_btn_box{
+    display: flex;
+    flex-flow: row;
+    justify-content: right;    
+    border: none;
+}
+
+.edit_btn{
+    font-size: 20px;
+    color: #222222;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+  }
+  
+  .modal_content {
+    background: white;
+    padding: 20;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    padding: 10px;
+  }
+
+.send_btn{
+    margin-left:10px;
+    background-color: aquamarine;
+    border:#666666 1px solid;
+    height: 25px;
+    width: 50px;
+}

@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+.schedule {
+    font-family: 'DungGeunMo';
+    color: #ececec;
+    position: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.schedule_header {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.schedule_comment {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.schedule_menu {
+    font-size: 26px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.card_list_top {
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.card_list_top button {
+    background-color: #C9FD61;
+}
+
+.card_list_bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.card_list_bottom button {
+    background-color: #999999;
+}
+
