@@ -7,26 +7,11 @@ server:
       enabled: true
       force: true
 
-
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://i8a803.p.ssafy.io:3002/mpti_auth?serverTimezone=Asia/Seoul
-    username: root
-    password: ehdrms
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-
   redis:
-    host: localhost
+    host: i8a803.p.ssafy.io
     port: 6379
+    password: ehdrms
 
   security:
     oauth2.client:
@@ -34,7 +19,7 @@ spring:
         google:
           clientId: 806496478771-0u0jqsq2ld8tc4h8pumesrm0a2de22l8.apps.googleusercontent.com
           clientSecret: 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
-          redirectUri: "http://localhost:8000/oauth2/callback/google"
+          redirectUri: "https://i8a803.p.ssafy.io/api/auth/oauth2/callback/google"
           scope:
             - email
             - profile
@@ -43,21 +28,23 @@ spring:
           clientSecret: 5dPZ_6i7c4
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
-          redirectUri: "http://localhost:8000/oauth2/callback/naver"
+          redirectUri: "https://i8a803.p.ssafy.io/api/auth/oauth2/callback/naver"
           scope:
             - nickname
             - email
-            - profile_image
+#            - profile_image
           clientName: Naver
         kakao:
           clientId: b36b4450a8252d26fcb847fd0270bd23
+#          clientId : f75e205928d04633609cec5f8a6c9bd1
           clientSecret: z8TfyulLdcoLVm9Lhv424f8PMw9zJoIC
+#          clientSecret : 4ixTRzzbkMmpshh87r5EL3FqegefB3BF
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
-          redirectUri: "http://localhost:8000/oauth2/callback/kakao"
+          redirectUri: "https://i8a803.p.ssafy.io/api/auth/oauth2/callback/kakao"
           scope:
             - profile_nickname
-            - profile_image
+#            - profile_image
             - account_email
           clientName: Kakao
 
@@ -76,24 +63,21 @@ spring:
 app:
   auth:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
-    accessTokenExpirationMsec: 300000 # 5분
-    refreshTokenExpirationMsec: 1800000 # 30분
-    trainerServerUrl : http://localhost:8002/api/auth
-    userServerUrl : http://localhost:8001/api/auth
-
-  #    tokenExpirationMsec: 1800000 # 30분
-  #    refreshTokenExpirationMsec: 259200000 #3일
+    accessTokenExpirationMsec: 3600000 # 1시간
+    refreshTokenExpirationMsec: 604800000 # 7일
+#    accessTokenExpirationMsec: 600000 # 1분
+#    refreshTokenExpirationMsec: 1800000 # 3분
+    #    trainerServerUrl: https://i8a803.p.ssafy.io/api/trainer/api/auth
+    trainerServerUrl: https://i8a803.p.ssafy.io/api/trainer/api/auth
+    userServerUrl: https://i8a803.p.ssafy.io/api/user/api/auth
 
   cors:
-    ###########테스트를 위해 설정 port : 8081 #############
     allowedOrigins: http://localhost:3000,http://localhost:8080
 
   oauth2:
-    authorizedRedirectUris: http://localhost:3000/oauth2/redirect
+    authorizedRedirectUris: https://i8a803.p.ssafy.io/oauth2/redirect
 #      - myandroidapp://oauth2/redirect
 #      - myiosapp://oauth2/redirect
-
-
 
 logging.level:
   org.hibernate.SQL: debug

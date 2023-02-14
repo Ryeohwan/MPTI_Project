@@ -1,11 +1,10 @@
 package mpti.common.security;
 
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.auth.api.request.LoginRequest;
+import mpti.auth.application.AuthService;
 import okhttp3.*;
 
-import mpti.auth.dto.User;
+import mpti.auth.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -27,81 +27,50 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private OkHttpClient client = new OkHttpClient();
 
-    private final Gson gson;
-
     private final String USER = "ROLE_USER";
     private final String TRAINER = "ROLE_TRAINER";
+
+    private final String ADMIN = "ROLE_ADMIN";
+
+    private final String ADMIN_EMAIL = "admin123@admin.com";
 
     @Value("${app.auth.trainerServerUrl}")
     private String TRAINER_SERVER_URL;
     @Value("${app.auth.userServerUrl}")
     private String USER_SERVER_URL;
 
+    private final AuthService authService;
+
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
 
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(email);
-        String json = gson.toJson(loginRequest);
+        if(email.equals(ADMIN_EMAIL)) {
+            UserDto admin = UserDto.builder()
+                    .id(12345L)
+                    .name("ADMIN")
+                    .email(ADMIN_EMAIL)
+                    .password("$2a$12$pg1UC8hREv8ijEPGG1UAn.w1SZ3aFjd..P.LIBWT.wZko.jsPQiYW")
+                    .needUpdate(false)
+                    .build();
 
-        ///////////////////////////////// 트레이너 DB 조회
-        logger.info("트레이너 DB 조회");
-        RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
-        Request request = new Request.Builder()
-                .url(TRAINER_SERVER_URL + "/login")
-                .post(requestBody)
-                .build();
-        User responseUser = null;
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()){
-                logger.error("응답에 실패했습니다");
-            }else{
-                String st = response.body().string();
-                responseUser = gson.fromJson(st, User.class);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            return UserPrincipal.create(admin, ADMIN);
         }
 
-        if (responseUser == null) {
-            logger.info(email + " 아이디는 트레이너 데이터 베이스에서 찾지 못했습니다: ");
-        } else {
-            return UserPrincipal.create(responseUser, TRAINER);
+        // 회원이 User 와 Trainer DB에 있는 지 확인
+        UserDto user = authService.getTrainerByEmail(email);
+        String role = TRAINER;
+        if(user == null) {
+            user = authService.getUserByEmail(email);
+            role = USER;
         }
 
-        ///////////////////////////////// 유저 DB 조회
-        logger.info("유저 DB 조회");
-        requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
-        request = new Request.Builder()
-                .url(USER_SERVER_URL + "/login")
-                .post(requestBody)
-                .build();
-        responseUser = null;
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()){
-                logger.error("응답에 실패했습니다");
-            }else{
-                String st = response.body().string();
-                responseUser = gson.fromJson(st, User.class);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (user == null) {
+            logger.error(email + " not found");
+            throw new UsernameNotFoundException(email + " not found");
         }
 
-        if (responseUser == null) {
-            logger.info(email + " 아이디는 유저 데이터 베이스에서 찾지 못했습니다: ");
-        } else {
-            return UserPrincipal.create(responseUser, USER);
-        }
-
-
-        if (responseUser == null) {
-            throw new UsernameNotFoundException(email + " 아이디는 회원가입을 하지 않는 사용자 입니다");
-        } else {
-            return UserPrincipal.create(responseUser, USER);
-        }
-
-        //return UserPrincipal.create(responseUser);
+        user.setNeedUpdate(false);
+        return UserPrincipal.create(user, role);
     }
 
 }

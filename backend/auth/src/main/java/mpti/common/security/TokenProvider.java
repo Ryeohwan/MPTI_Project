@@ -51,33 +51,34 @@ public class TokenProvider implements InitializingBean {
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION);
-
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY, authorities)
+                .setSubject(authentication.getName()) // String email
+                .setId(userPrincipal.getName()) // long id
+                .claim(AUTHORITIES_KEY, authorities) // role
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
 
-    public String renewAccessToken(String name, String role) {
-
-        List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority(role));
-
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION);
-
-        return Jwts.builder()
-                .setSubject(name)
-                .claim(AUTHORITIES_KEY, authorities)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                .compact();
-    }
+//    public String renewAccessToken(String name, String role) {
+//
+//        List<GrantedAuthority> authorities = Collections.
+//                singletonList(new SimpleGrantedAuthority(role));
+//
+//        Date now = new Date();
+//        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION);
+//
+//        return Jwts.builder()
+//                .setSubject(name)
+//                .claim(AUTHORITIES_KEY, authorities)
+//                .setIssuedAt(now)
+//                .setExpiration(expiryDate)
+//                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+//                .compact();
+//    }
 
     public String createRefreshToken(Authentication authentication) {
 
@@ -85,14 +86,14 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        logger.info("authorities :: " + authorities);
-
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + REFRESH_TOKEN_EXPIRATION);
 
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject(authentication.getName())
+                .setId(userPrincipal.getName())
                 .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
@@ -106,45 +107,6 @@ public class TokenProvider implements InitializingBean {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
-    }
-
-    public boolean validateToken(String authToken) {
-        logger.info("토큰 겁사필터 시작");
-        try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
-            logger.info("유효한 jwt access tocken 입니다");
-            return true;
-        } catch (SignatureException ex) {
-            logger.error("유효하지 않은 jwt access tocken 서명입니다"); //"Invalid JWT signature"
-        } catch (MalformedJwtException ex) {
-            logger.error("유효하지 않은 jwt access tocken 입니다"); // Invalid JWT token
-        } catch (ExpiredJwtException ex) {
-            logger.error("만료된 jwt access tocken 입니다"); // Expired JWT token
-        } catch (UnsupportedJwtException ex) {
-            logger.error("지원하지 않는 형식의 jwt access tocken 입니다"); // Unsupported JWT token
-        } catch (IllegalArgumentException ex) {
-            logger.error("jwt access tocken의 claims이 비어 있습니다"); // JWT claims string is empty.
-        }
-        return false;
-    }
-
-    public Claims getExpiredTokenClaims(String authToken) {
-        try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
-        } catch (ExpiredJwtException e) {
-            logger.info("만료된 jwt access tocken 입니다[1]"); // "Expired JWT token."
-            return e.getClaims();
-        }
-        return null;
-    }
-
-    public String getUserEmailFromToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
     }
 
 }

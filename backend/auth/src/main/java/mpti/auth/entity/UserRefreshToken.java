@@ -13,9 +13,10 @@ import java.util.Collection;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RedisHash(timeToLive = 1800 ) //Sec
+@RedisHash(timeToLive = 604800 ) //Sec -> 7일
 public class UserRefreshToken {
     @NotNull
     @Size(max = 256)

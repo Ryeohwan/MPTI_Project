@@ -1,6 +1,5 @@
 package mpti.common.config;
 
-import mpti.common.security.CustomUserDetailsService;
 import mpti.common.security.oauth.CustomOAuth2UserService;
 import mpti.common.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
 import mpti.common.security.oauth.OAuth2AuthenticationFailureHandler;
@@ -26,9 +25,6 @@ import org.springframework.security.web.SecurityFilterChain;
         prePostEnabled = true
 )
 public class SecurityConfig {
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private CustomOAuth2UserService customOAuth2UserService;
@@ -73,32 +69,32 @@ public class SecurityConfig {
                     .disable()
 
                 // 접근제한 설정을 위한 필터
-                .authorizeRequests()
-                    .antMatchers("/",
-                        "/error",
-                        "/favicon.ico",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
-                        .permitAll()
-                    .antMatchers("/api/auth/**", "/api/oauth2/**")
-                        .permitAll()
-                    .anyRequest()
-                        .authenticated()
-                    .and()
+//                 .authorizeRequests()
+//                     .antMatchers("/",
+//                         "/error",
+//                         "/favicon.ico",
+//                         "/**/*.png",
+//                         "/**/*.gif",
+//                         "/**/*.svg",
+//                         "/**/*.jpg",
+//                         "/**/*.html",
+//                         "/**/*.css",
+//                         "/**/*.js")
+//                         .permitAll()
+//                     .antMatchers("/api/auth/**", "/api/oauth2/**")
+//                         .permitAll()
+//                     .anyRequest()
+//                         .authenticated()
+//                     .and()
 
                 // OAuth2 로그인을 위한 필터
                 .oauth2Login()
                     .authorizationEndpoint()
-                        .baseUri("/oauth2/authorize")
+                        .baseUri("/api/auth/oauth2/authorize")
                         .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                         .and()
                     .redirectionEndpoint()
-                        .baseUri("/oauth2/callback/*")
+                        .baseUri("/api/auth/oauth2/callback/*")
                         .and()
                     .userInfoEndpoint()
                         .userService(customOAuth2UserService)

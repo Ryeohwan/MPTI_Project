@@ -3,12 +3,14 @@ package mpti.common.security.oauth;
 
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import mpti.auth.api.request.LoginRequest;
 import mpti.auth.api.request.SocialSignUpRequest;
+import mpti.auth.application.AuthService;
 import mpti.auth.dto.AuthProvider;
-import mpti.auth.dto.User;
-import mpti.common.exception.OAuth2AuthenticationProcessingException;
-import mpti.common.exception.ResourceNotFoundException;
+import mpti.auth.dto.UserDto;
+import mpti.common.errors.OAuth2AuthenticationProcessingException;
+import mpti.common.errors.ResourceNotFoundException;
+//import mpti.common.errors.UserNotFoundException;
+import mpti.common.errors.StopUntilException;
 import mpti.common.security.UserPrincipal;
 import mpti.common.security.oauth.provider.OAuth2UserInfo;
 import mpti.common.security.oauth.provider.OAuth2UserInfoFactory;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -26,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +44,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private OkHttpClient client = new OkHttpClient();
 
     private final Gson gson;
+    private final AuthService authService;
 
     @Value("${app.auth.tokenSecret:}")
     private String SECRET_KEY;
@@ -77,137 +82,64 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        User user = processTrainerOAuth2User(oAuth2UserRequest,oAuth2UserInfo);
-        if(user != null) return UserPrincipal.create(user, oAuth2User.getAttributes());
+        UserDto user = authService.getUserByEmail(oAuth2UserInfo.getEmail());
 
-        user = processMemberOAuth2User(oAuth2UserRequest, oAuth2UserInfo);
-        if(user != null) return UserPrincipal.create(user, oAuth2User.getAttributes());
+        if(user != null) {
+            logger.info(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()) + "");
+            logger.info(user.getProvider());
 
-        user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
-        logger.info(user.getProvider() + "[OAuth 로그인] 소셜 로그인을 처음 시도해서 데이터 DB에 저장성공");
+            // 회원가입을 했던 회왼 -> 바로 user 조회
+            user = updateExistingUser(user, oAuth2UserInfo);
+            user.setNeedUpdate(false);
+
+            LocalDate stopUntil = user.getStopUntil();
+            if(LocalDate.now().isBefore(stopUntil)) {
+                throw new StopUntilException(stopUntil.toString());
+            }
+
+        } else {
+            // 회원가입이 처음인 회원 -> 추가 정보 요청 send Redirect
+             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
+             user.setNeedUpdate(true);
+        }
         return UserPrincipal.create(user, oAuth2User.getAttributes());
-
     }
 
 
 
-    private User processTrainerOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-        // oAuth2UserRequest 데이터에 대한 후처리 되는 함수
-        // 함수 종료시 @AuthenticationPrincipal 어노테이션이 생성
-        logger.info("[OAuth 로그인]트레이너 DB 조회");
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(oAuth2UserInfo.getEmail());
-        String json = gson.toJson(loginRequest);
-
-        RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
-        Request request = new Request.Builder()
-//                .url("http://localhost:8002/api/auth/login")
-                .url(TRAINER_SERVER_URL + "/login")
-                .post(requestBody)
-                .build();
-
-        User user = null;
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()){
-                logger.error("응답에 실패했습니다 == 로그인을 할 수 없습니다");
-            }else{
-                String st = response.body().string();
-                user = gson.fromJson(st, User.class);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(user != null) {
-            if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-                throw new OAuth2AuthenticationProcessingException("다른 방식으로 로그인을 시도해주세요");
-            }
-            logger.info(user.getProvider() + "[OAuth 로그인] 소셜 로그인을 이미 한적이 있습니다");
-            user = updateExistingUser(user, oAuth2UserInfo);
-        }
-
-        return user;
-//        return UserPrincipal.create(user, oAuth2User.getAttributes());
-    }
-
-    private User processMemberOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-
-        logger.info("[OAuth 로그인] 유저 DB 조회");
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(oAuth2UserInfo.getEmail());
-        String json = gson.toJson(loginRequest);
-
-        RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
-        Request request = new Request.Builder()
-//                .url("http://localhost:8002/api/auth/login")
-                .url(USER_SERVER_URL + "/login")
-                .post(requestBody)
-                .build();
-
-        User user = null;
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()){
-                logger.error("응답에 실패했습니다 == 로그인을 할 수 없습니다");
-            }else{
-                String st = response.body().string();
-                user = gson.fromJson(st, User.class);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(user != null) {
-            if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-                throw new OAuth2AuthenticationProcessingException("다른 방식으로 로그인을 시도해주세요");
-            }
-            logger.info(user.getProvider() + "[OAuth 로그인] 소셜 로그인을 이미 한적이 있습니다");
-            user = updateExistingUser(user, oAuth2UserInfo);
-        }
-
-        return user;
-    }
-
-    private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
+    private UserDto updateExistingUser(UserDto existingUser, OAuth2UserInfo oAuth2UserInfo) {
 
         Map<String, Object> updateRequest = new HashMap<>();
         updateRequest.put("email", existingUser.getEmail());
 
         String json = gson.toJson(updateRequest);
-        logger.info(json);
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
                 .url(USER_SERVER_URL +"/update")
                 .post(requestBody)
                 .build();
 
-        User user = new User();
+        UserDto user = null;
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()){
                 logger.error("응답에 실패했습니다");
             }else{
                 String st = response.body().string();
-                user = gson.fromJson(st, User.class);
+                user = gson.fromJson(st, UserDto.class);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         if(user == null) {
-            throw new ResourceNotFoundException("[OAuth] 회원가입 실패", "", "");
+//            throw new ResourceNotFoundException("User", "email", existingUser.getEmail());
+            throw new UsernameNotFoundException(existingUser.getEmail() + " not found");
         }
         return user;
-
-        //existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        //return userRepository.save(existingUser);
     }
 
 
-    private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-//        User user = new User();
-//        user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
-//        user.setProviderId(oAuth2UserInfo.getId());
-//        user.setName(oAuth2UserInfo.getName());
-//        user.setEmail(oAuth2UserInfo.getEmail());
-//        user.setImageUrl(oAuth2UserInfo.getImageUrl());
+    private UserDto registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
 
         // 회원만 소셜로그인으로 회원가입이 가능하다
         logger.info("[OAuth 로그인] 회원 회원가입");
@@ -222,27 +154,26 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .build();
 
         String json = gson.toJson(socialSignUpRequest);
-        logger.info(json);
         RequestBody requestBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), json);
         Request request = new Request.Builder()
                 .url(USER_SERVER_URL+"/signup")
                 .post(requestBody)
                 .build();
 
-        User user = new User();
+        UserDto user = null;
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()){
                 logger.error("응답에 실패했습니다");
             }else{
                 String st = response.body().string();
-                user = gson.fromJson(st, User.class);
+                user = gson.fromJson(st, UserDto.class);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         if(user == null) {
-            throw new ResourceNotFoundException("[OAuth] 회원가입 실패", "", "");
+            throw new ResourceNotFoundException("User", "email", oAuth2UserInfo.getName());
         }
         return user;
     }
