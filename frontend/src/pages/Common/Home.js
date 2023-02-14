@@ -6,6 +6,7 @@ import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpinner";
+
 const Home = () => {
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state) => state.etc);
@@ -13,13 +14,14 @@ const Home = () => {
   
   const [trainer, setTrainer] = useState([]);
   const [review, setReview] = useState([]);
+
   useEffect(() => {
     // 홈에서 트레이너 상위 0페이지 존재하는 트레이너 불러옴
     dispatch(trainerListByStar(0)).then((res) => {
       const trainerList = res;
       setTrainer(trainerList.slice(0,4));
     });
-
+    
     dispatch(reviewList(0)).then((res) => {
       const reviewList = res;
       setReview(reviewList.slice(0,4));
@@ -49,9 +51,9 @@ console.log('렌더링 확인')
           {trainer.map((it) => {
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>
-                <li key={it.name} className={styles.home_trainer_item}>
+                <li key={it.id} className={styles.home_trainer_item}>
                   <div className={styles.home_trainer_img}>
-                    <img src={TrainerImg} />
+                    <img src={TrainerImg} alt=""/>
                   </div>
                   <div className={styles.home_trainer_info}>
                     <div className={styles.home_trainer_name}>
@@ -83,7 +85,7 @@ console.log('렌더링 확인')
               <li key={it.id} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>
                   <div className={styles.home_review_img}>
-                    <img src={TrainerImg} />
+                    <img src={TrainerImg} alt=""/>
                   </div>
                   <div className={styles.home_review_name}>{it.targetName} </div>
                 </div>

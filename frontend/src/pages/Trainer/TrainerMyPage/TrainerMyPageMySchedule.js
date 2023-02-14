@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
 import styles from "./TrainerMyPageMySchedule.module.css";
 import Calendar from "../../../components/Calendar/Calendar";
 import axios from "axios";
 
 
 const TrainerMyPageMySchedule = () => {
+  const {id, name} = useSelector((state) => state.auth)
   const morning = [6, 7, 8, 9, 10, 11];
   const afternoon = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
   const formatToday = format(new Date(), "yyyy-MM-dd");
@@ -52,8 +54,8 @@ const TrainerMyPageMySchedule = () => {
       setReservedHour(filterReservedHour);                                            // 회원이 예약한 데이터 시간 배열
     }
   }, [daySchedule])
-
-
+  
+  
   // totalTimeArray : setTimeArray()에 담아 최종적으로 timeArray로 저장하고 싶은 배열 (예약O + 오픈O)
   // reservedHour : 회원이 예약을 한 시간(예약 O + 오픈 ㅇ)
 
@@ -77,11 +79,12 @@ const TrainerMyPageMySchedule = () => {
     };
     getReservation();
   }, []);
+  
 
   const sendData = () => {
     const data = {
-      trainerId: 1,
-      trainerName: "원쵸디",
+      trainerId: id,
+      trainerName: name,
       year: clickedDay[0],
       month: clickedDay[1],
       day: clickedDay[2],
@@ -95,7 +98,6 @@ const TrainerMyPageMySchedule = () => {
     axios.get("/api/business/reservation/list")
     };
     
-
   return (
     <div className={styles.container}>
       <div className={styles.bigtxt}>스케줄 조정</div>

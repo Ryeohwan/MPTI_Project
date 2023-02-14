@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const ClientPayResult = () => {
@@ -9,7 +9,7 @@ const ClientPayResult = () => {
   const clickIdArray = JSON.parse(localStorage.getItem("reservationId"));
   const {id, name} = useSelector((state) => state.auth)
   console.log(id, name)
-  
+
   const navigateToClientMySchedule = () => {
     navigate('/user/myschedule')
   }
@@ -36,8 +36,8 @@ const ClientPayResult = () => {
     
     const sendData = () => {
       const data = {
-        userId : 1,
-        userName: "려환",
+        userId : id,
+        userName: name,
         idList: clickIdArray,
       };
       const accessToken = localStorage.getItem('access_token');

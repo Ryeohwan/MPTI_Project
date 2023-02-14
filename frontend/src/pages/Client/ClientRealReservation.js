@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { useLocation } from "react-router";
 import TopTitle from "../../components/Common/TopTitle";
 import styles from "./ClientRealReservation.module.css";
 import Calendar from "../../components/Calendar/Calendar";
 import axios from "axios";
 
 const ClientRealReservation = () => {
+  const location = useLocation();
 
   const formatToday = format(new Date(), "yyyy-MM-dd");
   const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
@@ -21,7 +23,8 @@ const ClientRealReservation = () => {
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
 
   // 바꿔야 됨
-  const trainerId = 1;
+  const trainerId = location.state.id;
+  console.log(trainerId)
 
   const getDaySchedule = (intDate) => {
     setClickDay(intDate);
@@ -52,7 +55,7 @@ const ClientRealReservation = () => {
   const kakaoPay = () => {
     axios
       .post("/api/business/pay/order/request", {
-        totalAmount: 1 * clickIdArray.length,
+        totalAmount: 1 * clickIdArray.length,             // 결제할 금액
       })
       .then((res) => {
         console.log(res);
