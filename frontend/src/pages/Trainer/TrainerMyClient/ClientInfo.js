@@ -28,7 +28,7 @@ const ClientInfo = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.flex_row}>
-                <ClientProfile name={props.name} gender={props.gender} age={props.age} image={props.s3Url} />
+                <ClientProfile name={props.name} gender={props.gender} age={props.age} image={props.s3Url} email={props.email} id={props.id} role={props.role} />
                 <ClientLog email={props.email}/>
 
             </div>
