@@ -61,7 +61,7 @@ const ManagerSignupApproval = () => {
               return (
                 <li key={it.email} className={styles.content_item}>
                   <div className={styles.item_img}>
-                    <img src={trainerImg}></img>
+                    <img src={it.s3Url}></img>
                   </div>
 
                   <div className={styles.item_info_box}>

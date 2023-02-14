@@ -6,7 +6,7 @@ import styles from "./Signup.module.css"
 import { useNavigate } from 'react-router-dom';
 const ClientSignup = () => {
     const [name, setName] = useState({ name: "", nameMsg: "", isName: false });
-    const [gender, setGender] = useState({ gender: "male", isGender: false });
+    const [gender, setGender] = useState({ gender: "male", isGender: true });
     const [email, setEmail] = useState({ email: "", emailMsg: "", isEmail: false });
     const [password, setPassword] = useState({ password: "", passwordMsg: "", isPassword: false });
     const [passwordConfirm, setPasswordConfirm] = useState({ passwordConfirm: "", passwordConfirmMsg: "", isPasswordConfirm: false });
@@ -159,7 +159,7 @@ const ClientSignup = () => {
 
                 <div className={styles.form_gender} >
                     <label htmlFor='gender'>성별</label>
-                    <select ref={genderInputRef} defaultValue={"male"} id="gender" onChange={genderChangeHandler}>
+                    <select ref={genderInputRef} defaultValue={gender} id="gender" onChange={genderChangeHandler}>
                         <option value="male">남성</option>
                         <option value="female">여성</option>
                     </select>

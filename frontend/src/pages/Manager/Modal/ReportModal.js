@@ -4,10 +4,11 @@ import axios from "axios";
 import reportBell from '../../../assets/img/reportbell.png';
 import { useDispatch } from 'react-redux';
 import { reportApproval } from "../../../store/admin";
+import { useNavigate } from 'react-router-dom';
 const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => {
     
   const dispatch = useDispatch();
-  
+  const navigate= useNavigate();
   const [days, setDays]= useState("");
     
     const selectHandler = (e)=>{
@@ -19,6 +20,7 @@ const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => 
             return;
         }
         
+        
 
         const criminal = {
           blockPeriod: days,
@@ -26,12 +28,8 @@ const ReportModal = ({ writerName, targetName,memo,reportType,id ,onClose }) => 
           
         }
         dispatch(reportApproval(criminal));
-        // axios.post("/api/business/opinion/report/process", crimimnal).then((res)=>{
-        //   console.log(res);
-        // }).catch((err)=>{
-        //   console.log(err)
-        // })
-        
+        alert("제재처리가 완료되었습니다.")
+        navigate("manager/report");
        
         console.log(criminal);
         

@@ -2,27 +2,29 @@ import React, {useState, useEffect} from 'react';
 import styles from './ClientLog.module.css'
 import { Doughnut } from "react-chartjs-2";
 import {Chart, ArcElement} from 'chart.js'
+import axios from 'axios';
 Chart.register(ArcElement)
-const workoutData=[1,2,4,5,2,1,2,0];
 
 const ClientLog = (props) => {
-    const clientId = props.id
-
-    
     const [analyze, setAnalyze] = useState({
-        labels: ["biceps", "triceps", "chest","legs", "shoulder", "back", "core", "aerobic" ],
+        labels: ["biceps", "triceps", "chest", "legs", "shoulder", "back", "core", "aerobic"],
         datasets: [
           {
             data: [0,0,0,0,0,0,0,0],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56" , "#36A2EB", "#FFCE56" ],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56" , "#36A2EB", "#FFCE56" ],
+            backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
           }
         ]
       });
 
-    useEffect(()=>{
-        const sets= [{...analyze.datasets, data: workoutData,}]
-        setAnalyze({...analyze, datasets:sets})
+    useEffect(()=> {
+   
+        axios.get(`/api/user/status/${props.email}`).then(res=>{
+            const workoutData= Object.values(res.data);
+            const sets= [{...analyze.datasets, data: workoutData}]
+            setAnalyze({...analyze, datasets:sets})
+        });
+
     }, [])
 
     return (

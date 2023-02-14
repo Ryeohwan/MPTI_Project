@@ -86,6 +86,8 @@ export default function App() {
         <Route path="/user/home" element={<Home />} />
         <Route path="/user/trainerdetail/realreservation" element={<ClientRealReservation/>} />
         {/* <Route path="/home" element={<Home />} /> */}
+        <Route path="/user/home" element={<Home/>} />
+
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
         <Route
           path="/trainer/myreservation"
