@@ -8,7 +8,7 @@ import mpti.domain.member.api.request.LoginRequest;
 import mpti.domain.member.api.request.SocialSignUpRequest;
 import mpti.domain.member.dao.UserRepository;
 import mpti.domain.member.entity.User;
-import mpti.common.exceptions.BadRequestException;
+import mpti.common.errors.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("api/user/api/auth")
 public class AuthToUserController {
     private static final Logger logger = LoggerFactory.getLogger(AuthToUserController.class);
     private final UserRepository userRepository;
@@ -58,7 +58,7 @@ public class AuthToUserController {
 
     @PostMapping("/signup")
     public User registerUser(@Valid @RequestBody SocialSignUpRequest socialSignUpRequest) {
-        if(userRepository.e`xistsByEmail(socialSignUpRequest.getEmail())) {
+        if(userRepository.existsByEmail(socialSignUpRequest.getEmail())) {
             throw new BadRequestException("이미 사용하고 있는 아이디 이메일입니다");
         }
 

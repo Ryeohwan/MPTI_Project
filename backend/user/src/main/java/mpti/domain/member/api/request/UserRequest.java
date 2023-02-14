@@ -2,48 +2,97 @@ package mpti.domain.member.api.request;
 
 
 import lombok.Getter;
-import mpti.domain.member.entity.Ptlog;
+import mpti.domain.member.entity.Memo;
 import mpti.domain.member.entity.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 public class UserRequest {
-    // 회원가입할 때 담아갈 dto
-    @NotBlank(message = "닉네임을 입력해주세요.")
-    @Size(min = 2, max = 10, message = "닉네임은 2자 이상 10자 이하로 입력해주세요.")
+    Long id;
     String name;
-    @NotBlank(message = "이메일 주소를 입력해주세요.")
-    @Email(message = "올바른 이메일 주소를 입력해주세요.")
+
     String email;
-    @NotBlank(message = "비밀번호를 입력해주세요.")
+
     String password;
     int age;
     String gender;
-    @NotBlank(message = "휴대폰 번호를 입력해주세요.")
-    @Pattern(regexp = "(01[016789])(\\d{3,4})(\\d{4})")
+
+    LocalDate birth;
+
     String phone;
     String address;
-    Ptlog ptlog;
+    Memo memo;
+    @Column(updatable = false)
     LocalDateTime createAt;
     LocalDateTime updateAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate stopUntil;
+
+    String s3Url;
+
+
+    String role;
+
+    private int core,chest, shoulder, biceps, triceps,back,legs,aerobic;
+
+
+
+    public void setCore(int core) {
+        this.core = core;
+    }
+
+    public void setChest(int chest) {
+        this.chest = chest;
+    }
+
+    public void setShoulder(int shoulder) {
+        this.shoulder = shoulder;
+    }
+
+    public void setBiceps(int biceps) {
+        this.biceps = biceps;
+    }
+
+    public void setTriceps(int triceps) {
+        this.triceps = triceps;
+    }
+
+    public void setBack(int back) {
+        this.back = back;
+    }
+
+    public void setLegs(int legs) {
+        this.legs = legs;
+    }
+
+    public void setAerobic(int aerobic) {
+        this.aerobic = aerobic;
+    }
+
+
 
     public UserRequest() {
     }
 
-    public UserRequest(String name, String email, String password, int age, String gender, String phone, String address, Ptlog ptlog, LocalDateTime createAt, LocalDateTime updateAt) {
+    public UserRequest(Long id,String name, String email, String password, LocalDate birth, String gender, String phone, String address, Memo memo, LocalDateTime createAt, LocalDateTime updateAt,LocalDate stopUntil) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.age = age;
+        this.birth = birth;
         this.gender = gender;
         this.phone = phone;
         this.address = address;
-        this.ptlog = ptlog;
+        this.memo = memo;
         this.createAt = createAt;
         this.updateAt = updateAt;
     }
@@ -51,14 +100,16 @@ public class UserRequest {
     public User toEntity(){
         return User.builder()
                 .email(email)
+                .birth(birth)
                 .name(name)
                 .password(password)
-                .age(age)
                 .phone(phone)
                 .address(address)
-                .ptlog(ptlog)
+                .memo(memo)
                 .createAt(createAt)
-                .updateAt(updateAt).build();
+                .updateAt(updateAt)
+                .stopUntil(stopUntil)
+                .build();
     }
 
     public void setName(String name) {
@@ -89,8 +140,8 @@ public class UserRequest {
         this.address = address;
     }
 
-    public void setPtlog(Ptlog ptlog) {
-        this.ptlog = ptlog;
+    public void setMemo(Memo memo) {
+        this.memo = memo;
     }
 
     public void setCreateAt(LocalDateTime createAt) {
@@ -99,5 +150,25 @@ public class UserRequest {
 
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public void setStopUntil(LocalDate stopUntil) {
+        this.stopUntil = stopUntil;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBirth(LocalDate birth) {
+        this.birth = birth;
+    }
+
+    public void setS3Url(String s3Url) {
+        this.s3Url = s3Url;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
