@@ -1,34 +1,28 @@
-import React from "react";
 import { useState,useEffect } from "react";
 import styles from "./TrainerCard.module.css";
 import TrainerImg from "./../../assets/img/trainer.PNG";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 const TrainerCard = (trainers) => {
-  const {role} = useSelector((state)=>state.auth)
-  
   const [trainerList, setTrainerList] = useState(trainers.trainers);
-  
+
   useEffect(()=>{
     setTrainerList(trainers.trainers);
   },[trainers.trainers]);
  
   return (
     <ul className={styles.trainer_list}>
-      {trainerList && trainerList.map((it) => {
+      {trainerList.map((it) => {
         return (
-          <Link key={it.email} className={styles.trainer_item} to={`/${role}/trainerdetail`} state={it}>
-              <div className={styles.trainer_img}>
-                <img src={TrainerImg} alt="" />
-              </div>
-              <div className={styles.trainer_info}>
-                <div>{it.name} 트레이너</div>
-                <div>별점 5개 평점 {it.star}점</div>
-                <div>
-
-                </div>
-              </div>
-          </Link>
+          <li key={it.email} className={styles.trainer_item}>
+            <div className={styles.trainer_img}>
+              <img src={TrainerImg} alt="" />
+            </div>
+            <div className={styles.trainer_info}>
+              <div>{it.name} 트레이너</div>
+              <div>별점 5개 평점 {it.star}점</div>
+              <div></div>
+            </div>
+          </li>
         );
       })}
 
