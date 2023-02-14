@@ -8,24 +8,18 @@ const SignupRedirect = () => {
     useEffect(()=>{
         const params = new URLSearchParams(window.location.search);
         const accessToken = params.get("access_token");
-        if(accessToken){
-            alert("저장완료")
+        const refreshToken = params.get("refresh_token");
+        const isNewUser = params.get("need_update");
+        //true면 유저상세정보로 false 바로홈으로
+        if(accessToken && isNewUser){
+            alert("로그인 성공 !")
             localStorage.setItem("access_token", accessToken);
+            localStorage.setItem("refresh_token", refreshToken);
             axios.defaults.headers.common['authorization'] = `Bearer ${accessToken}`;
-            axios.get("/api/user/api/auth/test")
-            .then((res)=>{
-                console.log(res);
-                navigate("/home")
-            }).catch((err)=>{
-
-            })
-
-        
-            // axios.get()
-            // navigate("/login")
-        }else{
+            navigate("/user/mypage")
+        }else if(accessToken && !isNewUser){
             console.log("");
-            navigate("/login")
+            navigate("/user/home")
         }
     },[])
    
