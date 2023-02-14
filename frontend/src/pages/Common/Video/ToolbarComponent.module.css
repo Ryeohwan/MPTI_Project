@@ -1,9 +1,0 @@
-.buttonsContent {
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-    height: 100% !important;
-    width: 280px;
-    margin: 0;
-}
