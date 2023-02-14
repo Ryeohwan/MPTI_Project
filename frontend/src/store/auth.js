@@ -77,6 +77,7 @@ export const login = (email, password) => async (dispatch) => {
         dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
 
         dispatch(authActions.loginSuccess(role));
+     
     } catch (error) {
         dispatch(authActions.loginFailure(error));
     }
