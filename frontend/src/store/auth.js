@@ -10,7 +10,8 @@ const initialState = {
     role: "",
     isLoading: false,
     isLoggedIn:false,
-    error: ""
+    error: "",
+    roleToken:null
 };
 
 const authSlice = createSlice({
@@ -24,6 +25,10 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isLoggedIn = true;
             state.role= action.payload;
+        },
+        getRoleToken: (state, action) => {
+            console.log(action.payload)
+            state.roleToken = action.payload;
         },
         loginGetData: (state, action) => {
             console.log("여기임 ㅋㅋ 여기 ㅋㅋ",  action.payload.payload);
@@ -55,6 +60,19 @@ const authSlice = createSlice({
         },signupFailure: (state, action) => {
             state.isLoading = false;
         },
+        logout: (state) => {
+            state.id= ""
+            state.name= ""
+            state.email= ""
+            state.phone= ""
+            state.image= ""
+            state.role= ""
+            state.isLoading= false
+            state.isLoggedIn=false
+            state.error= ""
+            state.roleToken=null
+        }
+
     },
 });
 
@@ -69,10 +87,8 @@ export const login = (email, password) => async (dispatch) => {
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
 
         const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
-        localStorage.setItem("mpti_role", role);
-        console.log(role, email, '여기가 문제 user는 post, ')
-        const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):
-        await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+        const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+        dispatch(authActions.getRoleToken(role))
 
         console.log(userInfo,'여긴안와');
         dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))

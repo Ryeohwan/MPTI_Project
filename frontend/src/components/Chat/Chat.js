@@ -7,7 +7,7 @@ import SockJS from 'sockjs-client';
 import axios from 'axios';
 import RoomList from './RoomList';
 import ChatList from './ChatList';
-import { chatToggle, etcActions, getChatRoomList } from '../../store/etc';
+import { etcActions, getChatRoomList } from '../../store/etc';
 
 const chatServerUrl = 'http://i8a803.p.ssafy.io:8005';
 const Chat = () => {
