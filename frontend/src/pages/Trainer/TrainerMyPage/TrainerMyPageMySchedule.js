@@ -19,7 +19,7 @@ const TrainerMyPageMySchedule = () => {
   const [daySchedule, setDaySchedule] = useState([]);                     // 캘린더에서 클릭한 날짜의 데이터를 daySchedule에 저장
   const [timeArray, setTimeArray] = useState([]);                         // 이미 예약된 레슨 시간 + 내가 열어둔 레슨 시간
   const [click, setClick] = useState(false)
-
+  console.log(id, name)
   const postClick = () => {
     setClick(!click)
   }
@@ -28,15 +28,14 @@ const TrainerMyPageMySchedule = () => {
   useEffect(() => {
     async function getReservation(){
       const data = await axios.get("/api/business/reservation/list");
-      setAllData(data.data);
+      setAllData(data.data.filter((item) => item.trainerId === id));
     };
     getReservation();
   }, [click])
-
+  
   // # 캘린더에서 클릭한 날짜의 특정 스케쥴 받아온 clickedDaySchedule을 props로 올려받음
   async function getDaySchedule(intDate){
-    const trainerId = 1;
-    const data = await axios.get(`/api/business/reservation/list/${trainerId}/${intDate[0]}/${intDate[1]}/${intDate[2]}`);
+    const data = await axios.get(`/api/business/reservation/list/${id}/${intDate[0]}/${intDate[1]}/${intDate[2]}`);
     const clickedDaySchedule = data.data;
     console.log(clickedDaySchedule);
     setDaySchedule(clickedDaySchedule);
@@ -75,12 +74,12 @@ const TrainerMyPageMySchedule = () => {
   useEffect(() => {
     async function getReservation(){
       const data = await axios.get("/api/business/reservation/list");
-      setAllData(data.data);
+      setAllData(data.data.filter((item) => item.trainerId === id));
     };
     getReservation();
   }, []);
   
-
+  console.log(allData)
   const sendData = () => {
     const data = {
       trainerId: id,

@@ -22,7 +22,7 @@ const ClientRealReservation = () => {
   const [dayReservation, setDayReservation] = useState([]); // 특정 트레이너의 특정 날짜 데이터
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
 
-  // 바꿔야 됨
+
   const trainerId = location.state.id;
   console.log(trainerId)
 
