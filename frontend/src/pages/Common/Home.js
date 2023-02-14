@@ -9,31 +9,26 @@ import { BasicLoadingSpinner } from "./../../components/Loading/BasicLoadingSpin
 const Home = () => {
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state) => state.etc);
-  const a= useSelector((state) => state.auth);
-  console.log(a);
+  const {role}= useSelector((state) => state.auth);
   
   const [trainer, setTrainer] = useState([]);
   const [review, setReview] = useState([]);
-  const [role, setrole] = useState('client')
-  //console.log(isLoading);
-  //console.log(isLoading)
   useEffect(() => {
     // 홈에서 트레이너 상위 0페이지 존재하는 트레이너 불러옴
     dispatch(trainerListByStar(0)).then((res) => {
       const trainerList = res;
-      //console.log(trainerList[0]);
       setTrainer(trainerList.slice(0,4));
     });
 
     dispatch(reviewList(0)).then((res) => {
       const reviewList = res;
-      // console.log(reviewList);
       setReview(reviewList.slice(0,4));
     });
 
 
   }, []);
-
+  
+console.log('렌더링 확인')
   return (
     <div className={styles.Home}>
      
