@@ -10,33 +10,38 @@ const ClientRealReservation = () => {
   const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
 
   const [clickDay, setClickDay] = useState(intFormatToday); // 클릭한 날짜 [2023, 2, 11]
-  const [clickTime, setClickTime] = useState([]); // 클릭한 시간 (날짜 바뀔 때마다 초기화)
-  const [clickTimeData, setClickTimeData] = useState([]); // 클릭한 시간의 모든 데이터
-  const [clickId, setClickId] = useState(null); // 클릭한 시간 데이터의 id 
   const [clickIdArray, setClickIdArray] = useState([]); // 유저가 클릭한 시간들의 데이터 id 배열 (post로 보냄)
-  
+
   const [openedData, setOpenedData] = useState([]); // 최초 렌더링시 이미 예약된 시간 제외, 예약 가능한 데이터만 담음
-  const [time, setTime] = useState([]); // 특정 트레이너의 특정 날짜 데이터 받아와서 시간만 담은 배열
+  const [time, setTime] = useState([]); // 특정 트레이너의 특정 날짜 데이터 받아와서 시간만 담은 배열 => 그 날 타임 박스에 띄움
+  const [timeArray, setTimeArray] = useState([]); // 클릭한 날짜의 데이터 중 클릭한 시간들만 담은 배열
+  const [clickTimeArray, setClickTimeArray] = useState([]);
   const [dayReservation, setDayReservation] = useState([]); // 특정 트레이너의 특정 날짜 데이터
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
   
   // 바꿔야 됨
   const trainerId = 1;
-  
-  console.log(clickIdArray);
+
   const getDaySchedule = (intDate) => {
     setClickDay(intDate);
   };
-  
-  console.log("clicked Id", clickId)
-  console.log("clicked Ids Array", clickIdArray)
-  console.log("clicked time", clickTime)
-  console.log(clickTimeData)
-  console.log(dayReservation)
 
-  const handleClickTime = (time) => {
-    setClickTimeData(dayReservation.filter((item) => item.hour === time));
+  const handleClickTime = (event, time) => {
+    const newTime = [clickDay[0], clickDay[1], clickDay[2], time].join(" ");
+    const newReservation = dayReservation.filter((item) => item.hour === time)
+    if (reservedHour.includes(time)) {
+      event.preventDefault();
+    } else if (clickIdArray.includes(newReservation[0].id) && timeArray.includes(newTime)) {
+      setClickIdArray(clickIdArray.filter((item) => item !== newReservation[0].id))
+      setTimeArray(timeArray.filter((item) => item !== newTime))
+    } else if (!clickIdArray.includes(newReservation[0].id) && !timeArray.includes(newTime)) {
+      setClickIdArray((prev) => [...prev, newReservation[0].id])
+      setTimeArray((prev) => [...prev, newTime])
+    }
+    
   };
+
+  console.log("clickIdArray", clickIdArray)
 
   useEffect(() => {
     async function getReservation() {
@@ -50,7 +55,7 @@ const ClientRealReservation = () => {
           item.month === intFormatToday[1] &&
           item.day === intFormatToday[2]
       );
-      
+
       setTime(
         todayData
           .map((item) => item.hour)
@@ -75,9 +80,10 @@ const ClientRealReservation = () => {
       setReservedHour(reservedDataTime);
     }
     getDayReservation(clickDay);
-    setClickTime(null);
+    
+    
   }, [clickDay]);
-
+  
   useEffect(() => {
     setTime(
       dayReservation
@@ -86,7 +92,10 @@ const ClientRealReservation = () => {
           return a - b;
         })
     );
-  }, [dayReservation]);
+    const splitTimeArray = timeArray.map((item) => item.split(" "))
+    const clickDayTimes = splitTimeArray.filter((item) => item[0] === clickDay[0].toString() && item[1] === clickDay[1].toString() && item[2] === clickDay[2].toString())
+    setClickTimeArray(clickDayTimes.map((item) => parseInt(item[3])))
+  }, [dayReservation, timeArray]);
 
   return (
     <div className={styles.real_reservation_container}>
@@ -106,11 +115,11 @@ const ClientRealReservation = () => {
             time.map((item) => (
               <div
                 className={`${styles.time_item} ${
-                  reservedHour.includes(item) ? `${styles.reserved_time}` : null
-                } ${clickTime === item ? `${styles.clicked_time}` : null}`}
+                  reservedHour.includes(item) ? `${styles.reserved_time}` : `${styles.not_reserved_time}`
+                } ${clickTimeArray.includes(item) ? `${styles.clicked_time}` : null}`}
                 key={item}
-                onClick={() => {
-                  handleClickTime(item);
+                onClick={(event) => {
+                  handleClickTime(event, item);
                 }}
               >
                 {item}:00 ~ {item + 1}:00
@@ -123,10 +132,10 @@ const ClientRealReservation = () => {
           )}
         </div>
       </div>
-      <div>
-        <button>결제하기</button>
-        <button>돌아가기</button>
-      </div>
+          <div className={styles.btn_wrapper}>
+            <button className={styles.payment_btn}>결제하기</button>
+            <button className={styles.back_btn}>돌아가기</button>
+          </div>
     </div>
   );
 };

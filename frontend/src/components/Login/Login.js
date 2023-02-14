@@ -32,6 +32,7 @@ useEffect(()=>{
         setRoleToken(localStorage.getItem("mpti_role"))
     }else{
         navigate(`/${roleToken}/home`);
+        // navigate(`/client/home`);
     }
 
 },[roleToken,isLoggedIn ]) 

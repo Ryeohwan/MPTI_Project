@@ -1,29 +1,32 @@
 // 라이브러리
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
 import logo from '../../assets/img/pxArt.png'
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { chatToggle, etcActions } from '../../store/etc'
 //ClientHeader
 export default function ClientHeader(){
+	const dispatch = useDispatch();
 	const [roleToken, setRoleToken]=useState(
 		localStorage.getItem("mpti_role")
 	);
 	const navigate= useNavigate();
 
 	// 채팅 온
-	const [chaton, setChatOn] = useState(false);
+	const {chatOn} = useSelector(state=>state.etc)
+
+	// const setChatOn = () => console.log(1)
 	// 선택한 메뉴
 	const [menuselect, setMenuSelect] = useState(null);
 	// 메시지 개수
 	const [messagecount, setMessageCount] = useState(99);
 	//채팅 끄기
-	function turnoffchat() {
-		setChatOn(false)
-	}
+
 	const [view, setView] = useState(false);
 
 	useEffect(() =>{
@@ -53,7 +56,7 @@ export default function ClientHeader(){
   	return(
 		// nav_box 스타일 지정
 		<div className={styles.Header}>
-			<Chat chaton={chaton} turnoffchat={turnoffchat}/>
+			{ chatOn && <Chat />}
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo}> <Link to={'home'} onClick={()=>{setMenuSelect('home')}}>
 			MPTI</Link>	</div>
@@ -74,7 +77,7 @@ export default function ClientHeader(){
 				{/* 메일 + 프로필 담는 박스 */}
 				<div className={styles.mail_profile_box}>
 					{/* 메시지 */}
-					<div className={styles.mail_box} onClick={()=>{setChatOn(true)}}>
+					<div className={styles.mail_box} onClick={()=>{dispatch(etcActions.chatToggle())}}>
 						{/* 메시지 개수 */}
 						<div className={styles.mail_count_box}> {messagecount}+ </div>
 						{/* 메시지 이미지 */}
