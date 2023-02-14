@@ -9,12 +9,11 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { chatToggle, etcActions } from '../../store/etc'
+import { authActions } from '../../store/auth'
 //ClientHeader
 export default function ClientHeader(){
 	const dispatch = useDispatch();
-	const [roleToken, setRoleToken]=useState(
-		localStorage.getItem("mpti_role")
-	);
+	const {roleToken} = useSelector((state) => state.auth)
 	const navigate= useNavigate();
 
 	// 채팅 온
@@ -46,6 +45,8 @@ export default function ClientHeader(){
 	}
 
 	const logout = () => {
+		dispatch(authActions.logout())
+		sessionStorage.clear()
 		localStorage.clear()
 		navigate("/login")
 		console.log('로그아웃')
