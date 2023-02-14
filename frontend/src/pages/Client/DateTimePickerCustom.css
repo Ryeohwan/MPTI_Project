@@ -1,0 +1,6 @@
+.react-datetime-picker__wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border: none !important;
+  }

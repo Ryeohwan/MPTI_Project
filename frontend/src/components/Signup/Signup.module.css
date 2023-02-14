@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+.Signup {
+    font-family: 'DungGeunMo';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    height: 750px;
+    /* background-color: skyblue; */
+}
+
+.header {
+    font-size: 90px;
+    border-top: 4pt solid #c9fd61;
+    border-bottom: 4pt solid #c9fd61;
+    color: #ececec;
+}
+
+.header_box {
+    display: flex;
+    justify-content: left;
+    width: 530px;
+}
+
+.form_box {
+    width: 530px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 10px;
+    border-bottom: 1px solid #ececec;
+    border-top: 1px solid #ececec;
+    padding: 4%;
+    background-color: #454648;
+    color: #ececec;
+}
+
+.form_title {
+    color: #ececec;
+    font-size: 16px;
+    margin-top: 10px;
+    width: 530px;
+}
+
+label {
+    display: inline-block;
+    width: 110px;
+}
+
+input {
+    width: 160px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.form_email button {
+    width: 80px;
+    border-radius: 5px;
+    border-style: none;
+    font-family: 'DungGeunMo';
+    height: 28px;
+    background-color: #97969d;
+    color: #ececec;
+}
+
+.form_email button:hover {
+    color: white;
+}
+
+.form_prize input {
+    width: 108px
+}
+
+.form_career input {
+    width: 108px
+}
+
+.form_certificate input {
+    width: 108px
+}
+
+p {
+    color: red;
+    font-size: 12px;
+    margin: 8px;
+}
+
+input[type="date"] {
+    font-family: 'DungGeunMo';
+}
+
+select {
+    font-family: 'DungGeunMo';
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.form_btn_box {
+    display: flex;
+    justify-content: right;
+    padding-right: 5px;
+    padding-top: 10px;
+    width: 530px;
+}
+
+.form_sub_btn {
+    height: 48px;
+    font-family: 'DungGeunMo';
+    background-color: #B1DE59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+}
