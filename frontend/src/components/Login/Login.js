@@ -12,7 +12,6 @@ const dispatch = useDispatch();
 const navigate=useNavigate();
 const { role, isLoggedIn} = useSelector((state) => state.auth);
 const {roleToken} = useSelector(state=>state.auth)
-console.log(role,'ㅁㄴ어ㅏㅁ나어', roleToken, '롤, 롤토큰')
 const [userInfo, setUserInfo] = useState({
     email: "",
     isEmail: undefined,
@@ -26,14 +25,11 @@ const [userInfo, setUserInfo] = useState({
 console.log("로그인상태", isLoggedIn);
 
 useEffect(()=>{
-    console.log('유즈 이펙트 안에',role,'확인',roleToken)
     if(roleToken === null){
-        
     }else{
         navigate(`/${roleToken}/home`);
         // navigate(`/client/home`);
     }
-
 },[roleToken]) 
 
 const userInfoHandler= (e)=>{
