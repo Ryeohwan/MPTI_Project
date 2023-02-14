@@ -48,6 +48,7 @@ const ManagerSignupApproval = () => {
     }
   };
 
+  const profileUrl  = "/profile_base.png";
   return (
     <>
       <div className={styles.info_content_box}>
@@ -61,7 +62,7 @@ const ManagerSignupApproval = () => {
               return (
                 <li key={it.email} className={styles.content_item}>
                   <div className={styles.item_img}>
-                    <img src={it.s3Url}></img>
+                    <img src={it.s3Url===null? profileUrl:it.s3Url }></img>
                   </div>
 
                   <div className={styles.item_info_box}>

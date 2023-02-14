@@ -1,14 +1,14 @@
 import styles from "./AccountModal.module.css";
 import { useState } from 'react';
 import reportBell from '../../../assets/img/reportbell.png';
-
-const AccountModal = ({ name, email, gender, phone, birth, id ,onClose }) => {
+// import basicImage from '../../../../public/profile_base.png'
+const AccountModal = ({ name, email, gender, phone, birth, image,id ,onClose }) => {
   
-
+const profileUrl  = "/profile_base.png";
   return (
     <div className={styles.ReportModal}>
-      <h1 className={styles.title}>계정정보 </h1>
-      <div className={styles.name}>{name}</div>
+      <div>USER INFO</div>
+      <div className={styles.image}><img src={image===null? profileUrl: image}/></div>
       <h3>이름</h3>
       <div className={styles.name}>{name}</div>
       <h3>성별</h3>

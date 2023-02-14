@@ -90,8 +90,9 @@ const ManagerAccountManagement = () => {
                  >
                     <div className={styles.item_info}
                      onClick={() =>
-                      handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, index)
+                      handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, it.s3Url, index)
                     }>
+                      <img src="/star.png"></img>
                       <div>{(8*(page-1))+index+1}</div>
                       <div>성명:{it.name} </div>
                       <div>E-MAIL:{it.email} </div>
@@ -116,6 +117,7 @@ const ManagerAccountManagement = () => {
                         birth={modal.birth}
                         gender={modal.gender}
                         phone={modal.phone}
+                        image={modal.image}
                         id={modal.id}
                         
                         onClose={handleCloseModal}
