@@ -195,6 +195,7 @@ export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async
 // 나의 모든 대화방 가져오기
 export const getChatRoomList = (id, role) => async (dispatch) => {
     try{
+        console.log('나의 아이디, 역할',id,role)
         const response = await axios.get(`/api/chat/load/list/${id}/${role}`)
         console.log(response)
         return response.data
@@ -232,16 +233,6 @@ export const uploadImage = (role, formData) => async (dispatch) => {
     }
 }
 
-export const chatToggle = () => async (dispatch) => {
-    try{
-
-        console.log(123123)
-        return 1
-    } catch(error) {
-        return "에러"
-    }
-    // dispatch(etcActions.chatToggle())
-}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;
