@@ -8,7 +8,7 @@ import TrainerClientBody from './TrainerMyClient/TrainerClientBody';
 const TrainerMyClient = () => {
     return (
         <div className={styles.TrainerMyClient}>
-            <TopTitle title='고객 관리▼' content='고객을 관리해 주세요.'/>
+            <TopTitle title='고객 관리▼' content='소중한 귀하의 MPTI 고객들을 한눈에 관리해보세요.'/>
             <div className={styles.body_box}>
                 <TrainerClientBody/>
             </div>

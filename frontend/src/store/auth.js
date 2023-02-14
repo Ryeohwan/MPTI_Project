@@ -68,7 +68,7 @@ export const login = (email, password) => async (dispatch) => {
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
 
-        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
+        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "admin"; 
         localStorage.setItem("mpti_role", role);
         console.log(role, email, '여기가 문제 user는 post, ')
         const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):

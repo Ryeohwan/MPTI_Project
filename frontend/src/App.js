@@ -94,7 +94,7 @@ export default function App() {
           element={<TrainerMyReservation />}
         />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
-        <Route path="/manager/*" element={<ManagerHome />} />
+        <Route path="/admin/*" element={<ManagerHome />} />
         <Route element={<Landing />} />
       </Routes>
     </div>

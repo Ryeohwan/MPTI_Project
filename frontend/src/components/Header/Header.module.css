@@ -24,9 +24,17 @@
     font-weight: 400;
     font-size: 56px;
     color: #ececec;
-    border-bottom: 4pt solid #C9FD61;
-    border-top: 4pt solid #C9FD61;
+    /* border-bottom: 4pt solid #C9FD61; */
+    /* border-top: 4pt solid #C9FD61; */
     text-shadow: 2px 2px 2px black;
+    
+}
+
+.head_logo img{
+    width: 200px;
+    padding-top: 40px;
+
+    height: 100px;
 }
 
 
