@@ -30,11 +30,8 @@ const ClientTrainerDetail = () => {
   }
 
   const navigate = useNavigate();
-  const navigateToPayment = () => {
-    navigate("clientpayment");
-  }
   const navigateToRealReservation = () => {
-    navigate("/client/trainerdetail/realreservation");
+    navigate("/user/trainerdetail/realreservation");
   };
 
   return (
@@ -68,7 +65,7 @@ const ClientTrainerDetail = () => {
             </button>
             <button
               className={styles.trainer_reservation_btn}
-              onClick={navigateToRealReservation}
+              onClick={() => navigateToRealReservation()}
             >
               예약하기
             </button>
