@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./ScheduleCardItem2.module.css"
 
 // 이 카드는 trainer가 나의 고객들 볼떄 사용.
 function ScheduleCardItem2(props) {
-
+  const {role, image} = useSelector(state=>state.auth)
+console.log('ScheduleCardItem2.js 트레이너페이지',props.trainerId, props.userId, props.trainerName, props.sessionId, props.userName)
     return (
       <div className={styles.card_item}>
         <img className={styles.card_item_img} src="/profilepic.png" alt="profile"></img>
@@ -17,7 +19,7 @@ function ScheduleCardItem2(props) {
           <div className={styles.card_item_info_txt}></div>
           <div>{props.year}.{props.month}.{props.day} {props.hour}시</div>
         </div>
-        <button className={styles.button}><Link to="/lesson" state={{trainerId:props.trainerId, clientId:props.userId, name:props.trainerId,sessionId:props.sessionId, clientName:props.userName}}><div>입장</div></Link></button>
+        <button className={styles.button}><Link to="/lesson" state={{trainerId:props.trainerId, clientId:props.userId, name:props.trainerName,sessionId:props.sessionId, clientName:props.userName, trainerName:props.trainerName, image:image, role:role}}><div>입장</div></Link></button>
       </div>
     );
   }

@@ -8,6 +8,8 @@ const SERVER_URL = 'https://i8a803.p.ssafy.io';
 const SERVER_SECRET = 'mpti';
 const Lesson = ()=>{
     const location = useLocation()
+    // state.name, sessionId, name(yourname), clientName
+    //sessionId, clientId, trainerId, role, image, trainerName
     const userName = location.state.name
     const sessionId = location.state.sessionId
     const [token, setToken] = useState(undefined);
