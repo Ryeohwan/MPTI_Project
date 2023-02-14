@@ -1,6 +1,6 @@
 
 .MyPage_body_profile {
-    color: #222222;
+    color: #ececec;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -42,8 +42,10 @@
     height: 50px;
     font-family: 'DungGeunMo';
     font-size: 15px;
-    background-color: #C9FD61;
+    background-color: grey;
+    color: #ececec;
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    margin-top: 15px;
 }

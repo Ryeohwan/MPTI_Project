@@ -6,6 +6,10 @@
     flex-direction: column;
 }
 
+img{
+    width:30px;
+    height: 30px;
+}
 
 /* 컨텐츠 부분 */
 
@@ -38,7 +42,7 @@
 .item_info {
     display: grid;
     width: 100%;
-    grid-template-columns: 5% 30% 45% 25%;
+    grid-template-columns: 5% 5% 25% 50% 25%;
     grid-template-rows: 10px;
 }
 

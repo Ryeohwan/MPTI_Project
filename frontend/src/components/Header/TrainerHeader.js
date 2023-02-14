@@ -54,7 +54,7 @@ export default function TrainerHeader(){
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
-						MPTI</Link>	
+				<img src='/background.png'/></Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}

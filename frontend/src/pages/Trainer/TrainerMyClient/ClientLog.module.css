@@ -2,9 +2,14 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    background-color: #ECECEC;
+    border: 1px solid #ececec;
+    background-color: black;
     border-radius: 10px;
+  
     padding: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
 }
 .flex_column{
     display: flex;
@@ -14,7 +19,8 @@
 }
 
 .flex_column div{
-    color: #222222
+    color: #ececec;
+    /* color: #222222 */
 }
 
 .grid_2_column {
