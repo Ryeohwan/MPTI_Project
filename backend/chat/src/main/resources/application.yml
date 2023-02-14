@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      authentication-database : admin
+      database : mpti
+      port : 27017
+      host : i8a803.p.ssafy.io
+      username : ekdrms
+      password : ehdrms
+
+
+server:
+  port: 8005

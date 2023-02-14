@@ -8,13 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { etcActions } from '../../store/etc';
+import { authActions } from '../../store/auth';
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	const dispatch = useDispatch();
 	// const {role}=useSelector(state=> state.auth);
-	const [roleToken, setRoleToken]=useState(
-		localStorage.getItem("mpti_role")
-	);
+	const {roleToken} = useSelector((state)=>state.auth)
 	const navigate= useNavigate();
 
 	const [view, setView] = useState(false);
@@ -41,6 +40,8 @@ export default function TrainerHeader(){
 	} , [])
 
 	const logout = () => {
+		dispatch(authActions.logout())
+		sessionStorage.clear()
 		localStorage.clear()
 		navigate("/login")
 		console.log('로그아웃')
