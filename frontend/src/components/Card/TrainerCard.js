@@ -1,25 +1,31 @@
-import React from "react";
 import { useState,useEffect } from "react";
 import styles from "./TrainerCard.module.css";
 import TrainerImg from "./../../assets/img/trainer.PNG";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 const TrainerCard = (trainers) => {
-  const {role} = useSelector((state)=>state.auth)
-  
   const [trainerList, setTrainerList] = useState(trainers.trainers);
-  
+
+  const starRate = (star) => {
+    const elements = [];
+    for (let i=0; i<star; i++) {
+      elements.push(<Icon key={i+5} icon="ic:round-star" className={styles.star_icon}></Icon>)
+    }
+    for (let i=0; i<5-star; i++) {
+      elements.push(<Icon key={i} icon="ic:round-star-border" className={styles.border_star_icon}></Icon>)
+    }
+    return elements
+  }
+
   useEffect(()=>{
     setTrainerList(trainers.trainers);
   },[trainers.trainers]);
   
   return (
     <ul className={styles.trainer_list}>
-      {trainerList && trainerList.map((it) => {
+      {trainerList.map((it) => {
         return (
-          <Link key={it.email} className={styles.trainer_item} to={`/${role}/trainerdetail`} state={it}>
-              <div className={styles.trainer_img}>
+          <li key={it.email} className={styles.trainer_item}>
+            <div className={styles.trainer_img}>
               <img src={TrainerImg} alt="" />
             </div>
             <div className={styles.content_box2}>
@@ -33,7 +39,7 @@ const TrainerCard = (trainers) => {
                 
               </div>
             </div>
-          </Link>
+          </li>
         );
       })}
 
