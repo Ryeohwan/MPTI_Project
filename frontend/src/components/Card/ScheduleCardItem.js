@@ -8,7 +8,7 @@ import { trainerDetail } from "../../store/etc";
 function ScheduleCardItem({schedule, active}) {
   const dispatch = useDispatch()
   dispatch(trainerDetail)
-  const {name } = useSelector((state)=>(state.etc))
+  const {role, image, name} = useSelector((state)=>(state.auth))
   console.log(schedule.trainerId)
   const trainerImg = schedule.imageUrl
   return (
