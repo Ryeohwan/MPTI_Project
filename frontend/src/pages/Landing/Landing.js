@@ -18,10 +18,10 @@ const [roleToken, setRoleToken] = useState(
                     <div className={styles.typingwrapper}>
 
                     <h1 className={styles.typing}>
-                        M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        I</h1>
+                        M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        I&nbsp;</h1>
                     </div>
                     <h3 className={`${styles.loader} ${styles.typingwrapper} ${styles.typing2}`}>
                         <span>M</span>

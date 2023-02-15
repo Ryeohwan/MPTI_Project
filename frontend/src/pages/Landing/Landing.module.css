@@ -27,7 +27,7 @@ list-style: none;
 position: absolute;
 left: 0;
 top:0;
-width: 100vw;
+width: 100%;
 height: auto;
 background-size: 100%;
 z-index: 0;
@@ -279,7 +279,7 @@ border: #C9FD61;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid transparent;
-  font-size: 2em;
+  font-size: 6em !important; 
 }
 
 .typing2 {
