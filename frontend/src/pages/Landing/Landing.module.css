@@ -42,8 +42,71 @@ h1 {
     padding-left: 10%;
     background-color: #111216;
     opacity: 0.8;
-    margin-left: 5%;
-    margin-right: 5%;
+    /* margin-left: 5%;
+    margin-right: 5%; */
+}
+
+.landing_img {
+    width: 150px;
+}
+
+.landing_box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+a:hover {
+    background-color: white;
+    color: #3d3d3e;
+}
+
+.landing_image img {
+    width: 200px;
+    text-align: center;
+}
+
+.landing_image {
+    /* width: 200px; */
+    display: flex;
+    padding-right: 7%;
+    justify-content: center;
+    text-align: center;
+}
+
+.landing_goal {
+    font-family: "DungGeunMo";
+    padding-top: 20px;
+    margin-top: 300px;
+    padding-left: 5%;
+    background-color: #111216;
+    opacity: 0.8;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: white;
+    height: 500px;
+}
+
+.landing_info {
+    padding-top: 10px;
+}
+
+.landing_title {
+    font-size: 24px;
+    padding-top: 5px;
+}
+
+.landing_guide {
+    font-family: "DungGeunMo";
+    margin-top: 300px;
+    padding-left: 5%;
+    padding-top: 20px;
+    background-color: #111216;
+    opacity: 0.8;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: white;
+    height: 500px;
 }
 
 .logo {

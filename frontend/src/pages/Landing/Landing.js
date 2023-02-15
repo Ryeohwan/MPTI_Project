@@ -28,8 +28,8 @@ const navigate= useNavigate();
          
         <Routes>
             <Route path="/" element={<LandingHome/>}/>
-            <Route path="goal" element={<LandingGoal/>}/>
-            <Route path="" element={<LandingGuide/>}/>
+            <Route path="/goal" element={<LandingGoal/>}/>
+            <Route path="/guide" element={<LandingGuide/>}/>
         </Routes>
         </div>
     )

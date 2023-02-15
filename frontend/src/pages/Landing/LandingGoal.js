@@ -13,14 +13,19 @@ const navigate= useNavigate();
 
 
     return(
-            <nav className={styles.landing_logo}>
-            <div className={styles.logo} >M P T I</div>
-            <div className={styles.subtitle}>Market by Personal Trainer & I</div>
-            <div className={styles.navigate}>    
-                <div className={styles.navigate_btn} onClick={()=>{navigate("/login")}}>
-                    START
+            <nav className={styles.landing_goal}>
+                
+                <div className={styles.landing_box}>  
+                    <img src="/MPTIlogo.png" className={styles.landing_img} />
+                    <div className={styles.landing_title}>는 다음과 같은 바를 지향합니다.</div>
                 </div>
-            </div>
+              
+                <div className={styles.landing_info}>- 운동의 중요성을 알리고 고객의 성향에 알맞는 선생님들을 소개해드립니다.</div>
+                <div className={styles.landing_info}>- 일반 고객뿐만 아니라 트레이너까지 서로 득이 될 수 있는 서비스를 제공합니다. </div>
+                <div className={styles.landing_info}>- </div>
+                <div className={styles.landing_info}>- </div>
+
+                <div className={styles.landing_image}><img   src="/back-spinner.gif" alt="" /></div>
             </nav>
     )
 
