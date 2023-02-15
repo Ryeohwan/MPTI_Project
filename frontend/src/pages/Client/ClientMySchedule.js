@@ -38,7 +38,7 @@ const MySchedule =()=> {
             <TopTitle title='내 스케줄▼' content='고객님의 오늘 수업에 입장하고 예약 스케줄을 관리해보세요!'/>
             <div className={styles.schedule_menu}>오늘 수업</div>
             <ul className={styles.card_list_top}>
-                {todaySchedule.length ? todaySchedule.map((item, index) => <ScheduleCardItem key={index} schedule={item} active={true}/>) : <div>오늘 수업이 없습니다</div>}
+                {todaySchedule.length ? todaySchedule.map((item, index) => <ScheduleCardItem key={index} schedule={item} active={true} />) : <div>오늘 수업이 없습니다</div>}
             </ul>
             <div className={styles.schedule_menu}>예약한 스케줄</div>
             <ul className={styles.card_list_bottom}>

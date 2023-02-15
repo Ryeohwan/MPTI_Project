@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./ManagerAccountManagement.module.css";
 import { useDispatch } from "react-redux";

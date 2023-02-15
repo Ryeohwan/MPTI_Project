@@ -5,6 +5,7 @@
     padding-right: 15px;
     display: flex;
     flex-direction: column;
+    width: 970px;
 }
 
 .log_box {
@@ -136,10 +137,11 @@
 .graph_part {
     /* background-color: blue; */
     display: flex;
+    align-items: center;
 }
 .graph_info{
     display: grid;
-    grid-template-columns:repeat(2,150px);
+    grid-template-columns:repeat(2,160px);
     grid-template-rows: 41px 41px 41px 41px;
     /* background-color: red; */
 }
@@ -154,4 +156,10 @@
     height: 20px;
 
     border-radius: 5px;
+}
+
+.part_name{
+    width: 80px;
+    height: 20px;
+
 }
