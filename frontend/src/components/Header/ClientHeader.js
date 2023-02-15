@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 // CSS
 import styles from './Header.module.css'
 import Chat from '../Chat/Chat'
-import logo from '../../assets/img/pxArt.png'
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
