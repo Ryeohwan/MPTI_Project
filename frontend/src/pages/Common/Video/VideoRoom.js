@@ -183,16 +183,15 @@ const VideoRoom = (props) => {
       };
 
     const updateSubscribers = () => {
-        let subscribers = remotes.current;
-        setSubscribers(subscribers);
+        setSubscribers(remotes.current);
       }
 
     const leaveSession = () => {
-        let mySession = session.current;
-        if(mySession) {
-            mySession.disconnect();
+        if(session.current) {
+            session.current.disconnect();
         }
         OV.current = null;
+        
         // session.current = undefined
         setSubscribers([])
         setMySessionId('SessionA')
@@ -251,6 +250,7 @@ const VideoRoom = (props) => {
             let nickname = e.stream.connection.data.split('%')[0];
             newUser.setNickname(JSON.parse(nickname).clientData);
             remotes.current.push(newUser);
+            console.log(newUser, remotes.current, '들어가는 것 확인')
             if(localUserAccessAllowed) {
                 updateSubscribers();
             }
@@ -270,8 +270,8 @@ const VideoRoom = (props) => {
 
     const subscribeToUserChanged = () => {
         session.current.on('signal:userChanged', (e) => {
-            console.log(e)
             let remoteUsers = subscribers;
+            console.log(e, subscribers, 'signal:userChanged 왔음')
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
                     let  data = JSON.parse(e.data);
