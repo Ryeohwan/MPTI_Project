@@ -12,10 +12,11 @@ import ChatComponent from './ChatComponent'
 import HeaderComponent from './HeaderComponent'
 import styles from './VideoRoom.module.css'
 import { useNavigate } from 'react-router-dom'
-
-
+import VideoClientReview from './VideoClientReview'
+import { useSelector } from 'react-redux'
 const VideoRoom = (props) => {
     const navigate = useNavigate()
+    const {role} = useSelector(state => state.auth)
     const localUser = useRef(new userModel())
     const serverUrl = props.openviduServerUrl?props.openviduServerUrl:'https://i8a803.p.ssafy.io'
     const serverKey = props.openviduSecret?props.openviduSecret:'mpti'
@@ -41,6 +42,7 @@ const VideoRoom = (props) => {
     const [chatDisplay, setChatDisplay]= useState('none')
     const [currentVideoDevice, setCurrentVideoDevice]= useState(undefined)
     const [logDisplay, setLogDisplay] = useState('none')
+    const [reviewDisplay, setReviewDisplay] = useState('none')
     const OV = useRef(undefined);
     // func 
     const joinSession = () => {
@@ -73,7 +75,7 @@ const VideoRoom = (props) => {
 
     const timeSetWhile = (value) => {
         if(seconds+value>0){
-            sendSignalTimer({type:'alter', time:seconds+value})
+            sendSignalTimer({type:'alter', time:seconds+parseInt(value)})
         } else {
             sendSignalTimer({type:'alter', time:0})
         }
@@ -201,7 +203,10 @@ const VideoRoom = (props) => {
         setMyUserName('트레이너')
         // localUser.current = undefined;
         console.log('여기까지 왔어')
-        navigate('/user/home')
+        if(role==='user'){
+            toggleReview()
+        }
+        // navigate('/user/home')
         
     }
 
@@ -253,6 +258,7 @@ const VideoRoom = (props) => {
             newUser.setType('remote')
             let nickname = e.stream.connection.data.split('%')[0];
             newUser.setNickname(JSON.parse(nickname).clientData);
+            remotes.current=[]
             remotes.current.push(newUser);
             console.log(newUser, remotes.current, '들어가는 것 확인')
             if(localUserAccessAllowed) {
@@ -507,7 +513,9 @@ const VideoRoom = (props) => {
     // 토글 로그
     const toggleLog = () => {
         logDisplay==='none'?setLogDisplay('block'):setLogDisplay('none')
-
+    }
+    const toggleReview = () => {
+        reviewDisplay==='none'?setReviewDisplay('block'):setReviewDisplay('none')
     }
 
 
@@ -531,7 +539,6 @@ const VideoRoom = (props) => {
         <div id='container' className={styles.container}>
             <div className={styles.container2}>
 
-            
             <HeaderComponent
                 seconds={seconds}/>
 
@@ -545,6 +552,17 @@ const VideoRoom = (props) => {
                     trainerId={props.trainerId}
                     clientId={props.clientId}
                 />
+                <VideoClientReview
+                    // reviewDisplay={reviewDisplay}
+                    // toggleReview={toggleReview}
+                    reviewDisplay={reviewDisplay}
+                    trainerId={props.trainerId}
+                    clientId={props.clientId}
+                    clientName={props.clientName}
+                    trainerName={props.trainerName}
+                >
+
+                </VideoClientReview>
             <div id='middle_box' className={styles.container_body}>  
 
                 {localUser.current !== undefined
@@ -593,6 +611,7 @@ const VideoRoom = (props) => {
             leaveSession= {leaveSession}
             toggleChat= {toggleChat}
             toggleLog={toggleLog}
+            toggleReview ={toggleReview}
             setSeconds={setSeconds}
             timerStart={timerStart}
             timerStop={timerStop}

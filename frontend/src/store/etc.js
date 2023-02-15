@@ -269,6 +269,21 @@ export const getTodayLesson = (id) => async (dispatch) => {
     }
 }
 
+// 리뷰 작성
+export const writeReview = (userId, trainerId, star, memo, userName, trainerName) => async(dispatch) => {
+    try{
+        return await axios.post('/api/business/opinion/review/write',{
+            writerId:userId,
+            targetId:trainerId,
+            star:star,
+            memo:memo,
+            writerName:userName,
+            targetName:trainerName
+        }).then((res) => console.log(res.data))
+    } catch(err) {
+        return console.log('리뷰 작성 실패')
+    }
+}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;
