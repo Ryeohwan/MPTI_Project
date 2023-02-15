@@ -46,10 +46,10 @@ console.log('렌더링 확인')
       <div className={styles.home_trainer_box}>
         <ul className={styles.home_trainer_list}>
 
-          {trainer.map((it) => {
+          {trainer.map((it, index) => {
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>
-                <li key={it.id} className={styles.home_trainer_item}>
+                <li key={it.email} className={styles.home_trainer_item}>
                   <div className={styles.home_trainer_img}>
                     <img src={TrainerImg} alt=""/>
                   </div>
@@ -78,7 +78,7 @@ console.log('렌더링 확인')
 
       <div className={styles.home_review_box}>
         <ul className={styles.home_review_list}>
-          {review.map((it) => {
+          {review.map((it, index) => {
             return (
               <li key={it.id} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>

@@ -5,10 +5,12 @@ import ClientInfo from "./ClientInfo";
 import '../../Manager/Paging.css';
 import Pagination from "react-js-pagination";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyClient } from "../../../store/etc";
 const TrainerClientBody = (props) => {
+  const {id} = useSelector(state=>state.auth)
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState(""); //검색어
-  const [select, setSelect] = useState(1); //선택한 페이지
   const [targetClient, setTargetClient] = useState(undefined); //상세페이지 볼 클라이언트 id
   const [signupList, setSignupList] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,23 +19,15 @@ const TrainerClientBody = (props) => {
     console.log(page);
     setPage(page);
   };
-  const dispatch = useDispatch();
   useEffect(() => {
-    
-    axios
-      .post(`/api/user/userList/${page-1}`, { id: 1 })
-      .then((res) => {
+    dispatch(getMyClient(id, page)).then((res)=>{
+      console.log('나의 고객들',res)
+      setSignupList(res.content)
+        setTotalPage(res.totalElements);
+    }).catch((err) => {
+      console.log(err)
+    })
 
-        console.log(res);
-        console.log(res.data.content);
-        setSignupList(res.data.content)
-        setTotalPage(res.data.totalElements);
-        // setSignupList(res.content)
-
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [page]);
 
   return targetClient ? (

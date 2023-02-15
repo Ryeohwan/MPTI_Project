@@ -11,6 +11,7 @@
     align-items: center;
     margin-top: 10%;
     
+    
 }
 
 .header {
@@ -38,17 +39,36 @@
     font-size: 16px;
     margin-bottom: 12px;
 }
-
+.select_guide{
+    font-size: 15px;
+    color:  #ECECEC;
+    padding-top: 30px;
+    /* border-bottom: 1px solid #ececec; */
+    width: 100%;
+    text-align: center;
+  
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.guide_info{
+    overflow: scroll;
+    font-size: 12px;
+    height: 200px;
+    width: 350px;
+    color:#ececec;
+}
 .select_box{
     border-top: 1px solid #ececec;
     border-bottom: 1px solid #ececec;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 350px;
+    height: 450px;
     font-size: 32px;
     color: #ececec;    
 }
+
 
 
 .select_btn_box{

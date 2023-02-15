@@ -4,22 +4,23 @@ import axios from 'axios'
 // import { useSelector } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";    
 import { uploadImage } from '../../store/etc';
+import { getMyData } from '../../store/auth';
 
 
 const MyPageProfile = () => {
     const dispatch = useDispatch()
     const {email, name, role, image} = useSelector((state) => state.auth)
-    const [profileImage,setProfileImage] = useState(image)
-    // const {name, email, role, s3Url} = useSelector((state) => state.etc)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
-    console.log(email,name, role, image)
     const handlePictureUpload=async (e)=>{
         const formData =await new FormData();
         formData.append('email', email)
         formData.append('file', uploadPicture)
         // 업로드한 사진을 URL로 만들어서 성공하면 그 URL을 소스에. (window.URL.createObjectURL)
-        dispatch(uploadImage(role, formData)).then((res) => {setProfileImage(window.URL.createObjectURL(uploadPicture));setShowModal(false);})
+        // 2. 1번째 방법 아무리 생각해도 이상해서 다른방법 => cash boosting?? 캐쉬부수기 시행.
+        // 주의사항 : user랑 trainer auth에서 정보 받을때, user는 image에 s3url, trainer는 iamgeUrl로 들어오니 주의
+        await dispatch(uploadImage(role, formData)).then((res) => {setShowModal(false);})
+        !image && dispatch(getMyData(role, email)).then((res)=>{alert('업로드 완료')})
     }
 
 
@@ -42,7 +43,7 @@ const MyPageProfile = () => {
                 </div>
             }
             <div className={styles.MyPage_body_profile_box}>
-                <img className={styles.picture} src={profileImage?profileImage:'/profile_base.png'} alt='/profile_base.png'></img>
+                <img className={styles.picture} src={image?`${image}?${Math.random()}`:'/profile_base.png'} alt='/profile_base.png'></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
             <div className={styles.name}>{name} <span className={styles.name2}>{role}</span></div>

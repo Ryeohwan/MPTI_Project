@@ -84,7 +84,6 @@ export const trainerDetail = (email) => async (dispatch) => {
     try {
         const response = await axios.get(`/api/trainer/info/${email}`);
         console.log(response);
-        console.log(111)
         return response.data
     } catch (error) {
 
@@ -183,7 +182,8 @@ export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async
 export const getChatRoomList = (id, role) => async (dispatch) => {
     try{
         console.log('나의 아이디, 역할',id,role)
-        const response = await axios.get(`/api/chat/load/list/${id}/${role}`)
+        
+        const response = await axios.get(`/api/chat/load/list/${id}/${role==='trainer'?'TRAINER':'USER'}`)
         console.log(response)
         return response.data
     } catch (error) {
@@ -207,7 +207,7 @@ export const sendLog = (data) => async (dispatch) =>{
 export const uploadImage = (role, formData) => async (dispatch) => {
     try {
         if(role==='user'){
-            return axios.post('/api/user/upload', formData).then((res) => res).catch((err)=> 
+            return axios.post('/api/user/upload', formData).then((res) => {return res}).catch((err)=> 
             alert('업로드 실패'))
         }
         else if(role==='trainer'){
@@ -217,6 +217,56 @@ export const uploadImage = (role, formData) => async (dispatch) => {
 
     } catch(error) {
         return '에러'
+    }
+}
+// 이름으로 검색
+export const nameSearch = (page, word) => async (dispatch) => {
+    try{
+        console.log(123)
+        const response = await axios.get(`/api/trainer/search/name/${page}/${word}`)
+        console.log(response.data, '이름검색')
+        return response.data
+    } catch(err) {
+        return err;
+    }
+}
+
+// 날짜로 검색
+export const dateSearch = (page, date) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/trainer/search/date/${page}/${date}`)
+        // const response = await axios.get(`/api/trainer/search/date/0/20230224`)
+        console.log(response.data, '날짜 검색')
+        return response.data
+    } catch(err) {
+        
+    }
+}
+
+// 트레이너 오늘 스케줄(수업/수업 아닌것 포함) 가져오기
+export const getDaySchedule = (id, day, page) => async (dispatch) => {
+    try{
+        return await axios.get(`/api/business/reservation/page/${id}/${day.getFullYear()}/${day.getMonth()+1}/${day.getDate()}/${page-1}`).then((res)=> res.data)
+    } catch(err) {
+        return console.log('트레이너 오늘 수업 가져오기 실패')
+    }
+}
+
+// 트레이너 본인의 고객들 가져오기
+export const getMyClient = (id, page) => async (dispatch) => {
+    try{
+        return await axios.post(`/api/user/userList/${page-1}`, { id: id }).then(res=>res.data)
+    } catch(err) {
+        return console.log('수업 가져오기 실패')
+    }
+}
+
+// 트레이너 본인에게 예약된 회원 조회
+export const getTodayLesson = (id) => async (dispatch) => {
+    try{
+        return await axios.get(`/api/business/reservation/trainer/reserved/list/${id}`).then(res=>{console.log(res.data); return res.data;})
+    } catch(err) {
+        return console.log('예약된 회원들 못가져옴')
     }
 }
 
