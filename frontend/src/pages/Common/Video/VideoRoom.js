@@ -19,8 +19,8 @@ const VideoRoom = (props) => {
     const localUser = useRef(new userModel())
     const serverUrl = props.openviduServerUrl?props.openviduServerUrl:'https://i8a803.p.ssafy.io'
     const serverKey = props.openviduSecret?props.openviduSecret:'mpti'
-    const userName = props.user
-    const sessionName = props.sessionName
+    const userName = useState(props.user)
+    const sessionName = useState(props.sessionName)
     const remotes = useRef([]);
     const layout = useRef(new openviduLayout()) 
 
@@ -30,8 +30,10 @@ const VideoRoom = (props) => {
     const [myUserName,setMyUserName]= useState(userName)
     const session = useRef(undefined)
     const [messageReceived, setMessageReceived] = useState(false)
-    let hasBeenUpdated = false
-    let localUserAccessAllowed = false;
+    // --------------- let
+    const [hasBeenUpdated, setHasBeenUpdated] = useState(false)
+    const [localUserAccessAllowed, setLocalUserAccessAllowed] = useState(false);
+    //  ------------------
     const [seconds, setSeconds] = useState(30);
     const [timeStop,setTimeStop] = useState(true)
     // const [localUser, setLocalUser]= useState(undefined)
@@ -79,6 +81,7 @@ const VideoRoom = (props) => {
 
     // DidMoubnt
     useEffect(()=>{
+        console.log(subscribers)
         const layoutOptions = {
             maxRatio: 3 / 2,
             minRatio: 9 / 16,
@@ -91,7 +94,7 @@ const VideoRoom = (props) => {
             bigFirst: true,
             animate: true
         }
-        layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
+        // layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
         window.addEventListener('beforeunload', onbeforeunload);
 
         joinSession();
@@ -103,6 +106,7 @@ const VideoRoom = (props) => {
     },[])
 
     useEffect(()=>{
+        console.log(subscribers, '섭스크라이버 바뀌면 체크')
         if(localUser.current){
             sendSignalUserChanged({
                 isAudioActive: localUser.current.isAudioActive(),
@@ -153,7 +157,8 @@ const VideoRoom = (props) => {
           publisher.on('accessAllowed', () => {
             session.current.publish(publisher).then(() => {
               updateSubscribers();
-              localUserAccessAllowed = true;
+              setLocalUserAccessAllowed(true)
+            //   localUserAccessAllowed = true; 수정
               if (props.joinSession) {
                 props.joinSession();
               }
@@ -172,7 +177,7 @@ const VideoRoom = (props) => {
         setCurrentVideoDevice(videoDevices[0]);
         localUser.current.getStreamManager().on('streamPlaying', (e) =>{
             // updateLayout()
-            publisher.videos[0].video.parentElement.classList.remove('custom-class')
+            // publisher.videos[0].video.parentElement.classList.remove('custom-class')
         })
 
       };
@@ -194,7 +199,7 @@ const VideoRoom = (props) => {
         setMyUserName('트레이너')
         // localUser.current = undefined;
         console.log('여기까지 왔어')
-        navigate('/client/home')
+        navigate('/user/home')
         
     }
 
@@ -227,8 +232,9 @@ const VideoRoom = (props) => {
         let index = remoteUser.indexOf(userStream,0);
 
         if(index > -1) {
+            console.log(remoteUser,'remoteUser넣는데 무엇이 들어오나')
             remoteUser.splice(index,1);
-            setSubscribers(remoteUser);
+            setSubscribers((prev)=>[...prev,remoteUser]);
         }
     }
     const subscribeToStreamCreated = () => {
@@ -236,7 +242,7 @@ const VideoRoom = (props) => {
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
                 checkSomeoneShareScreen();
-                subscriber.videos[0].video.parentElement.classList.remove('custom-class')
+                // subscriber.videos[0].video.parentElement.classList.remove('custom-class')
             })
             let newUser = new userModel();
             newUser.setStreamManager(subscriber);
@@ -264,6 +270,7 @@ const VideoRoom = (props) => {
 
     const subscribeToUserChanged = () => {
         session.current.on('signal:userChanged', (e) => {
+            console.log(e)
             let remoteUsers = subscribers;
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
@@ -282,6 +289,7 @@ const VideoRoom = (props) => {
                     }
                 }
             });
+            console.log('remote유저를 subscriber에 넣기', remoteUsers)
             setSubscribers(remoteUsers)
         })
     }
@@ -297,6 +305,7 @@ const VideoRoom = (props) => {
             data: JSON.stringify(data),
             type: 'userChanged'
         };
+        console.log('유저바뀜', signalOptions.data)
         session.current.signal(signalOptions)
     }
 
@@ -441,10 +450,12 @@ const VideoRoom = (props) => {
     const checkSize = () => {
         if(document.getElementById('layout').offsetWidth <= 700 && !hasBeenUpdated) {
             toggleChat('none')
-            hasBeenUpdated = true;
+            setHasBeenUpdated(true)
+            // HasBeenUpdated = true; 여기서 수정
         }
         if (document.getElementById('layout').offsetWidth > 700 && hasBeenUpdated) {
-            hasBeenUpdated = false;
+            setHasBeenUpdated(false)
+            // hasBeenUpdated = false; 여기서 수정
           }
     }
 
@@ -479,7 +490,8 @@ const VideoRoom = (props) => {
                 }
 
                 {subscribers.map((sub, index) => {
-                    return <div key={index} className="OT_root OT_publisher custom-class" id='remoteUsers'>
+                    console.log(sub,index,'섭스크라이브 확인');
+                    return <div key={index} className="" id='remoteUsers'>
                             <StreamComponent 
                             user={sub} 
                             streamId={sub.streamManager.stream.streamId}/>
@@ -531,6 +543,7 @@ const VideoRoom = (props) => {
     }
     async function createSession(sessionId) {
         const data = JSON.stringify({customSessionId: sessionId});
+        
         return axios.post(serverUrl+'/openvidu/api/sessions', data, {
             headers: {
                 Authorization:'Basic ' + btoa('OPENVIDUAPP:' + serverKey),
