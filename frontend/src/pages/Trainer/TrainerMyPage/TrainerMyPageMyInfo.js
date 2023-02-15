@@ -2,26 +2,19 @@ import styles from './TrainerMyPageMyInfo.module.css'
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
+import { changeTrainerInfo } from '../../../store/etc';
 
-const request_url = '/api/trainer/info/update/'
 
 const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
-    console.log(myInfo)
+    const dispatch = useDispatch()
     const email = myInfo.email
     const [edit,setEdit] = useState(false);
     const setInfo = async (e) => {
-        console.log(e.target.phone.value, myInfo.phone)
         e.preventDefault()
         if(e.target.phone.value!==myInfo.phone){
-            console.log(typeof(e.target.phone.value))
-            console.log(e.target.phone.value)
-            const data = await axios.post(request_url+email, {phone:e.target.phone.value})
-            setMyInfo(data.data)
-            setEdit(false);
-            return;
+            const data = await dispatch(changeTrainerInfo(email,e.target.phone.value))
+            setMyInfo(data)
         }
-        await axios.post('/api/trainer/info/update', {phone:'010-1234-4567'})
-        
         setEdit(false)
     }
 
@@ -69,7 +62,10 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
                                     </div>
                             </div>
                             </div>
-                            <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} type='submit'>완료✔</button></div>
+                            <div className={styles.edit_btns}>
+                                <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} onClick={(e)=>{e.preventDefault(); setEdit((prev=>!prev))}}>취소</button></div>
+                                <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} type='submit'>완료✔</button></div>
+                            </div>
                     </form>
                         // edit 상태면 위의 양식을 출력 
                     :

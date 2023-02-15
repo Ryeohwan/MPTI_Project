@@ -4,8 +4,8 @@
 .modal {
     top: 100px;
     position: absolute;
-    width: 450px;
-    height: 800px;
+    width: 350px;
+    height: 600px;
     right: 20%;
     display: no;
     flex-direction: column;
@@ -14,6 +14,7 @@
     border: 1px solid #C9FD61;
     padding: 5px 20px;
     border-radius: 25pt;
+    z-index: 1000;
 }
 .chat_title_box {
     display: flex;

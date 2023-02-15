@@ -27,17 +27,16 @@ const authSlice = createSlice({
             state.role= action.payload;
         },
         getRoleToken: (state, action) => {
-            console.log(action.payload)
             state.roleToken = action.payload;
         },
         loginGetData: (state, action) => {
-            console.log("login getdata",  action.payload.payload);
             state.name = action.payload.payload.name;
             state.email = action.payload.payload.email;
             state.phone = action.payload.payload.phone;
             state.gender = action.payload.payload.gender;
-            state.image = state.role==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
+            state.image = state.roleToken==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
             state.id = action.payload.payload.id;
+            state.role = state.roleToken;
         },
         socialGetData: (state, action) => {
             console.log("social getdata",  action.payload.payload);
@@ -90,7 +89,6 @@ const authSlice = createSlice({
 
 
 export const login = (email, password) => async (dispatch) => {
-    console.log(email, password, 'adadasdasd')
         dispatch(authActions.loginRequest());
     try {
         const response = await axios.post("/api/auth/login", { email, password });
@@ -159,8 +157,6 @@ export const duplicateCheck = (type,email) => async(dispatch)=>{
     try {
         const response2=await axios.get(`/api/user/duplicate/${email}`);
         const response= await axios.get(`/api/trainer/duplicate/${email}`);
-        console.log(response);
-        console.log("중복확인 성공");
         return "중복된 아이디가 없습니다";
         // dispatch(authActions.duplicateMsg("중복된 아이디가 없습니다."));
     } catch (error) {

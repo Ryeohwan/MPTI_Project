@@ -13,12 +13,12 @@ const Home = () => {
   const [trainer, setTrainer] = useState([]);
   const [review, setReview] = useState([]);
 
-  const starRate = (star) => {
+  const starRate = (star, identifier) => {
     const elements = [];
     for (let i = 0; i < star; i++) {
       elements.push(
         <Icon
-          key={i + 5}
+          key={`${identifier}-${i+5}`}
           icon="openmoji:star"
           className={styles.star_icon}
         ></Icon>
@@ -27,7 +27,7 @@ const Home = () => {
     for (let i = 0; i < 5 - star; i++) {
       elements.push(
         <Icon
-          key={i}
+          key={`${identifier}-${i}`}
           icon="ic:round-star-border"
           className={styles.border_star_icon}
         ></Icon>
@@ -64,8 +64,8 @@ const Home = () => {
 
           {trainer.map((it, index) => {
             return (
-              <Link to={`/${role}/trainerdetail`} state={it}>
-                <li key={index} className={styles.home_trainer_item}>
+              <Link key={`trainer-${it.id}`} to={`/${role}/trainerdetail`} state={it}>
+                <li className={styles.home_trainer_item}>
                   <div className={styles.home_trainer_img}>
                     <img src={it.imageUrl} alt="" />
                   </div>
@@ -75,7 +75,7 @@ const Home = () => {
                     </div>
                     <br></br>
                     <div className={styles.home_trainer_rate}>
-                      <div>{starRate(it.stars)}</div>
+                      <div>{starRate(it.stars, it.id)}</div>
                       <div className={styles.star_rate}>{it.stars}점</div>
                     </div>
                     <div className={styles.home_trainer_introduce}>
@@ -99,7 +99,7 @@ const Home = () => {
           {review.map((it, index) => {
             console.log(it);
             return (
-              <li key={index} className={styles.home_review_item}>
+              <li key={`review-${it.id}`} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>
                   <div className={styles.home_review_img}>
                     <img src={smileImg} alt=""></img>
@@ -114,7 +114,7 @@ const Home = () => {
                     {it.writerName}
                   </div>
                   <div className={styles.home_review_start}>
-                    {starRate(it.star)}{" "}
+                    {starRate(it.star, it.writerName)}{" "}
                   </div>
                 </div>
 

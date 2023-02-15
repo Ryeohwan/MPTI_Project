@@ -19,7 +19,7 @@ console.log('ScheduleCardItem2.js 트레이너페이지',props.trainerId, props.
           <div className={styles.card_item_info_txt}></div>
           <div>{props.year}.{props.month}.{props.day} {props.hour}시</div>
         </div>
-        <button className={styles.button}><Link to="/lesson" state={{trainerId:props.trainerId, clientId:props.userId, name:props.trainerName,sessionId:props.sessionId, clientName:props.userName, trainerName:props.trainerName, image:image, role:role}}><div>입장</div></Link></button>
+        <button className={styles.button}><Link to="/lesson" state={{trainerId:props.trainerId, clientId:props.userId, name:props.trainerName,sessionId:props.sessionId, clientName:props.userName, trainerName:props.trainerName, image:image, role:role}}><div className={styles.button_text}>입장</div></Link></button>
       </div>
     );
   }

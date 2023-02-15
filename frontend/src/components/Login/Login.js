@@ -6,6 +6,7 @@ import naver from "../../assets/img/login_naver.png";
 import google from "../../assets/img/login_google.png";
 import { useNavigate } from 'react-router-dom';
 import { authActions, login }  from '../../store/auth';
+import logo from '../../assets/img/MPTIlogo.png'
 
 const Login = () => {
 const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const onSubmitHandler = (e)=>{
 return (
     <div className={styles.Login}> 
     <div className={styles.header_box}>
-                <div className={styles.header}>MPTI</div>
+        <div className={styles.header}><img src={logo} alt=''/></div>
             </div>
             
         <form onSubmit={onSubmitHandler}>
