@@ -17,8 +17,9 @@ const ClientTrainerDetail = () => {
   const awards = JSON.parse(location.state.awards)
   const license = JSON.parse(location.state.license)
   const career = JSON.parse(location.state.career)
-  const s3Url = location.state.s3Url
+  // const s3Url = location.state.s3Url
   const email = location.state.email
+  const image = location.state.imageUrl
 
   // 채팅방 Id 가져오기 
   const goChat = async () => {
@@ -29,7 +30,7 @@ const ClientTrainerDetail = () => {
     dispatch(etcActions.chatTarget(targetName))
     return roomId
   }
-
+  
   return (
     <div>
       <TopTitle
@@ -41,7 +42,7 @@ const ClientTrainerDetail = () => {
         <div className={styles.trainer_profile_box}>
           <div className={styles.trainer_img_wrapper}>
             <img
-              src={s3Url?s3Url:'/profile_base.png'}
+              src={image ? image:'/profile_base.png'}
               alt="profile_base.png"
               className={styles.trainer_detail_img}
             />
@@ -70,7 +71,7 @@ const ClientTrainerDetail = () => {
         </div>
 
         <div className={styles.trainer_info_box}>
-          <div className={styles.trainer_prize_title}>수상</div>
+          <div className={styles.trainer_prize_title}>🏆수상</div>
           <div className={styles.trainer_prize_content_box}>
             {awards.map((item) => (
               <div key={item} className={styles.trainer_prize_content}>
@@ -79,7 +80,7 @@ const ClientTrainerDetail = () => {
             ))}
           </div>
 
-          <div className={styles.trainer_certificate_title}>자격증</div>
+          <div className={styles.trainer_certificate_title}>📜자격증</div>
           <div className={styles.trainer_certificate_content_box}>
             {license.map((item) => (
               <div key={item} className={styles.trainer_certificate_content}>
@@ -88,7 +89,7 @@ const ClientTrainerDetail = () => {
             ))}
           </div>
 
-          <div className={styles.trainer_career_title}>경력</div>
+          <div className={styles.trainer_career_title}>👨‍🎓경력</div>
           <div className={styles.trainer_career_content_box}>
             {career.map((item) => (
               <div key={item} className={styles.trainer_career_content}>

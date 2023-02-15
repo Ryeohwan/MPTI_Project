@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -61,7 +60,7 @@ export const trainerListByPage = (pagenum) => async (dispatch) => {
         const response = await axios.get(`/api/trainer/list/${pagenum}`);
         console.log(response.data);
     } catch (error) {
-        console.log(error)
+
     }
 }
 
@@ -182,7 +181,8 @@ export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async
 export const getChatRoomList = (id, role) => async (dispatch) => {
     try{
         console.log('나의 아이디, 역할',id,role)
-        const response = await axios.get(`/api/chat/load/list/${id}/${role}`)
+        
+        const response = await axios.get(`/api/chat/load/list/${id}/${role==='trainer'?'TRAINER':'USER'}`)
         console.log(response)
         return response.data
     } catch (error) {
@@ -218,7 +218,29 @@ export const uploadImage = (role, formData) => async (dispatch) => {
         return '에러'
     }
 }
+// 이름으로 검색
+export const nameSearch = (page, word) => async (dispatch) => {
+    try{
+        console.log(123)
+        const response = await axios.get(`/api/trainer/search/name/${page}/${word}`)
+        console.log(response.data, '이름검색')
+        return response.data
+    } catch(err) {
+        return err;
+    }
+}
 
+// 날짜로 검색
+export const dateSearch = (page, date) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/trainer/search/date/${page}/${date}`)
+        // const response = await axios.get(`/api/trainer/search/date/0/20230224`)
+        console.log(response.data, '날짜 검색')
+        return response.data
+    } catch(err) {
+        
+    }
+}
 
 // 트레이너 오늘 스케줄(수업/수업 아닌것 포함) 가져오기
 export const getDaySchedule = (id, day, page) => async (dispatch) => {

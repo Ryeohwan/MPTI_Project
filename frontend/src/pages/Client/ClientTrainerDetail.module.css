@@ -27,6 +27,7 @@
     position: relative;
     border-radius: 70%;
     width: 80%;
+    height: 80%;
 }
 .trainer_name {
     text-align: center;
