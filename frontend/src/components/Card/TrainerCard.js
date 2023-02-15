@@ -19,7 +19,7 @@ const TrainerCard = (trainers) => {
     }
     return elements
   }
-
+  
   useEffect(()=>{
     setTrainerList(trainers.trainers);
   },[trainers.trainers]);
