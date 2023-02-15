@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
-import TrainerImg from "./../../assets/img/trainer.PNG";
 import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -63,11 +62,12 @@ const Home = () => {
       <div className={styles.home_trainer_box}>
         <ul className={styles.home_trainer_list}>
           {trainer.map((it, index) => {
+            console.log("이거다 임마",it.imageUrl)
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>
                 <li key={index} className={styles.home_trainer_item}>
                   <div className={styles.home_trainer_img}>
-                    <img src={TrainerImg} alt="" />
+                    <img src={it.imageUrl} alt="" />
                   </div>
                   <div className={styles.home_trainer_info}>
                     <div className={styles.home_trainer_name}>
@@ -102,7 +102,7 @@ const Home = () => {
               <li key={index} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>
                   <div className={styles.home_review_img}>
-                    <img src={TrainerImg} alt="" />
+                    <img src={it.imageUrl} alt="" />
                   </div>
                   <div className={styles.home_review_name}>
                     {it.targetName}{" "}

@@ -1,14 +1,14 @@
 import { useState,useEffect } from "react";
 import styles from "./TrainerCard.module.css";
 import { useSelector } from "react-redux";
-import TrainerImg from "./../../assets/img/trainer.PNG";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
 const TrainerCard = (trainers) => {
+  
   const [trainerList, setTrainerList] = useState(trainers.trainers);
   const {role}= useSelector((state) => state.auth);
-
+  
   const starRate = (star) => {
     const elements = [];
     for (let i=0; i<star; i++) {
@@ -27,11 +27,12 @@ const TrainerCard = (trainers) => {
   return (
     <ul className={styles.trainer_list}>
       {trainerList.map((it) => {
+      
         return (
           <Link to={`/${role}/trainerdetail`} state={it}>
             <li key={it.email} className={styles.trainer_item}>
               <div className={styles.trainer_img}>
-                <img src={TrainerImg} alt="" />
+                <img src={it.imageUrl} alt="" />
               </div>
               <div className={styles.content_box2}>
               <div>{it.name} 트레이너</div>

@@ -5,7 +5,9 @@
 
 
 /* 홈 부분 */
-
+body {
+    margin-bottom: 3%;
+}
 .Home {
     font-family: 'DungGeunMo';
     color: #ececec;
@@ -54,7 +56,7 @@
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #ececec;
-    background-color: #7b7b7b; 
+    background-color: #ececec; 
 }
 
 .home_trainer_img {
