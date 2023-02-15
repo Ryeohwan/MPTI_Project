@@ -182,6 +182,7 @@ const VideoRoom = (props) => {
         localUser.current.getStreamManager().on('streamPlaying', (e) =>{
             // updateLayout()
             publisher.videos[0].video.parentElement.classList.remove('custom-class')
+            setReRender((prev)=>!prev)
         })
 
       };
@@ -189,6 +190,7 @@ const VideoRoom = (props) => {
     const updateSubscribers = () => {
         console.log('updateSubscribers에서 setSubscribe 실행 확인', remotes.current)
         setSubscribers(remotes.current);
+        setReRender((prev)=>!prev)
       }
 
     const leaveSession = () => {
@@ -206,7 +208,10 @@ const VideoRoom = (props) => {
         if(role==='user'){
             toggleReview()
         }
-        // navigate('/user/home')
+        else{
+
+            navigate('/user/home')
+        }
         
     }
 
@@ -244,12 +249,14 @@ const VideoRoom = (props) => {
             remoteUser.splice(index,1);
             setSubscribers((prev)=>[...prev,remoteUser]);
         }
+        setReRender(prev=>!prev)
     }
     const subscribeToStreamCreated = () => {
         session.current.on('streamCreated', (e) => {
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
                 checkSomeoneShareScreen();
+                setReRender((prev)=>!prev)
                 // subscriber.videos[0].video.parentElement.classList.remove('custom-class')
             })
             let newUser = new userModel();
@@ -265,8 +272,9 @@ const VideoRoom = (props) => {
                 console.log('localUserAcess를 확인합니다.')
                 updateSubscribers();
             }
-
+            
         })
+
     }
     const subscribeToStreamDestroyed = () => {
         session.current.on('streamDestroyed', (e) => {
@@ -275,6 +283,7 @@ const VideoRoom = (props) => {
                 checkSomeoneShareScreen();
             }, 20)
             e.preventDefault();
+            setReRender(prev=>!prev)
             // updateLayout()
         })
     }
@@ -462,6 +471,7 @@ const VideoRoom = (props) => {
             publisher.on('streamPlaying', () => {
                 // updateLayout();
                 publisher.video[0].video.parentElement.classList.remove('custom-class');
+                reRender(prev=>!prev)
             })
     })}
 
