@@ -11,11 +11,12 @@ import IconButton from "@material-ui/core/IconButton"
 import HighlightOff from "@material-ui/icons/HighlightOff"
 import FormHelperText from "@material-ui/core/FormHelperText"
 const StreamComponent = (props) => {
+    console.log(props, 'StreamComponent 내부 확인')
     const [nickname, setNickname] = useState(props.user.getNickname())
     const [showForm, setShowForm] = useState(false)
     const [mutedSound, setMutedSound] = useState(false)
     const [isFormValid, setIsFormValid] = useState(true)
-    console.log(props.user, '유저데이터')
+    console.log(props, '상대? 유저데이터')
     // const handleChange = (e) => {
     //     setNickname(e.target.value)
     //     e.preventDefault();

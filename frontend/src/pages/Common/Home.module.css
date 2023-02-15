@@ -32,7 +32,7 @@
 .home_trainer_box {
     height: 320px;
     /* background-color: #454648; */
-    background-color: black;
+    background-color: rgb(26, 25, 25);
     border-radius: 10px;
     /* border: 1px solid #ececec; */
 }
@@ -54,7 +54,7 @@
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #ececec;
-    background-color: #454648; 
+    background-color: #7b7b7b; 
 }
 
 .home_trainer_img {
@@ -88,16 +88,27 @@ li {
 }
 
 .home_trainer_name {
-    font-weight: bold
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .home_trainer_rate {
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40%;
 }
-
-.home_trainer_rate span {
+.star_rate {
+    font-size: 15px;
+    margin-top: 2.5px;
+}
+.star_icon {
     color: #FFF500;
-    font-size: 26px;
+    font-size: 18px;
+}
+.border_star_icon {
+    color:rgb(78, 78, 78);
+    font-size: 18px;
 }
 
 .home_trainer_introduce {
@@ -111,7 +122,7 @@ li {
 
 .home_review_box {
     height: 170px;
-    background-color: black;
+    background-color: rgb(26, 25, 25);
     border-radius: 5px;
     box-shadow: 2px 2px 2px #ececec;
 }
@@ -126,7 +137,7 @@ li {
 }
 
 .home_review_item {
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     /* background-color: #ececec; */
     width: 210px;
     height: 140px;
@@ -135,7 +146,7 @@ li {
     margin-right: 5px;
     color: #000000;
     border: 1px solid white;
-    background-color: #454648; 
+    background-color: #7b7b7b; 
 }
 
 .home_review_top {
@@ -178,9 +189,11 @@ li {
 
 .home_review_bottom {
     background-color: white;
-    padding: 6px;
+    padding: 3px;
     font-size: 12px;
     font-family: sans-serif;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    height: 30%;
 }

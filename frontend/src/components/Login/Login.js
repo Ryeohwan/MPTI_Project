@@ -21,15 +21,14 @@ const [userInfo, setUserInfo] = useState({
     passwordMsg: ""
 })
 
-
-console.log("로그인상태", isLoggedIn);
-
 useEffect(()=>{
     if(roleToken === null){
+        
     }else{
         navigate(`/${roleToken}/home`);
         // navigate(`/client/home`);
     }
+
 },[roleToken]) 
 
 const userInfoHandler= (e)=>{
