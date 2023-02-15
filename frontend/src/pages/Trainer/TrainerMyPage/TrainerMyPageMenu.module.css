@@ -1,0 +1,32 @@
+.menu_box{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 20px 10px;
+    background-color: #323234;
+    border-radius: 20px;
+    gap: 10px;
+    text-align: center;
+}
+
+.menu_title{
+    font-size: 20px;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 10px;
+}
+
+.menu_item{
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+.select{
+    position: absolute;
+    color: chartreuse;
+    line-height:16px;
+    padding-left: 5px;
+}
+
+.unselect{
+    display: none;
+}
+
