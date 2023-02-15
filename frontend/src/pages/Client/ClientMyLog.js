@@ -19,7 +19,7 @@ const ClientMyLog = () => {
     labels: ["biceps", "triceps", "chest", "legs", "shoulder", "back", "core", "aerobic"],
     datasets: [
       {
-        data: [1, 2, 4, 5, 2, 1, 2, 0],
+        data: [0, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
       }

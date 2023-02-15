@@ -31,7 +31,7 @@ const authSlice = createSlice({
             state.roleToken = action.payload;
         },
         loginGetData: (state, action) => {
-            console.log("여기임 ㅋㅋ 여기 ㅋㅋ",  action.payload.payload);
+            console.log("login getdata",  action.payload.payload);
             state.name = action.payload.payload.name;
             state.email = action.payload.payload.email;
             state.phone = action.payload.payload.phone;
@@ -39,6 +39,16 @@ const authSlice = createSlice({
             state.image = action.payload.payload.s3Url;
             state.id = action.payload.payload.id;
         },
+        socialGetData: (state, action) => {
+            console.log("social getdata",  action.payload.payload);
+            state.email = action.payload.payload.email;
+            state.id = action.payload.payload.id;
+            state.roleToken = action.payload.payload.roleToken;
+            state.isLoggedIn = true;
+        },
+
+
+
         loginFailure: (state, action) => {
             state.isLoading = false;
             state.isLoggedIn = false;
