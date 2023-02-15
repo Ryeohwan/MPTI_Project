@@ -55,6 +55,8 @@ const Lesson = ()=>{
                             error={handlerErrorEvent}
                             clientId={location.state.clientId}
                             trainerId={location.state.trainerId}
+                            clientName={location.state.clientName}
+                            trainerName={location.state.trainerName}
                         />
                     </div>
                 )}
