@@ -27,17 +27,16 @@ const authSlice = createSlice({
             state.role= action.payload;
         },
         getRoleToken: (state, action) => {
-            console.log(action.payload)
             state.roleToken = action.payload;
         },
         loginGetData: (state, action) => {
-            console.log("여기임 ㅋㅋ 여기 ㅋㅋ",  action.payload.payload);
             state.name = action.payload.payload.name;
             state.email = action.payload.payload.email;
             state.phone = action.payload.payload.phone;
             state.gender = action.payload.payload.gender;
-            state.image = state.role==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
+            state.image = state.roleToken==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
             state.id = action.payload.payload.id;
+            state.role = state.roleToken;
         },
         loginFailure: (state, action) => {
             state.isLoading = false;
@@ -79,20 +78,17 @@ const authSlice = createSlice({
 
 
 export const login = (email, password) => async (dispatch) => {
-    console.log(email, password, 'adadasdasd')
         dispatch(authActions.loginRequest());
     try {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-
         const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
+        console.log(role, 'auth const login 에서 role의 값 받았습니다.')
+        
         const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
         dispatch(authActions.getRoleToken(role))
-
-        console.log(userInfo,'여긴안와');
         dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
-
         dispatch(authActions.loginSuccess(role));
      
     } catch (error) {
@@ -141,8 +137,6 @@ export const duplicateCheck = (type,email) => async(dispatch)=>{
     try {
         const response2=await axios.get(`/api/user/duplicate/${email}`);
         const response= await axios.get(`/api/trainer/duplicate/${email}`);
-        console.log(response);
-        console.log("중복확인 성공");
         return "중복된 아이디가 없습니다";
         // dispatch(authActions.duplicateMsg("중복된 아이디가 없습니다."));
     } catch (error) {
