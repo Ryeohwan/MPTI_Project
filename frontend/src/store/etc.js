@@ -285,5 +285,14 @@ export const writeReview = (userId, trainerId, star, memo, userName, trainerName
     }
 }
 
+// 트레이너 개인정보 바꾸기(휴대폰 번호)
+export const changeTrainerInfo = (email, phone) => async (dispatch) => {
+    try{
+        return await axios.post('/api/trainer/info/update/'+email,{phone}).then((res)=>res.data)
+    } catch(err) {
+        return alert('트레이너 정보 바꾸기 문제가 생겼습니다.')
+    }
+}
+
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;
