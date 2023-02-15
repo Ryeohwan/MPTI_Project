@@ -4,11 +4,12 @@ import { useLocation, Link } from "react-router-dom";
 import TopTitle from "../../components/Common/TopTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { etcActions, getChatRoom, trainerDetail } from "../../store/etc";
+
 const ClientTrainerDetail = () => {
   const {id, role} = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const location = useLocation();
-
+  console.log(location.state)
   // 클릭한 트레이너 정보들 보기쉽게 정리 (아래에)
   const name= location.state.name;
   const gender = location.state.gender;
