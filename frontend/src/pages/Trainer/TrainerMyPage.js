@@ -14,7 +14,7 @@ import { trainerDetail, trainerReview } from '../../store/etc';
 const paths = ['myschedule', 'myreview', 'myinfo']
 const TrainerMyPage = (props) => {
     const dispatch = useDispatch();
-    const {email, id} = useSelector((state) => state.etc);
+    const {email, id} = useSelector((state) => state.auth);
     const [myInfo, setMyInfo] = useState(null);
     const [myReview, setMyReview] = useState([]);
     const [reviewPage, setReviewPage] = useState(0);

@@ -42,7 +42,7 @@
 }
 
 .sub_info {
-    height: 250px;
+    height: 300px;
     margin-top: 10px;
     border-radius: 5px;
     border: 1px solid white;
@@ -95,11 +95,12 @@
 .info_select {
     display: flex;
     align-items: center;
-    /* margin-bottom: 13px; */
+    margin-bottom: 7px;
 }
 
 .info_result {
     width: 65%;
+    line-height: 1.3;
 }
 
 .info_result h3 {
@@ -113,6 +114,8 @@
     height: 30px;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 11px;
+    margin-left: 6%;
     font-size: 15px;
     background-color: rgb(201, 253, 97);
 }
@@ -127,7 +130,7 @@
 
 .graph_chart {
     display: flex;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .graph_part {
