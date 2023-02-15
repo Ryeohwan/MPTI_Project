@@ -206,14 +206,17 @@ const ClientMyLog = () => {
           <div className={styles.info_result}>
             <h3>나의 체질량 지수(BMI) 결과</h3>
 
-            <div className={styles.bmi}>체질량 지수(BMI)란?
-              BMI는 몸무게를 신장으로 나눈 수치로 저체중, 정상체중, 과체중, 혹은 비만 중 어디에 속하는지를 알려줍니다. 전문가들은 환자의 만성질환 위험을 가늠하기 위해 BMI를 사용하기도 합니다. 주의: BMI는 신장과 체중만을 이용한 결과이기 때문에 체지방량을 대표하지는 않습니다. 그러므로 지방량, 근육량, 혹은 뼈 무게를 구분할 수 없습니다.</div>
+            <div className={styles.bmi}>
+              <span style={{color: "rgb(201, 253, 97)"}}>체질량 지수(BMI)란 ? </span>
+              BMI는 몸무게를 신장으로 나눈 수치로 저체중, 정상체중, 과체중, 혹은 비만 중 어디에 속하는지를 알려줍니다. 전문가들은 환자의 만성질환 위험을 가늠하기 위해 BMI를 사용하기도 합니다. 
+              <br/><br/>
+              <span style={{color: "rgb(201, 253, 97)"}}>주의 : </span>BMI는 신장과 체중만을 이용한 결과이기 때문에 체지방량을 대표하지는 않습니다. 그러므로 지방량, 근육량, 혹은 뼈 무게를 구분할 수 없습니다.</div>
 
 
             <div className={styles.result}>
               {!userInfo.isChk ? <div>고객님의 bmi수치는 <span>{userInfo.bmi}</span>  입니다. 이는 {
 
-                userInfo.msg === "저체중" || userInfo.msg === "과체중" ? <span style={{ color: "red" }}>{userInfo.msg} 상태</span> : <span style={{ color: "blue" }}>{userInfo.msg} 상태</span>} 입니다. </div> : null}
+                userInfo.msg === "저체중" || userInfo.msg === "과체중" ? <span style={{ color: "#FF7493" }}>{userInfo.msg} 상태</span> : <span style={{ color: "#3399FF" }}>{userInfo.msg} 상태</span>} 입니다. </div> : null}
             </div>
 
 

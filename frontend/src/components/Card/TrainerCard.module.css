@@ -58,11 +58,12 @@ li {
 }
 
 .star_icon {
-    color: rgb(188, 188, 1);
-    
+    color: rgb(221, 203, 12);
 }
 
-
+.border_star_icon {
+    color: rgb(148, 147, 147);
+}
 .content_box2 {
     background-color: #ececec;
     border-radius: 8px;

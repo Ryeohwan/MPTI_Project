@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
 import styles from "./TrainerMyPageMySchedule.module.css";
 import Calendar from "../../../components/Calendar/Calendar";
 import axios from "axios";
 
 
 const TrainerMyPageMySchedule = () => {
+  const {id, name} = useSelector((state) => state.auth)
   const morning = [6, 7, 8, 9, 10, 11];
   const afternoon = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
   const formatToday = format(new Date(), "yyyy-MM-dd");
@@ -17,7 +19,7 @@ const TrainerMyPageMySchedule = () => {
   const [daySchedule, setDaySchedule] = useState([]);                     // 캘린더에서 클릭한 날짜의 데이터를 daySchedule에 저장
   const [timeArray, setTimeArray] = useState([]);                         // 이미 예약된 레슨 시간 + 내가 열어둔 레슨 시간
   const [click, setClick] = useState(false)
-
+  console.log(id, name)
   const postClick = () => {
     setClick(!click)
   }
@@ -26,15 +28,14 @@ const TrainerMyPageMySchedule = () => {
   useEffect(() => {
     async function getReservation(){
       const data = await axios.get("/api/business/reservation/list");
-      setAllData(data.data);
+      setAllData(data.data.filter((item) => item.trainerId === id));
     };
     getReservation();
   }, [click])
-
+  
   // # 캘린더에서 클릭한 날짜의 특정 스케쥴 받아온 clickedDaySchedule을 props로 올려받음
   async function getDaySchedule(intDate){
-    const trainerId = 1;
-    const data = await axios.get(`/api/business/reservation/list/${trainerId}/${intDate[0]}/${intDate[1]}/${intDate[2]}`);
+    const data = await axios.get(`/api/business/reservation/list/${id}/${intDate[0]}/${intDate[1]}/${intDate[2]}`);
     const clickedDaySchedule = data.data;
     console.log(clickedDaySchedule);
     setDaySchedule(clickedDaySchedule);
@@ -53,11 +54,6 @@ const TrainerMyPageMySchedule = () => {
     }
   }, [daySchedule])
 
-
-  // totalTimeArray : setTimeArray()에 담아 최종적으로 timeArray로 저장하고 싶은 배열 (예약O + 오픈O)
-  // reservedHour : 회원이 예약을 한 시간(예약 O + 오픈 ㅇ)
-
-
   console.log("timeArray",timeArray)
 
   const handleClick = (event, time) => {
@@ -73,15 +69,16 @@ const TrainerMyPageMySchedule = () => {
   useEffect(() => {
     async function getReservation(){
       const data = await axios.get("/api/business/reservation/list");
-      setAllData(data.data);
+      setAllData(data.data.filter((item) => item.trainerId === id));
     };
     getReservation();
   }, []);
-
+  
+  console.log(allData)
   const sendData = () => {
     const data = {
-      trainerId: 1,
-      trainerName: "원쵸디",
+      trainerId: id,
+      trainerName: name,
       year: clickedDay[0],
       month: clickedDay[1],
       day: clickedDay[2],
@@ -95,7 +92,6 @@ const TrainerMyPageMySchedule = () => {
     axios.get("/api/business/reservation/list")
     };
     
-
   return (
     <div className={styles.container}>
       <div className={styles.bigtxt}>스케줄 조정</div>

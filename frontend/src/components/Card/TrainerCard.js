@@ -13,7 +13,7 @@ const TrainerCard = (trainers) => {
   useEffect(()=>{
     setTrainerList(trainers.trainers);
   },[trainers.trainers]);
- 
+  
   return (
     <ul className={styles.trainer_list}>
       {trainerList && trainerList.map((it) => {
@@ -28,11 +28,7 @@ const TrainerCard = (trainers) => {
               <div className={styles.star_box}>
                 <div>별점: </div>
                 <div>
-                  <Icon icon="ic:round-star" className={styles.star_icon}></Icon>{it.star}
-                  <Icon icon="ic:round-star" className={styles.star_icon}></Icon>{it.star}
-                  <Icon icon="ic:round-star" className={styles.star_icon}></Icon>{it.star}
-                  <Icon icon="ic:round-star" className={styles.star_icon}></Icon>{it.star}
-                  <Icon icon="ic:round-star" className={styles.star_icon}></Icon>{it.star}
+                  {starRate(it.stars)}
                 </div>
                 
               </div>

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { useLocation } from "react-router";
 import TopTitle from "../../components/Common/TopTitle";
 import styles from "./ClientRealReservation.module.css";
 import Calendar from "../../components/Calendar/Calendar";
 import axios from "axios";
 
 const ClientRealReservation = () => {
+  const location = useLocation();
+
   const formatToday = format(new Date(), "yyyy-MM-dd");
   const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
 
@@ -18,9 +21,10 @@ const ClientRealReservation = () => {
   const [clickTimeArray, setClickTimeArray] = useState([]);
   const [dayReservation, setDayReservation] = useState([]); // 특정 트레이너의 특정 날짜 데이터
   const [reservedHour, setReservedHour] = useState([]); // 특정 트레이너의 특정 날짜 데이터 중 예약이 된 시간들 배열
-  
-  // 바꿔야 됨
-  const trainerId = 1;
+
+
+  const trainerId = location.state.id;
+  console.log(trainerId)
 
   const getDaySchedule = (intDate) => {
     setClickDay(intDate);
@@ -28,20 +32,41 @@ const ClientRealReservation = () => {
 
   const handleClickTime = (event, time) => {
     const newTime = [clickDay[0], clickDay[1], clickDay[2], time].join(" ");
-    const newReservation = dayReservation.filter((item) => item.hour === time)
+    const newReservation = dayReservation.filter((item) => item.hour === time);
     if (reservedHour.includes(time)) {
       event.preventDefault();
-    } else if (clickIdArray.includes(newReservation[0].id) && timeArray.includes(newTime)) {
-      setClickIdArray(clickIdArray.filter((item) => item !== newReservation[0].id))
-      setTimeArray(timeArray.filter((item) => item !== newTime))
-    } else if (!clickIdArray.includes(newReservation[0].id) && !timeArray.includes(newTime)) {
-      setClickIdArray((prev) => [...prev, newReservation[0].id])
-      setTimeArray((prev) => [...prev, newTime])
+    } else if (
+      clickIdArray.includes(newReservation[0].id) &&
+      timeArray.includes(newTime)
+    ) {
+      setClickIdArray(
+        clickIdArray.filter((item) => item !== newReservation[0].id)
+      );
+      setTimeArray(timeArray.filter((item) => item !== newTime));
+    } else if (
+      !clickIdArray.includes(newReservation[0].id) &&
+      !timeArray.includes(newTime)
+    ) {
+      setClickIdArray((prev) => [...prev, newReservation[0].id]);
+      setTimeArray((prev) => [...prev, newTime]);
     }
-    
   };
+  
+  const kakaoPay = () => {
+    axios
+      .post("/api/business/pay/order/request", {
+        totalAmount: 1 * clickIdArray.length,             // 결제할 금액
+      })
+      .then((res) => {
+        console.log(res);
+        window.location.replace(res.data.next_redirect_pc_url);
+      });
+    localStorage.setItem("reservationId", JSON.stringify(clickIdArray));
+  };
+  
+  console.log("clickIdArray", clickIdArray);
+  
 
-  console.log("clickIdArray", clickIdArray)
 
   useEffect(() => {
     async function getReservation() {
@@ -55,7 +80,7 @@ const ClientRealReservation = () => {
           item.month === intFormatToday[1] &&
           item.day === intFormatToday[2]
       );
-
+      
       setTime(
         todayData
           .map((item) => item.hour)
@@ -80,10 +105,8 @@ const ClientRealReservation = () => {
       setReservedHour(reservedDataTime);
     }
     getDayReservation(clickDay);
-    
-    
   }, [clickDay]);
-  
+
   useEffect(() => {
     setTime(
       dayReservation
@@ -92,9 +115,14 @@ const ClientRealReservation = () => {
           return a - b;
         })
     );
-    const splitTimeArray = timeArray.map((item) => item.split(" "))
-    const clickDayTimes = splitTimeArray.filter((item) => item[0] === clickDay[0].toString() && item[1] === clickDay[1].toString() && item[2] === clickDay[2].toString())
-    setClickTimeArray(clickDayTimes.map((item) => parseInt(item[3])))
+    const splitTimeArray = timeArray.map((item) => item.split(" "));
+    const clickDayTimes = splitTimeArray.filter(
+      (item) =>
+        item[0] === clickDay[0].toString() &&
+        item[1] === clickDay[1].toString() &&
+        item[2] === clickDay[2].toString()
+    );
+    setClickTimeArray(clickDayTimes.map((item) => parseInt(item[3])));
   }, [dayReservation, timeArray]);
 
   return (
@@ -115,8 +143,14 @@ const ClientRealReservation = () => {
             time.map((item) => (
               <div
                 className={`${styles.time_item} ${
-                  reservedHour.includes(item) ? `${styles.reserved_time}` : `${styles.not_reserved_time}`
-                } ${clickTimeArray.includes(item) ? `${styles.clicked_time}` : null}`}
+                  reservedHour.includes(item)
+                    ? `${styles.reserved_time}`
+                    : `${styles.not_reserved_time}`
+                } ${
+                  clickTimeArray.includes(item)
+                    ? `${styles.clicked_time}`
+                    : null
+                }`}
                 key={item}
                 onClick={(event) => {
                   handleClickTime(event, item);
@@ -132,10 +166,12 @@ const ClientRealReservation = () => {
           )}
         </div>
       </div>
-          <div className={styles.btn_wrapper}>
-            <button className={styles.payment_btn}>결제하기</button>
-            <button className={styles.back_btn}>돌아가기</button>
-          </div>
+      <div className={styles.btn_wrapper}>
+        <button className={styles.payment_btn} onClick={() => kakaoPay()}>
+          결제하기
+        </button>
+        <button className={styles.back_btn}>돌아가기</button>
+      </div>
     </div>
   );
 };
