@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ManagerSignupApproval.module.css";
-import trainerImg from "../../assets/img/trainer.PNG";
-
 import { useDispatch } from "react-redux";
 import { signupTrainerList, signupApproval } from "../../store/admin";
 import './Paging.css';

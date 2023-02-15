@@ -34,6 +34,8 @@
     column-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
 }
+
+
 .card_list_top button {
     background-color: #C9FD61;
 }

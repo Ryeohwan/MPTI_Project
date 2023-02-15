@@ -20,7 +20,7 @@ const ClientMyLog = () => {
     datasets: [
       {
         data: [],
-        backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
+        backgroundColor: ["#FF3366", "orange", "green", "yellow", "pink", "skyblue", "#0033CC", "purple"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
       }
     ]
@@ -37,7 +37,7 @@ const ClientMyLog = () => {
       datasets: [
       {
         data: workoutlist,
-        backgroundColor: ["red", "orange", "green", "yellow", "pink", "skyblue", "blue", "purple"],
+        backgroundColor: ["#FF3366", "orange", "green", "yellow", "pink", "skyblue", "#0033CC", "purple"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56", "#36A2EB", "#FFCE56"],
       }
     ] })
@@ -124,7 +124,7 @@ const ClientMyLog = () => {
           <div className={styles.graph_info}>
             
               <div className={styles.part}>
-                  <div style={{backgroundColor:"red"}} className={styles.part_color}></div>
+                  <div style={{backgroundColor:"#FF3366"}} className={styles.part_color}></div>
                   <div className={styles.part_name}>가슴 {totalPartCalculator()===0 ? "": `(${Math.floor(analyze.datasets[0].data[0]/totalPartCalculator() *100)})%`}</div>
               </div>
 
@@ -154,7 +154,7 @@ const ClientMyLog = () => {
               </div>
 
               <div className={styles.part}>
-                  <div style={{backgroundColor:"blue"}} className={styles.part_color}></div>
+                  <div style={{backgroundColor:"#0033CC"}} className={styles.part_color}></div>
                   <div className={styles.part_name}>다리 {totalPartCalculator()===0 ? "": `(${Math.floor(analyze.datasets[0].data[6]/totalPartCalculator() *100)})%`}</div>
               </div>
 

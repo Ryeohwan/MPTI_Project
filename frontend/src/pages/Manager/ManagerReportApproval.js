@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import BasicLoadingSpinner from "../../components/Loading/BasicLoadingSpinner";
 import styles from "./ManagerReportApproval.module.css";
 import ReportModal from "./Modal/ReportModal";
 import ReportModalContainer from "./Modal/ReportModalContainer";
-import { reportList,reportApproval } from "../../store/admin";
+import { reportList } from "../../store/admin";
 import Pagination from "react-js-pagination";
 
 const ManagerReportApproval = () => {

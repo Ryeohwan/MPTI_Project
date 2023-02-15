@@ -7,6 +7,17 @@ li {
     list-style: none;
 }
 
+.card_today_item {
+    display: grid;
+    grid-template-columns: 80px 110px auto;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #C9FD61;
+    border-radius: 6px;
+    padding: 10px 20px 10px 10px;
+    background-color: black;
+}
+
 .card_item {
     display: grid;
     grid-template-columns: 80px 110px auto;
@@ -17,6 +28,7 @@ li {
     padding: 10px 20px 10px 10px;
     background-color: black;
 }
+
 
 .card_item_img {
     height: 10%;
