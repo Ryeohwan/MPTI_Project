@@ -31,6 +31,8 @@ import TrainerSignup from "./components/Signup/TrainerSignup";
 import Lesson from "./pages/Common/Lesson";
 import ClientRealReservation from "./pages/Client/ClientRealReservation";
 import ClientPayResult from "./pages/Client/ClientPayResult";
+import LandingGoal from "./pages/Landing/LandingGoal";
+import LandingGuide from "./pages/Landing/LandingGuide";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -62,15 +64,9 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/trainer/home" element={<Home />} />
         <Route path="/trainer/myclient" element={<TrainerMyClient />} />
-        <Route
-          path="/trainer/myreservation"
-          element={<TrainerMyReservation />}
-        />
+        <Route path="/trainer/myreservation" element={<TrainerMyReservation />}/>
         <Route path="/trainer/mypage" element={<TrainerMyPage />} />
-        <Route
-          path="/trainer/trainerdetail"
-          element={<ClientTrainerDetail />}
-        />
+        <Route path="/trainer/trainerdetail" element={<ClientTrainerDetail />}/>
         <Route path="/lesson" element={<Lesson />} />
 
         <Route path="/oauth2/redirect" element={<SignupRedirect />} />
