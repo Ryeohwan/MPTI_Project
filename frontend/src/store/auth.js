@@ -96,8 +96,6 @@ export const login = (email, password) => async (dispatch) => {
         dispatch(authActions.loginSuccess(role));
      
     } catch (error) {
-        alert('로그인 정보를 확인하세요.') 
-        document.getElementById('password').value=''
         dispatch(authActions.loginFailure(error));
     }
 };

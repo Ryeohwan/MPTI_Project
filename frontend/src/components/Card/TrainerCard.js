@@ -23,8 +23,6 @@ const TrainerCard = (trainers) => {
   return (
     <ul className={styles.trainer_list}>
       {trainerList.map((it) => {
-        
-
         return (
           <li key={it.email} className={styles.trainer_item}>
             <div className={styles.trainer_img}>
