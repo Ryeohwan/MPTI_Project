@@ -97,14 +97,21 @@ export const login = (email, password) => async (dispatch) => {
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
 
-        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
-        const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "admin"; 
         dispatch(authActions.getRoleToken(role))
+    
 
-        console.log(userInfo,'여긴안와');
-        dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+        if(role === "admin"){
+            dispatch(authActions.loginSuccess(role));
+        }else{
+            const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+            console.log(userInfo,'여긴안와');
+            dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+            dispatch(authActions.loginSuccess(role));
+        }
+      
 
-        dispatch(authActions.loginSuccess(role));
+       
      
     } catch (error) {
         dispatch(authActions.loginFailure(error));
