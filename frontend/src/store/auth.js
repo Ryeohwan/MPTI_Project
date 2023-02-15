@@ -43,7 +43,8 @@ const authSlice = createSlice({
             console.log("social getdata",  action.payload.payload);
             state.email = action.payload.payload.email;
             state.id = action.payload.payload.id;
-            state.roleToken = action.payload.payload.roleToken;
+            state.roleToken = "user";
+            state.role= "user"
             state.isLoggedIn = true;
         },
 

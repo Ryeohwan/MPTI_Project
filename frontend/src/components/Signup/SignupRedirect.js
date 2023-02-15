@@ -21,7 +21,7 @@ const SignupRedirect = () => {
         if(accessToken){
             if(isNewUser){
                 alert("로그인 성공 ! 처음 방문")
-                dispatch(authActions.socialGetData({type:'data', payload:{roleToken: "user", id: id, email: email}}));
+                dispatch(authActions.socialGetData({type:'data', payload:{roleToken: "user",role:"user", id: id, email: email}}));
                 localStorage.setItem("access_token", accessToken);
                 localStorage.setItem("refresh_token", refreshToken);
                 axios.defaults.headers.common['authorization'] = `Bearer ${accessToken}`;
