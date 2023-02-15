@@ -38,6 +38,17 @@ const authSlice = createSlice({
             state.id = action.payload.payload.id;
             state.role = state.roleToken;
         },
+        socialGetData: (state, action) => {
+            console.log("social getdata",  action.payload.payload);
+            state.email = action.payload.payload.email;
+            state.id = action.payload.payload.id;
+            state.roleToken = "user";
+            state.role= "user"
+            state.isLoggedIn = true;
+        },
+
+
+
         loginFailure: (state, action) => {
             state.isLoading = false;
             state.isLoggedIn = false;
@@ -83,13 +94,22 @@ export const login = (email, password) => async (dispatch) => {
         const response = await axios.post("/api/auth/login", { email, password });
         localStorage.setItem("access_token", response.headers["authorization"]);
         localStorage.setItem("refresh_token", response.headers["refresh-token"]);
-        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "manager"; 
-        console.log(role, 'auth const login 에서 role의 값 받았습니다.')
-        
-        const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+
+        const role= await response.headers["role"] === "[ROLE_TRAINER]"? "trainer": response.headers["role"] === "[ROLE_USER]"? "user": "admin"; 
         dispatch(authActions.getRoleToken(role))
-        dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
-        dispatch(authActions.loginSuccess(role));
+    
+
+        if(role === "admin"){
+            dispatch(authActions.loginSuccess(role));
+        }else{
+            const userInfo = role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+            console.log(userInfo,'여긴안와');
+            dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+            dispatch(authActions.loginSuccess(role));
+        }
+      
+
+       
      
     } catch (error) {
         alert('로그인 정보를 확인하세요.') 
