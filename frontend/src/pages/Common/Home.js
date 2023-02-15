@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
+import smileImg from "../../assets/img/smile.png";
 import { trainerListByStar, reviewList } from "../../store/etc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -28,7 +29,6 @@ const Home = () => {
         <Icon
           key={i}
           icon="ic:round-star-border"
-
           className={styles.border_star_icon}
         ></Icon>
       );
@@ -62,7 +62,6 @@ const Home = () => {
       <div className={styles.home_trainer_box}>
         <ul className={styles.home_trainer_list}>
           {trainer.map((it, index) => {
-            console.log("이거다 임마",it.imageUrl)
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>
                 <li key={index} className={styles.home_trainer_item}>
@@ -97,12 +96,12 @@ const Home = () => {
       <div className={styles.home_review_box}>
         <ul className={styles.home_review_list}>
           {review.map((it, index) => {
-            console.log(it)
+            console.log(it);
             return (
               <li key={index} className={styles.home_review_item}>
                 <div className={styles.home_review_top}>
                   <div className={styles.home_review_img}>
-                    <img src={it.imageUrl} alt="" />
+                    <img src={smileImg} alt=""></img>
                   </div>
                   <div className={styles.home_review_name}>
                     {it.targetName}{" "}
@@ -113,7 +112,9 @@ const Home = () => {
                   <div className={styles.home_review_cusname}>
                     {it.writerName}
                   </div>
-                  <div className={styles.home_review_start}>{starRate(it.star)} </div>
+                  <div className={styles.home_review_start}>
+                    {starRate(it.star)}{" "}
+                  </div>
                 </div>
 
                 <div className={styles.home_review_bottom}>{it.memo}</div>

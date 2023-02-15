@@ -27,21 +27,22 @@ const TrainerCard = (trainers) => {
   return (
     <ul className={styles.trainer_list}>
       {trainerList.map((it) => {
-      
+        console.log("이거임 이거",it)
         return (
           <Link to={`/${role}/trainerdetail`} state={it}>
+            
             <li key={it.email} className={styles.trainer_item}>
               <div className={styles.trainer_img}>
-                <img src={it.imageUrl} alt="" />
+                <img src={`${it.imageUrl}?${Math.random()}`} alt="" />
               </div>
               <div className={styles.content_box2}>
               <div>{it.name} 트레이너</div>
               <br></br>
                 <div className={styles.star_box}>
-                  <div>별점: </div>
                   <div>
                     {starRate(it.stars)}
                   </div>
+                  <div className={styles.star_rate}>{it.stars} 점</div>
                   
                 </div>
               </div>

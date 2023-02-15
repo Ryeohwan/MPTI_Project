@@ -3,14 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./ScheduleCardItem.module.css"
 import { trainerDetail } from "../../store/etc";
+
+
 function ScheduleCardItem({schedule, active}) {
   const dispatch = useDispatch()
   dispatch(trainerDetail)
-  const {name, s3Url} = useSelector((state)=>(state.etc))
-console.log(schedule.trainerId)
+  const {name } = useSelector((state)=>(state.etc))
+  console.log(schedule.trainerId)
+  const trainerImg = schedule.imageUrl
   return (
-    <li className={styles.card_item}>
-      <img className={styles.card_item_img} src={s3Url?s3Url:'/profile_base.png'} alt='/profile_base.png'></img>
+    <li className={active ? `${styles.card_today_item}` : `${styles.card_item}`}>
+      <img className={styles.card_item_img} src={trainerImg ? trainerImg : "/profile_base.png"} alt='/profile_base.png'></img>
       <div className={styles.card_item_info}>
         <div className={styles.card_item_info_txt}>{schedule.trainerName}</div>
         <div>{schedule.year}.{schedule.month}.{schedule.day} {schedule.hour}:00 - {schedule.hour+1}:00</div>

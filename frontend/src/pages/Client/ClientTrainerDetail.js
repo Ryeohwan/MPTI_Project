@@ -51,7 +51,7 @@ const ClientTrainerDetail = () => {
           <div className={styles.trainer_name}>{name} 트레이너</div>
 
           <div className={styles.trainer_gender_age}>
-            {gender}, {age}세
+            {gender === "W" ? "(여)" : "(남)"} {age}세
           </div>
           {role==='user' && <div className={styles.trainer_detail_btn_wrapper}>
              <button 
