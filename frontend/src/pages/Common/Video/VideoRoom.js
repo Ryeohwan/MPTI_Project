@@ -60,22 +60,22 @@ const VideoRoom = (props) => {
         return () => timeStop?null:clearInterval(timer)
     },[seconds, timeStop])
     const timerStart = () => {
-        sendSignalTimer({type:'start', time:{seconds}})
+        sendSignalTimer({type:'start', time:seconds})
     }
 
     const timerStop = () => {
-        sendSignalTimer({type:'stop', time:{seconds}})
+        sendSignalTimer({type:'stop', time:seconds})
     }
 
     const timerReset = (value) => {
-        sendSignalTimer({type:'reset', time:{value}})
+        sendSignalTimer({type:'reset', time:value})
     }
 
     const timeSetWhile = (value) => {
         if(seconds+value>0){
-            setSeconds(seconds+value)
+            sendSignalTimer({type:'alter', time:seconds+value})
         } else {
-            setSeconds(0)
+            sendSignalTimer({type:'alter', time:0})
         }
     }
 
@@ -314,6 +314,7 @@ const VideoRoom = (props) => {
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
                     const data =JSON.parse(e.data);
+                    console.log(data, '여기데이터')
                     switch(data.type){
                         case 'start':
                             setSeconds(data.time)
@@ -325,6 +326,9 @@ const VideoRoom = (props) => {
                             break;
                         case 'reset' :
                             setSeconds(data.time)
+                            break;
+                        case 'alter':
+                            setSeconds((prev) => data.time)
                             break;
                         default:
                             break
@@ -338,6 +342,24 @@ const VideoRoom = (props) => {
             data: JSON.stringify(data),
             type: 'Timer'
         };
+        switch(data.type){
+            case 'start':
+                setSeconds(data.time)
+                setTimeStop(false)
+                break;
+            case 'stop' :
+                setSeconds(data.time)
+                setTimeStop(true)
+                break;
+            case 'reset' :
+                setSeconds(data.time)
+                break;
+            case 'alter':
+                setSeconds((prev) => data.time)
+                break;
+            default:
+                break
+        }
         console.log('타이머 시작', signalOptions.data)
         session.current.signal(signalOptions)
     }
