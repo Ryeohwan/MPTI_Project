@@ -19,8 +19,8 @@ const VideoRoom = (props) => {
     const localUser = useRef(new userModel())
     const serverUrl = props.openviduServerUrl?props.openviduServerUrl:'https://i8a803.p.ssafy.io'
     const serverKey = props.openviduSecret?props.openviduSecret:'mpti'
-    const userName = props.user
-    const sessionName = props.sessionName
+    const userName = useState(props.user)
+    const sessionName = useState(props.sessionName)
     const remotes = useRef([]);
     const layout = useRef(new openviduLayout()) 
 
@@ -30,8 +30,10 @@ const VideoRoom = (props) => {
     const [myUserName,setMyUserName]= useState(userName)
     const session = useRef(undefined)
     const [messageReceived, setMessageReceived] = useState(false)
-    let hasBeenUpdated = false
-    let localUserAccessAllowed = false;
+    // --------------- let
+    const [hasBeenUpdated, setHasBeenUpdated] = useState(false)
+    const [localUserAccessAllowed, setLocalUserAccessAllowed] = useState(false);
+    //  ------------------
     const [seconds, setSeconds] = useState(30);
     const [timeStop,setTimeStop] = useState(true)
     // const [localUser, setLocalUser]= useState(undefined)
@@ -153,7 +155,8 @@ const VideoRoom = (props) => {
           publisher.on('accessAllowed', () => {
             session.current.publish(publisher).then(() => {
               updateSubscribers();
-              localUserAccessAllowed = true;
+              setLocalUserAccessAllowed(true)
+            //   localUserAccessAllowed = true; 수정
               if (props.joinSession) {
                 props.joinSession();
               }
@@ -443,10 +446,12 @@ const VideoRoom = (props) => {
     const checkSize = () => {
         if(document.getElementById('layout').offsetWidth <= 700 && !hasBeenUpdated) {
             toggleChat('none')
-            hasBeenUpdated = true;
+            setHasBeenUpdated(true)
+            // HasBeenUpdated = true; 여기서 수정
         }
         if (document.getElementById('layout').offsetWidth > 700 && hasBeenUpdated) {
-            hasBeenUpdated = false;
+            setHasBeenUpdated(false)
+            // hasBeenUpdated = false; 여기서 수정
           }
     }
 
@@ -481,7 +486,7 @@ const VideoRoom = (props) => {
                 }
 
                 {subscribers.map((sub, index) => {
-                    return <div key={index} className="OT_root OT_publisher custom-class" id='remoteUsers'>
+                    return <div key={index} className="" id='remoteUsers'>
                             <StreamComponent 
                             user={sub} 
                             streamId={sub.streamManager.stream.streamId}/>
