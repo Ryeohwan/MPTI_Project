@@ -60,7 +60,8 @@ const Home = () => {
       {/* 트레이너 리스트 부분 - 분리예정 */}
 
       <div className={styles.home_trainer_box}>
-        <ul className={styles.home_trainer_list}>
+        <ul className={styles.home_trainer_list} >
+
           {trainer.map((it, index) => {
             return (
               <Link to={`/${role}/trainerdetail`} state={it}>

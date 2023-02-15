@@ -91,7 +91,7 @@ const ManagerReportApproval = () => {
                 <li key={it.id} style={it.stopUntil? {backgroundColor:"grey"}:null} className={styles.content_item}>
                   <div className={styles.item_info_box}>
                     <div className={styles.item_info}>
-                    <img src="/reportbell.png"/>  <div className={styles.item_index}>{(8*(page-1))+index+1}</div> <div>신고자: {it.writerName}</div> <div>피신고자: {it.targetName}</div> <div>사건 분류: {it.reportType} </div>
+                    <img  className={styles.image} src="/reportbell.png"/>  <div className={styles.item_index}>{(8*(page-1))+index+1}</div> <div>신고자: {it.writerName}</div> <div>피신고자: {it.targetName}</div> <div>사건 분류: {it.reportType} </div>
                       
                     </div>
                     <div className={styles.item_btn}>
