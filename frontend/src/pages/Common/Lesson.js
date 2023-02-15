@@ -70,6 +70,7 @@ const Lesson = ()=>{
     }
     async function createSession(sessionId) {
         const data = JSON.stringify({customSessionId: sessionId});
+        console.log(sessionId,'세션아이디')
         return axios.post(SERVER_URL+'/openvidu/api/sessions', data, {
             headers: {
                 Authorization:'Basic ' + btoa('OPENVIDUAPP:' + SERVER_SECRET),
@@ -80,6 +81,7 @@ const Lesson = ()=>{
             return (response.data.id); //resolve
         })
         .catch((response => {
+            console.log('OPEN_VIDU API 확인')
             const error = Object.assign({}, response);
             if (error.response && error.response.status === 409){
                 

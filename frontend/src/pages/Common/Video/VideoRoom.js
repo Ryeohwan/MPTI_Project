@@ -264,6 +264,7 @@ const VideoRoom = (props) => {
 
     const subscribeToUserChanged = () => {
         session.current.on('signal:userChanged', (e) => {
+            console.log(e)
             let remoteUsers = subscribers;
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
@@ -297,6 +298,7 @@ const VideoRoom = (props) => {
             data: JSON.stringify(data),
             type: 'userChanged'
         };
+        console.log('유저바뀜', signalOptions.data)
         session.current.signal(signalOptions)
     }
 
@@ -531,6 +533,7 @@ const VideoRoom = (props) => {
     }
     async function createSession(sessionId) {
         const data = JSON.stringify({customSessionId: sessionId});
+        
         return axios.post(serverUrl+'/openvidu/api/sessions', data, {
             headers: {
                 Authorization:'Basic ' + btoa('OPENVIDUAPP:' + serverKey),
