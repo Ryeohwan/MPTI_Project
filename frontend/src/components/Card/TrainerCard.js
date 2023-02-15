@@ -30,9 +30,9 @@ const TrainerCard = (trainers) => {
       {trainerList.map((it) => {
         console.log("이거임 이거",it)
         return (
-          <Link to={`/${role}/trainerdetail`} state={it}>
+          <Link key={it.email} to={`/${role}/trainerdetail`} state={it}>
             
-            <li key={it.email} className={styles.trainer_item}>
+            <li className={styles.trainer_item}>
               <div className={styles.trainer_img}>
                 <img src={`${it.imageUrl}?${Math.random()}`} alt="" />
               </div>
