@@ -10,13 +10,18 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
     const email = myInfo.email
     const [edit,setEdit] = useState(false);
     const setInfo = async (e) => {
+        console.log(e.target.phone.value, myInfo.phone)
         e.preventDefault()
         if(e.target.phone.value!==myInfo.phone){
+            console.log(typeof(e.target.phone.value))
+            console.log(e.target.phone.value)
             const data = await axios.post(request_url+email, {phone:e.target.phone.value})
             setMyInfo(data.data)
             setEdit(false);
             return;
         }
+        await axios.post('/api/trainer/info/update', {phone:'010-1234-4567'})
+        
         setEdit(false)
     }
 

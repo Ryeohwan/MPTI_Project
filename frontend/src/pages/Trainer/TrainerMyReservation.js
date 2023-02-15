@@ -6,34 +6,38 @@ import MySchedule from './TrainerMyReservation/MySchedule'
 import Pagination from "react-js-pagination";
 import { useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import "../../pages/Manager/Paging.css"
+import { getTodayLesson } from '../../store/etc';
 const TrainerMyReservation = () => {
-    const [pages, setPages]=useState(3);
-    const [pageSelect, setPageSelect] = useState(1);
+    const {id} = useSelector((state)=>state.auth)
+    const dispatch = useDispatch();
     const [tab, setTab] = useState('tab1')
-
-
     const [signupList, setSignupList] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage]= useState(0);
     const handlePageChange = (page) => {
-      console.log(page);
       setPage(page);
     };
-    const dispatch = useDispatch();
     //0206
     useEffect(()=>{
-        axios.get(`/api/business/reservation/page/1/2023/2/7/${page-1}`).then((res)=>{
-            console.log(res.data);
-            setTotalPage(res.data.totalElements);
-            setSignupList(res.data.content)
+        console.log(id)
+        dispatch(getTodayLesson(id)).then((res) => { 
+            // setTotalPage(res.totalElements);
+            setSignupList(res)
         })
     }, [page])
+    // useEffect(()=>{
+    //     dispatch(getDaySchedule(id, new Date(), page)).then((res) => {
+    //         console.log('오늘 스케줄',res)
+    //         setTotalPage(res.totalElements);
+    //         setSignupList(res.content)
+    //     })
+    // }, [page])
 
     return (
         <div className={styles.TrainerMyReservation}>
-            <TopTitle title='예약현황▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 ! '/>
+            <TopTitle title='예약현황▼' content='트레이너님의 스케줄을 확인하세요! '/>
             <div className={styles.body_box}>
                 <div className={styles.tabs}>
                     <label className={styles.tab1} htmlFor='tab1'>오늘 수업</label>
@@ -53,7 +57,7 @@ const TrainerMyReservation = () => {
                 </div>
             </div>
             {tab==='tab1' && <div className={styles.pagenation}>
-          <Pagination
+          {/* <Pagination
       activePage={page}
       itemsCountPerPage={7}
       totalItemsCount={totalPage}
@@ -61,7 +65,7 @@ const TrainerMyReservation = () => {
       prevPageText={"‹"}
       nextPageText={"›"}
       onChange={handlePageChange}
-    />
+    /> */}
         </div>}
 
         </div>

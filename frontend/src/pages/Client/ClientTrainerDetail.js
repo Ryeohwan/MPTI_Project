@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ClientTrainerDetail.module.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import TopTitle from "../../components/Common/TopTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { etcActions, getChatRoom, trainerDetail } from "../../store/etc";
@@ -29,11 +29,6 @@ const ClientTrainerDetail = () => {
     return roomId
   }
 
-  const navigate = useNavigate();
-  const navigateToRealReservation = () => {
-    navigate("/user/trainerdetail/realreservation");
-  };
-
   return (
     <div>
       <TopTitle
@@ -56,19 +51,20 @@ const ClientTrainerDetail = () => {
           <div className={styles.trainer_gender_age}>
             {gender}, {age}세
           </div>
-          {role==='user' &&<div className={styles.trainer_detail_btn_wrapper}>
+          {role==='user' && <div className={styles.trainer_detail_btn_wrapper}>
              <button 
               className={styles.trainer_talk_btn}
               onClick={() => goChat()}
             >
               상담하기
             </button>
-            <button
-              className={styles.trainer_reservation_btn}
-              onClick={() => navigateToRealReservation()}
-            >
-              예약하기
-            </button>
+            <Link to={"/user/trainerdetail/realreservation"} state={location.state}>
+              <button
+                className={styles.trainer_reservation_btn}
+              >
+                예약하기
+              </button>
+            </Link>
           </div>}
         </div>
 

@@ -30,6 +30,7 @@ import ClientSignup from "./components/Signup/ClientSignup";
 import TrainerSignup from "./components/Signup/TrainerSignup";
 import Lesson from "./pages/Common/Lesson";
 import ClientRealReservation from "./pages/Client/ClientRealReservation";
+import ClientPayResult from "./pages/Client/ClientPayResult";
 
 /*-----------------------------------코드 시작 부분-----------------------------------*/
 
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/user/trainerdetail" element={<ClientTrainerDetail />} />
         <Route path="/user/home" element={<Home />} />
         <Route path="/user/trainerdetail/realreservation" element={<ClientRealReservation/>} />
+        <Route path="/user/payresult" element={<ClientPayResult/>} />
         {/* <Route path="/home" element={<Home />} /> */}
         <Route path="/user/home" element={<Home/>} />
 
@@ -94,7 +96,7 @@ export default function App() {
           element={<TrainerMyReservation />}
         />
         <Route path="/trainer/mypage/*" element={<TrainerMyPage />} />
-        <Route path="/manager/*" element={<ManagerHome />} />
+        <Route path="/admin/*" element={<ManagerHome />} />
         <Route element={<Landing />} />
       </Routes>
     </div>

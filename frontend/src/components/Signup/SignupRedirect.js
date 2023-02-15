@@ -24,7 +24,7 @@ const SignupRedirect = () => {
             // axios.get()
             // navigate("/login")
         }else{
-            alert("잘못된 접근")
+            console.log("");
             navigate("/login")
         }
     },[])

@@ -36,7 +36,7 @@ const authSlice = createSlice({
             state.email = action.payload.payload.email;
             state.phone = action.payload.payload.phone;
             state.gender = action.payload.payload.gender;
-            state.image = action.payload.payload.s3Url;
+            state.image = state.role==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
             state.id = action.payload.payload.id;
         },
         loginFailure: (state, action) => {
@@ -150,6 +150,17 @@ export const duplicateCheck = (type,email) => async(dispatch)=>{
     }
 }
 
+export const getMyData = (role, email) => async(dispatch) => {
+    try{
+        const userInfo = await role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
+        console.log(userInfo)
+        dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+        return '정보 갱신 성공';
+    } catch(err) {
+        return "정보 불러오기 실패";
+    }
+
+}
 
 
 export const authActions = authSlice.actions;

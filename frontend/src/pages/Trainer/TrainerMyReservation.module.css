@@ -23,12 +23,15 @@ input[type="radio"] {
     font-weight: 400;
     font-size: 24px;
     line-height: 56px;
-    color: black;
+    color: #ececec;
+    
 }
 
 .tab1 {
     cursor: pointer;
-    background-color: #BCC4BB;
+    /* background-color: #BCC4BB; */
+    background-color: black;
+    color: #ececec;
     width: 160px;
     height: 56px;
     border-radius: 5px 0px 0px 0px;
@@ -45,7 +48,8 @@ input[id='tab2']:checked+div {
 
 .tab2 {
     cursor: pointer;
-    background-color: #AAD654;
+    /* background-color: #AAD654; */
+    background-color: gray;
     width: 160px;
     height: 56px;
     border-radius: 0px 5px 0px 0px;
