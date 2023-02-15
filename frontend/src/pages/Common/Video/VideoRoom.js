@@ -81,6 +81,7 @@ const VideoRoom = (props) => {
 
     // DidMoubnt
     useEffect(()=>{
+        console.log(subscribers)
         const layoutOptions = {
             maxRatio: 3 / 2,
             minRatio: 9 / 16,
@@ -93,7 +94,7 @@ const VideoRoom = (props) => {
             bigFirst: true,
             animate: true
         }
-        layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
+        // layout.current.initLayoutContainer(document.getElementById('layout'), layoutOptions)
         window.addEventListener('beforeunload', onbeforeunload);
 
         joinSession();
@@ -105,6 +106,7 @@ const VideoRoom = (props) => {
     },[])
 
     useEffect(()=>{
+        console.log(subscribers, '섭스크라이버 바뀌면 체크')
         if(localUser.current){
             sendSignalUserChanged({
                 isAudioActive: localUser.current.isAudioActive(),
@@ -175,7 +177,7 @@ const VideoRoom = (props) => {
         setCurrentVideoDevice(videoDevices[0]);
         localUser.current.getStreamManager().on('streamPlaying', (e) =>{
             // updateLayout()
-            publisher.videos[0].video.parentElement.classList.remove('custom-class')
+            // publisher.videos[0].video.parentElement.classList.remove('custom-class')
         })
 
       };
@@ -197,7 +199,7 @@ const VideoRoom = (props) => {
         setMyUserName('트레이너')
         // localUser.current = undefined;
         console.log('여기까지 왔어')
-        navigate('/client/home')
+        navigate('/user/home')
         
     }
 
@@ -230,8 +232,9 @@ const VideoRoom = (props) => {
         let index = remoteUser.indexOf(userStream,0);
 
         if(index > -1) {
+            console.log(remoteUser,'remoteUser넣는데 무엇이 들어오나')
             remoteUser.splice(index,1);
-            setSubscribers(remoteUser);
+            setSubscribers((prev)=>[...prev,remoteUser]);
         }
     }
     const subscribeToStreamCreated = () => {
@@ -239,7 +242,7 @@ const VideoRoom = (props) => {
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
                 checkSomeoneShareScreen();
-                subscriber.videos[0].video.parentElement.classList.remove('custom-class')
+                // subscriber.videos[0].video.parentElement.classList.remove('custom-class')
             })
             let newUser = new userModel();
             newUser.setStreamManager(subscriber);
@@ -286,6 +289,7 @@ const VideoRoom = (props) => {
                     }
                 }
             });
+            console.log('remote유저를 subscriber에 넣기', remoteUsers)
             setSubscribers(remoteUsers)
         })
     }
@@ -486,6 +490,7 @@ const VideoRoom = (props) => {
                 }
 
                 {subscribers.map((sub, index) => {
+                    console.log(sub,index,'섭스크라이브 확인');
                     return <div key={index} className="" id='remoteUsers'>
                             <StreamComponent 
                             user={sub} 
