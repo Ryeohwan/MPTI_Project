@@ -60,17 +60,15 @@ const VideoRoom = (props) => {
         return () => timeStop?null:clearInterval(timer)
     },[seconds, timeStop])
     const timerStart = () => {
-        sendSignalTimer({type:'start', time:30})
-        setTimeStop(false)
+        sendSignalTimer({type:'start', time:{seconds}})
     }
 
     const timerStop = () => {
-        sendSignalTimer({type:'stop', time:30})
-        setTimeStop(true)
+        sendSignalTimer({type:'stop', time:{seconds}})
     }
 
     const timerReset = (value) => {
-        setSeconds(value)
+        sendSignalTimer({type:'reset', time:{value}})
     }
 
     const timeSetWhile = (value) => {
@@ -315,11 +313,22 @@ const VideoRoom = (props) => {
             let remoteUsers = remotes.current
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
-                    const a =JSON.parse(e.data);
-                    console.log(a, '시작합니다.')
-                    // setTimeStop(false)
-                    // setTimeStop(true)
-                    
+                    const data =JSON.parse(e.data);
+                    switch(data.type){
+                        case 'start':
+                            setSeconds(data.time)
+                            setTimeStop(false)
+                            break;
+                        case 'stop' :
+                            setSeconds(data.time)
+                            setTimeStop(true)
+                            break;
+                        case 'reset' :
+                            setSeconds(data.time)
+                            break;
+                        default:
+                            break
+                    }
                 }
             });
         })
