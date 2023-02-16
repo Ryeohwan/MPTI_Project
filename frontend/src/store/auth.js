@@ -93,8 +93,6 @@ const authSlice = createSlice({
         dataFailure: (state) => {
             state.isLoading = false;
         },
-
-
     },
 });
 
