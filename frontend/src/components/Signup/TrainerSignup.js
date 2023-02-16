@@ -154,7 +154,7 @@ const TrainerSignup = () => {
     } else if (!email.isEmail) {
       emailInputRef.current.focus();
       return;
-    } else if (!gender.isGender) {
+    } else if (!gender) {
       genderInputRef.current.focus();
       return;
     } else if (!birth.isBirth) {
