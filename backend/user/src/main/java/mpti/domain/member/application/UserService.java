@@ -10,6 +10,7 @@ import mpti.domain.member.dao.MemoRepository;
 import mpti.domain.member.dao.UserRepository;
 import mpti.domain.member.dto.BusinessRequest;
 import mpti.domain.member.dto.StatusDto;
+import mpti.domain.member.dto.ptOrderDto;
 import mpti.domain.member.entity.Memo;
 import mpti.domain.member.entity.User;
 import org.springframework.data.domain.Page;
@@ -19,12 +20,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @RequiredArgsConstructor
@@ -317,31 +321,32 @@ public class UserService {
         List<StatusDto> result = new ArrayList<>();
         for (Memo a:temp) {
             StatusDto b = new StatusDto();
-            List<String> c = new ArrayList<>();
-            if(a.getCore() != 0){
-                c.add("core");
-            }
-            if(a.getLegs() != 0){
-                c.add("legs");
-            }
+            ptOrderDto c = new ptOrderDto();
             if(a.getChest() != 0){
-                c.add("chest");
-            }
-            if(a.getBack() != 0){
-                c.add("back");
-            }
-            if(a.getBiceps() != 0){
-                c.add("biceps");
-            }
-            if(a.getAerobic() != 0){
-                c.add("aerobic");
+                c.setChest("chest");
             }
             if(a.getShoulder() != 0){
-                c.add("shoulder");
+                c.setShoulder("shoulder");
+            }
+            if(a.getBiceps() != 0){
+                c.setBiceps("biceps");
             }
             if(a.getTriceps() != 0){
-                c.add("triceps");
+                c.setTriceps("triceps");
             }
+            if(a.getBack() != 0){
+                c.setBack("back");
+            }
+            if(a.getCore() != 0){
+                c.setCore("core");
+            }
+            if(a.getLegs() != 0){
+                c.setLegs("legs");
+            }
+            if(a.getAerobic() != 0){
+                c.setAerobic("aerobic");
+            }
+
             b.setPart(c);
             b.setDate(a.getDate());
             b.setRecord(a.getRecord());

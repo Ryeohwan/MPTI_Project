@@ -87,8 +87,21 @@
     background-color: #81a43a !important;
 }
 
-.edit {
-    color: black;
+.edit{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    font-size: 20px;
+    color: #ececec;
+    text-align: right;
     cursor: pointer;
-    margin-left: 91%;
+    justify-content: flex-end;
+    align-items: center;
+    height: 25px;
+    width: 100%;
+}
+
+.edit_img{
+    height: 20px;
+    width: 20px;
 }

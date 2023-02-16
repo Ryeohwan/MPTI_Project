@@ -15,6 +15,8 @@ public class GetReservationResponse {
 
     private String trainerName;
 
+    private String imageUrl;
+
     private Long userId;
 
     private String userName;
@@ -29,6 +31,7 @@ public class GetReservationResponse {
         this.id = reservation.getId();
         this.trainerId = reservation.getTrainerId();
         this.trainerName = reservation.getTrainerName();
+        this.imageUrl = reservation.getImageUrl();
         this.userId = reservation.getUserId();
         this.userName = reservation.getUserName();
         this.year = reservation.getYear();

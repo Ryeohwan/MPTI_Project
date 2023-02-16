@@ -15,7 +15,7 @@ export default function ClientHeader(){
 	const dispatch = useDispatch();
 	const {roleToken} = useSelector((state) => state.auth)
 	const navigate= useNavigate();
-
+	const {image} = useSelector(state=>state.auth)
 	// 채팅 온
 	const {chatOn} = useSelector(state=>state.etc)
 
@@ -79,14 +79,14 @@ export default function ClientHeader(){
 				<div className={styles.mail_profile_box}>
 					{/* 메시지 */}
 					<div className={styles.mail_box} onClick={()=>{dispatch(etcActions.chatToggle())}}>
-						{/* 메시지 개수 */}
-						<div className={styles.mail_count_box}> {messagecount}+ </div>
+						{/* 메시지 개수
+						<div className={styles.mail_count_box}> {messagecount}+ </div> */}
 						{/* 메시지 이미지 */}
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /clientmypage 라우팅 */}
 					<div className={styles.mypage_box}>
-						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png' onClick={() => setView((prev)=>!prev)}></img>
+						<img className={styles.profile_img} alt="/profile_base.png" src={image} onClick={() => setView((prev)=>!prev)}></img>
 						{
 							view &&
 							<div className={styles.dropdown}>
