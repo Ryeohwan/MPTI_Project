@@ -16,7 +16,8 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 30px 30px 30px 30px;
-    background-color: #D0E2A6;
+    background-color: #202020;
+    border: 1px solid #ececec;
     border-radius: 7px;
     align-items:center;
     gap:20px;   
@@ -29,7 +30,7 @@
     color: #111111;
     font-size: 20px;
     border-radius: 7px;
-    background-color: #DDE2E2;
+    background-color: #ececec;
     padding: 20px;
 }
 
@@ -75,4 +76,20 @@
     text-align: center;
     font-size: 30px;
     color: #222222;
+}
+.review_delete {
+    font-size: 13px;
+    display: flex;
+    justify-content: flex-end;
+}
+.delete_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(237, 116, 116);
+    background-color: rgb(237, 122, 122);
+    border-radius: 4px;
+    padding: 2px 2px 2px 4px;
+    color: #ececec;
+    cursor: pointer;
 }

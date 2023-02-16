@@ -9,7 +9,8 @@ import { getMyData } from '../../store/auth';
 
 const MyPageProfile = () => {
     const dispatch = useDispatch()
-    const {email, name, role, image} = useSelector((state) => state.auth)
+    const {email, name, role, image} = useSelector(state => state.auth)
+    console.log(email, name, role, image)
     const [showModal, setShowModal] = useState(false);
     const [uploadPicture, setUploadPicture] = useState(null);
     const handlePictureUpload=async (e)=>{

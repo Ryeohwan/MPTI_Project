@@ -27,13 +27,20 @@
     margin-top: 50px;
     margin-bottom: 15px;
 }
-
+.schedule_wrapper {
+    padding: 10px;
+    border: 2px solid #ececec;
+    background-color: #878886;
+    border-radius: 7px;
+}
 .card_list_top {
     display: grid;
     row-gap: 10px;
     column-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
 }
+
+
 .card_list_top button {
     background-color: #C9FD61;
 }

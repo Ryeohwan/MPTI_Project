@@ -6,6 +6,7 @@ import naver from "../../assets/img/login_naver.png";
 import google from "../../assets/img/login_google.png";
 import { useNavigate } from 'react-router-dom';
 import { authActions, login }  from '../../store/auth';
+import logo from '../../assets/img/MPTIlogo.png'
 
 const Login = () => {
 const dispatch = useDispatch();
@@ -21,15 +22,14 @@ const [userInfo, setUserInfo] = useState({
     passwordMsg: ""
 })
 
-
-console.log("로그인상태", isLoggedIn);
-
 useEffect(()=>{
     if(roleToken === null){
+        
     }else{
         navigate(`/${roleToken}/home`);
         // navigate(`/client/home`);
     }
+
 },[roleToken]) 
 
 const userInfoHandler= (e)=>{
@@ -58,7 +58,7 @@ const onSubmitHandler = (e)=>{
 return (
     <div className={styles.Login}> 
     <div className={styles.header_box}>
-                <div className={styles.header}>MPTI</div>
+        <div className={styles.header}><img src={logo} alt=''/></div>
             </div>
             
         <form onSubmit={onSubmitHandler}>
@@ -81,7 +81,7 @@ return (
             
             <div className={styles.simple_box}>
              <div className={styles.simple_btn_kakao} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/kakao?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}><img src={kakao}></img>Kakao</div>
-                <div className={styles.simple_btn_google} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/google?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}> <img src={google}></img>Google</div>
+                <div className={styles.simple_btn_google} onClick={()=>window.location.href="http://localhost:8000/api/auth/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect"}> <img src={google}></img>Google</div>
                 <div className={styles.simple_btn_naver} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/naver?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}> <img src={naver}></img>Naver</div>
             </div>
 

@@ -8,6 +8,8 @@ const SERVER_URL = 'https://i8a803.p.ssafy.io';
 const SERVER_SECRET = 'mpti';
 const Lesson = ()=>{
     const location = useLocation()
+    // state.name, sessionId, name(yourname), clientName
+    //sessionId, clientId, trainerId, role, image, trainerName
     const userName = location.state.name
     const sessionId = location.state.sessionId
     const [token, setToken] = useState(undefined);
@@ -53,6 +55,8 @@ const Lesson = ()=>{
                             error={handlerErrorEvent}
                             clientId={location.state.clientId}
                             trainerId={location.state.trainerId}
+                            clientName={location.state.clientName}
+                            trainerName={location.state.trainerName}
                         />
                     </div>
                 )}
@@ -68,6 +72,7 @@ const Lesson = ()=>{
     }
     async function createSession(sessionId) {
         const data = JSON.stringify({customSessionId: sessionId});
+        console.log(sessionId,'세션아이디')
         return axios.post(SERVER_URL+'/openvidu/api/sessions', data, {
             headers: {
                 Authorization:'Basic ' + btoa('OPENVIDUAPP:' + SERVER_SECRET),
@@ -78,6 +83,7 @@ const Lesson = ()=>{
             return (response.data.id); //resolve
         })
         .catch((response => {
+            console.log('OPEN_VIDU API 확인')
             const error = Object.assign({}, response);
             if (error.response && error.response.status === 409){
                 

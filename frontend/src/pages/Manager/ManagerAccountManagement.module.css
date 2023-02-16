@@ -6,9 +6,10 @@
     flex-direction: column;
 }
 
-img{
-    width:30px;
+.image{
+    width:20px;
     height: 30px;
+    padding-bottom: 13px;
 }
 
 /* 컨텐츠 부분 */

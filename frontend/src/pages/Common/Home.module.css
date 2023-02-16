@@ -5,7 +5,9 @@
 
 
 /* 홈 부분 */
-
+body {
+    margin-bottom: 3%;
+}
 .Home {
     font-family: 'DungGeunMo';
     color: #ececec;
@@ -32,7 +34,7 @@
 .home_trainer_box {
     height: 320px;
     /* background-color: #454648; */
-    background-color: black;
+    background-color: rgb(26, 25, 25);
     border-radius: 10px;
     /* border: 1px solid #ececec; */
 }
@@ -47,20 +49,23 @@
 }
 
 .home_trainer_item {
-    /* background-color: #ececec; */
     width: 210px;
     height: 290px;
     border-radius: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    border: 1px solid #ececec;
-    background-color: #454648; 
+    /* border: 1px solid #ececec; */
+    background-color: #ececec; 
+}
+
+.home_trainer_item:hover {
+    background-color: #a2e392;
 }
 
 .home_trainer_img {
     width: 100%;
     padding: 5%;
-    height: 189px;
+    height: 202px;
     border-radius: 1200px;
 }
 
@@ -88,16 +93,27 @@ li {
 }
 
 .home_trainer_name {
-    font-weight: bold
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .home_trainer_rate {
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20%;
 }
-
-.home_trainer_rate span {
+.star_rate {
+    font-size: 15px;
+    margin-top: 2.5px;
+}
+.star_icon {
     color: #FFF500;
-    font-size: 26px;
+    font-size: 18px;
+}
+.border_star_icon {
+    color:rgb(78, 78, 78);
+    font-size: 18px;
 }
 
 .home_trainer_introduce {
@@ -111,7 +127,7 @@ li {
 
 .home_review_box {
     height: 170px;
-    background-color: black;
+    background-color: rgb(26, 25, 25);
     border-radius: 5px;
     box-shadow: 2px 2px 2px #ececec;
 }
@@ -126,7 +142,7 @@ li {
 }
 
 .home_review_item {
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     /* background-color: #ececec; */
     width: 210px;
     height: 140px;
@@ -135,9 +151,8 @@ li {
     margin-right: 5px;
     color: #000000;
     border: 1px solid white;
-    background-color: #454648; 
+    background-color: #bae1b0; 
 }
-
 .home_review_top {
     display: flex;
     align-items: center;
@@ -149,19 +164,20 @@ li {
 }
 
 .home_review_img img {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     border-radius: 40px;
+    margin-left: 2px;
 }
 
 .home_review_name {
-    padding-left: 20px;
+    padding-left: 3px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .home_review_mid {
     display: flex;
-    padding-top: 8px;
     align-items: center;
     padding-left: 5px;
 }
@@ -174,13 +190,16 @@ li {
 
 .home_review_cusname {
     font-size: 14px;
+    margin-left: 5px;
 }
 
 .home_review_bottom {
-    background-color: white;
-    padding: 6px;
+    background-color: rgb(255, 255, 255);
+    padding: 4px;
     font-size: 12px;
     font-family: sans-serif;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    height: 35%;
 }

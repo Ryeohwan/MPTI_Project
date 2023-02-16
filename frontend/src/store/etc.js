@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -162,11 +161,21 @@ export const clientEditInfo = (email, password, phone) => async(dispatch) => {
 export const clientSchedule = (id) => async (dispatch) => {
     try{
         const response = await axios.get(`/api/business/reservation/user/list/${id}`)
+        console.log(response.data)
         return response.data
     } catch(error) {
-        alert('정상적인 경로가 아닙니다.')
+        console.log(error)
     }
 }
+
+// export const cancelSchedule = (userId, reservationId) => async (dispatch) => {
+//     try {
+//         const response = await axios.post("api/business/reservation/cancel", {id:reservationId, userId:userId})
+//         return (response.data)
+//     } catch (err) {
+//         console.log(err)
+//     }
+// }
 // 상대방과 대화방 만들기
 export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async (dispatch) => {
     try{
@@ -270,6 +279,30 @@ export const getTodayLesson = (id) => async (dispatch) => {
     }
 }
 
+// 리뷰 작성
+export const writeReview = (userId, trainerId, star, memo, userName, trainerName) => async(dispatch) => {
+    try{
+        return await axios.post('/api/business/opinion/review/write',{
+            writerId:userId,
+            targetId:trainerId,
+            star:star,
+            memo:memo,
+            writerName:userName,
+            targetName:trainerName
+        }).then((res) => console.log(res.data))
+    } catch(err) {
+        return console.log('리뷰 작성 실패')
+    }
+}
+
+// 트레이너 개인정보 바꾸기(휴대폰 번호)
+export const changeTrainerInfo = (email, phone) => async (dispatch) => {
+    try{
+        return await axios.post('/api/trainer/info/update/'+email,{phone}).then((res)=>res.data)
+    } catch(err) {
+        return alert('트레이너 정보 바꾸기 문제가 생겼습니다.')
+    }
+}
 
 export const etcActions = etcSlice.actions;
 export default etcSlice.reducer;

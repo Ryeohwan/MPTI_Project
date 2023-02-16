@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { etcActions } from '../../store/etc';
 import { authActions } from '../../store/auth';
+import logo from '../../assets/img/MPTIlogo.png'
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	const dispatch = useDispatch();
@@ -54,7 +55,7 @@ export default function TrainerHeader(){
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
-				<img src='/background.png'/></Link>	
+				<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}}/></Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}

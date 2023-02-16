@@ -15,16 +15,15 @@
 
 } 
 .trainer_item{
-    border: #D0E2A6 2.5px solid;
-    background-color: rgba(108, 101, 101, 0.297);
+    border: #D0E2A6 1px solid;
+    background-color: rgba(192, 252, 175, 0.745);
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-radius: 10px;  
+    border-radius: 7px;  
 }
 canvas{
-
     aspect-ratio: auto 500 / 500;
 }
 
@@ -54,9 +53,12 @@ li {
 .star_box {
     margin: 1% 13% 1% 13%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 15px;
 }
-
+.star_rate {
+    font-size: 13px;
+}
 .star_icon {
     color: rgb(221, 203, 12);
 }
@@ -65,8 +67,8 @@ li {
     color: rgb(148, 147, 147);
 }
 .content_box2 {
-    background-color: #ececec;
-    border-radius: 8px;
+    background-color: #ecececcd;
+    border-radius: 4px;
     padding: 6px;
     text-align: center;
     font-size: 15px;
@@ -75,5 +77,5 @@ li {
     width: 190px;
     height: 80px;
     padding-top: 15px;
-    margin-top: 1px;
+    margin-top: 3px;
 }
