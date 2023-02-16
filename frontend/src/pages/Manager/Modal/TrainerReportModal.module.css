@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../../assets/fonts/DungGeunMo.ttf');
+}
+
+.ReportModal {
+    width: 530px;
+    height: 720px;
+    padding: 25px;
+    color: #ececec;
+    background-color: red;
+    background: #4E4E4E;
+    border-radius: 10px;
+    border: 1px solid #ececec;
+    font-family: "DungGeunMo";
+    /* transition: all 0.3s ease-out; */
+}
+
+.title {
+    font-family: "DungGeunMo";
+    color: #ececec;
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    padding-left: 15px;
+    background-color: #6F768A;
+    border-radius: 2px;
+}
+
+.report {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    background-color: #6F768A;
+    border-radius: 2px;
+    word-break: break-all;
+}
+
+.process {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    margin-top: 15px;
+    /* background-color: red; */
+}
+
+.process_reportman {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    /* height: 100%; */
+    /* background-color: red; */
+}
+
+.process_title {
+    /* height: 100%; */
+    margin-right: 4px;
+    font-size: 18px;
+}
+
+.process_name {
+    background-color: #6F768A;
+    width: 150px;
+    height: 40px;
+    /* margin-left: 20px; */
+    padding: 10px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.memo {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    padding-left: 15px;
+    background-color: #6F768A;
+    border-radius: 2px;
+    font-family: "DungGeunMo";
+    color: #ececec;
+    font-size: 16px;
+    height: 200px;
+}
+
+.process_sanctions {
+    /* background-color: skyblue; */
+    display: flex;
+    align-items: center;
+    width: 50%;
+    /* padding-left: 10px; */
+    /* margin-left: 80px; */
+    /* width: 50%; */
+    /* background-color: red;
+     */
+    margin-top: 10px;
+}
+
+.process_select {
+    padding: 10px;
+    height: 40px;
+    width: 150px;
+}
+
+.process_select select {
+    width: 100%;
+    height: 100%;
+}
+
+.btnbox {
+    margin-top: 15px;
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btnbox button {
+    font-family: 'DungGeunMo';
+    width: 100px;
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 18px;
+    border-style: none;
+    border-radius: 5px;
+    color: #ececec;
+    cursor: pointer;
+}
+
+.btnbox button:hover {
+    border: 1px solid white;
+}
+
+.btn_no {
+    background-color: #242B3E;
+}
+
+.btn_ok {
+    background-color: palevioletred
+    /* #ABD752; */
+}

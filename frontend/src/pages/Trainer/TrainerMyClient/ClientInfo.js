@@ -6,14 +6,16 @@ import ClientLogCard from './ClientLogCard';
 import Pagination from "react-js-pagination";
 import { useEffect } from 'react';
 import axios from 'axios';
-
-
+import TrainerReportModal from '../../Manager/Modal/TrainerReportModal';
+import ReportModalContainer from "../../Manager/Modal/ReportModalContainer";
+import { useSelector } from 'react-redux';
 const ClientInfo = (props) => {    
     const setTargetClient= props.setTargetClient
     const [logList, setLogList]= useState([]);
-    
+    const  auth = useSelector((state) => state.auth);
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage]= useState(0);
+    console.log(props, "ss");
     const handlePageChange = (page) => {
     console.log(page);
     setPage(page);
@@ -25,6 +27,39 @@ const ClientInfo = (props) => {
             setTotalPage(res.data.totalElements);
         })
     },[page])
+
+
+      // 신고 모달관련
+  const [modal, setModal] = useState({
+    show: false,
+    writerName: "",
+    targetName: "",
+    writerId: "",
+    targetId:"",
+  });
+
+  const handleOpenModal = (writerName, targetName, writerId, targetId ) => {
+    setModal({
+      show: true,
+      writerName,
+      targetName,
+      writerId,
+      targetId,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setModal({
+      show: false,
+      writerName: "",
+      targetName: "",
+      writerId: "",
+      targetId:"",
+      
+    });
+  };
+
+
     return (
         <div className={styles.container}>
             <div className={styles.flex_row}>
@@ -32,6 +67,7 @@ const ClientInfo = (props) => {
                 <ClientLog email={props.email}/>
 
             </div>
+            
             <div className={styles.grid_2_row}>
                 {logList.map((it, index)=>{
                     return(<ClientLogCard key={index} data={it}/>
@@ -39,7 +75,7 @@ const ClientInfo = (props) => {
                 })}
 
             </div>
-            
+  
             <div className={styles.pagenation}>
           <Pagination
             activePage={page}
@@ -53,6 +89,23 @@ const ClientInfo = (props) => {
         </div>
                 
             <button className={styles.back_btn} onClick={() => setTargetClient(undefined)}>뒤로가기</button>
+            <div className={styles.trainer_report} onClick={() =>
+                handleOpenModal(auth.name, props.name, auth.id, props.id)
+            } >
+                <img src="/reportbell.png" />신고
+           </div>
+
+           {modal.show && (
+                    <ReportModalContainer onClose={handleCloseModal}>
+                      <TrainerReportModal
+                        writerName={modal.writerName}
+                        targetName={modal.targetName}
+                        writerId ={modal.writerId}
+                        targetId={modal.targetId}
+                        onClose={handleCloseModal}
+                      />
+                    </ReportModalContainer>
+                  )}
         </div>
     )
 }

@@ -4,15 +4,21 @@ import { useLocation, Link } from "react-router-dom";
 import TopTitle from "../../components/Common/TopTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { etcActions, getChatRoom, trainerDetail } from "../../store/etc";
+import { useState } from "react";
+import ReportModalContainer from "../Manager/Modal/ReportModalContainer";
+import TrainerReportModal from "../Manager/Modal/TrainerReportModal";
 
 const ClientTrainerDetail = () => {
   const { id, role } = useSelector((state) => state.auth);
+  const  auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
   console.log(location.state);
   // 클릭한 트레이너 정보들 보기쉽게 정리 (아래에)
   const name = location.state.name;
   const gender = location.state.gender;
+  const targetId = location.state.id;
+  
   const age =
     new Date().getFullYear() -
     parseInt(location.state.birthday.slice(0, 4)) +
@@ -24,6 +30,7 @@ const ClientTrainerDetail = () => {
   const email = location.state.email;
   const image = location.state.imageUrl;
 
+  
   // 채팅방 Id 가져오기
   const goChat = async () => {
     const [targetId, targetName] = await dispatch(trainerDetail(email)).then(
@@ -36,6 +43,37 @@ const ClientTrainerDetail = () => {
     dispatch(etcActions.chatEnter({ type: "enter", payload: roomId }));
     dispatch(etcActions.chatTarget(targetName));
     return roomId;
+  };
+
+  
+  // 신고 모달관련
+  const [modal, setModal] = useState({
+    show: false,
+    writerName: "",
+    targetName: "",
+    writerId: "",
+    targetId:"",
+  });
+
+  const handleOpenModal = (writerName, targetName, writerId, targetId ) => {
+    setModal({
+      show: true,
+      writerName,
+      targetName,
+      writerId,
+      targetId,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setModal({
+      show: false,
+      writerName: "",
+      targetName: "",
+      writerId: "",
+      targetId:"",
+      
+    });
   };
 
   return (
@@ -76,8 +114,10 @@ const ClientTrainerDetail = () => {
                   예약하기
                 </button>
               </Link>
+
             </div>
           )}
+          
         </div>
 
         <div className={styles.trainer_info_box}>
@@ -107,6 +147,23 @@ const ClientTrainerDetail = () => {
               </div>
             ))}
           </div>
+          <div className={styles.trainer_report} onClick={() =>
+                handleOpenModal(auth.name, name, id, targetId)
+            }>
+            <img src="/reportbell.png" />신고
+           </div>
+          
+           {modal.show && (
+                    <ReportModalContainer onClose={handleCloseModal}>
+                      <TrainerReportModal
+                        writerName={modal.writerName}
+                        targetName={modal.targetName}
+                        writerId ={modal.writerId}
+                        targetId={modal.targetId}
+                        onClose={handleCloseModal}
+                      />
+                    </ReportModalContainer>
+                  )}
         </div>
       </div>
     </div>
