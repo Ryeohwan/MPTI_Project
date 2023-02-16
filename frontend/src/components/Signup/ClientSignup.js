@@ -121,7 +121,7 @@ const ClientSignup = () => {
   const duplicateHandler = (e) => {
     e.preventDefault();
     if (email.isEmail) {
-      dispatch(duplicateCheck("client", email.email))
+      dispatch(duplicateCheck("user", email.email))
         .then((res) => setEmail({ ...email, isEmail: true, emailMsg: res }))
         .catch((err) => {
           setEmail({ ...email, isEmail: false, emailMsg: err });
@@ -168,7 +168,7 @@ const ClientSignup = () => {
 
     dispatch(signup("user", data))
       .then((res) => {
-        alert("회원가입 성공");
+        // alert("회원가입 성공");
         navigate("/login");
       })
       .catch((err) => {
