@@ -49,7 +49,7 @@ public class User {
     private String password;
 
     private String gender;
-    @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$" ,message = "핸드폰 번호의 양식과 맞지 않습니다. 01x-xxx(x)-xxxx")
+//    @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$" ,message = "핸드폰 번호의 양식과 맞지 않습니다. 01x-xxx(x)-xxxx")
     private String phone;
     private String address;
     private LocalDate birth;
@@ -84,7 +84,7 @@ public class User {
     public User() {
     }
 
-
+    // 유효성 검사 추가 예정
     public void setEmail(String email) {
 
         if(email != null) this.email = email;
