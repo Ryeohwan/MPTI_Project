@@ -39,6 +39,19 @@
     background-color: #454648;
     color: #ececec;
 }
+.form_box_client{
+    width: 530px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 10px;
+    border-bottom: 1px solid #ececec;
+    border-top: 1px solid #ececec;
+    padding: 4%;
+    background-color: #454648;
+    color: #ececec;
+}
 
 .form_title {
     color: #ececec;
@@ -90,14 +103,22 @@ p {
     margin: 8px;
 }
 
+.form_email button{
+    cursor: pointer;
+}
+
 input[type="date"] {
     font-family: 'DungGeunMo';
+}
+p{
+    margin-left:110px;
 }
 
 select {
     font-family: 'DungGeunMo';
     border-radius: 5px;
     font-size: 13px;
+    height: 18px;
 }
 
 .form_btn_box {
@@ -118,4 +139,11 @@ select {
     font-size: 16px;
     cursor: pointer;
     margin-top: 30px;
+}
+
+.form_sub_btn:hover {
+   background-color: #bcd38c;
+}
+.form_phone{
+    padding-bottom: 8px;
 }
