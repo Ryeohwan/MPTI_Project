@@ -161,11 +161,21 @@ export const clientEditInfo = (email, password, phone) => async(dispatch) => {
 export const clientSchedule = (id) => async (dispatch) => {
     try{
         const response = await axios.get(`/api/business/reservation/user/list/${id}`)
+        console.log(response.data)
         return response.data
     } catch(error) {
-        alert('정상적인 경로가 아닙니다.')
+        console.log(error)
     }
 }
+
+// export const cancelSchedule = (userId, reservationId) => async (dispatch) => {
+//     try {
+//         const response = await axios.post("api/business/reservation/cancel", {id:reservationId, userId:userId})
+//         return (response.data)
+//     } catch (err) {
+//         console.log(err)
+//     }
+// }
 // 상대방과 대화방 만들기
 export const getChatRoom = (myId, myRole, myName, targetId, targetName) => async (dispatch) => {
     try{

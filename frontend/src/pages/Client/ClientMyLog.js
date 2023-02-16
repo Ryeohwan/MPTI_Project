@@ -167,11 +167,11 @@ const ClientMyLog = () => {
         </div>
      
         <div className={styles.log_recommend}>
-          <h3>MPTI 추천운동</h3>
+          <div className={styles.recommend_title}>MPTI 추천운동</div>
           
           {analyze.datasets[0].data.filter(it => 0 === it).length>4?
           "아직 모든 부위의 운동량이 부족합니다.":   ""}
-          <br></br>
+          
           {analyze.datasets[0].data.filter(it => 0 === it).length>4?
           "":  analyze.datasets[0].data.slice(0,4).reduce((totalval, curval)=>{
             return  totalval+ curval;
@@ -179,7 +179,7 @@ const ClientMyLog = () => {
           >
            analyze.datasets[0].data.slice(4,8).reduce((totalval, curval)=>{
             return  totalval+ curval;
-          },0)? <><div>상체운동을 위주로 열심히 하셨네요! 하체운동또 빼놓으면 안되는것 잊지마세요.</div> <br/><div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>[스쿼트, 런지]</div></>: <><div>하체운동을 위주로 열심히 하셨네요! 상체운동또 빼놓으면 안되는것 잊지마세요.</div> <div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>  [팔굼혀펴기, 풀업]</div></>}
+          },0)? <><div>상체운동을 위주로 열심히 하셨네요! 하체운동도 빼놓으면 안 되는것 잊지 마세요.</div> <div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>[스쿼트, 런지]</div></>: <><div>하체운동을 위주로 열심히 하셨네요! 상체운동도 빼놓으면 안 되는것 잊지 마세요.</div> <div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>  [팔굼혀펴기, 풀업]</div></>}
           
         
         

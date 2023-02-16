@@ -105,7 +105,7 @@ const Home = () => {
                     <img src={smileImg} alt=""></img>
                   </div>
                   <div className={styles.home_review_name}>
-                    {it.targetName}{" "}
+                    {it.targetName} 트레이너
                   </div>
                 </div>
 

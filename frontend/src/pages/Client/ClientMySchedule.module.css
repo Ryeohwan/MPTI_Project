@@ -27,7 +27,12 @@
     margin-top: 50px;
     margin-bottom: 15px;
 }
-
+.schedule_wrapper {
+    padding: 10px;
+    border: 2px solid #ececec;
+    background-color: #878886;
+    border-radius: 7px;
+}
 .card_list_top {
     display: grid;
     row-gap: 10px;
