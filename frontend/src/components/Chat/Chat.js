@@ -210,7 +210,7 @@ const Chat = () => {
                 </div>
                     {chatRoom?<form className={styles.message_form} method='submit' onSubmit={(event)=>{handleSubmit(event); event.target['0'].value=null; }}>
                         <input id='message_input' className={styles.chat_input}></input>
-                        <button className={styles.input_button}>></button>
+                        <button className={styles.input_button}>&gt;</button>
                     </form>:null}
                         
                 
