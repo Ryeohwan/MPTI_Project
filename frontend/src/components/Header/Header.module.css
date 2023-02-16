@@ -20,21 +20,16 @@
 }
 
 .head_logo {
-    font-family: 'DungGeunMo';
-    font-weight: 400;
-    font-size: 56px;
-    color: #ececec;
-    /* border-bottom: 4pt solid #C9FD61; */
-    /* border-top: 4pt solid #C9FD61; */
-    text-shadow: 2px 2px 2px black;
-    
-}
-
-.head_logo img{
-    width: 200px;
-    padding-top: 40px;
-
-    height: 100px;
+    /* border-bottom: 2pt solid white;
+    border-bottom-style: ridge;
+    border-bottom-width: 6px;
+    border-top: 2pt solid white;
+    border-top-style: groove;
+    border-top-width: 6px;
+    image-rendering:pixelated; */
+    margin-top: 28px;
+    margin-left: 15px;
+    height: 70px;
 }
 
 

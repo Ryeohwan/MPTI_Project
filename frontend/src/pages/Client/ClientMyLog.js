@@ -113,7 +113,6 @@ const ClientMyLog = () => {
   return (
     <div className={styles.ClientMyLog}>
       <TopTitle title='운동기록▼' content='고객님의 운동기록을 확인하며 운동을 해보세요 !' />
-
       <div className={styles.log_box}>
         <div className={styles.log_graph}>
           <div className={styles.graph_part}>

@@ -13,10 +13,9 @@
   }
 
   .header {
-    font-size: 90px;
-    border-top: 4pt solid #c9fd61;
-    border-bottom: 4pt solid #c9fd61;
-    color: #ececec;
+    height: 100px;
+    width: 146px;
+    display: flex;
   }
 
   .header_box {

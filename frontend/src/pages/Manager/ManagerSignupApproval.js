@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { signupTrainerList, signupApproval } from "../../store/admin";
 import './Paging.css';
 import Pagination from "react-js-pagination";
+import { elements } from "chart.js";
 const ManagerSignupApproval = () => {
   const [signupList, setSignupList] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,15 +18,15 @@ const ManagerSignupApproval = () => {
   useEffect(() => {
     //가입신청 리스트
     dispatch(signupTrainerList(page - 1)).then((res) => {
-
+setSignupList(res.content)
       setTotalPage(res.totalElements);
 
-      const licensesString = res.content[0].awards;
-      const licensesArray = JSON.parse(licensesString);
-      const [licenseA, licenseB] = licensesArray;
-      console.log(licenseA);
-      console.log(res);
-      setSignupList(res.content)
+      // const licensesString = res.content[0].awards;
+      // const licensesArray = JSON.parse(licensesString);
+      // const [licenseA, licenseB] = licensesArray;
+      // console.log(licenseA);
+      // console.log(res);
+      
     });
   }, [page]);
 
@@ -46,6 +47,7 @@ const ManagerSignupApproval = () => {
     }
   };
 
+
   const profileUrl  = "/profile_base.png";
   return (
     <>
@@ -57,10 +59,14 @@ const ManagerSignupApproval = () => {
         <div className={styles.content_content}>
           <ul className={styles.content_list}>
             {signupList.map((it) => {
+              const Awards = JSON.parse(it.awards);
+              const Licenses = JSON.parse(it.license);
+              const Careers = JSON.parse(it.career);
+              console.log(Awards, Licenses,Careers );
               return (
                 <li key={it.email} className={styles.content_item}>
                   <div className={styles.item_img}>
-                    <img src={it.s3Url===null? profileUrl:it.s3Url }></img>
+                    <img src={it.imageUrl===null? profileUrl:it.imageUrl }></img>
                   </div>
 
                   <div className={styles.item_info_box}>
@@ -69,10 +75,10 @@ const ManagerSignupApproval = () => {
                       <div>E-MAIL: {it.email} </div>
                       <div>생년월일 : {it.birthday}</div>
                       <div>수상내역 :  {(() => {
-                        const Awards = JSON.parse(it.awards);
+
                         return (
                           <React.Fragment>
-                            {Awards.map((award, index) => (
+                            {Awards&&Awards.map((award, index) => (
                               <span key={index}> {award}</span>
                             ))}
                           </React.Fragment>
@@ -80,10 +86,10 @@ const ManagerSignupApproval = () => {
                       })()}
                       </div>
                       <div>자격증 :  {(() => {
-                        const Licenses = JSON.parse(it.license);
+                       
                         return (
                           <React.Fragment>
-                            {Licenses.map((license, index) => (
+                            {Licenses&&Licenses.map((license, index) => (
                               <span key={index}> {license}</span>
                             ))}
                           </React.Fragment>
@@ -91,10 +97,10 @@ const ManagerSignupApproval = () => {
                       })()}
                       </div>
                       <div>근무이력 :  {(() => {
-                        const Careers = JSON.parse(it.career);
+                      
                         return (
                           <React.Fragment>
-                            {Careers.map((career, index) => (
+                            {Careers&&Careers.map((career, index) => (
                               <span key={index}> {career}</span>
                             ))}
                           </React.Fragment>

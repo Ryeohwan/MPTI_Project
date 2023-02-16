@@ -18,8 +18,11 @@ import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew"
 import QuestionAnswer from "@material-ui/icons/QuestionAnswer"
 import IconButton from "@material-ui/core/IconButton"
 import Assignment from "@material-ui/icons/Assignment"
-const ToolbarComponent = (props) => {
+import { useSelector } from 'react-redux'
 
+
+const ToolbarComponent = (props) => {
+    const {role} = useSelector(state=>state.auth)
     const [fullScreen, setFullScreen] = useState(false)
     const [reRender, setReRender] = useState(true)
     const time = useRef()
@@ -66,11 +69,14 @@ const ToolbarComponent = (props) => {
 
     return <AppBar className='toolbar' id='header'>
             <div className="logOpen">
-                <IconButton color='inherit' onClick={props.toggleLog} className="logOpen2">
+                { role === 'trainer'? <IconButton color='inherit' onClick={props.toggleLog} className="logOpen2">
                     <Tooltip title="운동 체크">
                         <Assignment></Assignment>
                     </Tooltip>
                 </IconButton>
+                :
+                null
+                }
             </div>
                 <div className='timer_buttons'>
                     <input type="number" ref={time} className="timer_button"  defaultValue={parseInt(30)}></input>

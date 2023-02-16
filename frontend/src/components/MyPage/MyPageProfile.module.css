@@ -36,6 +36,7 @@
     height: 35px;
     left: 130px;
     bottom: 10px;
+    cursor: pointer;
 }
 .MyPage_body_profile > .name {
     font-size: 20px;
@@ -130,6 +131,7 @@
     color: #222222;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .button_back {
@@ -137,4 +139,5 @@
     width: 90px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   }

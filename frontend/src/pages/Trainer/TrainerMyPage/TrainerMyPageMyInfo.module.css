@@ -98,3 +98,9 @@
 .content_title{
     font-size: 20px;
 }
+
+.edit_btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -91,9 +91,9 @@ const ManagerAccountManagement = () => {
                      onClick={() =>
                       handleOpenModal(it.name,it.email, it.birth,it.gender, it.phone, it.s3Url, index)
                     }>
-                      <img src="/star.png"></img>
+                      <img className={styles.image} src="/star.png"/>
                       <div>{(8*(page-1))+index+1}</div>
-                      <div>성명:{it.name} </div>
+                      <div>성명: {it.name} </div>
                       <div>E-MAIL:{it.email} </div>
                       <div>age :{it.age} </div>
                     </div>

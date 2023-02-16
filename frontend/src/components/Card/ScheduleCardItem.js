@@ -32,6 +32,12 @@ function ScheduleCardItem({
   const { role, image } = useSelector((state) => state.auth);
   const trainerImg = schedule.imageUrl;
 
+function ScheduleCardItem({schedule, active}) {
+  const dispatch = useDispatch()
+  dispatch(trainerDetail)
+  const {role, image, name} = useSelector((state)=>(state.auth))
+  console.log(schedule.trainerId)
+  const trainerImg = schedule.imageUrl
   return (
     <li
       className={active ? `${styles.card_today_item}` : `${styles.card_item}`}

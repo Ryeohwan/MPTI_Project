@@ -12,10 +12,11 @@ import ChatComponent from './ChatComponent'
 import HeaderComponent from './HeaderComponent'
 import styles from './VideoRoom.module.css'
 import { useNavigate } from 'react-router-dom'
-
-
+import VideoClientReview from './VideoClientReview'
+import { useSelector } from 'react-redux'
 const VideoRoom = (props) => {
     const navigate = useNavigate()
+    const {role} = useSelector(state => state.auth)
     const localUser = useRef(new userModel())
     const serverUrl = props.openviduServerUrl?props.openviduServerUrl:'https://i8a803.p.ssafy.io'
     const serverKey = props.openviduSecret?props.openviduSecret:'mpti'
@@ -23,7 +24,7 @@ const VideoRoom = (props) => {
     const sessionName = useState(props.sessionName)
     const remotes = useRef([]);
     const layout = useRef(new openviduLayout()) 
-
+    const [reRender,setReRender] = useState(true)
     // state
     const [showExtensionDialog, setShowExtensionDialog] = useState(false)
     const [mySessionId, setMySessionId]= useState(sessionName)
@@ -41,6 +42,7 @@ const VideoRoom = (props) => {
     const [chatDisplay, setChatDisplay]= useState('none')
     const [currentVideoDevice, setCurrentVideoDevice]= useState(undefined)
     const [logDisplay, setLogDisplay] = useState('none')
+    const [reviewDisplay, setReviewDisplay] = useState('none')
     const OV = useRef(undefined);
     // func 
     const joinSession = () => {
@@ -60,22 +62,22 @@ const VideoRoom = (props) => {
         return () => timeStop?null:clearInterval(timer)
     },[seconds, timeStop])
     const timerStart = () => {
-        setTimeStop(false)
+        sendSignalTimer({type:'start', time:seconds})
     }
 
     const timerStop = () => {
-        setTimeStop(true)
+        sendSignalTimer({type:'stop', time:seconds})
     }
 
     const timerReset = (value) => {
-        setSeconds(value)
+        sendSignalTimer({type:'reset', time:value})
     }
 
     const timeSetWhile = (value) => {
         if(seconds+value>0){
-            setSeconds(seconds+value)
+            sendSignalTimer({type:'alter', time:seconds+parseInt(value)})
         } else {
-            setSeconds(0)
+            sendSignalTimer({type:'alter', time:0})
         }
     }
 
@@ -116,6 +118,7 @@ const VideoRoom = (props) => {
             })
         }
         checkSomeoneShareScreen();
+        setReRender(prev=>!prev)
         // updateLayout()
     },[subscribers])
 
@@ -171,19 +174,23 @@ const VideoRoom = (props) => {
         localUser.current.setStreamManager(publisher);
         subscribeToUserChanged();
         subscribeToStreamDestroyed();
+        subscribeToTimer();
         sendSignalUserChanged({
           isScreenShareActive: localUser.current.isScreenShareActive()
         });
         setCurrentVideoDevice(videoDevices[0]);
         localUser.current.getStreamManager().on('streamPlaying', (e) =>{
             // updateLayout()
-            // publisher.videos[0].video.parentElement.classList.remove('custom-class')
+            publisher.videos[0].video.parentElement.classList.remove('custom-class')
+            setReRender((prev)=>!prev)
         })
 
       };
 
     const updateSubscribers = () => {
+        console.log('updateSubscribers에서 setSubscribe 실행 확인', remotes.current)
         setSubscribers(remotes.current);
+        setReRender((prev)=>!prev)
       }
 
     const leaveSession = () => {
@@ -198,7 +205,13 @@ const VideoRoom = (props) => {
         setMyUserName('트레이너')
         // localUser.current = undefined;
         console.log('여기까지 왔어')
-        navigate('/user/home')
+        if(role==='user'){
+            toggleReview()
+        }
+        else{
+
+            navigate('/user/home')
+        }
         
     }
 
@@ -224,6 +237,7 @@ const VideoRoom = (props) => {
         });
     }
     const deleteSubscriber = (stream) => {
+        console.log('딜리트 섭스크라이븝ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ')
         let remoteUser = subscribers
         let userStream = remoteUser.filter((user) => {
             return user.getStreamManager().stream===stream;
@@ -235,12 +249,14 @@ const VideoRoom = (props) => {
             remoteUser.splice(index,1);
             setSubscribers((prev)=>[...prev,remoteUser]);
         }
+        setReRender(prev=>!prev)
     }
     const subscribeToStreamCreated = () => {
         session.current.on('streamCreated', (e) => {
             let subscriber = session.current.subscribe(e.stream, undefined);
             subscriber.on('streamPlaying', (e) => {
                 checkSomeoneShareScreen();
+                setReRender((prev)=>!prev)
                 // subscriber.videos[0].video.parentElement.classList.remove('custom-class')
             })
             let newUser = new userModel();
@@ -249,13 +265,16 @@ const VideoRoom = (props) => {
             newUser.setType('remote')
             let nickname = e.stream.connection.data.split('%')[0];
             newUser.setNickname(JSON.parse(nickname).clientData);
+            remotes.current=[]
             remotes.current.push(newUser);
             console.log(newUser, remotes.current, '들어가는 것 확인')
             if(localUserAccessAllowed) {
+                console.log('localUserAcess를 확인합니다.')
                 updateSubscribers();
             }
-
+            
         })
+
     }
     const subscribeToStreamDestroyed = () => {
         session.current.on('streamDestroyed', (e) => {
@@ -264,14 +283,17 @@ const VideoRoom = (props) => {
                 checkSomeoneShareScreen();
             }, 20)
             e.preventDefault();
+            setReRender(prev=>!prev)
             // updateLayout()
         })
     }
 
+
+
     const subscribeToUserChanged = () => {
         session.current.on('signal:userChanged', (e) => {
-            let remoteUsers = subscribers;
-            console.log(e, subscribers, 'signal:userChanged 왔음')
+            let remoteUsers = remotes.current
+            console.log(e, remotes.current, subscribers, 'signal:userChanged 왔음')
             remoteUsers.forEach((user) => {
                 if(user.getConnectionId() === e.from.connectionId) {
                     let  data = JSON.parse(e.data);
@@ -291,6 +313,7 @@ const VideoRoom = (props) => {
             });
             console.log('remote유저를 subscriber에 넣기', remoteUsers)
             setSubscribers(remoteUsers)
+            setReRender((prev) => !prev)
         })
     }
     
@@ -300,6 +323,65 @@ const VideoRoom = (props) => {
     //     }, 20)
     // }
 
+    const subscribeToTimer = () => {
+        session.current.on('signal:Timer', (e) => {
+            let remoteUsers = remotes.current
+            remoteUsers.forEach((user) => {
+                if(user.getConnectionId() === e.from.connectionId) {
+                    const data =JSON.parse(e.data);
+                    console.log(data, '여기데이터')
+                    switch(data.type){
+                        case 'start':
+                            setSeconds(data.time)
+                            setTimeStop(false)
+                            break;
+                        case 'stop' :
+                            setSeconds(data.time)
+                            setTimeStop(true)
+                            break;
+                        case 'reset' :
+                            setSeconds(data.time)
+                            break;
+                        case 'alter':
+                            setSeconds((prev) => data.time)
+                            break;
+                        default:
+                            break
+                    }
+                }
+            });
+        })
+    }
+    const sendSignalTimer = (data) => {
+        let signalOptions = {
+            data: JSON.stringify(data),
+            type: 'Timer'
+        };
+        switch(data.type){
+            case 'start':
+                setSeconds(data.time)
+                setTimeStop(false)
+                break;
+            case 'stop' :
+                setSeconds(data.time)
+                setTimeStop(true)
+                break;
+            case 'reset' :
+                setSeconds(data.time)
+                break;
+            case 'alter':
+                setSeconds((prev) => data.time)
+                break;
+            default:
+                break
+        }
+        console.log('타이머 시작', signalOptions.data)
+        session.current.signal(signalOptions)
+    }
+    
+// sendSignalUserChanged({type:'start', time: 30 })
+// sendSignalUserChanged({type:'stop', time: 30 })
+// sendSignalUserChanged({type:'reset', time: 40 })
     const sendSignalUserChanged = (data) => {
         let signalOptions = {
             data: JSON.stringify(data),
@@ -334,6 +416,7 @@ const VideoRoom = (props) => {
                 document.webkitExitFullscreen();
             }
         }
+        setReRender((prev) => !prev)
     }
     const switchCamera = async () => {
         try {
@@ -388,6 +471,7 @@ const VideoRoom = (props) => {
             publisher.on('streamPlaying', () => {
                 // updateLayout();
                 publisher.video[0].video.parentElement.classList.remove('custom-class');
+                reRender(prev=>!prev)
             })
     })}
 
@@ -417,7 +501,7 @@ const VideoRoom = (props) => {
             bigFirst: true,
             animate: true
         }
-        layout.current.setLayoutOptions(openviduLayoutOptions);
+        // layout.current.setLayoutOptions(openviduLayoutOptions);
         // updateLayout();
     }
 
@@ -439,7 +523,9 @@ const VideoRoom = (props) => {
     // 토글 로그
     const toggleLog = () => {
         logDisplay==='none'?setLogDisplay('block'):setLogDisplay('none')
-
+    }
+    const toggleReview = () => {
+        reviewDisplay==='none'?setReviewDisplay('block'):setReviewDisplay('none')
     }
 
 
@@ -463,7 +549,6 @@ const VideoRoom = (props) => {
         <div id='container' className={styles.container}>
             <div className={styles.container2}>
 
-            
             <HeaderComponent
                 seconds={seconds}/>
 
@@ -477,7 +562,18 @@ const VideoRoom = (props) => {
                     trainerId={props.trainerId}
                     clientId={props.clientId}
                 />
-            <div className={styles.container_body}>  
+                <VideoClientReview
+                    // reviewDisplay={reviewDisplay}
+                    // toggleReview={toggleReview}
+                    reviewDisplay={reviewDisplay}
+                    trainerId={props.trainerId}
+                    clientId={props.clientId}
+                    clientName={props.clientName}
+                    trainerName={props.trainerName}
+                >
+
+                </VideoClientReview>
+            <div id='middle_box' className={styles.container_body}>  
 
                 {localUser.current !== undefined
                 && localUser.current.getStreamManager() !== undefined
@@ -500,7 +596,7 @@ const VideoRoom = (props) => {
                 }
 
 
-            </div>        
+            </div>
                 {
                     localUser.current !== undefined 
                     && localUser.current.getStreamManager() !== undefined
@@ -525,6 +621,7 @@ const VideoRoom = (props) => {
             leaveSession= {leaveSession}
             toggleChat= {toggleChat}
             toggleLog={toggleLog}
+            toggleReview ={toggleReview}
             setSeconds={setSeconds}
             timerStart={timerStart}
             timerStop={timerStop}
