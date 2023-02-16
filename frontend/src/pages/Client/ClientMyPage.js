@@ -40,7 +40,7 @@ const ClientMyPage = () => {
                 <MyPageProfile/>
                 <div className={styles.ClientMyPage_body_content}>
                     <div className={styles.content_title}>내 개인정보</div>
-                    <ClientMyPageMyInfo myInfo={myInfo?{name:myInfo.name, gender:myInfo.gender, birth:myInfo.birth, email:myInfo.email,phone:myInfo.phone }:null} setMyInfo={setMyInfo}/>
+                    <ClientMyPageMyInfo myInfo={myInfo?{name:myInfo.name, gender:myInfo.gender, birth:myInfo.birth, email:myInfo.email, phone:myInfo.phone }:null} setMyInfo={setMyInfo}/>
                     <div className={styles.content_title}>내가 쓴 리뷰</div>
                     <ClientMyPageMyReview reviews={myReviews} setClick={setClick}/>
                 </div>
