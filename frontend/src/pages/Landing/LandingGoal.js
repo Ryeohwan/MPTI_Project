@@ -15,17 +15,21 @@ const navigate= useNavigate();
     return(
             <nav className={styles.landing_goal}>
                 
-                <div className={styles.landing_box}>  
+                <div className={styles.landing_box1}>  
                     <img src="/MPTIlogo.png" className={styles.landing_img} />
-                    <div className={styles.landing_title}>는 다음과 같은 바를 지향합니다.</div>
+                    {/* <div className={styles.landing_title}>는 다음과 같은 목표를 갖고있습니다.</div> */}
                 </div>
               
-                <div className={styles.landing_info}>- 운동의 중요성을 알리고 고객의 성향에 알맞는 선생님들을 소개해드립니다.</div>
-                <div className={styles.landing_info}>- 일반 고객뿐만 아니라 트레이너까지 서로 득이 될 수 있는 서비스를 제공합니다. </div>
-                <div className={styles.landing_info}>- </div>
-                <div className={styles.landing_info}>- </div>
-
-                <div className={styles.landing_image}><img   src="/back-spinner.gif" alt="" /></div>
+                <div className={styles.landing_direction}>"모든 국민이 건강한 그날까지 달리겠습니다"</div>
+                <div className={styles.landing_direction}>"We will continue until all the people are healthy."</div>
+                <div className={styles.landing_direction}>"我会一直做到所有国民都健康为止"</div>
+                <div className={styles.landing_direction}>"すべての国民が健康になるまで続けます"</div>
+                <div className={styles.landing_direction}>"jusqu'à ce que tous les citoyens soient en bonne santé."</div>
+                <div className={styles.landing_direction}>"Ich werde so lange weitermachen, bis es allen Menschen gut."</div>
+                <div className={styles.landing_direction}>"จะทำต่อไปจนกว่าประชาชนทุกคนจะมีสุขภาพแข็งแรงค่ะ"</div>
+             
+              
+                <div className={styles.landing_image}><img   src="/test.gif" alt="" /></div>
             </nav>
     )
 

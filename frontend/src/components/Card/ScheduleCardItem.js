@@ -76,5 +76,4 @@ function ScheduleCardItem({
     </li>
   );
 }
-
 export default ScheduleCardItem;

@@ -14,7 +14,7 @@ const profileUrl  = "/profile_base.png";
       <h3>성별</h3>
       <div className={styles.name}>{gender === 'F' ? "남성" : "여성"}</div>
       <h3>생년월일</h3>
-      <div className={styles.name}>{}</div>
+      <div className={styles.name}>{birth}</div>
       <h3>이메일</h3>
       <div className={styles.name}>{email}</div>
       <h3>휴대폰 번호</h3>

@@ -11,11 +11,11 @@ const SignupSelect = () => {
         <div className={styles.SignupSelect}>
         
         <div className={styles.header_box}>
-            <div className={styles.header}>MPTI</div>
+            <div className={styles.header}><img src='/MPTIlogo.png'/></div>
         </div>
 
         <div className={styles.select_form}>
-            <div className={styles.select_title}>회원가입</div>
+            <div className={styles.select_title}>고객/트레이너 회원가입 선택</div>
             <div className={styles.select_box}>
                     <div className={styles.select_list}>
                         <div onClick={()=> navigate("/clientsignup")} className={styles.select_item1}><span className={styles.select_square1} >&#9654;</span>고객</div>

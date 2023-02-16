@@ -14,6 +14,31 @@ const ClientMyPageMyReview = ({ reviews, setClick }) => {
         setClick((prev) => !prev)
       });
   };
+
+
+  const starRate = (star) => {
+    const elements = [];
+    for (let i = 0; i < star; i++) {
+      elements.push(
+        <Icon
+          key={`full-${i}`}
+          icon="openmoji:star"
+          className={styles.star_icon}
+        ></Icon>
+      );
+    }
+    for (let i = 0; i < 5 - star; i++) {
+      elements.push(
+        <Icon
+          key={`blank-${i}`}
+          icon="ic:round-star-border"
+          className={styles.border_star_icon}
+        ></Icon>
+      );
+    }
+    return elements;
+  }
+
   
 
   return (
@@ -27,7 +52,9 @@ const ClientMyPageMyReview = ({ reviews, setClick }) => {
                   {" "}
                   <div className={styles.review_top_left}>
                     {review.writerName}
-                    <div>{"⭐".repeat(review.star)}</div>{" "}
+                    <div>
+                    {starRate(review.star)}
+                    </div>
                   </div>{" "}
                   <div className={styles.review_delete}>
                     <div

@@ -13,6 +13,7 @@ import logo from '../../assets/img/MPTIlogo.png'
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	const dispatch = useDispatch();
+	const {image} = useSelector(state=>state.auth)
 	// const {role}=useSelector(state=> state.auth);
 	const {roleToken} = useSelector((state)=>state.auth)
 	const navigate= useNavigate();
@@ -55,7 +56,7 @@ export default function TrainerHeader(){
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
-				<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}}/></Link>	
+				<img src={logo} style={{width: "200px", height: "70px",marginTop:-8.5}} alt=""/></Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}
@@ -71,18 +72,18 @@ export default function TrainerHeader(){
 					<div className={styles.mail_profile_box}>
 						{/* 메시지 */}
 						<div className={styles.mail_box} onClick={()=>{dispatch(etcActions.chatToggle())}}>
-						{/* 메시지 개수 */}
-						<div className={styles.mail_count_box}> {messagecount}+ </div>
+						{/* 메시지 개수
+						<div className={styles.mail_count_box}> {messagecount}+ </div> */}
 						{/* 메시지 이미지 */}
 						<img className={styles.mail_img} alt="chatmail" src='/chatmail.png'></img>
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /trainermypage 라우팅 */}
 					<div className={styles.mypage_box}>
-						<img className={styles.profile_img} alt="profilepic" src='/profilepic.png' onClick={() => setView((prev)=>!prev)}></img>
+						<img className={styles.profile_img} alt="/profile_base.png" src={image} onClick={() => setView((prev)=>!prev)}></img>
 						{
 							view &&
 							<div className={styles.dropdown}>
-								<div className={styles.dropdown_content}><Link  to={'mypage'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content}><Link to={'mypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
 								<div className={styles.dropdown_content} onClick={()=>logout()}>로그아웃</div>
 							</div>
 						}

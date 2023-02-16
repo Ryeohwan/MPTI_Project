@@ -9,16 +9,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
-    
-    
+    margin-top: 3%;
 }
 
-.header {
-    font-size: 90px;
-    border-top: 4pt solid #c9fd61;
-    border-bottom: 4pt solid #c9fd61;
-    color: #ececec;
+  .header {
+
+  }
+
+  .header img {
+    width: 250px;
+    height: 130px;
   }
 
   .header_box {

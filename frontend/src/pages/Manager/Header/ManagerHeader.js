@@ -17,7 +17,7 @@ const ManagerHeader = () => {
 
     return (
         <div className={styles.header_box}>
-        <div className={styles.logo}>MPTI</div>
+        <div className={styles.logo}><img src='/MPTIlogo.png'/></div>
         <div  className={styles.statebar}>
             <div className={styles.statebar_comment}>Management Warehouse</div>
             <div className={styles.statebar_logout} onClick={logoutHandler}>LOGOUT</div>

@@ -81,7 +81,7 @@ return (
             
             <div className={styles.simple_box}>
              <div className={styles.simple_btn_kakao} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/kakao?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}><img src={kakao}></img>Kakao</div>
-                <div className={styles.simple_btn_google} onClick={()=>window.location.href="http://localhost:8000/api/auth/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect"}> <img src={google}></img>Google</div>
+                <div className={styles.simple_btn_google} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/google?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}> <img src={google}></img>Google</div>
                 <div className={styles.simple_btn_naver} onClick={()=>window.location.href="https://i8a803.p.ssafy.io/api/auth/oauth2/authorize/naver?redirect_uri=https://i8a803.p.ssafy.io/oauth2/redirect"}> <img src={naver}></img>Naver</div>
             </div>
 

@@ -2,18 +2,22 @@
     box-sizing: border-box
 }
 .modal {
-    top: 100px;
     position: absolute;
-    width: 350px;
+    width: 370px;
     height: 600px;
-    right: 20%;
-    display: no;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     flex-direction: column;
     align-items: center;
-    background: black;
+    background: rgba(0, 0, 0, 0.692);
     border: 1px solid #C9FD61;
-    padding: 5px 20px;
-    border-radius: 25pt;
+    padding: 0px 0px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    border-radius: 25px;
     z-index: 1000;
 }
 .chat_title_box {
@@ -24,7 +28,10 @@
     font-family: 'DungGeunMo';
     font-size: 25px;
     padding-bottom: 1px;
+    padding-top:10px;
     color: #cecece;
+    padding-left: 15px;
+    padding-right: 10px;
 }
 
 .chat_exit_btn {
@@ -36,35 +43,36 @@
 }
 
 .chat_search_bar{
-    background-color: #cecece;
+    background: #ececec;
+    border: #ececec solid 1px;
     border-radius: 6pt;
-    width: 100%;
+    width: 97%;
     font-family: 'DungGeunMo';
-    color: black;
+    color: #ececec;
     font-size: 13pt;
-    padding: 1%;
+    margin-left: 5px;
 }
 
 .chat_temp {
-    position: relative;
     display: flex;
     width: 100%;
-    height:86%;
+    height:85.1%;
     flex-flow: column;
     justify-content: space-between;
     color:#cecece;
     overflow-y: scroll;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .chat_temp::-webkit-scrollbar{
     width: 3px;
-
 }
 
 .chat_temp::-webkit-scrollbar-thumb{
     background: #C9FD61; /* 스크롤바의 색상 */
     border-radius: 10px;
-
 }
 
 .chat_temp::-webkit-scrollbar-track{
@@ -79,16 +87,20 @@
 }
 
 .chat_input {
-    border-radius: 10px;
     width: 100%;
-    font-size: 20px;
+    border-radius: 0px 0px 0px 20px;
+    border:none;
+    padding-left: 20px;
+    font-size:20px;
+    padding: 0;
+    
 }
-
 
 .message_form{
     position: relative;
     display: flex;
     flex-flow: row;
+    width: 100%;
 }
 
 .title_search{
@@ -107,11 +119,14 @@
 
 
 .input_button{
-    position: absolute;
+    position: relative;
+    display: block;
     font-size: 20px;
-    right: 1px;
-    height: 100%;
-    border-radius: 12px;
-    vertical-align: center;
+    height: 30px;
+    width: 30px;
+    border: solid #444444 1px;
+    border-radius: 0px 0px 25px 0px;
     background-color: #C9FD61;
+    border: 0;
+    padding: 0 0 0 0;
 }

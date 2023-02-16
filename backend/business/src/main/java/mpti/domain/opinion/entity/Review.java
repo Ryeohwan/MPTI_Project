@@ -11,14 +11,14 @@ import javax.persistence.*;
 @Setter
 public class Review extends Opinion{
 
-    private Double star;
+    private int star;
 
 
     public Review() {
     }
 
     @Builder
-    public Review(Long writerId, Long targetId, String writerName, String targetName, String memo, Double star) {
+    public Review(Long writerId, Long targetId, String writerName, String targetName, String memo, int star) {
         super(writerId, targetId, writerName, targetName, memo);
         this.star = star;
     }

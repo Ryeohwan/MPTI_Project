@@ -43,7 +43,8 @@ export default function App() {
 
   const [roleToken, setRoleToken] = useState(localStorage.getItem("mpti_role"));
   // const { isLoading } = useSelector((state) => state.admin);
-  const { isLoading } = useSelector((state) => state.etc);
+  const etc = useSelector((state) => state.etc);
+  const auth = useSelector((state) => state.auth);
   const admin = useSelector((state) => state.admin);
 
   const { role } = useSelector((state) => state.auth);
@@ -52,7 +53,7 @@ export default function App() {
 
   return (
     <div className="App">
-      {isLoading ? <BasicLoadingSpinner /> : null}
+      {(etc.isLoading||auth.isLoading||admin.isLoading) ? <BasicLoadingSpinner /> : null}
         <Routes>
           <Route path="/trainer/*" element={<TrainerHeader/>} />
           <Route path="/user/*" element={<ClientHeader/>} />

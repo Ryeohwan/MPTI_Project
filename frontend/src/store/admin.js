@@ -104,13 +104,16 @@ export const accountList = (pagenum) => async(dispatch)=>{
 }
 
 export const accountDelete = (data) => async(dispatch)=>{
+    dispatch(adminActions.dataRequest())
     try {
         console.log(data);
         const response=await axios.post("/api/user/admin/delete", data);
         console.log(response);
         console.log("회원 삭제 성공");
+        dispatch(adminActions.dataSuccess())
     } catch (error) {
         console.log("회원 삭제 실패");
+        dispatch(adminActions.dataFailure())
     }
 }
 

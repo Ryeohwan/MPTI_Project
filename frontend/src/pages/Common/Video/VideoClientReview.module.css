@@ -4,10 +4,10 @@
     font-family: 'DungGeunMo';
     display: grid !important;
     position: absolute;
-    grid-template-rows: 50px 240px 50px 200px 50px;
+    grid-template-rows: 20px 50px 200px 50px;
     justify-items: center;
     align-items: center;
-    height: 550px;
+    height: 370px;
     width: 350px;
     bottom:100px;
     background-color: #222222;
@@ -110,3 +110,13 @@
     cursor: pointer;
 }
 
+.star_icon {
+    height: 30px;
+    width: 30px;
+}
+
+.border_star_icon {
+    height: 30px;
+    width: 30px;
+    color: #ececec;
+}

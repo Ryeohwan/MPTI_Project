@@ -8,7 +8,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import "../../pages/Manager/Paging.css"
-import { getTodayLesson } from '../../store/etc';
+import { etcActions, getTodayLesson } from '../../store/etc';
 const TrainerMyReservation = () => {
     const {id} = useSelector((state)=>state.auth)
     const dispatch = useDispatch();
@@ -19,12 +19,17 @@ const TrainerMyReservation = () => {
     const handlePageChange = (page) => {
       setPage(page);
     };
+    
     //0206
     useEffect(()=>{
         console.log(id)
+        dispatch(etcActions.dataRequest())
         dispatch(getTodayLesson(id)).then((res) => { 
             // setTotalPage(res.totalElements);
+            dispatch(etcActions.dataSuccess())
             setSignupList(res)
+        }).catch((err)=>{
+            dispatch(etcActions.dataFailure())
         })
     }, [page])
     // useEffect(()=>{

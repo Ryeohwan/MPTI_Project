@@ -23,7 +23,7 @@ public class KakaoPayService {
     public ReadyResponse payReady(int totalAmount) throws IOException {
 
         String order_id = "1111";
-        String itemName = "호갱용 PT 1회권";
+        String itemName = "MPTI";
         Integer quantity = 1;
 
 
@@ -37,7 +37,7 @@ public class KakaoPayService {
         parameters.add("total_amount", String.valueOf(totalAmount));
         parameters.add("tax_free_amount", "0");
 //        parameters.add("approval_url", "https://i8a803.p.ssafy.io/clientmyreservation"); // 결제승인시 넘어갈 url
-        parameters.add("approval_url", "http://localhost:9999/order"); // 결제승인시 넘어갈 url
+        parameters.add("approval_url", "http://localhost:3000/user/payresult"); // 결제승인시 넘어갈 url
         parameters.add("cancel_url", "http://localhost:9999/order/pay/cancel"); // 결제취소시 넘어갈 url
         parameters.add("fail_url", "http://localhost:9999/order/pay/fail"); // 결제 실패시 넘어갈 url
 

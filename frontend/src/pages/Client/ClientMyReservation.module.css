@@ -12,6 +12,7 @@
     margin-top: 1.5rem;
 }
 .SearchName:hover {
+    cursor: pointer;
     color: #C9FD61;
 }
 .SearchNameInput {
@@ -29,6 +30,7 @@
 
 .SearchDateTime {
     margin-left: 4%;
+    cursor: pointer;
 }
 .SearchDateTime:hover {
     color: #C9FD61;
