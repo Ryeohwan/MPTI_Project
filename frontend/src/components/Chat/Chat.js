@@ -26,11 +26,8 @@ const Chat = () => {
     // 소켓 서버, stomp 서버
     const socket = useRef(); 
     const stompClient = useRef();
-    const searchValue = useRef();
+    // const [searchValue,setSearchValue] = useState('');
     const scroll = useRef();
-    if(searchValue.current){
-        console.log(searchValue.current.value)
-    }
     useEffect(()=>{
         return () => {
             console.log('chat 언마운트')
@@ -139,7 +136,7 @@ const Chat = () => {
         return(
             roomlist.map((room, index) => {
                 return <div key={`room${room.channelId}`}>
-                        <RoomList content={room.content} user={room.yourName} userId={room.yourId} channelId={room.channelId} date={room.createdDate}  enter_chat_room={enter_chat_room} />
+                            <RoomList content={room.content} user={room.yourName} userId={room.yourId} channelId={room.channelId} date={room.createdDate}  enter_chat_room={enter_chat_room} />
                         </div>
             })
         )
@@ -197,7 +194,7 @@ const Chat = () => {
                         {chatRoom? [<div key='back' className={styles.chat_exit_btn} onClick={() => {leave_chat_room()}}>&lt;&nbsp;</div>,<div key='room_name'>{chatTarget} 님</div>]:[<div key='whitespace'>&nbsp;&nbsp;</div>,<div key='roomlist'>채팅방</div>]}
                         <div className={styles.chat_exit_btn} onClick={()=>{dispatch(etcActions.chatToggle())}}>❌</div>
                     </div>
-                    {!chatRoom && <input ref={searchValue} className={styles.chat_search_bar} placeholder='사용자 검색'></input>}
+                    {/* {!chatRoom && <input value = {searchValue} onchange = {(e) => setSearchValue(e.target.value)}className={styles.chat_search_bar} placeholder='사용자 검색'></input>} */}
                 </div>
 
 

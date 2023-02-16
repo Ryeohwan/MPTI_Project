@@ -86,7 +86,7 @@ export default function ClientHeader(){
 					</div>
 					{/* 가장 오른쪽 프로필 그림 클릭시 /clientmypage 라우팅 */}
 					<div className={styles.mypage_box}>
-						<img className={styles.profile_img} alt="/profile_base.png" src={image} onClick={() => setView((prev)=>!prev)}></img>
+						<img className={styles.profile_img} alt="/profile_base.png" src={image?`${image}?${Math.random()}`:'/profile_base.png'} onClick={() => setView((prev)=>!prev)}></img>
 						{
 							view &&
 							<div className={styles.dropdown}>
