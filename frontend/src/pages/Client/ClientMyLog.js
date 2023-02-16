@@ -180,8 +180,6 @@ const ClientMyLog = () => {
            analyze.datasets[0].data.slice(4,8).reduce((totalval, curval)=>{
             return  totalval+ curval;
           },0)? <><div>상체운동을 위주로 열심히 하셨네요! 하체운동도 빼놓으면 안 되는것 잊지 마세요.</div> <div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>[스쿼트, 런지]</div></>: <><div>하체운동을 위주로 열심히 하셨네요! 상체운동도 빼놓으면 안 되는것 잊지 마세요.</div> <div style={{textAlign:"center", paddingTop:"20px" , fontSize:"20px"}}>  [팔굼혀펴기, 풀업]</div></>}
-          
-        
         
         </div>
       </div>
