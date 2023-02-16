@@ -111,6 +111,7 @@ const ClientSignup = () => {
     const curDate = e.target.value;
     const selectedDate = new Date(curDate);
     const todayDate = new Date();
+    console.log(e.target.value)
     if (selectedDate.getTime() > todayDate.getTime()) {
       setBirth({ birth: "", birthMsg: "미래에서 오셧군요", isBirth: false });
     } else {
@@ -161,7 +162,7 @@ const ClientSignup = () => {
       name: name.name,
       email: email.email,
       password: password.password,
-      birthday: birth.birth,
+      birth: birth.birth,
       gender: gender.gender,
       phone: phoneInputRef.current.value,
     };
