@@ -22,7 +22,7 @@ const navigate= useNavigate();
                 <div className={styles.header_menu}><Link  to={"/"}>HOME</Link></div>
                 <div className={styles.header_menu}><Link  to={"/goal"}>GOAL</Link></div>
                 <div className={styles.header_menu}><Link  to={"/guide"}>GUIDE</Link></div>
-                <div className={styles.header_menu}  onClick={()=>{navigate("/login")}}>LOGIN</div>
+                <div className={styles.header_login}  onClick={()=>{navigate("/login")}}>LOGIN</div>
             </div>
           </header>
          
