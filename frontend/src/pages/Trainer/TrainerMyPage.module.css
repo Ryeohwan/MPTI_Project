@@ -15,5 +15,8 @@
 .left_body {
     display: flex;
     flex-direction: column;
-    gap:100px;
+    gap:70px;
+    margin-top: 6%;
+    margin-left: 2%;
+
 }

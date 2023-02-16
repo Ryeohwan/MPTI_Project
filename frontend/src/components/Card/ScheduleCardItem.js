@@ -28,6 +28,7 @@ function ScheduleCardItem({
       });
   
   };
+
   const {role, image, name} = useSelector((state)=>(state.auth))
   console.log(schedule.trainerId)
   const trainerImg = schedule.imageUrl

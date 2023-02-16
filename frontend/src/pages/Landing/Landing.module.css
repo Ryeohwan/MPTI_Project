@@ -47,7 +47,14 @@ h1 {
     font-size: 26px;
 }
 .header_menu:hover {
+    background-color: rgba(255, 255, 255, 0.325);
     color: grey;
+
+}
+
+.header_login:hover {
+    background-color: rgba(255, 255, 255, 0.325);
+    color: white;
 }
 .nav_box{
     display: flex;
@@ -96,10 +103,6 @@ h1 {
     justify-content:center;
 }
 
-a:hover {
-    background-color: white;
-    color: #3d3d3e;
-}
 
 .landing_image img {
     width: 200px;

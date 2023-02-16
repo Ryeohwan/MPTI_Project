@@ -56,7 +56,7 @@ export default function TrainerHeader(){
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
-				<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}}/></Link>	
+				<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}} alt=""/></Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}
@@ -83,7 +83,7 @@ export default function TrainerHeader(){
 						{
 							view &&
 							<div className={styles.dropdown}>
-								<div className={styles.dropdown_content}><Link  to={'mypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content}><Link to={'mypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
 								<div className={styles.dropdown_content} onClick={()=>logout()}>로그아웃</div>
 							</div>
 						}
