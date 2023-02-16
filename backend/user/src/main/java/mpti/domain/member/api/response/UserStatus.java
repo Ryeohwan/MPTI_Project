@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class UserStatus {
-    private int chest,shoulder,biceps,triceps,back,core,legs,aerobic;
+    private int core,chest, shoulder, biceps, triceps,back,legs,aerobic;
 
     public void setCore(int core) {
         this.core = core;

@@ -1,7 +1,7 @@
 package mpti.common.security.oauth;
 
 
-import com.google.gson.*;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.auth.api.request.SocialSignUpRequest;
 import mpti.auth.application.AuthService;
@@ -29,9 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,25 +43,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private OkHttpClient client = new OkHttpClient();
 
-    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
-        @Override
-        public JsonElement serialize(LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
-            return new JsonPrimitive(src.format(DateTimeFormatter.ISO_LOCAL_DATE));
-        }
-
-
-
-    }).registerTypeAdapter(LocalDate.class,  new JsonDeserializer<LocalDate>(){
-        @Override
-        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-                throws JsonParseException {
-            return LocalDate.parse(json.getAsString(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        }
-
-
-
-    }).create();
+    private final Gson gson;
     private final AuthService authService;
 
     @Value("${app.auth.tokenSecret:}")
@@ -103,7 +83,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         UserDto user = authService.getUserByEmail(oAuth2UserInfo.getEmail());
-        Map<String, Object> attributes = new HashMap<>();
 
         if(user != null) {
             logger.info(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()) + "");
@@ -112,8 +91,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             // 회원가입을 했던 회왼 -> 바로 user 조회
             user = updateExistingUser(user, oAuth2UserInfo);
             user.setNeedUpdate(false);
-            attributes.put("needUpdate", false);
-//            user.setStopUntil(LocalDate.now().minusDays(1));
 
             LocalDate stopUntil = user.getStopUntil();
             if(LocalDate.now().isBefore(stopUntil)) {
@@ -124,11 +101,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             // 회원가입이 처음인 회원 -> 추가 정보 요청 send Redirect
              user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
              user.setNeedUpdate(true);
-
-            attributes.put("needUpdate", true);
         }
-//        return UserPrincipal.create(user, oAuth2User.getAttributes());
-        return UserPrincipal.create(user, attributes);
+        return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
 
 
@@ -151,7 +125,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 logger.error("응답에 실패했습니다");
             }else{
                 String st = response.body().string();
-                logger.info("추가::::::" + st);
                 user = gson.fromJson(st, UserDto.class);
             }
         } catch (IOException e) {

@@ -27,8 +27,6 @@ public class Reservation {
     @Column(nullable = false)
     private String trainerName;
 
-    private String imageUrl;
-
     private Long userId;
     private String userName;
 

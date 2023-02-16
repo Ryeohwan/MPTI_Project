@@ -22,7 +22,7 @@ public class GetReviewResponse {
 
     private LocalDateTime createdAt;
 
-    private int star;
+    private Double star;
 
     public GetReviewResponse(Review review) {
         this.id = review.getId();
