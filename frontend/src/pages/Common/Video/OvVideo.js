@@ -1,5 +1,6 @@
 import React from "react"
 import { useRef, useEffect } from "react"
+import styles from './OvVideo.module.css'
 const OvVideo = (props) => {
     const video = useRef()
     useEffect(()=>{
@@ -16,6 +17,7 @@ const OvVideo = (props) => {
               }
             });
           }
+          
     },[])
     
     // 여기는 !한개면 됌.
@@ -23,8 +25,8 @@ const OvVideo = (props) => {
         props.user.getStreamManager().addVideoElement(video.current)
     }
 
-    return <div>
-        <video id={`video-${props.user.getStreamManager().stream.streamId}`} ref={video} autoPlay={true} muted={props.mutedSound}/>
+    return <div className={styles.video_box}>
+        <video id={`video-${props.user.getStreamManager().stream.streamId}`} className = {styles.myvideo} ref={video} autoPlay={true} muted={props.mutedSound}/>
     </div>
 }
 

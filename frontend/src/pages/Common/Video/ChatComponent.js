@@ -24,6 +24,7 @@ const ChatComponent = (props) => {
             // let video = document.getElementById('video-' + data.streamId);
             // let avatar = userImg.getContext('2d');
             // avatar.drawImage(video, 200, 120, 285, 285, 0, 0, 60, 60);
+            
             props.messageReceived();
             scrollToBottom()
         }
