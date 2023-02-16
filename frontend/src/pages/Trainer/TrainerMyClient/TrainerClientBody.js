@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyClient } from "../../../store/etc";
+
 const TrainerClientBody = (props) => {
   const {id} = useSelector(state=>state.auth)
   const dispatch = useDispatch();

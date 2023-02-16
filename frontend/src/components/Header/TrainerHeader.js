@@ -56,7 +56,7 @@ export default function TrainerHeader(){
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo} onClick={()=>{setMenuSelect('home')}}>
 				<Link to={'home'} >
-				<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}} alt=""/></Link>	
+				<img src={logo} style={{width: "200px", height: "70px",marginTop:-8.5}} alt=""/></Link>	
 			</div>
 			
 			{/* head menu담는 박스 */}

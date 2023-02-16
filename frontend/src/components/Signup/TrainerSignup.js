@@ -197,10 +197,10 @@ const TrainerSignup = () => {
   return (
     <div className={styles.Signup}>
       <div className={styles.header_box}>
-        <div className={styles.header}>MPTI</div>
+        <div className={styles.header}><img src='/MPTIlogo.png'/></div>
       </div>
 
-      <div className={styles.form_title}>회원가입</div>
+      <div className={styles.form_title}>트레이너 회원가입</div>
 
       <form className={styles.form_box}>
         <div className={styles.form_name}>
