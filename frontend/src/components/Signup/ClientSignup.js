@@ -179,10 +179,10 @@ const ClientSignup = () => {
   return (
     <div className={styles.Signup}>
       <div className={styles.header_box}>
-        <div className={styles.header}>MPTI</div>
+        <div className={styles.header}><img src='/MPTIlogo.png'/></div>
       </div>
 
-      <div className={styles.form_title}>회원가입</div>
+      <div className={styles.form_title}>일반고객 회원가입</div>
 
       <form className={styles.form_box_client}>
         <div className={styles.form_name}>
