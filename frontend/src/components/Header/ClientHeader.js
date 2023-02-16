@@ -60,7 +60,7 @@ export default function ClientHeader(){
 			{ chatOn && <Chat />}
 			{/* home 이동버튼 */}
 			<div className={styles.head_logo}> <Link to={'home'} onClick={()=>{setMenuSelect('home')}}>
-			<img src={logo} style={{width: "150px", height: "45px",marginBottom:15,marginTop:-4.5}}/></Link></div>
+			<img src={logo} style={{width: "200px", height: "70px",marginTop:-8.5}}/></Link></div>
 			
 
 			{/* head menu담는 박스 */}
