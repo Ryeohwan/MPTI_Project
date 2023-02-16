@@ -1,8 +1,24 @@
 import React from 'react'
 import styles from './TrainerMyPageMyReview.module.css'
+import { Icon } from '@iconify/react'
 
 const TrainerMyPageMyReview= ({reviews})=>{
   console.log(reviews)
+
+  const anonymousName = (name) => {
+    const elements = [];
+    for (let i = 0; i < name.length; i++) {
+      elements.push(
+        <Icon
+          key={i}
+          icon="octicon:north-star-16"
+          className={styles.name_icon}
+        ></Icon>
+      );
+    }
+    return elements;
+  }
+
   return(
     <div className={styles.container}>
       <div className={styles.content_title}>내 고객리뷰</div>
@@ -12,7 +28,10 @@ const TrainerMyPageMyReview= ({reviews})=>{
             <div className={styles.in_box} key={review.id}>
               <div className={styles.review_top}>
                 <div className={styles.review_top_left}>
-                  {review.writerName} 님
+                  <div>
+                    {anonymousName(review.writerName)} 님
+                  </div>
+
                   <div>{'⭐'.repeat(review.star)}</div>
                   <div className={styles.review_time}>{review.createdAt.substr(0,10)}</div>
                 </div>   

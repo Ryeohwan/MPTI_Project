@@ -25,7 +25,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
             {
                 !myInfo?null:
                 edit?
-                    <form className={styles.out_box} method='PoST' onSubmit={(e) => {setInfo(e);}}>
+                    <form className={styles.out_box} method='POST' onSubmit={(e) => {setInfo(e);}}>
                         <div className={styles.content_box}>
                             {/* 이메일 */}
                             <div className={styles.in_box}>
