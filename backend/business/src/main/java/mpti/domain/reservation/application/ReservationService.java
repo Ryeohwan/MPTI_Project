@@ -1,21 +1,25 @@
 package mpti.domain.reservation.application;
 
 import com.google.gson.Gson;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import mpti.common.errors.AlreadyReservedException;
+import mpti.common.errors.IsNotSendersReservationException;
 import mpti.common.errors.ReservationNotFoundException;
 import mpti.common.errors.ServerCommunicationException;
+import mpti.domain.opinion.dto.ReviewDto;
 import mpti.domain.reservation.api.request.*;
 import mpti.domain.opinion.entity.Role;
-import mpti.domain.reservation.api.response.CancelReservationResponse;
-import mpti.domain.reservation.api.response.GetReservationResponse;
-import mpti.domain.reservation.api.response.GetIdSetResponse;
+import mpti.domain.reservation.api.response.*;
 
 import mpti.domain.reservation.dao.ReservationRepository;
-import mpti.domain.reservation.dto.ReservationDto;
+import mpti.domain.reservation.dao.querydsl.ReservationQueryRepository;
+import mpti.domain.reservation.dto.IdNameDto;
+import mpti.domain.reservation.dto.YearMonthDayDto;
 import mpti.domain.reservation.entity.Reservation;
 import okhttp3.*;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -33,9 +37,14 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
+    private final ReservationQueryRepository reservationQueryRepository;
+
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient();
     private final Gson gson;
+
+    @Value("${server_url.getImageUrl}")
+    private String getImageUrl;
 
     public List<GetReservationResponse> getReservationList() {
 
@@ -102,18 +111,53 @@ public class ReservationService {
             reservation.cancel();
             return Optional.of(new CancelReservationResponse(reservation));
         }else{
-
+            throw new IsNotSendersReservationException(reservation.getId());
         }
 
-        return Optional.of(new CancelReservationResponse());
     }
 
     public void deleteReservation(Reservation reservation){
         reservationRepository.delete(reservation);
     }
 
-    public void openReservation(Reservation reservation) {
-        reservationRepository.save(reservation);
+    public void openReservation(Reservation reservation) throws IOException {
+
+        GetImageUrlRequest getImageUrlRequest = new GetImageUrlRequest(reservation.getTrainerId());
+
+        // DTO를 JSON으로 변환
+        String json = gson.toJson(getImageUrlRequest);
+
+
+        // RequestBody에 JSON 탑재
+        RequestBody body = RequestBody.create(json, JSON);
+
+//        Request request;
+
+        Request request = new Request.Builder()
+                .url(getImageUrl)
+                .post(body)
+                .build();
+
+        // request 요청
+        try (Response response = client.newCall(request).execute()) {
+            // 요청 실패
+            if (!response.isSuccessful()){
+                throw new ServerCommunicationException();
+            }else{
+
+                String st = response.body().string();
+
+                GetImageUrlResponse responseMember = gson.fromJson(st, GetImageUrlResponse.class);
+
+                reservation.setImageUrl(responseMember.getImageUrl());
+
+                reservationRepository.save(reservation);
+            }
+        }
+
+
+
+
     }
 
     public void scheduling(SchedulingRequest schedulingRequest) throws IOException {
@@ -175,35 +219,45 @@ public class ReservationService {
 
     public Set<GetIdSetResponse> getIdSet(Long id, Role role) {
 
-        List<Reservation> reservations;
+//        List<Reservation> reservations;
+        List<IdNameDto> idNameDtoList;
         Set<GetIdSetResponse> getIdListResponseSet = new HashSet<>();
 
-        if(role.equals(Role.USER)){
-            reservations = reservationRepository.findByUserId(id);
-            for(Reservation reservation : reservations){
-                Long trainerId = reservation.getTrainerId();
-                String trainerName = reservation.getTrainerName();
-                if(trainerId != null){
-                    getIdListResponseSet.add(new GetIdSetResponse(trainerId, trainerName));
-                }
-            }
-        }else {
-            reservations = reservationRepository.findByTrainerId(id);
-            for(Reservation reservation : reservations){
-                Long userId = reservation.getUserId();
-                String userName = reservation.getUserName();
-                if(userId != null){
-                    getIdListResponseSet.add(new GetIdSetResponse(userId, userName));
-                }
+        idNameDtoList = reservationQueryRepository.findDistinctIdListByTrainerIdOrUserIdByRole(id, role);
+        for(IdNameDto idNameDto : idNameDtoList){
+            Long idNameDtoId = idNameDto.getId();
+            String idNameDtoName = idNameDto.getName();
+            if(idNameDtoId != null){
+                getIdListResponseSet.add(new GetIdSetResponse(idNameDtoId, idNameDtoName));
             }
         }
+
+//        if(role.equals(Role.USER)){
+//            reservations = reservationRepository.findByUserId(id);
+//            for(Reservation reservation : reservations){
+//                Long trainerId = reservation.getTrainerId();
+//                String trainerName = reservation.getTrainerName();
+//                if(trainerId != null){
+//                    getIdListResponseSet.add(new GetIdSetResponse(trainerId, trainerName));
+//                }
+//            }
+//        }else {
+//            reservations = reservationRepository.findByTrainerId(id);
+//            for(Reservation reservation : reservations){
+//                Long userId = reservation.getUserId();
+//                String userName = reservation.getUserName();
+//                if(userId != null){
+//                    getIdListResponseSet.add(new GetIdSetResponse(userId, userName));
+//                }
+//            }
+//        }
 
         return getIdListResponseSet;
     }
 
     public List<GetReservationResponse> getReservationListByUserId(Long userId) {
 
-        List<Reservation> reservationByUserId = reservationRepository.findByUserId(userId);
+        List<Reservation> reservationByUserId = reservationRepository.findByUserIdOrderByYearAscMonthAscDayAscHourAsc(userId);
 
         List<GetReservationResponse> getReservationResponseList = reservationByUserId.stream()
                 .map((reservation) -> new GetReservationResponse(reservation))
@@ -232,5 +286,21 @@ public class ReservationService {
                 .collect(Collectors.toList());
 
         return getReservationResponseList;
+    }
+
+    public List<GetAvailableReservationListByDateResponse> getAvailableReservationListByDate(String requestBody) {
+
+        YearMonthDayDto yearMonthDayDto = gson.fromJson(requestBody, YearMonthDayDto.class);
+
+        List<Long> reservationList = reservationRepository.findtrainerList(yearMonthDayDto.getYear(), yearMonthDayDto.getMonth(), yearMonthDayDto.getDay());
+
+
+        List<GetAvailableReservationListByDateResponse> trainerList = new ArrayList<>();
+
+        for (Long trainer_id : reservationList){
+            trainerList.add(new GetAvailableReservationListByDateResponse(trainer_id));
+        }
+
+        return trainerList;
     }
 }

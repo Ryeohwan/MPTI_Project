@@ -1,17 +1,16 @@
 package mpti.domain.reservation.api.controller;
 
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import mpti.common.errors.AlreadyReservedException;
 import mpti.domain.opinion.entity.Role;
 import mpti.domain.reservation.api.request.CancelRequest;
 import mpti.domain.reservation.api.request.MakeReservationRequest;
 import mpti.domain.reservation.api.request.SchedulingRequest;
-import mpti.domain.reservation.api.response.CancelReservationResponse;
-import mpti.domain.reservation.api.response.GetReservationResponse;
-import mpti.domain.reservation.api.response.GetIdSetResponse;
-import mpti.domain.reservation.api.response.MakeReservationResponse;
+import mpti.domain.reservation.api.response.*;
 import mpti.domain.reservation.application.ReservationService;
 import mpti.domain.reservation.dto.ReservationDto;
+import mpti.domain.reservation.dto.YearMonthDayDto;
 import mpti.domain.reservation.entity.Reservation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +28,8 @@ import java.util.Set;
 public class ReservationController {
 
     private final ReservationService reservationService;
+
+    private final Gson gson;
 
     // [GET] 현재 모든 예약(예약가능 + 예약 완료) 리스트 반환
     // Pageable
@@ -159,5 +160,15 @@ public class ReservationController {
     }
 
 
+//    [POST] 년-월-일로 예약 가능한 트레이너 ID 리스트 조회
+
+    @PostMapping("/trainer/available/list")
+    public ResponseEntity<List<GetAvailableReservationListByDateResponse>> getAvailableReservationListByDate(@RequestBody String requestBody){
+
+        List<GetAvailableReservationListByDateResponse> getReservationResponseList = reservationService.getAvailableReservationListByDate(requestBody);
+
+
+        return ResponseEntity.ok(getReservationResponseList);
+    }
 
 }

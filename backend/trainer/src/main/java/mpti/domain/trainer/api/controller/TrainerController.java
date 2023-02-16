@@ -55,10 +55,10 @@ public class TrainerController {
         return ResponseEntity.ok(trainerDto);
     }
 
-    @PostMapping("/info/update")
+    @PostMapping("/info/update/{email}")
 //    @PreAuthorize("hasAuthority('ROLE_TRAINER')")
-    public ResponseEntity updateTrainerInfo(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody UpdateRequest updateRequest) {
-        String email = userPrincipal.getEmail();
+    public ResponseEntity updateTrainerInfo(@PathVariable String email, @RequestBody UpdateRequest updateRequest) {
+//        String email = userPrincipal.getEmail();
         TrainerDto trainerDto = trainerService.updateInfo(email, updateRequest);
         return ResponseEntity.ok(trainerDto);
     }
@@ -72,13 +72,13 @@ public class TrainerController {
 
     @GetMapping("/list/{page}")
     public ResponseEntity getTrainerListByDate(@PathVariable int page) {
-        Page<TrainerDto> pages = trainerService.getAllTrainers(page, 5, "createAt");
+        Page<TrainerDto> pages = trainerService.getAllTrainers(page, 8, "createAt");
         return ResponseEntity.ok(pages);
     }
 
     @GetMapping("/listbystar/{page}")
     public ResponseEntity getTrainerListByStar(@PathVariable int page) {
-        Page<TrainerDto> pages = trainerService.getAllTrainers(page, 5, "stars");
+        Page<TrainerDto> pages = trainerService.getAllTrainers(page, 8, "stars");
         return ResponseEntity.ok(pages);
     }
 
@@ -115,6 +115,20 @@ public class TrainerController {
         map.put("imageUrl", url);
         return ResponseEntity.ok(map);
     }
+
+    @GetMapping("/search/name/{page}/{word}")
+    public ResponseEntity searchByName(@PathVariable int page, @PathVariable String word) {
+        Page<TrainerDto> pages = trainerService.searchTrainerByName(word, page, 8);
+        return ResponseEntity.ok(pages);
+    }
+    @GetMapping("/search/date/{page}/{date}")
+    public ResponseEntity searchByDate(@PathVariable int page, @PathVariable String date) {
+
+        Page<TrainerDto> pages = trainerService.searchTrainerByDate(date, page, 8);
+        return ResponseEntity.ok(pages);
+    }
+
+
 
 
 }

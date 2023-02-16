@@ -23,6 +23,8 @@ server:
 server_url :
   sendUserStopUntil : https://i8a803.p.ssafy.io/api/user/admin/stop
   sendTrainerStopUntil : https://i8a803.p.ssafy.io/api/trainer/admin/stop
+  sendAverageStar : https://i8a803.p.ssafy.io/api/trainer/update/star
+  getImageUrl : https://i8a803.p.ssafy.io/api/trainer/info/image
 #  sendTrainerStopUntil : http://localhost:8002/api/trainer/admin/stop
 
 app:
