@@ -43,11 +43,12 @@
 }
 
 .chat_search_bar{
-    background-color: #cecece;
+    background: #ececec;
+    border: #ececec solid 1px;
     border-radius: 6pt;
     width: 97%;
     font-family: 'DungGeunMo';
-    color: black;
+    color: #ececec;
     font-size: 13pt;
     margin-left: 5px;
 }
@@ -87,9 +88,12 @@
 
 .chat_input {
     width: 100%;
-    border-radius: 0px 0px 0px 10px;
-    border: #444444 solid 1px;
-    font-size: 20px;
+    border-radius: 0px 0px 0px 20px;
+    border:none;
+    padding-left: 20px;
+    font-size:20px;
+    padding: 0;
+    
 }
 
 .message_form{
@@ -116,11 +120,13 @@
 
 .input_button{
     position: relative;
+    display: block;
     font-size: 20px;
-    height: 100%;
-
+    height: 30px;
+    width: 30px;
     border: solid #444444 1px;
     border-radius: 0px 0px 25px 0px;
-    vertical-align: center;
     background-color: #C9FD61;
+    border: 0;
+    padding: 0 0 0 0;
 }
