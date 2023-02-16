@@ -18,7 +18,6 @@ const ManagerHome = () => {
                     <Route path='/account' element={<ManagerAccountManagement/>}/>
                     <Route path='/report' element={<ManagerReportApproval/>}/>
                 </Routes>
-
             </div>
         </div>
     );

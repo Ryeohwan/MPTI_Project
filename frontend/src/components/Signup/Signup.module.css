@@ -30,7 +30,7 @@
 
 .form_box {
     width: 530px;
-    height: 550px;
+    height: 650px;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -43,7 +43,7 @@
 }
 .form_box_client{
     width: 530px;
-    height: 420px;
+    height: 476px;
     display: flex;
     flex-direction: column;
     justify-content: left;

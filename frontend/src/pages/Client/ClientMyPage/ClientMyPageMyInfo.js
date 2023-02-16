@@ -38,7 +38,7 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
                      <div className={styles.modal} onClick={() => setShowModal(false)}>
                     </div>
                     <div className={styles.modal_content}>
-                        <div>비밀번호</div>
+                        <div className={styles.model_pw}>비밀번호</div>
                         <form onSubmit={(e) => {infoEdit(e)}}>
                             <input id='password' type="password" autoFocus={true}></input>
                             <button className={styles.send_btn} type='submit'>확인</button>
