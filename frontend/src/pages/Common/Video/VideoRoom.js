@@ -53,6 +53,8 @@ const VideoRoom = (props) => {
     }
     const onbeforeunload = (e) => {leaveSession()}
 
+
+    // 타이머 기능
     useEffect(() => {
         const timer = timeStop?undefined
         :setInterval(() => {
@@ -201,8 +203,8 @@ const VideoRoom = (props) => {
         
         // session.current = undefined
         setSubscribers([])
-        setMySessionId('SessionA')
-        setMyUserName('트레이너')
+        // setMySessionId('SessionA')
+        // setMyUserName('트레이너')
         // localUser.current = undefined;
         console.log('여기까지 왔어')
         if(role==='user'){
@@ -221,6 +223,7 @@ const VideoRoom = (props) => {
         sendSignalUserChanged({
             isVideoActive: localUser.current.isVideoActive()
         });
+        setReRender(prev=>!prev)
     }
 
     const micStatusChanged = ()=> {
@@ -389,6 +392,7 @@ const VideoRoom = (props) => {
         };
         console.log('유저바뀜', signalOptions.data)
         session.current.signal(signalOptions)
+        setReRender(prev=>!prev)
     }
 
     const toggleFullscreen = () => {
@@ -437,6 +441,8 @@ const VideoRoom = (props) => {
                 localUser.current.setStreamManager(newPublisher);
                 setCurrentVideoDevice(newVideoDevice);
               }
+            } else {
+                alert('비디오 입력장치가 1개 이하입니다!')
             }
           } catch (error) {
             console.error(error);
@@ -460,7 +466,7 @@ const VideoRoom = (props) => {
               } else if (e && e.name === 'SCREEN_CAPTURE_DENIED') {
                 alert('You need to choose a window or application to share');
             }
-        });
+        })
         publisher.once('accessAllowed', () => {
             session.current.unpublish(localUser.current.getStreamManager());
             localUser.current.setStreamManager(publisher)
@@ -470,10 +476,9 @@ const VideoRoom = (props) => {
             })
             publisher.on('streamPlaying', () => {
                 // updateLayout();
-                publisher.video[0].video.parentElement.classList.remove('custom-class');
-                reRender(prev=>!prev)
+                publisher.videos[0].video.parentElement.classList.remove('custom-class');
             })
-    })}
+    });setReRender(prev=>!prev);}
 
     const closeDialogExtension = () => {
         setShowExtensionDialog(false)
@@ -501,6 +506,7 @@ const VideoRoom = (props) => {
             bigFirst: true,
             animate: true
         }
+        setReRender(prev=>!prev)
         // layout.current.setLayoutOptions(openviduLayoutOptions);
         // updateLayout();
     }
@@ -529,7 +535,7 @@ const VideoRoom = (props) => {
     }
 
 
-    const checkNotification = () => {
+    const checkNotification = (e) => {
         setMessageReceived(chatDisplay === 'none')
     }
 
@@ -573,24 +579,30 @@ const VideoRoom = (props) => {
                 >
 
                 </VideoClientReview>
+                {/* 비디오 담는 박스 */}
             <div id='middle_box' className={styles.container_body}>  
 
                 {localUser.current !== undefined
                 && localUser.current.getStreamManager() !== undefined
-                && <div id='localUser' className="">
+                && <div id='localUser' className={styles.localVideo}>
                     <StreamComponent
                     user={localUser.current}
                     handleNickname={nicknameChanged}
+                    reRender={reRender}
                     />
+                    {/* <div>{userName}</div> */}
                     </div>
                 }
 
                 {subscribers.map((sub, index) => {
-                    console.log(sub,index,'섭스크라이브 확인');
-                    return <div key={index} className="" id='remoteUsers'>
+                    console.log(sub.nickname[0],index,'섭스크라이브 확인');
+                    return <div key={index} className={styles.remoteVideo} id='remoteUsers'>
                             <StreamComponent 
                             user={sub} 
-                            streamId={sub.streamManager.stream.streamId}/>
+                            streamId={sub.streamManager.stream.streamId}
+                            reRender={reRender}
+                            />
+                            {/* <div>{sub.nickname.length?sub.nickname[0]:'유저'}</div> */}
                         </div>
                     })
                 }
