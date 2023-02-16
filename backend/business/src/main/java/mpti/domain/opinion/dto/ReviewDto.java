@@ -21,7 +21,7 @@ public class ReviewDto {
 
     private LocalDateTime createdAt;
 
-    private Double star;
+    private int star;
 
     private String memo;
 

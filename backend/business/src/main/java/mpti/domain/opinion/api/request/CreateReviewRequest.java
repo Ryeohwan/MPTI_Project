@@ -13,7 +13,7 @@ public class CreateReviewRequest {
 
     private String targetName;
 
-    private Double star;
+    private int star;
 
     private String memo;
 
