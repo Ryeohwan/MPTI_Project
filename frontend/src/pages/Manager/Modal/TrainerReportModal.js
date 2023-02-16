@@ -47,7 +47,7 @@ const TrainerReportModal = ({ writerName, targetName,writerId,targetId,onClose }
       <div className={styles.name}>{targetName}</div>
 
       <div className={styles.process_sanctions}>
-          <div className={styles.process_title}>제재일수</div>
+          <div className={styles.process_title}>신고분류</div>
 
       <div className={styles.process_select}>
          <select onChange={selectHandler} defaultValue={reportType}>
@@ -69,7 +69,7 @@ const TrainerReportModal = ({ writerName, targetName,writerId,targetId,onClose }
       <div className={styles.btnbox}>
         <div className={styles.btn}>
           <button className={styles.btn_ok} onClick={reportHandler}>
-            제재진행
+            신고하기
           </button>
           <button className={styles.btn_no} onClick={onClose}>
             창 닫기
