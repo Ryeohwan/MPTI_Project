@@ -21,13 +21,15 @@ const ClientInfo = (props) => {
     setPage(page);
   };
     useEffect(()=>{
-        axios.post(`/api/user/pt/status/${page-1}`, {id:1}).then(res=>{
-            console.log(res.data, "sss");
+        axios.post(`/api/user/pt/status/${page-1}`, {id:auth.id}).then(res=>{
+            console.log(res.data);
             setLogList(res.data.content);
             setTotalPage(res.data.totalElements);
+        }).catch((err) => {
+          console.log(err)
         })
     },[page])
-
+  console.log(logList)
 
       // 신고 모달관련
   const [modal, setModal] = useState({

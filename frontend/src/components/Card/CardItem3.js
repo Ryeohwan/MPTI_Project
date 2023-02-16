@@ -18,7 +18,7 @@ function CardItem3(props) {
         </div>
         <div className={styles.card_item_info}>
           <div className={styles.card_item_info_txt}>{props.name}</div>
-          <div className={styles.card_item_info_txt}>({props.gender==="F"? "여": "남"}), {age}세</div>
+          <div className={styles.card_item_info_txt}>({props.gender==="F" ? "여": "남"}) {age}세</div>
           <div className={styles.card_item_info_txt}>{time}</div>
           <div>{props.phone}</div>
         </div>
