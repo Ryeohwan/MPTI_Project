@@ -5,7 +5,6 @@
     bottom: 100px;
     width: 350px;
     height: 80%;
-    
   }
   
   #chatToolbar {
@@ -30,7 +29,7 @@
   
   #chatComponent {
     border: 1px solid #C9FD61;
-    background-color: #b8b8b8;
+    background-color: black;
     position: absolute;
     z-index: 99999;
     top: 0;
@@ -73,7 +72,7 @@
   
   .msg-info p {
     font-size: 0.9em;
-    color: #000000;
+    color: #ececec;
     font-family: "DungGeunMo";
   }
   
@@ -98,7 +97,7 @@
   }
   
   .message.left .msg-detail {
-    padding-left: 65px;
+    padding-left: 0px;
   }
   
   .message.left .user-img {
@@ -125,7 +124,7 @@
     text-align: right;
   }
   .message.right .user-img {
-    right: -5px;
+    right: 0px;
     border: 1px solid #c8ffe8ab;
   }
   
@@ -137,7 +136,7 @@
     background-color: #c8ffe8;
     border-bottom-width: 0;
     border-left-width: 0;
-    right: -5px;
+    right: 0px;
   }
   
   /* End my messages */

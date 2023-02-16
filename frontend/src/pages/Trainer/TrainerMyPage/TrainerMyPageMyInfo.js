@@ -64,7 +64,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
                             </div>
                             <div className={styles.edit_btns}>
                                 <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} onClick={(e)=>{e.preventDefault(); setEdit((prev=>!prev))}}>취소</button></div>
-                                <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} type='submit'>완료✔</button></div>
+                                <div className={styles.edit_btn_box}><button className={`${styles.edit_btn} ${styles.edit}`} type='submit'>완료</button></div>
                             </div>
                     </form>
                         // edit 상태면 위의 양식을 출력 
@@ -108,7 +108,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
                                     </div>
                                 </div>
                             </div>
-                        <div className={styles.edit} onClick={()=>setEdit(true)}>수정🖍</div>
+                        <div className={styles.edit} onClick={()=>setEdit(true)}>수정<img className={styles.edit_img} src='/edit.png' alt='edit.png'></img></div>
                     </div>
                     }
         </div>
