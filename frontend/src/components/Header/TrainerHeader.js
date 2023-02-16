@@ -13,7 +13,8 @@ import logo from '../../assets/img/MPTIlogo.png'
 // 트레이너NavBar 리턴 함수
 export default function TrainerHeader(){
 	const dispatch = useDispatch();
-	const {image} = useSelector(state=>state.auth)
+	const {image} = useSelector((state) => state.auth)
+	console.log(image)
 	// const {role}=useSelector(state=> state.auth);
 	const {roleToken} = useSelector((state)=>state.auth)
 	const navigate= useNavigate();
