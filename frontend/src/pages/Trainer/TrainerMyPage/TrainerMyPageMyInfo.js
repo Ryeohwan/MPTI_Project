@@ -18,6 +18,7 @@ const TrainerMyPageMyInfo=({myInfo, setMyInfo})=>{
         setEdit(false)
     }
 
+    
     return(
         <div className={styles.container}> 
             <div className={styles.content_title}>내 개인정보</div>
