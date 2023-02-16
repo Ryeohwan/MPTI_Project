@@ -148,7 +148,7 @@ const TrainerMyPageMySchedule = () => {
             ))}
           </div>
         </div>
-        <div className={styles.edit} onClick={() => {sendData();postClick();}}>완료🖍</div>
+        <div className={styles.edit} onClick={() => {sendData();postClick();}}><div>완료</div><img className={styles.edit_img} src='/edit.png' alt='edit.png'></img></div>
       </div>
     </div>
   );

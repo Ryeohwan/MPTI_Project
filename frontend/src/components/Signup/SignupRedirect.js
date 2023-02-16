@@ -44,13 +44,7 @@ const SignupRedirect = () => {
 
     return (
         <div>
-            여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@ 여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@ 여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@ 여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@ 여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@ 여긴 다시 받는곳입니다.dwdwdssssssssssssssssssssssssssssss
-            @@
+            소셜 로그인 리다이렉트
         </div>
     );
 };

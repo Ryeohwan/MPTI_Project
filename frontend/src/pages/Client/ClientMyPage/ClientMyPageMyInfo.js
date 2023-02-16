@@ -38,7 +38,7 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
                      <div className={styles.modal} onClick={() => setShowModal(false)}>
                     </div>
                     <div className={styles.modal_content}>
-                        <div>비밀번호</div>
+                        <div className={styles.model_pw}>비밀번호</div>
                         <form onSubmit={(e) => {infoEdit(e)}}>
                             <input id='password' type="password" autoFocus={true}></input>
                             <button className={styles.send_btn} type='submit'>확인</button>
@@ -56,10 +56,10 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
                         <div className={styles.left}>{info_list[index]}</div>{index<4?
                         <div className={styles.right}>{value}</div>
                         :
-                        <input type='text' id='phone' defaultValue={value} className={styles.right}></input>}
+                        <input type='text' id='phone' defaultValue={value} className={`${styles.right} ${styles.input_box}`}></input>}
                     </div>)}
                 </div>
-                <div className={styles.edit_btn_box}><button className={styles.edit_btn} onClick={() => setEdit(false)}>취소</button><button className={styles.edit_btn} onClick={() => editCheck()}>완료✔</button></div>
+                <div className={styles.edit_btn_box}><button className={styles.edit_btn} onClick={() => setEdit(false)}>취소</button><button className={styles.edit_btn} onClick={() => editCheck()}>완료</button></div>
                 
             </form>
                 // edit 상태면 위의 양식을 출력 
@@ -73,7 +73,7 @@ const ClientMyPageMyInfo = ({myInfo, setMyInfo}) => {
                         <div className={styles.left}>{info_list[index]}</div> <div className={styles.right} value={value}>{value}</div>
                     </div>):null}
                 </div>
-                <div className={styles.edit} onClick={()=>{setEdit(true);}}>수정🖍</div>
+                <div className={styles.edit} onClick={()=>{setEdit(true);}}>수정<img className={styles.edit_img} src='/edit.png' alt='edit.png'></img></div>
             </div>
             } 
         </div>

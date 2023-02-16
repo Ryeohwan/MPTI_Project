@@ -1,8 +1,34 @@
 import React from 'react'
 import styles from './TrainerMyPageMyReview.module.css'
+import { Icon } from "@iconify/react";
 
 const TrainerMyPageMyReview= ({reviews})=>{
-  console.log(reviews)
+
+  const starRate = (star) => {
+    const elements = [];
+    for (let i = 0; i < star; i++) {
+      elements.push(
+        <Icon
+          key={`full-${i}`}
+          icon="openmoji:star"
+          className={styles.star_icon}
+        ></Icon>
+      );
+    }
+    for (let i = 0; i < 5 - star; i++) {
+      elements.push(
+        <Icon
+          key={`blank-${i}`}
+          icon="ic:round-star-border"
+          className={styles.border_star_icon}
+        ></Icon>
+      );
+    }
+    return elements;
+  }
+
+
+
   return(
     <div className={styles.container}>
       <div className={styles.content_title}>내 고객리뷰</div>
@@ -13,7 +39,9 @@ const TrainerMyPageMyReview= ({reviews})=>{
               <div className={styles.review_top}>
                 <div className={styles.review_top_left}>
                   {review.writerName} 님
-                  <div>{'⭐'.repeat(review.star)}</div>
+                  <div>
+                    {starRate(review.star)}
+                    </div>
                   <div className={styles.review_time}>{review.createdAt.substr(0,10)}</div>
                 </div>   
               </div>  

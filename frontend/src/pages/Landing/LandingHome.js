@@ -15,7 +15,7 @@ const navigate= useNavigate();
     return(
             <nav className={styles.landing_logo}>
             <div className={styles.logo} >M P T I</div>
-            <div className={styles.subtitle}>Market by Personal Trainer & I</div>
+            <div className={styles.subtitle}>Market for Personal Trainer & I</div>
             <div className={styles.navigate}>    
                 <div className={styles.navigate_btn} onClick={()=>{navigate("/login")}}>
                     START

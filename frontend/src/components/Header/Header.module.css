@@ -41,7 +41,7 @@
     align-items: center;
     width: 40%;
     font-size: 18px;
-    text-shadow: 2px 4px 2px black;
+    /* text-shadow: 2px 4px 2px black; */
 }
 
 
@@ -87,23 +87,23 @@
     border: 2px solid;
     border-radius: 50%;
     object-fit: fill;
-    width: px;
+    width: 35px;
     height: 35px;
     cursor: pointer;
 }
 
 .head_text {
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
-.head_text:hover {
+/* .head_text:hover {
     white-space: nowrap;
     color: #C9FD61;
-}
+} */
 
 a {
     text-decoration: none;
-    color: #ececec;
+    /* color: #ececec; */
 }
 
 .mail_img {

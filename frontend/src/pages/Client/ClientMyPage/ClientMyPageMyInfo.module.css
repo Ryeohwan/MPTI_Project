@@ -48,26 +48,37 @@
 }   
 
 .edit{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
     font-size: 20px;
     color: #ececec;
     text-align: right;
     cursor: pointer;
-
+    justify-content: flex-end;
+    align-items: center;
+    height: 25px;
 }
 
 .edit_btn_box{
+    font-size: 18px;
+    padding-top: 5px;
     display: flex;
     flex-flow: row;
-    justify-content: right;    
+    justify-content: right;
+    align-items: center;
     border: none;
+    gap: 30px;
 }
 
 .edit_btn{
     font-size: 20px;
-    color: #222222;
+    font-family: 'DungGeunMo';
+    color: #ececec;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
 }
 
 .modal {
@@ -94,10 +105,22 @@
     padding: 10px;
   }
 
+.model_pw {
+    color: #272727;
+}
+
 .send_btn{
     margin-left:10px;
     background-color: aquamarine;
     border:#666666 1px solid;
     height: 25px;
     width: 50px;
+}
+.edit_img{
+    height: 20px;
+    width: 20px;
+}
+
+.input_box {
+    height: 16px;
 }

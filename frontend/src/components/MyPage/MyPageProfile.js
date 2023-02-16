@@ -47,7 +47,7 @@ const MyPageProfile = () => {
                 <img className={styles.picture} src={image?`${image}?${Math.random()}`:'/profile_base.png'} alt='/profile_base.png'></img>
                 <img className={styles.camera} src='/camera.png' alt='camera' onClick={() => setShowModal(!showModal)}></img>
             </div>
-            <div className={styles.name}>{name} <span className={styles.name2}>{role}</span></div>
+            <div className={styles.name}>{name} <span className={styles.name2}>{role==="trainer" ? "트레이너" : "회원"}</span></div>
 
         </div>
     );

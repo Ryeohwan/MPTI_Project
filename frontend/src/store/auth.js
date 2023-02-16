@@ -37,6 +37,7 @@ const authSlice = createSlice({
             state.image = state.roleToken==='user'?action.payload.payload.s3Url:action.payload.payload.imageUrl;
             state.id = action.payload.payload.id;
             state.role = state.roleToken;
+            console.log(action.payload);
         },
         socialGetData: (state, action) => {
             console.log("social getdata",  action.payload.payload);
@@ -47,7 +48,9 @@ const authSlice = createSlice({
             state.isLoggedIn = true;
         },
 
-
+        logoutRequest: (state) => {
+            state.isLoading = true;
+        },
 
         loginFailure: (state, action) => {
             state.isLoading = false;
@@ -81,7 +84,16 @@ const authSlice = createSlice({
             state.isLoggedIn=false
             state.error= ""
             state.roleToken=null
-        }
+        },dataRequest: (state) => {
+            state.isLoading = true;
+        },
+        dataSuccess: (state) => {
+            state.isLoading = false;
+        },
+        dataFailure: (state) => {
+            state.isLoading = false;
+        },
+
 
     },
 });
@@ -119,6 +131,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async(dispatch)=>{
+    dispatch(authActions.logoutRequest()); 
     try {
         const accessToken = localStorage.getItem('access_token');
         const refreshToken = localStorage.getItem('refresh_token');
@@ -167,12 +180,15 @@ export const duplicateCheck = (type,email) => async(dispatch)=>{
 }
 
 export const getMyData = (role, email) => async(dispatch) => {
+    dispatch(authActions.dataRequest());
     try{
         const userInfo = await role==="trainer"?await axios.get(`/api/${role}/info/${email}`).then(data=>data.data):await axios.post(`/api/${role}/info`,{email:email}).then(data=>data.data);
         console.log(userInfo)
         dispatch(authActions.loginGetData({type:'ss', payload:userInfo}))
+        dispatch(authActions.dataSuccess());
         return '정보 갱신 성공';
     } catch(err) {
+        dispatch(authActions.dataFailure());
         return "정보 불러오기 실패";
     }
 
