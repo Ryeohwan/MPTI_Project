@@ -104,7 +104,7 @@ const Home = () => {
                     <img src={smileImg} alt=""></img>
                   </div>
                   <div className={styles.home_review_name}>
-                    {it.targetName}{" "}
+                    {it.targetName} 트레이너
                   </div>
                 </div>
 
@@ -113,7 +113,7 @@ const Home = () => {
                     {it.writerName}
                   </div>
                   <div className={styles.home_review_start}>
-                    {starRate(it.star)}{" "}
+                    {starRate(it.star)}{" "} 
                   </div>
                 </div>
 

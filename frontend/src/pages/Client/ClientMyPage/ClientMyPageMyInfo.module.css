@@ -10,7 +10,8 @@
     margin-bottom: 20px;
     padding: 30px 30px 10px 30px;
     height: 100%;
-    background-color: #D0E2A6;
+    background-color: #202020;
+    border: 1px solid #ececec;
     border-radius: 7px;
     align-items:center;
 }
@@ -21,7 +22,7 @@
     color: #111111;
     font-size: 20px;
     border-radius: 7px;
-    background-color: #DDE2E2;
+    background-color: #ececec;
     padding: 20px;
 }
 
@@ -48,7 +49,7 @@
 
 .edit{
     font-size: 20px;
-    color: #222222;
+    color: #ececec;
     text-align: right;
     cursor: pointer;
 

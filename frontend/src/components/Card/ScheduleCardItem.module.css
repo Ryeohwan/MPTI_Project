@@ -1,62 +1,79 @@
 @font-face {
-    font-family: 'DungGeunMo';
-    src: url('../../assets/fonts/DungGeunMo.ttf');
+  font-family: "DungGeunMo";
+  src: url("../../assets/fonts/DungGeunMo.ttf");
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 .card_today_item {
-    display: grid;
-    grid-template-columns: 80px 110px auto;
-    align-items: center;
-    width: 100%;
-    border: 1px solid #C9FD61;
-    border-radius: 6px;
-    padding: 10px 20px 10px 10px;
-    background-color: black;
+  display: grid;
+  grid-template-columns: 80px 110px auto;
+  align-items: center;
+  width: 97%;
+  border: 1px solid #c9fd61;
+  border-radius: 6px;
+  padding: 10px 20px 10px 10px;
+  background-color: black;
 }
 
 .card_item {
-    display: grid;
-    grid-template-columns: 80px 110px auto;
-    align-items: center;
-    width: 100%;
-    border: 1px solid #ececec;
-    border-radius: 6px;
-    padding: 10px 20px 10px 10px;
-    background-color: black;
+  display: grid;
+  grid-template-columns: 80px 110px auto;
+  align-items: center;
+  width: 97%;
+  border: 1px solid #ececec;
+  border-radius: 6px;
+  padding: 10px 20px 10px 10px;
+  background-color: black;
 }
 
-
 .card_item_img {
-    height: 10%;
-    width: 50px;
-    height: 50px;
-    border: 1px solid #ececec;
-    border-radius: 30px;
-}   
-
-.card_item_info {
+  height: 10%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ececec;
+  border-radius: 30px;
+  margin-left: 10%;
 }
 
 .card_item_info_txt {
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .button {
-    justify-self: flex-end;
-    height: 30px;
-    width: 60px;
-    border-radius: 5px;
-    cursor: pointer;
-    padding:0;
+  justify-self: flex-end;
+  height: 30px;
+  width: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
 }
 
-.button > a{
-    width: 100%;
-    height: 100%;
-    color: black;
+.button > a {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.btn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel_btn {
+  font-family: none;
+  font-size: 14px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0;
+  background-color: rgb(237, 122, 122);
+  color: white;
 }
