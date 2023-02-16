@@ -84,7 +84,7 @@ export default function TrainerHeader(){
 						{
 							view &&
 							<div className={styles.dropdown}>
-								<div className={styles.dropdown_content}><Link to={'mypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content}><Link to={'mypage/myinfo'} onClick={()=>{setMenuSelect('trainermypage'); setView(false);}}>마이페이지</Link></div>
 								<div className={styles.dropdown_content} onClick={()=>logout()}>로그아웃</div>
 							</div>
 						}

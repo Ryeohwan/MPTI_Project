@@ -90,7 +90,7 @@ export default function ClientHeader(){
 						{
 							view &&
 							<div className={styles.dropdown}>
-								<div className={styles.dropdown_content}><Link to={'mypage'} onClick={()=>{setMenuSelect('clientmypage')}}>마이페이지</Link></div>
+								<div className={styles.dropdown_content}><Link to={'mypage'} onClick={()=>{setMenuSelect('clientmypage'); setView(false);}}>마이페이지</Link></div>
 								<div className={styles.dropdown_content} onClick={()=>{logout()}}>로그아웃</div>
 							</div>
 						}
