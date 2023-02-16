@@ -1,7 +1,6 @@
 .my_reservation {
     font-family: 'DungGeunMo';
     color: #ececec;
-    /* background-color: red; */
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -57,8 +56,9 @@
 
 
 .home_trainer_box {
-    background-color: #D0E2A6;
-    border-radius: 10px;
+    background-color: #1e1e1e;
+    border: 1px solid #ececec;
+    border-radius: 7px;
     padding: 10px;
     margin-top: 10px;
 }
