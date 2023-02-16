@@ -45,6 +45,10 @@
   .form_sign{
     cursor: pointer;
   }
+  
+  .form_sign_box{
+    width: 100px;
+  }
 
   .form_btn {
     width: 530px;
@@ -91,7 +95,9 @@
     background: #dddddd;
   }
 
-  
+  .comment p{
+    margin-left: 5px;
+  }
 
 
   .form_sign_box{

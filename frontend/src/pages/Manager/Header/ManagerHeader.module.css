@@ -9,19 +9,19 @@
 }
 
 .logo {
-    font-size: 90px;
-    border-top: 4pt solid #c9fd61;
-    border-bottom: 4pt solid #c9fd61;
-    width: 18%;
-    color: #ececec;
-    text-shadow: 2px 6px 2px black; 
+
 }
+
+.logo img {
+    width: 250px;
+    height: 160px;
+  }
 
 .statebar {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 10px;
+    /* margin-top: 5px; */
     color: #ececec;
     text-shadow: 2px 4px 2px black; 
 }
