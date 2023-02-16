@@ -61,14 +61,14 @@
 }
 
 .edit_btn_box{
-    font-size: 20px;
+    font-size: 18px;
     padding-top: 5px;
     display: flex;
     flex-flow: row;
     justify-content: right;
     align-items: center;
     border: none;
-    gap: 10px;
+    gap: 30px;
 }
 
 .edit_btn{
@@ -104,6 +104,10 @@
     z-index:2;
     padding: 10px;
   }
+
+.model_pw {
+    color: #272727;
+}
 
 .send_btn{
     margin-left:10px;
