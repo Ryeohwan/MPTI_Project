@@ -1,0 +1,95 @@
+.container {
+    font-family: 'DungGeunMo';
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+}
+
+.content_title {
+    font-size: 20px;
+}
+
+.out_box{
+    display: flex;
+    flex-flow: column;
+    width: 680px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 30px 30px 30px;
+    background-color: #202020;
+    border: 1px solid #ececec;
+    border-radius: 7px;
+    align-items:center;
+    gap:20px;   
+    justify-content: space-between;
+}
+.in_box {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    color: #111111;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #ececec;
+    padding: 20px;
+}
+
+.content_box{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    min-height: 385px;
+    gap: 20px;
+}
+
+.review_top{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.review_top_left{
+    display: grid;
+    grid-template-columns: 130px 370px 1fr;
+    align-items:center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.review_top_right{
+    cursor: pointer;
+}
+
+.review_time{
+    font-size: 15px;
+}
+
+.review_content{
+    max-width: 580px;
+    margin-top: 10px;
+    font-size: 15px;
+    overflow-wrap: break-word;
+}
+
+.no_review{
+    text-align: center;
+    font-size: 30px;
+    color: #222222;
+}
+.review_delete {
+    font-size: 13px;
+    display: flex;
+    justify-content: flex-end;
+}
+.delete_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(237, 116, 116);
+    background-color: rgb(237, 122, 122);
+    border-radius: 4px;
+    padding: 2px 2px 2px 4px;
+    color: #ececec;
+    cursor: pointer;
+}

@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('../../assets/fonts/DungGeunMo.ttf');
+}
+
+@font-face {
+    font-family: 'Anton-Regular';
+    src: url('../../assets/fonts/Anton-Regular.ttf');
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Slab:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap");
+h1 {
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    margin-top: 100px;
+    font-size: 20px;
+    font-family: "DungGeunMo";
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    padding-left: 79%;
+    /* padding-right: 3%; */
+}
+
+.header_menu {
+    cursor: pointer;
+    opacity: 1;
+    color: white;
+}
+
+.header_menu:hover {
+    color: grey;
+}
+
+.landing_logo {
+    font-family: "DungGeunMo";
+    margin-top: 300px;
+    padding-left: 10%;
+    background-color: #111216;
+    opacity: 0.8;
+    /* margin-left: 5%;
+    margin-right: 5%; */
+}
+
+.landing_img {
+    width: 150px;
+}
+
+.landing_box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+a:hover {
+    background-color: white;
+    color: #3d3d3e;
+}
+
+.landing_image img {
+    width: 200px;
+    text-align: center;
+}
+
+.landing_image {
+    /* width: 200px; */
+    display: flex;
+    padding-right: 7%;
+    justify-content: center;
+    text-align: center;
+}
+
+.landing_goal {
+    font-family: "DungGeunMo";
+    padding-top: 20px;
+    margin-top: 300px;
+    padding-left: 5%;
+    background-color: #111216;
+    opacity: 0.8;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: white;
+    height: 500px;
+}
+
+.landing_info {
+    padding-top: 10px;
+}
+
+.landing_title {
+    font-size: 24px;
+    padding-top: 5px;
+}
+
+.landing_guide {
+    font-family: "DungGeunMo";
+    margin-top: 300px;
+    padding-left: 5%;
+    padding-top: 20px;
+    background-color: #111216;
+    opacity: 0.8;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: white;
+    height: 500px;
+}
+
+.logo {
+    color: white;
+    font-weight: bold;
+    font-size: 100px;
+    /* text-shadow: 2px 3px 2px black; */
+}
+
+.subtitle {
+    color: white;
+    font-weight: 500;
+    font-size: 50px;
+    font-family: "DungGeunMo";
+}
+
+.header_box {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+    background-color: #3d3d3e;
+    height: 50px;
+    color: white;
+    align-items: center;
+    border-radius: 15px;
+    opacity: 0.8;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.9;
+    background: url(../../../public/landing.gif) no-repeat center;
+    background-size: cover;
+}
+
+.navigate_btn {
+    /* background-color: RED; */
+    width: 160px;
+    height: 60px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    border-radius: 10px;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.navigate_btn:hover {
+    background-color: white;
+    color: #3d3d3e;
+}

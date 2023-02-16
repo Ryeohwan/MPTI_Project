@@ -1,0 +1,19 @@
+.video_header {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    gap: 50px;
+    height: 50px;
+    z-index: 10;
+}
+
+.image {
+    height: 50px;
+}
+
+.time {
+    font-family: "DungGeunMo";
+    color: #ececec;
+    line-height: 50px;
+    font-size: 55px;
+}

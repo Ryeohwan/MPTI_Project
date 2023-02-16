@@ -1,0 +1,64 @@
+.info_nav_box{
+    background-color: blue;
+    width: 205px;
+    height: 190px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #0F0F10;
+    border: 1px solid #ececec;
+}
+.nav_title{
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 5px;
+}
+
+
+.nav_item{
+    padding-left: 0;
+    padding-right: 10%;
+    text-align: center;
+    height: 120px;
+    padding-top: 5%;
+
+}
+.square{
+    font-size: 16px;
+}
+
+.nav_item li{
+    list-style: none;
+    font-size: 16px;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+.nav_sign:hover .select_square1{
+    visibility: visible;
+}
+
+.nav_report:hover .select_square2{
+    visibility: visible;
+
+}
+
+.nav_account:hover .select_square3{
+    visibility: visible;
+
+}
+
+.select_square1{
+    visibility: hidden;
+}
+
+.select_square2{
+    visibility: hidden;
+}
+.select_square3{
+    visibility: hidden;
+}
+
+a{
+    text-decoration: none;
+    color: #ececec;
+}
