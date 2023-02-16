@@ -48,26 +48,37 @@
 }   
 
 .edit{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
     font-size: 20px;
     color: #ececec;
     text-align: right;
     cursor: pointer;
-
+    justify-content: flex-end;
+    align-items: center;
+    height: 25px;
 }
 
 .edit_btn_box{
+    font-size: 20px;
+    padding-top: 5px;
     display: flex;
     flex-flow: row;
-    justify-content: right;    
+    justify-content: right;
+    align-items: center;
     border: none;
+    gap: 10px;
 }
 
 .edit_btn{
     font-size: 20px;
-    color: #222222;
+    font-family: 'DungGeunMo';
+    color: #ececec;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
 }
 
 .modal {
@@ -100,4 +111,12 @@
     border:#666666 1px solid;
     height: 25px;
     width: 50px;
+}
+.edit_img{
+    height: 20px;
+    width: 20px;
+}
+
+.input_box {
+    height: 16px;
 }
