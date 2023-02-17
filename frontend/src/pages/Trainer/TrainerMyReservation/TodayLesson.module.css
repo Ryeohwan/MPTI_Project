@@ -32,7 +32,9 @@
 }
 
 .container > :nth-child(1) > button{
+    margin-left: 40%;
     background-color: #C9FD61;
     color: #222222;
     border-radius: 5px;
+    width: 40%;
 }
