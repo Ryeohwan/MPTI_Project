@@ -10,7 +10,7 @@
   #chatToolbar {
     border: 1px solid #C9FD61;
     height: 30px;
-    background-color: #222222;
+    background-color: black;
     box-sizing: border-box;
     font-weight: bold;
     font-size: 14px;
@@ -163,12 +163,12 @@
   }
   
   #sendButton {
-    width: 30px;
-    height: 30px;
-    background-color: #81e9b0;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    border-radius: 100px;
+    background-color: white;
     position: relative;
-
-    border: 1px solid #7ae2a9;
     box-shadow: none !important;
   }
   #sendButton {

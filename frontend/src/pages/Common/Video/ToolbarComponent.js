@@ -99,9 +99,7 @@ const ToolbarComponent = (props) => {
                 </IconButton>
                 {props.user !== undefined && props.user.isScreenShareActive() 
                     && <IconButton onClick={stopScreenShare} id='navScreenButton'>
-                        <StopScreenShare color="secondary">
-
-                        </StopScreenShare>
+                        <StopScreenShare color="secondary"/>
                 </IconButton>}
 
                 <IconButton color='inherit' className='navButton' onClick={switchCamera}>

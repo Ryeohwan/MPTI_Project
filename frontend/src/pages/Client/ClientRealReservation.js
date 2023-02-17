@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import TopTitle from "../../components/Common/TopTitle";
 import styles from "./ClientRealReservation.module.css";
 import Calendar from "../../components/Calendar/Calendar";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const ClientRealReservation = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const formatToday = format(new Date(), "yyyy-MM-dd");
   const intFormatToday = formatToday.split("-").map((item) => parseInt(item));
 
@@ -170,7 +170,7 @@ const ClientRealReservation = () => {
         <button className={styles.payment_btn} onClick={() => kakaoPay()}>
           결제하기
         </button>
-        <button className={styles.back_btn}>돌아가기</button>
+        <button className={styles.back_btn} onClick={() => navigate(-1)}>돌아가기</button>
       </div>
     </div>
   );

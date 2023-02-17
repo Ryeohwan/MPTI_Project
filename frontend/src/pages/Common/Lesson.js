@@ -1,9 +1,9 @@
 import React from 'react';
-import './Lesson.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import VideoRoom from './Video/VideoRoom';
+import styles from './Lesson.module.css'
 const SERVER_URL = 'https://i8a803.p.ssafy.io';
 const SERVER_SECRET = 'mpti';
 const Lesson = ()=>{
@@ -39,7 +39,7 @@ const Lesson = ()=>{
     }
 
     return(
-        <div>
+        <div className={styles.box}>
             {session === undefined ? (
                     <div>
                     </div>

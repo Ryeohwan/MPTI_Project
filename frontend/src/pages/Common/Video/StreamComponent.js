@@ -10,6 +10,7 @@ import InputLabel from "@material-ui/core/InputLabel"
 import IconButton from "@material-ui/core/IconButton"
 import HighlightOff from "@material-ui/icons/HighlightOff"
 import FormHelperText from "@material-ui/core/FormHelperText"
+import styles from './StreamComponent.module.css'
 const StreamComponent = (props) => {
     console.log(props, 'StreamComponent 내부 확인')
     const [nickname, setNickname] = useState(props.user.getNickname())
@@ -48,13 +49,13 @@ const StreamComponent = (props) => {
         {
             props.user !== undefined && props.user.getStreamManager() !== undefined
             ?
-            <div className="streamComponent">
+            <div className={styles.video_box}>
                 {/* <div className="pointer nickname">
                     {showForm?                    <FormControl id="nicknameForm">
                         <IconButton id="closeButton" color="inherit" onClick={toggleNicknameForm}></IconButton>
                     </FormControl>:null}</div> */}
-                <OvVideo user={props.user} mutedSound={mutedSound}>
-                    <div id='statusIcons'>
+                <OvVideo user={props.user} mutedSound={mutedSound} className={styles.video_box}>
+                    <div id='statusIcons' className={styles.video_box}>
                         {!props.user.isVideoActive()
                         ?
                         <div id='camIcon'>
