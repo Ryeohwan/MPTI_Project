@@ -39,9 +39,9 @@ const LandingGuide = () => {
         <div className={styles.landing_title}>의 사용법은 다음과 같습니다.</div>
       </div>
       <div className={styles.nav_box}>
-        <div onClick={() => clientHandleClick()}>관리자</div>
-        <div onClick={() => trainerHandleClick()}>고객</div>
-        <div onClick={() => adminHandleClick()}>트레이너</div>
+        <div onClick={() => clientHandleClick()}>고객</div>
+        <div onClick={() => trainerHandleClick()}>트레이너</div>
+        <div onClick={() => adminHandleClick()}>관리자</div>
       </div>
       {clientShow && (
         <div className={styles.infobox}>
