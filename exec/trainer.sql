@@ -1,0 +1,70 @@
+CREATE DATABASE  IF NOT EXISTS `mpti_trainer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `mpti_trainer`;
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+--
+-- Host: i8a803.p.ssafy.io    Database: mpti_trainer
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `trainer`
+--
+
+DROP TABLE IF EXISTS `trainer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `trainer` (
+  `trainer_id` bigint NOT NULL AUTO_INCREMENT,
+  `approved` bit(1) NOT NULL,
+  `awards` varchar(255) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `career` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `license` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `provider` varchar(10) DEFAULT 'local',
+  `stars` double DEFAULT '0',
+  `stop_until` date DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`trainer_id`),
+  UNIQUE KEY `UK_4jrvips0u6okch0ktcu7xdaxw` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainer`
+--
+
+LOCK TABLES `trainer` WRITE;
+/*!40000 ALTER TABLE `trainer` DISABLE KEYS */;
+INSERT INTO `trainer` VALUES (1,_binary '','[\"2013 고양시장배 보디빌딩 대회 5위\",\"\",\"\"]','1995-02-01','[\"전)) 노경우퍼스널트레이닝 트레이너\",\"전) 예스 휘트니스 팀장\",\"전) 바빌론 휘트니스 트레이너\"]','2023-02-16 20:43:11','tladmEma123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/tladmEma123','[\"[국가공인] 생활스포츠지도사 2급 보디빌딩(피트니스) - 문화체육관광부\",\"FISAF 국제퍼스널트레이너 자격증\",\"트리거 포인트 Ultimate6+ 과정 수료 (KFTA)\"]','심으뜸','$2a$10$cuGDZywnZzL4Y/amkNJ8SOpvGZJGWt0fwFw.SC.FlsZBYX4Yj3Kte','01055554444','local',5,'2023-02-16',NULL,'2023-02-17 05:47:45'),(2,_binary '','[\"2014 고양시장배 보디빌딩 대회 4위\",\"\",\"\"]','1989-03-03','[\"전) 강남 일루고 짐 시간제 트레이너\",\"\",\"\"]','2023-02-16 20:51:29','tttt@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/tttt','[\"생활 체육 지도사 3급\",\"\",\"\"]','문동은','$2a$10$kKBqlrl0fSe9CzsabcgsJuhDTv.HC8LQonsFAhbEMQksdlSY7GYYa','010-5054-1113','local',5,'2023-02-15',NULL,'2023-02-16 22:58:39'),(3,_binary '','[\"2017 NABBA KOREA 노비스 출전\",\"2019 머슬앤피트니스 스포츠모델 2위\",\"2022 MUSA안산 TOP 5\"]','1998-03-05','[\"현) 나의근육사용설멸서 교육이사\",\"현) 나의근육사용설명서 대표 점장\",\"\"]','2023-02-16 21:06:08','thalvlt123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/thalvlt123','[\"필라테스 퍼스널 트레이닝 지도자 (샤샤필라테스(SPPT))\",\"Balanced Body 리포머 필라테스 지도자\",\"Balanced Body 리포머 필라테스 지도자\"]','소미핏','$2a$10$8Yc4raw3e/gNPRaFc5gox.uIU/1738AlhDZFy0rhf5X.93bDd33iy','01075757575','local',4,'2023-02-15',NULL,'2023-02-16 21:44:11'),(4,_binary '','[\"aaa\",\"aaa\",\"aaa\"]','2023-02-01','[\"vvv\",\"vvv\",\"vvv\"]','2023-02-16 21:06:43','gksrud316@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/gksrud316','[\"ccc\",\"ccc\",\"ccc\"]','정원철','$2a$10$5It3ceR9yZeFYS72FrEuDOslYHWzLX.9Jk03r8N0nRa31n/6QkDxy','010-2314-1414','local',3,'2023-02-15',NULL,'2023-02-17 01:27:15'),(5,_binary '','[\"2018 NABBA KOREA WFF 스포츠모델 TOP 10\",\"2020 NABBA AOC TOP 10\",\"2022 MUSA안산 TOP 5\"]','1999-08-05','[\"현) 비나이더피트니스 시지점 지점장\",\"\",\"\"]','2023-02-16 21:08:58','glqdmEma123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/glqdmEma123','[\"운동처방사 1급\",\"KARFE DST 동적 안정성 트레이닝\",\"배구 심판 자격증 (대한배구협회)\"]','힙으뜸','$2a$10$r0suuiN1.BRYvB5hox2nieM8D6DTMhDMxTcPo/pWQmQy.hAJWXCza','01066665555','local',2,'2023-02-15',NULL,'2023-02-16 21:44:56'),(6,_binary '','[\"2017 NABBA KOREA 노비스 출전\",\"2019 머슬앤피트니스 스포츠모델 2위\",\"2020 NABBA AOC TOP 10\"]','1995-07-16','[\"전) 팀윤짐 6호점 근무\",\"전) 터닝포인트짐 구예점 근무\",\"전) 헬스보이짐 문래역점 근무\"]','2023-02-16 21:12:44','dbwlsvlt123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/dbwlsvlt123','[\"국제 재활 필라테스 지도자 (매직바디아카데미)\",\"운동처방사 1급 (한국자격검정평가진흥원)\",\"스트라이버 경영자 전문과 과정 Level 1 (비나이더피트니스)\"]','유진핏','$2a$10$EhhKuTXGiWAAiqQIpLymIuCaPVb7aQVxoEnUtwLmx07XUJ3Aek1ie','01089898989','local',1,'2023-02-15',NULL,'2023-02-16 21:44:28'),(10,_binary '','[\"2020년 PCA 피규어 그랑프리\",\"2020년 PCA 피규어 1위\",\"2015 미스터 & 미즈 경남 여성 보디빌딩 1위\"]','1989-09-05','[\"2021 PCA 경남 심사위원\",\"2020 PCA 경북 심사위원\",\"2018 PCA 경북 심사위원\"]','2023-02-16 22:02:09','rlarPfks123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/rlarPfks123','[\"18기 FMS 피트니스 마케터 수료\",\"여성 트레이닝 전문가 과정 수료 (대한여성트레이닝학회)\",\"IFBB PRO 트레이너\"]','김계란','$2a$10$0oWCnguzhvdIsmxX9C8OFO0yqsFqKSskHuByMKmD8fbIM7sx5W76K','01088888888','local',5,'2023-02-15',NULL,'2023-02-16 22:06:07'),(11,_binary '','[\"aaa\",\"aaa\",\"aaa\"]','2022-12-29','[\"bbb\",\"bbb\",\"ccc\"]','2023-02-16 22:23:37','gksrud317@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/gksrud317','[\"bbb\",\"bb\",\"bbb\"]','장진영','$2a$10$iNCFMnCNjlkXIGq7wO1jheD5tXYHhaHyuq7B78sV1lU2VoBDKqPgi','010-2093-1574','local',5,'2023-02-15',NULL,'2023-02-16 22:43:13'),(12,_binary '','[\"2022 MUSA 충남 보디빌딩 +85kg 2위\",\"2022 PCA 경남 피지크 1위\",\"2022 PCA 강원도 보디빌딩 1위\"]','1996-05-15','[\"전) 락핏 스튜디오\",\"전) 역삼 저스트짐\",\"전) 휘트니스 클리닉\"]','2023-02-17 00:56:15','dlrhdxhd123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/dlrhdxhd123','[\"생활스포츠지도사 2급 보디빌딩\",\"유소년스포츠지도사 보디빌딩\",\"노인스포츠지도사 보디빌딩\"]','이공통','$2a$10$7.7FUCKUpmcokQPOMXLtF.gAFXXIhnZi6IG2qsyo.5lV6fTblei2m','01012341234','local',5,'2023-02-15',NULL,'2023-02-17 01:00:56'),(13,_binary '','[\"자격증[국가공인] 생활스포츠지도사 2급 보디빌딩(피트니스) - 문화체육관광부\",\"자격증생활체육보디빌딩 트레이너 자격 실습교육강사\",\"\"]','1880-06-03','[\"경력iBODY24 메인모델\",\"\",\"\"]','2023-02-17 01:04:44','vltqmffl123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/vltqmffl123','[\"수상WBC 챔피언쉽 4위\",\"\",\"\"]','핏블리','$2a$10$RQU8Rvr72WANDnjBEBsj8Oz/oG2QhQvsLQMLEj6cIfmFItnej8k3S','01056785678','local',5,'2023-02-15',NULL,'2023-02-17 01:29:31'),(14,_binary '','[\"수상2019 미스터서울 클래식 -168 1등\",\"수상2016 미스터코리아 -65kg 3등\",\"수상2021 YMCA클래식 -168 3위\"]','1879-05-01','[\"학력한양대학교 체육학 학사\",\"한국체육대학교 체육학 석사 과정\",\"\"]','2023-02-17 01:07:22','gkwjddn123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/gkwjddn123','[\"자격증CES KOREA 교정운동전문가 Level 1 수료\",\"자격증Lv.1 랜드마인 코치 수료 (랜드마인 유니버시티)\",\"자격증교정 운동 전문가 자격증 (CES KOREA)\"]','하정우','$2a$10$7xywW4dmgBDHbJQnX4d25OWR10oF7kDgs1SswU9z4yEYoyu3aFtCW','01099999999','local',4,'2023-02-15',NULL,'2023-02-17 01:28:16'),(15,_binary '','[\"수상2016 미스터코리아 -65kg 3등\",\"수상WBC 챔피언쉽 4위\",\"수상나바코리아노비스 2위\"]','1991-01-12','[\"경력SBS 굿모닝대한민국 척추전문의 방송 출연\",\"\",\"\"]','2023-02-17 01:08:58','akehdtjr123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/akehdtjr123','[\"자격증BlackRoll(블랙롤) Trainer\",\"자격증한국인재교육원 RTS Lv.2 (재활트레이닝)\",\"자격증생활체육보디빌딩 트레이너 자격 실습교육강사\"]','마동석','$2a$10$lT3bYu3m0ayPuoW7tmJzV..ZWLs3TJH6MtsmCjl6RV3veIzSQQn3e','01044444444','local',3,'2023-02-15',NULL,'2023-02-17 01:29:55'),(16,_binary '','[\"자격증[국가공인] 생활스포츠지도사 2급 보디빌딩(피트니스) - 문화체육관광부\",\"\",\"\"]','1888-12-03','[\"학력한양대학교 체육학 학사\",\"\",\"\"]','2023-02-17 01:12:28','wkddmsckd123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/wkddmsckd123','[\"자격증생활체육보디빌딩 트레이너 자격 실습교육강사\",\"\",\"\"]','장은창','$2a$10$4Us2xgdACuVLegYRHaImsOZ7g1w.VE5NBbeF66lzFV8iD.h7KVg4q','01017777777','local',5,'2023-02-15',NULL,'2023-02-17 01:31:00'),(17,_binary '','[\"수상2019 미스터서울 클래식 -168 1등\",\"수상2016 미스터코리아 -65kg 3등\",\"수상2021 YMCA클래식 -168 3위\"]','1997-04-12','[\"현) 나의근육사용설멸서 교육이사\",\"현) 나의근육사용설명서 대표 점장\",\"\"]','2023-02-17 01:13:15','rnqhsrms123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/rnqhsrms123','[\"자격증CES KOREA 교정운동전문가 Level 1 수료\",\"자격증Lv.1 랜드마인 코치 수료 (랜드마인 유니버시티)\",\"자격증교정 운동 전문가 자격증 (CES KOREA)\"]','구본근','$2a$10$Sxwu4yeQXqoSZBddGGDYmun.bGuCRzpmohH2VPcvgYI4J/HDp2jI6','01099999999','local',4,'2023-02-15',NULL,'2023-02-17 01:31:11'),(18,_binary '','[\"2017 NABBA KOREA 노비스 출전\",\"2019 머슬앤피트니스 스포츠모델 2위\",\"2020 NABBA AOC TOP 10\"]','1987-07-12','[\"전)) 노경우퍼스널트레이닝 트레이너\",\"전) 예스 휘트니스 팀장\",\"전) 바빌론 휘트니스 트레이너\"]','2023-02-17 01:14:13','rlagustjd123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/rlagustjd123','[\"필라테스 퍼스널 트레이닝 지도자 (샤샤필라테스(SPPT))\",\"Balanced Body 리포머 필라테스 지도자\",\"Balanced Body 리포머 필라테스 지도자\"]','김현성','$2a$10$3i6pSE7OhoMxvOt1EXsjzeQ1tVgEJleIVzALlTvQ0ar9juvzSDoBG','01088888888','local',3,'2023-02-15',NULL,'2023-02-17 01:31:26'),(19,_binary '','[\"2017 NABBA KOREA 노비스 출전\",\"2019 머슬앤피트니스 스포츠모델 2위\",\"2020 NABBA AOC TOP 10\"]','1892-11-01','[\"2021 PCA 경남 심사위원\",\"2020 PCA 경북 심사위원\",\"2018 PCA 경북 심사위원\"]','2023-02-17 01:15:28','dlwpgns123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/dlwpgns123','[\"생활스포츠지도사 2급 보디빌딩\",\"유소년스포츠지도사 보디빌딩\",\"노인스포츠지도사 보디빌딩\"]','이재훈','$2a$10$TfjY8691vRQNBm7HZrzXMehk0W58DxVLqf7Cp94T2Xh6M50uxKauC','01099999999','local',5,'2023-02-15',NULL,'2023-02-17 01:31:47'),(20,_binary '','[\"2014 고양시장배 보디빌딩 대회 4위\",\"\",\"\"]','1987-07-30','[\"학력한양대학교 체육학 학사\",\"한국체육대학교 체육학 석사 과정\",\"\"]','2023-02-17 01:16:26','rkdehddnjs123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/rkdehddnjs123','[\"자격증CES KOREA 교정운동전문가 Level 1 수료\",\"자격증Lv.1 랜드마인 코치 수료 (랜드마인 유니버시티)\",\"자격증교정 운동 전문가 자격증 (CES KOREA)\"]','강동원','$2a$10$CwhQ3xJ6K5sP0gUUB2ogVOvSVE7/TeOuygvbwlGbKRCqwGj.juVTS','01088888888','local',5,'2023-02-15',NULL,'2023-02-17 01:32:03'),(21,_binary '','[\"자격증[국가공인] 생활스포츠지도사 2급 보디빌딩(피트니스) - 문화체육관광부\",\"\",\"\"]','1987-06-23','[\"경력SBS 굿모닝대한민국 척추전문의 방송 출연\",\"\",\"\"]','2023-02-17 01:17:07','wjddntjd123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/wjddntjd123','[\"[국가공인] 생활스포츠지도사 2급 보디빌딩(피트니스) - 문화체육관광부\",\"FISAF 국제퍼스널트레이너 자격증\",\"트리거 포인트 Ultimate6+ 과정 수료 (KFTA)\"]','정우성','$2a$10$YyoifxXvSEBl/iSjmjfJTeShUhznA.fTZNNkDSjHsHrsfziJQGcl6','01018888888','local',3,'2023-02-15',NULL,'2023-02-17 01:32:29'),(22,_binary '','[\"2020년 PCA 피규어 그랑프리\",\"2020년 PCA 피규어 1위\",\"2015 미스터 & 미즈 경남 여성 보디빌딩 1위\"]','1997-07-23','[\"전) 팀윤짐 6호점 근무\",\"전) 터닝포인트짐 구예점 근무\",\"전) 헬스보이짐 문래역점 근무\"]','2023-02-17 01:18:01','whdlstjd123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/whdlstjd123','[\"18기 FMS 피트니스 마케터 수료\",\"여성 트레이닝 전문가 과정 수료 (대한여성트레이닝학회)\",\"IFBB PRO 트레이너\"]','조인성','$2a$10$SmgSORTlehzx78m4qDo64usYFBdGPDGXFqf6azRACaNPb1/UuYPMG','01045674567','local',4,'2023-02-15',NULL,'2023-02-17 01:32:51'),(23,_binary '','[\"수상2019 미스터서울 클래식 -168 1등\",\"수상2016 미스터코리아 -65kg 3등\",\"수상2021 YMCA클래식 -168 3위\"]','1887-06-18','[\"전) 강남 일루고 짐 시간제 트레이너\",\"\",\"\"]','2023-02-17 01:19:33','duwlsrn123@naver.com','male','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/duwlsrn123','[\"수상WBC 챔피언쉽 4위\",\"\",\"\"]','여진구','$2a$10$A.twfWWeuSKyFHsrG5Wl/.SzJNJJT/Rv2.OJmirk/ODcvDfN/oace','01065656333','local',3,'2023-02-15',NULL,'2023-02-17 01:33:06'),(24,_binary '','[\"수상2019 미스터서울 클래식 -168 1등\",\"수상2016 미스터코리아 -65kg 3등\",\"수상2021 YMCA클래식 -168 3위\"]','2001-09-07','[\"경력iBODY24 메인모델\",\"\",\"\"]','2023-02-17 01:21:55','gkswlals123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/gkswlals123','[\"국제 재활 필라테스 지도자 (매직바디아카데미)\",\"운동처방사 1급 (한국자격검정평가진흥원)\",\"스트라이버 경영자 전문과 과정 Level 1 (비나이더피트니스)\"]','한지민','$2a$10$27CvSlQfw8iCDBCKmYcnUOz2Cx9yOdbMVcLmhMLMdvNMn7ko3XSP.','01019999999','local',5,'2023-03-18',NULL,'2023-02-17 05:48:35'),(25,_binary '','[\"2014 고양시장배 보디빌딩 대회 4위\",\"\",\"\"]','1987-09-02','[\"전)) 노경우퍼스널트레이닝 트레이너\",\"전) 예스 휘트니스 팀장\",\"전) 바빌론 휘트니스 트레이너\"]','2023-02-17 01:23:05','rlaswpsl123@naver.com','female','https://s3.ap-northeast-2.amazonaws.com/i8a803.p.ssafy.io.baguni/rlaswpsl123','[\"국제 재활 필라테스 지도자 (매직바디아카데미)\",\"운동처방사 1급 (한국자격검정평가진흥원)\",\"스트라이버 경영자 전문과 과정 Level 1 (비나이더피트니스)\"]','김제니','$2a$10$7QiTAXYTuIew2R2rs/gqPOYnl0A2tYggOJYTY42kYfrelVHb6LurC','010199999999','local',4,'2023-02-15',NULL,'2023-02-17 01:33:47'),(26,_binary '','[\"서울시장 배 미스 보디빌딩 대회 1등\",\"\",\"\"]','1996-06-07','[\"현)역삼 파워 짐\",\"\",\"\"]','2023-02-17 05:16:27','dlgyfl123@naver.com','female',NULL,'[\"생활체육지도사 1급\",\"\",\"\"]','이효리','$2a$10$7VGsc4ux9lVFZfexXx9px./XH/6b4hTGtnvMu0X2bC5A3nfU/nCe6','010-2244-3322','local',0,'2023-02-15',NULL,'2023-02-17 05:47:23'),(27,_binary '','[\"\",\"\",\"\"]','1998-01-12','[\"\",\"\",\"\"]','2023-02-17 09:05:01','ekdehdrms123@naver.com','male',NULL,'[\"\",\"\",\"\"]','당동근','$2a$10$VcmcgYfceSCkqa7Z8uMdg.X2X9EeXDLkh9XNStxhs2BTuYcOjtpKW','01012121212','local',0,'2023-02-16',NULL,'2023-02-17 09:05:26');
+/*!40000 ALTER TABLE `trainer` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-02-17  9:07:33
