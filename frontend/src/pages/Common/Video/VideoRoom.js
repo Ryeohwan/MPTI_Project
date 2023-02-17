@@ -211,8 +211,7 @@ const VideoRoom = (props) => {
             toggleReview()
         }
         else{
-
-            navigate('/user/home')
+            navigate('/trainer/home')
         }
         
     }
