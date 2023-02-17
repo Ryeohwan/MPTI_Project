@@ -8,12 +8,7 @@ function ScheduleCardItem2(props) {
 console.log('ScheduleCardItem2.js 트레이너페이지',props.trainerId, props.userId, props.trainerName, props.sessionId, props.userName)
     return (
       <div className={styles.card_item}>
-        <img className={styles.card_item_img} src="/profilepic.png" alt="profile"></img>
-        <div className={styles.card_item_info}>
-          <div className={styles.card_item_info_txt}>성명</div>
-          <div className={styles.card_item_info_txt}>성별/나이</div>
-          <div className={styles.card_item_info_txt}>예약한 수업</div>
-        </div>
+        <img className={styles.card_item_img} src={image} alt="profile"></img>
         <div className={styles.card_item_info}>
           <div className={styles.card_item_info_txt}>{props.userName}</div>
           <div className={styles.card_item_info_txt}></div>
